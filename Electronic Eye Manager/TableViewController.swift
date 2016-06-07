@@ -23,5 +23,16 @@ class TableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return xonData.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "strikeCell")
+        cell.textLabel?.text = xonData[indexPath.row][0]
+        return cell
+        
+    }
     
 }

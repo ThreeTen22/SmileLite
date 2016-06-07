@@ -37,7 +37,7 @@
         <!--Table View Controller-->
         <scene sceneID="sFA-7U-tck">
             <objects>
-                <tableViewController id="qqD-AD-eGc" sceneMemberID="viewController">
+                <tableViewController id="qqD-AD-eGc" customClass="TableViewController" customModule="Electronic_Eye_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="4Zd-mx-Yi0" customClass="MonthEyeTableView" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="339" height="867"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -49,6 +49,14 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aL4-5o-aPP" id="dXI-is-bKu">
                                     <rect key="frame" x="0.0" y="0.0" width="306" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Test 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ivn-bE-M5g">
+                                            <rect key="frame" x="137" y="11" width="64" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" weight="black" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
