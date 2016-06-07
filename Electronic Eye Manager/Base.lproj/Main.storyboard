@@ -14,14 +14,53 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Ch-xg-faF">
+                                <rect key="frame" x="1027" y="157" width="339" height="867"/>
+                                <connections>
+                                    <segue destination="qqD-AD-eGc" kind="embed" id="rTM-xV-GFn"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPadPro"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <customObject id="gRI-31-L3B" customClass="globVarContainer" customModule="Electronic_Eye_Manager" customModuleProvider="target"/>
             </objects>
+            <point key="canvasLocation" x="382" y="319"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="sFA-7U-tck">
+            <objects>
+                <tableViewController id="qqD-AD-eGc" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="4Zd-mx-Yi0" customClass="MonthEyeTableView" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="339" height="867"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="strikeCell" id="aL4-5o-aPP" customClass="MonthEyeCell" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="339" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aL4-5o-aPP" id="dXI-is-bKu">
+                                    <rect key="frame" x="0.0" y="0.0" width="306" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="qqD-AD-eGc" id="2GS-51-wYq"/>
+                            <outlet property="delegate" destination="qqD-AD-eGc" id="ysp-QF-atI"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Osb-XH-Ene" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1300.5" y="397.5"/>
         </scene>
     </scenes>
 </document>

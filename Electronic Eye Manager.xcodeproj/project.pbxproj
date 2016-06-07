@@ -14,6 +14,9 @@
 		9B66D3681D073EFC0099C670 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B66D3671D073EFC0099C670 /* Assets.xcassets */; };
 		9B66D36B1D073EFC0099C670 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B66D3691D073EFC0099C670 /* LaunchScreen.storyboard */; };
 		9B66D3731D073FCE0099C670 /* globalVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B66D3721D073FCE0099C670 /* globalVars.swift */; };
+		9BB8DADE1D07523400B6F10C /* MonthEyeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB8DADD1D07523400B6F10C /* MonthEyeCell.swift */; };
+		9BB8DAE01D0754C900B6F10C /* MonthEyeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB8DADF1D0754C900B6F10C /* MonthEyeTableView.swift */; };
+		9BB8DAE21D07558700B6F10C /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB8DAE11D07558700B6F10C /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		9B66D36A1D073EFC0099C670 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9B66D36C1D073EFC0099C670 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B66D3721D073FCE0099C670 /* globalVars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = globalVars.swift; sourceTree = "<group>"; };
+		9BB8DADD1D07523400B6F10C /* MonthEyeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthEyeCell.swift; path = ../MonthEyeCell.swift; sourceTree = "<group>"; };
+		9BB8DADF1D0754C900B6F10C /* MonthEyeTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthEyeTableView.swift; sourceTree = "<group>"; };
+		9BB8DAE11D07558700B6F10C /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,9 @@
 			children = (
 				9B66D35D1D073EFC0099C670 /* AppDelegate.swift */,
 				9B66D35F1D073EFC0099C670 /* ViewController.swift */,
+				9BB8DAE11D07558700B6F10C /* TableViewController.swift */,
+				9BB8DADD1D07523400B6F10C /* MonthEyeCell.swift */,
+				9BB8DADF1D0754C900B6F10C /* MonthEyeTableView.swift */,
 				9B66D3611D073EFC0099C670 /* Main.storyboard */,
 				9B66D3721D073FCE0099C670 /* globalVars.swift */,
 				9B66D3671D073EFC0099C670 /* Assets.xcassets */,
@@ -142,6 +151,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B66D3731D073FCE0099C670 /* globalVars.swift in Sources */,
+				9BB8DAE21D07558700B6F10C /* TableViewController.swift in Sources */,
+				9BB8DADE1D07523400B6F10C /* MonthEyeCell.swift in Sources */,
+				9BB8DAE01D0754C900B6F10C /* MonthEyeTableView.swift in Sources */,
 				9B66D3601D073EFC0099C670 /* ViewController.swift in Sources */,
 				9B66D3661D073EFC0099C670 /* Electronic_Eye_Manager.xcdatamodeld in Sources */,
 				9B66D35E1D073EFC0099C670 /* AppDelegate.swift in Sources */,
@@ -263,6 +275,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.skullcup.Electronic-Eye-Manager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -274,6 +287,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.skullcup.Electronic-Eye-Manager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
@@ -296,6 +310,7 @@
 				9B66D3711D073EFC0099C670 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
