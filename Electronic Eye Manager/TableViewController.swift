@@ -30,7 +30,7 @@ class TableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "strikeCell")
-        cell.textLabel?.text = xonData[indexPath.row][0]
+        cell.textLabel?.text = String(xonData[indexPath.row][0])
         return cell
         
     }
