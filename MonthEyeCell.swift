@@ -11,4 +11,6 @@ import UIKit
 
 class MonthEyeCell: UITableViewCell {
     
+    @IBOutlet var cellLabel: UILabel!
+    
 }

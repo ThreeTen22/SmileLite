@@ -29,8 +29,9 @@ class TableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "strikeCell")
-        cell.textLabel?.text = String(xonData[indexPath.row][0])
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("strikeCell", forIndexPath: indexPath) as! MonthEyeCell
+        
+        cell.cellLabel?.text = String(xonData[indexPath.row][0])
         return cell
         
     }
