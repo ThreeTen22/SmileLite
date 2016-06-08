@@ -25,9 +25,6 @@
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Kt-AG-AWJ">
                                 <rect key="frame" x="0.0" y="575" width="888" height="449"/>
-                                <connections>
-                                    <segue destination="Yfy-hV-SWI" kind="embed" id="n1n-zT-WJ2"/>
-                                </connections>
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -79,116 +76,5 @@
             </objects>
             <point key="canvasLocation" x="1381" y="389.5"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="MRu-UK-RPN">
-            <objects>
-                <navigationController id="iBA-JI-rwT" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HAm-gS-BZE">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="j7p-11-M0G" kind="relationship" relationship="rootViewController" id="hqj-xv-PjB"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0ca-ka-TcH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1082" y="1864"/>
-        </scene>
-        <!--Edge Rule Detail View Controller-->
-        <scene sceneID="N1B-TM-Ifb">
-            <objects>
-                <viewController id="j7p-11-M0G" customClass="EdgeRuleDetailViewController" customModule="Electronic_Eye_Manager" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="O4T-K6-Fc5"/>
-                        <viewControllerLayoutGuide type="bottom" id="mac-Ry-fWb"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="g2A-xi-pS8">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0od-Vb-b9g">
-                                <rect key="frame" x="20" y="149" width="528" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="0R9-ch-cDe"/>
-                    <connections>
-                        <outlet property="detailDescriptionLabel" destination="0od-Vb-b9g" id="eFO-F3-pnn"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GpJ-4S-sWu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1746" y="1864"/>
-        </scene>
-        <!--Root View Controller-->
-        <scene sceneID="pTc-6q-baK">
-            <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="HU3-8k-B1H" customClass="EdgeRuleMasterViewController" customModule="Electronic_Eye_Manager" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="x9p-oH-eeN">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="cIO-oA-xwf">
-                                <rect key="frame" x="0.0" y="72" width="568" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cIO-oA-xwf" id="sOq-GP-gkz">
-                                    <rect key="frame" x="0.0" y="0.0" width="568" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="iBA-JI-rwT" kind="showDetail" id="OHw-Qc-Gw8"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="HU3-8k-B1H" id="YdL-49-LuH"/>
-                            <outlet property="delegate" destination="HU3-8k-B1H" id="yiz-Av-LxB"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="uno-eR-IRl"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ckZ-Hc-k7H" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1746" y="1353"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="FjM-He-jcr">
-            <objects>
-                <navigationController id="OhN-8X-ek5" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nma-bP-f2J">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="HU3-8k-B1H" kind="relationship" relationship="rootViewController" id="fVf-eg-qYN"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KeB-BI-9Ik" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1082" y="1353"/>
-        </scene>
-        <!--Split View Controller-->
-        <scene sceneID="EYy-xj-9Vm">
-            <objects>
-                <splitViewController id="Yfy-hV-SWI" sceneMemberID="viewController">
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <segue destination="OhN-8X-ek5" kind="relationship" relationship="masterViewController" id="Q2c-Py-pel"/>
-                        <segue destination="iBA-JI-rwT" kind="relationship" relationship="detailViewController" id="QAn-2X-HgE"/>
-                    </connections>
-                </splitViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x2x-WC-Pu1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="246" y="1341"/>
-        </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="QAn-2X-HgE"/>
-    </inferredMetricsTieBreakers>
 </document>
