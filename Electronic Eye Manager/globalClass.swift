@@ -186,7 +186,7 @@ func prependZerosToString(numberToString str:String, MinCharLength charLength:In
     return newStr
 }
 
-///Will apprepend the appopriate amount of Zeros before a string so as to keep the character length consistant
+///Will append the appopriate amount of Zeros before a string so as to keep the character length consistant
 func appendZerosToString(numberToString str:String, MinCharLength charLength:Int)-> String {
     var newStr = str
     
