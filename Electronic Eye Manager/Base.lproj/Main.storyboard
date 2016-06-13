@@ -326,7 +326,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="cellLabel" destination="Ivn-bE-M5g" id="CPx-BS-msU"/>
+                                    <outlet property="cellLabel" destination="Ivn-bE-M5g" id="VCF-3g-DPd"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
