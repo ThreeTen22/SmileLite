@@ -35,10 +35,6 @@
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPadPro"/>
-                    <connections>
-                        <outlet property="edgeRuleContainer" destination="2Kt-AG-AWJ" id="k4p-vx-6eD"/>
-                        <outlet property="strikesContainer" destination="1Ch-xg-faF" id="jle-DA-YYf"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <customObject id="gRI-31-L3B" customClass="globVarContainer" customModule="Electronic_Eye_Manager" customModuleProvider="target"/>
