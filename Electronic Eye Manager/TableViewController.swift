@@ -31,7 +31,8 @@ class TableViewController: UITableViewController {
         
         let cell = self.tableView.dequeueReusableCellWithIdentifier("strikeCell", forIndexPath: indexPath) as! MonthEyeCell
         
-        cell.cellLabel?.text = String(xonData[indexPath.row][0])
+        cell.strikePrice?.text = String(xonData[indexPath.row][1])
+        //cell.delta
         
         return cell
         
