@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9B3A7F9E1D089DFA009F96E8 /* EdgeRuleMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A7F9D1D089DFA009F96E8 /* EdgeRuleMasterViewController.swift */; };
-		9B3A7FA01D089E81009F96E8 /* EdgeRuleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A7F9F1D089E81009F96E8 /* EdgeRuleDetailViewController.swift */; };
+		9B3A7FA21D0EF84E009F96E8 /* EdgeRuleMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A7FA11D0EF84E009F96E8 /* EdgeRuleMasterViewController.swift */; };
 		9B66D35E1D073EFC0099C670 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B66D35D1D073EFC0099C670 /* AppDelegate.swift */; };
 		9B66D3601D073EFC0099C670 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B66D35F1D073EFC0099C670 /* ViewController.swift */; };
 		9B66D3631D073EFC0099C670 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B66D3611D073EFC0099C670 /* Main.storyboard */; };
@@ -22,8 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9B3A7F9D1D089DFA009F96E8 /* EdgeRuleMasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeRuleMasterViewController.swift; sourceTree = "<group>"; };
-		9B3A7F9F1D089E81009F96E8 /* EdgeRuleDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeRuleDetailViewController.swift; sourceTree = "<group>"; };
+		9B3A7FA11D0EF84E009F96E8 /* EdgeRuleMasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EdgeRuleMasterViewController.swift; path = ../EdgeRuleMasterViewController.swift; sourceTree = "<group>"; };
 		9B66D35A1D073EFC0099C670 /* Electronic Eye Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Electronic Eye Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B66D35D1D073EFC0099C670 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B66D35F1D073EFC0099C670 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +66,7 @@
 		9B66D35C1D073EFC0099C670 /* Electronic Eye Manager */ = {
 			isa = PBXGroup;
 			children = (
+				9B3A7FA11D0EF84E009F96E8 /* EdgeRuleMasterViewController.swift */,
 				9B66D35D1D073EFC0099C670 /* AppDelegate.swift */,
 				9B66D35F1D073EFC0099C670 /* ViewController.swift */,
 				9BB8DAE11D07558700B6F10C /* TableViewController.swift */,
@@ -75,8 +74,6 @@
 				9BB8DADF1D0754C900B6F10C /* MonthEyeTableView.swift */,
 				9B66D3721D073FCE0099C670 /* globalVars.swift */,
 				9B66D3611D073EFC0099C670 /* Main.storyboard */,
-				9B3A7F9D1D089DFA009F96E8 /* EdgeRuleMasterViewController.swift */,
-				9B3A7F9F1D089E81009F96E8 /* EdgeRuleDetailViewController.swift */,
 				9B66D3671D073EFC0099C670 /* Assets.xcassets */,
 				9B66D3691D073EFC0099C670 /* LaunchScreen.storyboard */,
 				9B66D36C1D073EFC0099C670 /* Info.plist */,
@@ -157,13 +154,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B66D3731D073FCE0099C670 /* globalVars.swift in Sources */,
-				9B3A7F9E1D089DFA009F96E8 /* EdgeRuleMasterViewController.swift in Sources */,
+				9B3A7FA21D0EF84E009F96E8 /* EdgeRuleMasterViewController.swift in Sources */,
 				9BB8DAE21D07558700B6F10C /* TableViewController.swift in Sources */,
 				9BB8DADE1D07523400B6F10C /* MonthEyeCell.swift in Sources */,
 				9BB8DAE01D0754C900B6F10C /* MonthEyeTableView.swift in Sources */,
 				9B66D3601D073EFC0099C670 /* ViewController.swift in Sources */,
 				9B66D3661D073EFC0099C670 /* Electronic_Eye_Manager.xcdatamodeld in Sources */,
-				9B3A7FA01D089E81009F96E8 /* EdgeRuleDetailViewController.swift in Sources */,
 				9B66D35E1D073EFC0099C670 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
