@@ -171,7 +171,32 @@ var xonData:NSArray = [["06/17/16", 20, 7.4, 11.6, 9.16, 0, 0, 0.2, 0.0090191984
                        ["01/19/18", 70, 0.85, 3.8, 2.3982962354, 0, 42, 45.4, 43.6999621319, 0],
                        ["01/19/18", 75, 0.6, 3.4, 2.0609797547, 0, 46.2, 50, 48.2995574007, 0]]
 
+func isEven(i:Int)->Bool {
+    if (i%2 == 0) {
+        return true
+    }
+    return false
+}
+///Will prepend the appopriate amount of Zeros before a string so as to keep the character length consistant
+func prependZerosToString(numberToString str:String, MinCharLength charLength:Int)-> String {
+    var newStr = str
+    while newStr.characters.count < (charLength) {
+        newStr = "0"+newStr
+    }
+    return newStr
+}
 
-class globVarContainer: NSObject {
+///Will apprepend the appopriate amount of Zeros before a string so as to keep the character length consistant
+func appendZerosToString(numberToString str:String, MinCharLength charLength:Int)-> String {
+    var newStr = str
+    
+    while newStr.characters.count < (charLength) {
+        newStr = newStr + "0"
+    }
+    return newStr
+}
+
+
+class globalClass: NSObject {
 
 }

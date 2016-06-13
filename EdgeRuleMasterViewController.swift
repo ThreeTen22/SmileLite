@@ -13,9 +13,10 @@ var BCSPEdgeRule:NSArray = NSArray()
 class EdgeRuleMasterViewController: UIViewController {
     
     @IBOutlet var BuyCallSellPut: [UILabel]!
+    @IBOutlet var navBar: UINavigationItem!
     
     @IBAction func EditBCSP(sender: AnyObject) {
-        
+        print("button Pressed")
     }
     
     
@@ -30,6 +31,11 @@ class EdgeRuleMasterViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print(sender!)
+        print("Hello")
     }
     
 }
