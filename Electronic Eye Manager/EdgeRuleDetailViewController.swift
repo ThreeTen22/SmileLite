@@ -9,6 +9,9 @@
 import UIKit
 
     var edgeRuleTypes = ["$ Edge", "Gamma Edge"]
+    var buyCallEdgeRule = ["$ Edge", "0.03", "1500", "1.5", "45"]
+
+
 class EdgeRuleDetailViewController: UIViewController, UIPickerViewDelegate {
 
     @IBOutlet var edgeRulePicker: UIPickerView!

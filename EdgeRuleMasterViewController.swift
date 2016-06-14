@@ -10,15 +10,9 @@ import UIKit
 
 var BCSPEdgeRule:NSArray = NSArray()
 
-class EdgeRuleMasterViewController: UIViewController {
-    
-    @IBOutlet var BuyCallSellPut: [UILabel]!
-    @IBOutlet var navBar: UINavigationItem!
-    
-    @IBAction func EditBCSP(sender: AnyObject) {
-        print("button Pressed")
-    }
-    
+
+class EdgeRuleMasterViewController: UITableViewController {
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,5 +32,42 @@ class EdgeRuleMasterViewController: UIViewController {
         print("Hello")
     }
     
+    
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // the cells you would like the actions to appear needs to be editable
+        return true
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("EdgeRuleDetails", forIndexPath: indexPath)
+        return cell
+    }
+    
+    
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let more = UITableViewRowAction(style: .Default, title: "Edit Edge Rule") { action, index in
+            print("more button tapped")
+        }
+        more.backgroundColor = UIColor.lightGrayColor()
+        
+        return [more]
+    }
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        // you need to implement this method too or you can't swipe to display the actions
+        print("editing style:")
+        print(editingStyle)
+    }
 }
 
