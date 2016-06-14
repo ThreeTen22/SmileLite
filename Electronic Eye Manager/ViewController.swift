@@ -13,9 +13,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        print(String(xonData[0][0]))
-        print(String(xonData[0][1]))
-        print(String(xonData[0][2]))
     }
 
     override func didReceiveMemoryWarning() {

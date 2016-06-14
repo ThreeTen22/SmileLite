@@ -8,18 +8,14 @@
 
 import UIKit
 
-var BCSPEdgeRule:NSArray = NSArray()
-
+var scbpEdgeRule:NSArray = ["Sell Call | Buy Put","$ Edge", 0.00, 0, 0.0, 100.0]
+var bcspEdgeRule:NSArray = ["Buy Call | Sell Put","$ Edge", 0.00, 5000, 0.0, 100.0]
 
 class EdgeRuleMasterViewController: UITableViewController {
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        print(String(xonData[0][0]))
-        print(String(xonData[0][1]))
-        print(String(xonData[0][2]))
     }
     
     override func didReceiveMemoryWarning() {
@@ -28,8 +24,6 @@ class EdgeRuleMasterViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print(sender!)
-        print("Hello")
     }
     
     
@@ -45,6 +39,17 @@ class EdgeRuleMasterViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("EdgeRuleDetails", forIndexPath: indexPath)
+        var tempArray:NSArray = NSArray()
+        
+        if indexPath.row == 0 {
+            tempArray = scbpEdgeRule
+        }
+        else {
+            tempArray = bcspEdgeRule
+        }
+        for i in tempArray {
+            print("hello \(i)")
+        }
         return cell
     }
     
@@ -66,8 +71,6 @@ class EdgeRuleMasterViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         // you need to implement this method too or you can't swipe to display the actions
-        print("editing style:")
-        print(editingStyle)
     }
 }
 

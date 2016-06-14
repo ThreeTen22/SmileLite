@@ -65,7 +65,7 @@ class EdgeRuleDetailViewController: UIViewController, UIPickerViewDelegate {
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(component)
+        
     }
     
 }
