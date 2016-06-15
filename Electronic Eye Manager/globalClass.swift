@@ -7,8 +7,9 @@
 //
 
 import UIKit
+var bcspEdgeRule = [["Buy Call | Sell Put","$ Edge", "0.0", "0", "0.0", "0.0"],["0","0","0","0","0","0"]]
+var scbpEdgeRule = [["Sell Call | Buy Put","$ Edge", "0.0", "0", "0.0", "0.0"],["0","0","0","0","0","0"]]
 
-var globalTest = 15
 //                          Stock   Last  Bid 	Ask
 
 var xonTitleData:NSArray = ["XON", 29.17, 29.14, 29.18]
