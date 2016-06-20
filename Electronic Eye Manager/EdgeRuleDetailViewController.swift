@@ -19,7 +19,7 @@ class EdgeRuleDetailViewController: UIViewController, UIPickerViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        for i in 1...5 {
+        for i in 1...3 {
             str = String(edgeRuleArray[1][i])
             tempInt = Int(str)!
             print(edgeRuleArray[1][i])
@@ -34,7 +34,7 @@ class EdgeRuleDetailViewController: UIViewController, UIPickerViewDelegate {
     
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 5
+        return 4
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {

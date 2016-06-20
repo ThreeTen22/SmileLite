@@ -17,5 +17,4 @@ class MonthEyeCell: UITableViewCell {
     @IBOutlet var cPos: UILabel!
     @IBOutlet var pTheo: UILabel!
     @IBOutlet var pPos: UILabel!
-    
 }
