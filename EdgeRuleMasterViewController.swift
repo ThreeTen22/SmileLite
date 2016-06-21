@@ -59,8 +59,9 @@ class EdgeRuleMasterViewController: UITableViewController {
         else {
             tempArray = bcspEdgeRule
         }
-        for i in 1...6 {
+        for i in 1...5 {
             (cell.contentView.viewWithTag(i) as! UILabel).text! = "\(tempArray[0][i-1])"
+            
         }
         
         return cell
