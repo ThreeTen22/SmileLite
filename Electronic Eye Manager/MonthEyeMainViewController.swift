@@ -30,7 +30,9 @@ class MonthEyeMainViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        for i in super.childViewControllers {
+                print(i.title)
+        }
         // Do any additional setup after loading the view.
     }
 
@@ -44,8 +46,10 @@ class MonthEyeMainViewController: UIViewController, UITableViewDelegate {
         if (monthEyeActiveCell.isBtnActive[index]) {
             btnToModify.backgroundColor = UIColor.whiteColor()
             monthEyeActiveCell.isBtnActive[index] = false
+            btnToModify.setTitleColor(UIColor.blueColor(), forState: .Normal)
         } else {
             btnToModify.backgroundColor = UIColor.blueColor()
+            btnToModify.setTitleColor(UIColor.whiteColor(), forState: .Normal)
             monthEyeActiveCell.isBtnActive[index] = true
         }
     }
@@ -67,8 +71,9 @@ class MonthEyeMainViewController: UIViewController, UITableViewDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = monthEyeActivateTable.dequeueReusableCellWithIdentifier("MonthCell") as! MonthEyeActivateCell
+        let xonDataZero = xonData[0] as! NSArray
         if let monthName = cell.viewWithTag(5) as? UILabel {
-            monthName.text = "\(xonTitleData[0]) \(xonData[0][0])"
+            monthName.text = "\(xonTitleData[0]) \(xonDataZero[0])"
         }
         return cell
     }

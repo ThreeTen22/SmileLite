@@ -13,6 +13,7 @@ class TableViewController: UITableViewController {
     var deltaRange = [-1,-1]
     let monthFocus = "06/17/16"
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -26,7 +27,7 @@ class TableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count = 0
         for i in 0..<xonData.count {
-            if String(xonData[i][0]) == monthFocus {
+            if String((xonData[i] as! NSArray)[0]) == monthFocus {
                 count += 1
             }
         }
@@ -36,15 +37,14 @@ class TableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = self.tableView.dequeueReusableCellWithIdentifier("strikeCell", forIndexPath: indexPath) as! MonthEyeCell
-        
-        
-        if String(xonData[indexPath.row][0]) == monthFocus {
-            cell.strikePrice?.text = String(xonData[indexPath.row][1])
-            cell.delta?.text = removeAfterIndex(Source: String(xonData[indexPath.row][10]), CutOffIndex: 6)
-            cell.cTheo?.text = removeAfterIndex(Source: String(xonData[indexPath.row][3]), CutOffIndex: 4)
-            cell.cPos?.text = String(xonData[indexPath.row][5])
-            cell.pTheo?.text = removeAfterIndex(Source: String(xonData[indexPath.row][8]), CutOffIndex: 4)
-            cell.pPos?.text = String(xonData[indexPath.row][9])
+        let xonRowZero = xonData[indexPath.row] as! NSArray
+        if String(xonRowZero[0]) == monthFocus {
+            cell.strikePrice?.text = String(xonRowZero[1])
+            cell.delta?.text = removeAfterIndex(Source: String(xonRowZero[10]), CutOffIndex: 6)
+            cell.cTheo?.text = removeAfterIndex(Source: String(xonRowZero[3]), CutOffIndex: 4)
+            cell.cPos?.text = String(xonRowZero[5])
+            cell.pTheo?.text = removeAfterIndex(Source: String(xonRowZero[8]), CutOffIndex: 4)
+            cell.pPos?.text = String(xonRowZero[9])
         }
         if deltaRange[0] <= indexPath.row && indexPath.row <= deltaRange[1] && deltaRange[0] != (-1) {
             cell.backgroundColor = UIColor.lightGrayColor()

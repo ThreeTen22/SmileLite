@@ -19,7 +19,7 @@ class MonthEyeActivateCell: UITableViewCell {
         for i in 1...4 {
             if let btn = self.viewWithTag(i) as! UIButton! {
                 btn.layer.borderWidth = 1.0
-                btn.setTitle("", forState: .Normal)
+                //btn.setTitle("", forState: .Normal)
             }
             
         }

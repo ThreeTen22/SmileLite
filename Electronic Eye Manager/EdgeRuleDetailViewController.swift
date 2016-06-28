@@ -9,22 +9,25 @@
 import UIKit
 
 class EdgeRuleDetailViewController: UIViewController, UIPickerViewDelegate {
-    
+    //These values get changed at runtime,  compiler was complaining
     var edgeRuleTypes = ["$ Edge", "Gamma Edge"]
     var edgeRuleArray = [["    "],["   "]]
+    
     var isBCSP:Bool = false
     var str:String = ""
     var tempInt:Int = 0
+    
     @IBOutlet var edgeRulePicker: UIPickerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        for i in 1...3 {
+        for i in 1...4 {
             str = String(edgeRuleArray[1][i])
             tempInt = Int(str)!
+            print("Begin ViewDidLoadDebug:")
             print(edgeRuleArray[1][i])
             print(edgeRuleArray[0][i])
-            edgeRulePicker.selectRow(tempInt, inComponent: i-1, animated: true)
+            print("End ViewDidLoadDebug")
             edgeRulePicker.selectRow(tempInt, inComponent: i-1, animated: true)
         }
     }
@@ -46,7 +49,7 @@ class EdgeRuleDetailViewController: UIViewController, UIPickerViewDelegate {
         case 2:
             return 101
         case 3:
-            return 101
+            return 201
         case 4:
             return 101
         default:
@@ -62,7 +65,7 @@ class EdgeRuleDetailViewController: UIViewController, UIPickerViewDelegate {
         case 0:
             returnStr = edgeRuleTypes[row]
         case 1:
-            returnStr = appendZerosToString(numberToString: String(rowDbl*0.01), MinCharLength: 4)
+            returnStr = appendZerosToString(numberAsString: String(rowDbl*0.01), MinCharLength: 4)
         case 2:
             if row < 21 {
                 returnStr = String(100*row)
@@ -71,7 +74,8 @@ class EdgeRuleDetailViewController: UIViewController, UIPickerViewDelegate {
                 returnStr = String(2000+(500*(row-20)))
             }
         case 3:
-            returnStr = String(row)
+            returnStr = appendZerosToString(numberAsString: String(rowDbl*0.01), MinCharLength: 4)
+            
         case 4:
             returnStr = String(row)
         default:
@@ -84,7 +88,6 @@ class EdgeRuleDetailViewController: UIViewController, UIPickerViewDelegate {
         if isBCSP {
             //get information and put it into the array
             bcspEdgeRule[0][component+1] = self.pickerView(pickerView, titleForRow: row, forComponent: component)!
-            print(self.pickerView(pickerView, titleForRow: row, forComponent: component))
             
             //add Index
             bcspEdgeRule[1][component+1] = String(row)
@@ -92,11 +95,20 @@ class EdgeRuleDetailViewController: UIViewController, UIPickerViewDelegate {
         else {
             //get information and put it into the array
             scbpEdgeRule[0][component+1] = self.pickerView(pickerView, titleForRow: row, forComponent: component)!
-            print(self.pickerView(pickerView, titleForRow: row, forComponent: component))
             
             //add Index
             scbpEdgeRule[1][component+1] = String(row)
         }
+        
+        for i in parentViewController!.parentViewController!.childViewControllers {
+                print(i)
+            if let x = (i as? GraphViewController) {
+                print("entered")
+                x.redrawGraph()
+            }
+        }
     }
+    
+    
     
 }

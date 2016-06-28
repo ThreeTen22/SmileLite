@@ -7,8 +7,8 @@
 //
 
 import UIKit
-var bcspEdgeRule = [["Buy Call | Sell Put","$ Edge", "0.0", "0", "0.0", "0.0"],["0","0","0","0","0","0"]]
-var scbpEdgeRule = [["Sell Call | Buy Put","$ Edge", "0.0", "0", "0.0", "0.0"],["0","0","0","0","0","0"]]
+var bcspEdgeRule = [["Buy Call | Sell Put","$ Edge", "0.00", "0", "0.00"],["0","0","0","0","0"]]
+var scbpEdgeRule = [["Sell Call | Buy Put","$ Edge", "0.00", "0", "0.00"],["0","0","0","0","0"]]
 
 //                          Stock   Last  Bid 	Ask
 
@@ -196,7 +196,7 @@ func prependZerosToString(numberToString str:String, MinCharLength charLength:In
 }
 
 ///Will append the appopriate amount of Zeros before a string so as to keep the character length consistant
-func appendZerosToString(numberToString str:String, MinCharLength charLength:Int)-> String {
+func appendZerosToString(numberAsString str:String, MinCharLength charLength:Int)-> String {
     var newStr = str
     
     while newStr.characters.count < (charLength) {
