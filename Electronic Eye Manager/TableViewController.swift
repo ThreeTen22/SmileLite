@@ -40,9 +40,10 @@ class TableViewController: UITableViewController {
         let xonRowZero = xonData[indexPath.row] as! NSArray
         if String(xonRowZero[0]) == monthFocus {
             cell.strikePrice?.text = String(xonRowZero[1])
-            cell.delta?.text = removeAfterIndex(Source: String(xonRowZero[10]), CutOffIndex: 6)
+            cell.cDelta?.text = removeAfterIndex(Source: String(xonRowZero[11]), CutOffIndex: 5)
             cell.cTheo?.text = removeAfterIndex(Source: String(xonRowZero[3]), CutOffIndex: 4)
             cell.cPos?.text = String(xonRowZero[5])
+            cell.pDelta?.text = removeAfterIndex(Source: String(xonRowZero[10]), CutOffIndex: 5)
             cell.pTheo?.text = removeAfterIndex(Source: String(xonRowZero[8]), CutOffIndex: 4)
             cell.pPos?.text = String(xonRowZero[9])
         }

@@ -12,9 +12,14 @@ class GraphViewController: UIViewController {
 
     @IBOutlet var graph: GraphContainerView!
     
+    var testLabel = UILabel.init()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        testLabel.text = ""
+        testLabel.numberOfLines = 2
+        testLabel.sizeToFit()
+        self.view.addSubview(testLabel)
         // Do any additional setup after loading the view.
     }
 

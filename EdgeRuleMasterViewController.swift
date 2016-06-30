@@ -25,14 +25,22 @@ class EdgeRuleMasterViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("sender  \(sender)")
-        print("segue  \(segue)")
+        let destView = (segue.destinationViewController as! EdgeRuleDetailViewController)
         if (sender as! NSIndexPath).row == 0 {
-            (segue.destinationViewController as! EdgeRuleDetailViewController).isBCSP = false
-            (segue.destinationViewController as! EdgeRuleDetailViewController).edgeRuleArray = scbpEdgeRule
+            destView.isBCSP = false
+            destView.edgeRuleArray = scbpEdgeRule
+            destView.edgeRuleArrayBackup = scbpEdgeRule
         } else {
-            (segue.destinationViewController as! EdgeRuleDetailViewController).isBCSP = true
-            (segue.destinationViewController as! EdgeRuleDetailViewController).edgeRuleArray = bcspEdgeRule
+            destView.isBCSP = true
+            destView.edgeRuleArray = bcspEdgeRule
+            destView.edgeRuleArrayBackup = bcspEdgeRule
+        }
+        
+        for i in parentViewController!.parentViewController!.childViewControllers {
+            if let x = (i as? GraphViewController) {
+                print("entered")
+                destView.graphVC = x
+            }
         }
         
     }
@@ -48,6 +56,7 @@ class EdgeRuleMasterViewController: UITableViewController {
         return true
     }
     
+    // indexPath.row: 0 = scbp | 1 = bcsp
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("EdgeRuleDetails", forIndexPath: indexPath)
         
@@ -55,9 +64,12 @@ class EdgeRuleMasterViewController: UITableViewController {
         
         if indexPath.row == 0 {
             tempArray = scbpEdgeRule
+            (cell.contentView.viewWithTag(1) as! UILabel).textColor = UIColor.init(red: 240.0, green: 0.0, blue: 0.0, alpha: 1.0)
+            
         }
         else {
             tempArray = bcspEdgeRule
+            (cell.contentView.viewWithTag(1) as! UILabel).textColor = UIColor.init(red: 0.0, green: 240.0, blue: 0.0, alpha: 1.0)
         }
         for i in 1...5 {
             (cell.contentView.viewWithTag(i) as! UILabel).text! = "\(tempArray[0][i-1])"

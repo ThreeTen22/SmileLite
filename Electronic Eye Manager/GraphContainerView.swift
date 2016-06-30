@@ -17,36 +17,44 @@ class GraphContainerView: UIView {
     var maxY = 25000.0
     let xAxis:UIBezierPath = UIBezierPath()
     let yAxis:UIBezierPath = UIBezierPath()
+    var scbpPath:UIBezierPath = UIBezierPath()
+    var bcspPath:UIBezierPath = UIBezierPath()
+    let xAxisScales = [UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath()]
+    let yAxisScales = [UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath()]
     
     override func awakeFromNib() {
         xAxis.lineWidth = 1.0
         yAxis.lineWidth = 1.0
+        for i in xAxisScales {
+            i.lineWidth = 1.0
+        }
+        for i in yAxisScales {
+            i.lineWidth = 1.0
+        }
     }
     override func drawRect(rect: CGRect) {
-        var scbpPath:UIBezierPath = UIBezierPath()
-        var bcspPath:UIBezierPath = UIBezierPath()
-        let lineWidth:CGFloat = 1.0
-        
         //create x/y axis
         xAxis.moveToPoint(CGPoint(x: rect.minX, y: rect.maxY))
         xAxis.addLineToPoint(CGPoint(x: rect.maxX, y: rect.maxY))
         yAxis.moveToPoint(CGPoint(x: rect.minX, y: rect.minY))
         yAxis.addLineToPoint(CGPoint(x: rect.minX, y: rect.maxY))
+        
+        
         xAxis.stroke()
         yAxis.stroke()
-        
         //create lines
-        scbpPath = createPathUsing(PathContainer: rect, Type: 0)
-        bcspPath = createPathUsing(PathContainer: rect, Type: 1)
+        scbpPath.CGPath = createPathUsing(PathContainer: rect, Type: 0)
+        print("yCeil: \(yCeiling)")
+        bcspPath.CGPath = createPathUsing(PathContainer: rect, Type: 1)
         bcspPath.lineWidth = 1.0
-        scbpPath.lineWidth = lineWidth
+        scbpPath.lineWidth = 1.0
+        UIColor.redColor().setStroke()
         scbpPath.stroke()
+        UIColor.greenColor().setStroke()
         bcspPath.stroke()
-        
-        //setNeedsDisplay()
     }
     
-    func createPathUsing(PathContainer rect:CGRect, Type type:Int) -> UIBezierPath {
+    func createPathUsing(PathContainer rect:CGRect, Type type:Int) -> CGPath {
         
         if type == 0 {
             xIntercept = Double(scbpEdgeRule[0][2])!
@@ -77,7 +85,7 @@ class GraphContainerView: UIView {
         }
         newPath.addLineToPoint(CGPoint(x: width, y: height - nextY))
         
-        return newPath
+        return newPath.CGPath
     }
     // y - y1 = m(x - x1)
     // 0 = mx - m(var)

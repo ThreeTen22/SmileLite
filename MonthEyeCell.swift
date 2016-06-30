@@ -11,8 +11,9 @@ import UIKit
 
 class MonthEyeCell: UITableViewCell {
     
+    @IBOutlet var pDelta: UILabel!
     @IBOutlet var strikePrice: UILabel!
-    @IBOutlet var delta: UILabel!
+    @IBOutlet var cDelta: UILabel!
     @IBOutlet var cTheo: UILabel!
     @IBOutlet var cPos: UILabel!
     @IBOutlet var pTheo: UILabel!
