@@ -12,14 +12,29 @@ class GraphViewController: UIViewController {
 
     @IBOutlet var graph: GraphContainerView!
     
-    var testLabel = UILabel.init()
+    @IBOutlet var xAxisLabels: UIStackView!
+    @IBOutlet var yAxisLabels: UIStackView!
     
     override func viewDidLoad() {
+        let xAxisSubViews = xAxisLabels.arrangedSubviews
+        var text = ""
+        for i in 0..<9 {
+            if let x = (xAxisSubViews[i] as? UILabel) {
+                
+                text = "\(5.0/Double(10)*Double(i+1))"
+                x.text = removeAfterIndex(Source: text, CutOffIndex: 4)
+            }
+        }
+        
+        let yAxisSubViews = yAxisLabels.arrangedSubviews
+        for i in 1..<5 {
+            if let y = (yAxisSubViews[i].viewWithTag(1) as? UILabel) {
+                
+                text = "\(Int(25000.0-(25000.0/Double(yAxisSubViews.count)*Double(i))))"
+                y.text = removeAfterIndex(Source: text, CutOffIndex: 5)
+            }
+        }
         super.viewDidLoad()
-        testLabel.text = ""
-        testLabel.numberOfLines = 2
-        testLabel.sizeToFit()
-        self.view.addSubview(testLabel)
         // Do any additional setup after loading the view.
     }
 

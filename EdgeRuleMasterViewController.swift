@@ -38,7 +38,6 @@ class EdgeRuleMasterViewController: UITableViewController {
         
         for i in parentViewController!.parentViewController!.childViewControllers {
             if let x = (i as? GraphViewController) {
-                print("entered")
                 destView.graphVC = x
             }
         }
@@ -83,13 +82,48 @@ class EdgeRuleMasterViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let more = UITableViewRowAction(style: .Default, title: "Edit Edge Rule") { action, index in
-            print("Edit Edge Mode Pressed")
+        var mimicFrom = ["SCBP", "BCSP"]
+        var mimicTitle = ""
+        
+        var graph:GraphViewController {
+            for i in parentViewController!.parentViewController!.childViewControllers {
+                if let x = (i as? GraphViewController) {
+                    return x
+                }
+            }
+            return GraphViewController()
+        }
+        
+        
+        
+        if indexPath.row == 0 {
+            mimicTitle = "Mimic\n\(mimicFrom[1])\nParameters"
+        } else {
+            mimicTitle = "Mimic\n\(mimicFrom[0])\nParameters"
+        }
+        
+        let editRule = UITableViewRowAction(style: .Default, title: "Edit\nEdge Rule") { action, index in
             self.performSegueWithIdentifier("editEdgeRule", sender: indexPath)
         }
-        more.backgroundColor = UIColor.lightGrayColor()
         
-        return [more]
+        let mimicRule = UITableViewRowAction(style: .Default, title: mimicTitle) { action, index in
+            if indexPath.row == 0 {
+                scbpEdgeRule = bcspEdgeRule
+                scbpEdgeRule[0][0] = (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))?.viewWithTag(1) as! UILabel).text!
+            }
+            else {
+                bcspEdgeRule = scbpEdgeRule
+                bcspEdgeRule[0][0] = (self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0))?.viewWithTag(1) as! UILabel).text!
+                
+            }
+            self.tableView.reloadData()
+            graph.graph.setNeedsDisplay()
+            self.performSegueWithIdentifier("editEdgeRule", sender: indexPath)
+        }
+        
+        editRule.backgroundColor = UIColor.darkGrayColor()
+        mimicRule.backgroundColor = UIColor.orangeColor()
+        return [editRule, mimicRule]
     }
     
     

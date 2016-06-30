@@ -81,7 +81,7 @@ class EdgeRuleDetailViewController: UIViewController, UIPickerViewDelegate {
                 setInformation(pickerView, tempRow + 1, component)
             }
             print("row \(row) temprow    \(tempRow) component \(component) didAppear: \(didAppear)")
-            graphVC.graph.setNeedsDisplay()
+            graphVC.redrawGraph()
         }
         return returnStr
         
@@ -89,7 +89,7 @@ class EdgeRuleDetailViewController: UIViewController, UIPickerViewDelegate {
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         setInformation(pickerView, row, component)
-        graphVC.redrawGraph()
+        //graphVC.redrawGraph()
         print("selected: \(row)")
         //curRowIndx = row
     }

@@ -19,8 +19,9 @@ class GraphContainerView: UIView {
     let yAxis:UIBezierPath = UIBezierPath()
     var scbpPath:UIBezierPath = UIBezierPath()
     var bcspPath:UIBezierPath = UIBezierPath()
-    let xAxisScales = [UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath()]
-    let yAxisScales = [UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath()]
+    let xAxisScales = [UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath()]
+    let yAxisScales = [UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath(),UIBezierPath()]
+    var firstTime = true
     
     override func awakeFromNib() {
         xAxis.lineWidth = 1.0
@@ -34,12 +35,43 @@ class GraphContainerView: UIView {
     }
     override func drawRect(rect: CGRect) {
         //create x/y axis
+        
+        let minX = Double(rect.minX)
+        let maxX = Double(rect.maxX)
+        let minY = Double(rect.minY)
+        let maxY = Double(rect.maxY)
+        let xCount = xAxisScales.count
+        let yCount = yAxisScales.count
+        let xDivis = (maxX/Double(xCount))
+        let yDivis = (maxY/Double(yCount))
+        let rgb = CGFloat(0.85)
+        print(rect.minX)
+        
+        UIColor(red: rgb, green: rgb, blue: rgb, alpha: CGFloat(1)).setStroke()
+        for i in 1..<xCount {
+            xAxisScales[i].removeAllPoints()
+            xAxisScales[i].stroke()
+            xAxisScales[i].moveToPoint(CGPoint(x: xDivis*Double(i), y: minY))
+            xAxisScales[i].addLineToPoint(CGPoint(x: xDivis*Double(i), y: maxY))
+            xAxisScales[i].stroke()
+        }
+        
+        for i in 1..<yCount {
+            yAxisScales[i].removeAllPoints()
+            yAxisScales[i].stroke()
+            yAxisScales[i].moveToPoint(CGPoint(x: minX,   y:maxY - yDivis*Double(i)))
+            yAxisScales[i].addLineToPoint(CGPoint(x: maxX, y: maxY - yDivis*Double(i)))
+            yAxisScales[i].stroke()
+        }
+        
+        xAxis.removeAllPoints()
+        yAxis.removeAllPoints()
         xAxis.moveToPoint(CGPoint(x: rect.minX, y: rect.maxY))
         xAxis.addLineToPoint(CGPoint(x: rect.maxX, y: rect.maxY))
         yAxis.moveToPoint(CGPoint(x: rect.minX, y: rect.minY))
         yAxis.addLineToPoint(CGPoint(x: rect.minX, y: rect.maxY))
         
-        
+        UIColor.blackColor().setStroke()
         xAxis.stroke()
         yAxis.stroke()
         //create lines
@@ -47,7 +79,11 @@ class GraphContainerView: UIView {
         print("yCeil: \(yCeiling)")
         bcspPath.CGPath = createPathUsing(PathContainer: rect, Type: 1)
         bcspPath.lineWidth = 1.0
-        scbpPath.lineWidth = 1.0
+        if bcspPath == scbpPath {
+            scbpPath.lineWidth = 2.0
+        } else {
+            scbpPath.lineWidth = 1.0
+        }
         UIColor.redColor().setStroke()
         scbpPath.stroke()
         UIColor.greenColor().setStroke()

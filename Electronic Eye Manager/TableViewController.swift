@@ -47,9 +47,20 @@ class TableViewController: UITableViewController {
             cell.pTheo?.text = removeAfterIndex(Source: String(xonRowZero[8]), CutOffIndex: 4)
             cell.pPos?.text = String(xonRowZero[9])
         }
-        if deltaRange[0] <= indexPath.row && indexPath.row <= deltaRange[1] && deltaRange[0] != (-1) {
-            cell.backgroundColor = UIColor.lightGrayColor()
-        } else {
+        if indexPath.row > deltaRange[0] && deltaRange[1] >= indexPath.row  {
+            if deltaRange[0] != (-1) {
+                cell.backgroundColor = UIColor.lightGrayColor()
+            }
+        }
+        else if deltaRange[0] == indexPath.row  {
+            if deltaRange[0] == deltaRange[1] {
+                cell.backgroundColor = UIColor.yellowColor()
+            }
+            else {
+                cell.backgroundColor = UIColor.lightGrayColor()
+            }
+        }
+        else {
             cell.backgroundColor = UIColor.whiteColor()
         }
         return cell
@@ -70,6 +81,7 @@ class TableViewController: UITableViewController {
                 } else {
                     self.selectMinDelta = true
                     self.deltaRange[0] = indexPath.row
+                    self.deltaRange[1] = indexPath.row
                 }
                 self.tableView.reloadData()
                 print(self.deltaRange)
@@ -80,8 +92,8 @@ class TableViewController: UITableViewController {
             let clearDelta = UITableViewRowAction(style: .Default, title: "clear range", handler: { action, index in
                 self.deltaRange[0] = -1
                 self.deltaRange[1] = -1
-                self.tableView.reloadData()
                 self.selectMinDelta = false
+                self.tableView.reloadData()
             })
             return [delta,clearDelta]
         }
