@@ -63,12 +63,11 @@ class EdgeRuleMasterViewController: UITableViewController {
         
         if indexPath.row == 0 {
             tempArray = scbpEdgeRule
-            (cell.contentView.viewWithTag(1) as! UILabel).textColor = UIColor.init(red: 240.0, green: 0.0, blue: 0.0, alpha: 1.0)
+            (cell.contentView.viewWithTag(1) as! UILabel).textColor = UIColor(red: 240.0, green: 0.0, blue: 0.0, alpha: 1.0)
             
         }
         else {
             tempArray = bcspEdgeRule
-            (cell.contentView.viewWithTag(1) as! UILabel).textColor = UIColor.init(red: 0.0, green: 240.0, blue: 0.0, alpha: 1.0)
         }
         for i in 1...5 {
             (cell.contentView.viewWithTag(i) as! UILabel).text! = "\(tempArray[0][i-1])"

@@ -84,8 +84,9 @@ class GraphContainerView: UIView {
         } else {
             scbpPath.lineWidth = 1.0
         }
-        UIColor.redColor().setStroke()
+        UIColor.init(red: 240.0, green: 0.0, blue: 0.0, alpha: 1.0).setStroke()
         scbpPath.stroke()
+        
         UIColor.greenColor().setStroke()
         bcspPath.stroke()
     }

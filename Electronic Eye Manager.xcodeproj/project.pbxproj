@@ -21,6 +21,10 @@
 		9BD063911D19B8B6006571CB /* GraphContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD063901D19B8B6006571CB /* GraphContainerView.swift */; };
 		9BD063931D19C255006571CB /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD063921D19C255006571CB /* GraphViewController.swift */; };
 		9BD12FD11D0F0D770091AF05 /* EdgeRuleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD12FD01D0F0D770091AF05 /* EdgeRuleDetailViewController.swift */; };
+		9BEA426E1D353ADE00BC4B0C /* EyeBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA426D1D353ADE00BC4B0C /* EyeBookViewController.swift */; };
+		9BEA42701D3701B100BC4B0C /* StockFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA426F1D3701B100BC4B0C /* StockFilterView.swift */; };
+		9BEA42721D392F6E00BC4B0C /* EyeBookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA42711D392F6E00BC4B0C /* EyeBookTableViewCell.swift */; };
+		9BEA42761D3C8DEF00BC4B0C /* EyeClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA42751D3C8DEF00BC4B0C /* EyeClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +44,10 @@
 		9BD063901D19B8B6006571CB /* GraphContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphContainerView.swift; sourceTree = "<group>"; };
 		9BD063921D19C255006571CB /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		9BD12FD01D0F0D770091AF05 /* EdgeRuleDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeRuleDetailViewController.swift; sourceTree = "<group>"; };
+		9BEA426D1D353ADE00BC4B0C /* EyeBookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EyeBookViewController.swift; sourceTree = "<group>"; };
+		9BEA426F1D3701B100BC4B0C /* StockFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockFilterView.swift; sourceTree = "<group>"; };
+		9BEA42711D392F6E00BC4B0C /* EyeBookTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EyeBookTableViewCell.swift; sourceTree = "<group>"; };
+		9BEA42751D3C8DEF00BC4B0C /* EyeClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EyeClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +80,24 @@
 		9B66D35C1D073EFC0099C670 /* Electronic Eye Manager */ = {
 			isa = PBXGroup;
 			children = (
+				9BEA42671D3536A300BC4B0C /* Month Eye */,
+				9B66D3721D073FCE0099C670 /* globalClass.swift */,
+				9BEA42751D3C8DEF00BC4B0C /* EyeClass.swift */,
+				9BEA426D1D353ADE00BC4B0C /* EyeBookViewController.swift */,
+				9BEA42711D392F6E00BC4B0C /* EyeBookTableViewCell.swift */,
+				9BEA426F1D3701B100BC4B0C /* StockFilterView.swift */,
+				9B66D3611D073EFC0099C670 /* Main.storyboard */,
+				9B66D3671D073EFC0099C670 /* Assets.xcassets */,
+				9B66D3691D073EFC0099C670 /* LaunchScreen.storyboard */,
+				9B66D36C1D073EFC0099C670 /* Info.plist */,
+				9B66D3641D073EFC0099C670 /* Electronic_Eye_Manager.xcdatamodeld */,
+			);
+			path = "Electronic Eye Manager";
+			sourceTree = SOURCE_ROOT;
+		};
+		9BEA42671D3536A300BC4B0C /* Month Eye */ = {
+			isa = PBXGroup;
+			children = (
 				9B3A7FA11D0EF84E009F96E8 /* EdgeRuleMasterViewController.swift */,
 				9BD12FD01D0F0D770091AF05 /* EdgeRuleDetailViewController.swift */,
 				9BB8DADD1D07523400B6F10C /* MonthEyeCell.swift */,
@@ -81,15 +107,9 @@
 				9BB8DAE11D07558700B6F10C /* TableViewController.swift */,
 				9BD063921D19C255006571CB /* GraphViewController.swift */,
 				9BD063901D19B8B6006571CB /* GraphContainerView.swift */,
-				9B66D3721D073FCE0099C670 /* globalClass.swift */,
-				9B66D3611D073EFC0099C670 /* Main.storyboard */,
-				9B66D3671D073EFC0099C670 /* Assets.xcassets */,
-				9B66D3691D073EFC0099C670 /* LaunchScreen.storyboard */,
-				9B66D36C1D073EFC0099C670 /* Info.plist */,
-				9B66D3641D073EFC0099C670 /* Electronic_Eye_Manager.xcdatamodeld */,
 			);
-			path = "Electronic Eye Manager";
-			sourceTree = SOURCE_ROOT;
+			name = "Month Eye";
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -163,11 +183,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BEA42761D3C8DEF00BC4B0C /* EyeClass.swift in Sources */,
+				9BEA426E1D353ADE00BC4B0C /* EyeBookViewController.swift in Sources */,
 				9B66D3731D073FCE0099C670 /* globalClass.swift in Sources */,
 				9B3A7FA21D0EF84E009F96E8 /* EdgeRuleMasterViewController.swift in Sources */,
 				9BB8DAE21D07558700B6F10C /* TableViewController.swift in Sources */,
 				9BB8DADE1D07523400B6F10C /* MonthEyeCell.swift in Sources */,
+				9BEA42721D392F6E00BC4B0C /* EyeBookTableViewCell.swift in Sources */,
 				9B66D3661D073EFC0099C670 /* Electronic_Eye_Manager.xcdatamodeld in Sources */,
+				9BEA42701D3701B100BC4B0C /* StockFilterView.swift in Sources */,
 				9BD063911D19B8B6006571CB /* GraphContainerView.swift in Sources */,
 				9BC40E901D18C1A60074E919 /* MonthEyeActivateCell.swift in Sources */,
 				9BC40E8E1D18BEA80074E919 /* MonthEyeMainViewController.swift in Sources */,
@@ -289,6 +313,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Electronic Eye Manager/Info.plist";
@@ -296,6 +321,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.skullcup.Electronic-Eye-Manager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -305,6 +331,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Electronic Eye Manager/Info.plist";

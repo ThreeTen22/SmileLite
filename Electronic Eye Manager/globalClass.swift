@@ -7,6 +7,10 @@
 //
 
 import UIKit
+
+
+
+
 var bcspEdgeRule = [["Buy Call | Sell Put","$ Edge", "0.00", "0", "0.01"],["0","0","0","0","1"]]
 var scbpEdgeRule = [["Sell Call | Buy Put","$ Edge", "0.00", "0", "0.01"],["0","0","0","0","1"]]
 
