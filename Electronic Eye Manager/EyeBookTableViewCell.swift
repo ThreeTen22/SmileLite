@@ -10,9 +10,8 @@ import UIKit
 
 class EyeBookTableViewCell: UITableViewCell {
 
-    
-    var isBtnActive = [false, false, false, false]
-    var isMonthEye = false
+    var curMonthEye:MonthEye? = nil
+    var curStrikeEye:StrikeEye? = nil
     
     
     override func awakeFromNib() {
@@ -33,14 +32,32 @@ class EyeBookTableViewCell: UITableViewCell {
     
     
     func changeActiveButton(index:Int,_ btnToModify:UIButton) {
-        if (isBtnActive[index]) {
-            btnToModify.backgroundColor = UIColor.whiteColor()
-            isBtnActive[index] = false
-            btnToModify.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        } else {
-            btnToModify.backgroundColor = UIColor.blueColor()
-            btnToModify.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-            isBtnActive[index] = true
+        if let curME = curMonthEye {
+            if curME.isActive[index] {
+                btnToModify.backgroundColor = UIColor.whiteColor()
+                curME.isActive[index] = false
+                btnToModify.setTitleColor(UIColor.blueColor(), forState: .Normal)
+            }
+            else {
+                btnToModify.backgroundColor = UIColor.blueColor()
+                btnToModify.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+                curME.isActive[index] = true
+            }
+            return
+        }
+        
+        if let curSE = curStrikeEye {
+            if curSE.isActive[index] {
+                btnToModify.backgroundColor = UIColor.whiteColor()
+                curSE.isActive[index] = false
+                btnToModify.setTitleColor(UIColor.blueColor(), forState: .Normal)
+            }
+            else {
+                btnToModify.backgroundColor = UIColor.blueColor()
+                btnToModify.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+                curSE.isActive[index] = true
+            }
+            return
         }
     }
 

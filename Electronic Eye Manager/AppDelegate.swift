@@ -8,15 +8,48 @@
 
 import UIKit
 import CoreData
+import Darwin.C
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        var newListing = Listing(symbol: "XON")
+        var newMonth = MonthEye(symbol: "XON", expDate: "06/17/16")
+        newListing.AddEye(MonthEye: newMonth)
+        var newStrike = StrikeEye(symbol: "XON", expDate: "06/17/16", strikePrice: 30.0, priceOverride: nil, quantityOverride: nil)
+        newListing.AddEye(StrikeEye: newStrike)
+        
+        newStrike = StrikeEye(symbol: "XON", expDate: "06/17/16", strikePrice: 37.5, priceOverride: nil, quantityOverride: nil)
+        newListing.AddEye(StrikeEye: newStrike)
+        
+        eyeBook.append(newListing)
+        
+        newListing = Listing(symbol: "APPL")
+        newMonth = MonthEye(symbol: "APPL", expDate: "06/17/16")
+        newListing.AddEye(MonthEye: newMonth)
+        newStrike = StrikeEye(symbol: "APPL", expDate: "06/17/16", strikePrice: 30.0, priceOverride: nil, quantityOverride: nil)
+        newListing.AddEye(StrikeEye: newStrike)
+        
+        newStrike = StrikeEye(symbol: "APPL", expDate: "06/17/16", strikePrice: 37.5, priceOverride: nil, quantityOverride: nil)
+        newListing.AddEye(StrikeEye: newStrike)
+        
+        eyeBook.append(newListing)
+        
+        newListing = Listing(symbol: "MSFT")
+        newMonth = MonthEye(symbol: "MSFT", expDate: "06/17/16")
+        newListing.AddEye(MonthEye: newMonth)
+        newStrike = StrikeEye(symbol: "MSFT", expDate: "06/17/16", strikePrice: 30.0, priceOverride: nil, quantityOverride: nil)
+        newListing.AddEye(StrikeEye: newStrike)
+        
+        newStrike = StrikeEye(symbol: "MSFT", expDate: "06/17/16", strikePrice: 37.5, priceOverride: nil, quantityOverride: nil)
+        newListing.AddEye(StrikeEye: newStrike)
+        
+        eyeBook.append(newListing)
         
         return true
     }
