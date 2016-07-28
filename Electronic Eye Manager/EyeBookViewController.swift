@@ -14,12 +14,35 @@ class EyeBookViewController: UIViewController, UICollectionViewDelegate, UITable
         case ShowListing
     }
     
+    @IBOutlet var listingCollection: StockFilterView!
+    @IBOutlet var eyesTable: UITableView!
+    
+    
     var listingSymbols = [String]()
     var filteredSymbol:Listing = Listing()
     var currentFilter = FilterType.ShowAll
     var selectedSymbol = ""
     
-    
+    @IBAction func FilterSymbol(sender:UIButton) {
+        let myListing = getListingBySymbol(eyeBook, symbol: (sender.currentTitle!))
+        if (myListing.listingsymbol != selectedSymbol) {
+            let oldListing:Listing = getListingBySymbol(eyeBook, symbol: selectedSymbol)
+            oldListing.isSelected = false
+        }
+        if (myListing.isSelected) {
+            currentFilter = FilterType.ShowAll
+            selectedSymbol = ""
+            myListing.isSelected = false
+        }
+        else {
+            currentFilter = FilterType.ShowListing
+            selectedSymbol = myListing.listingsymbol
+            myListing.isSelected = true
+        }
+        eyesTable.reloadData()
+        listingCollection.reloadData()
+        
+    }
     
     @IBAction func FocusBtnPressed(sender: UIButton) {
         if let senderCellContainer = sender.superview!.superview as? EyeBookTableViewCell {
@@ -79,9 +102,18 @@ class EyeBookViewController: UIViewController, UICollectionViewDelegate, UITable
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
         let listingAtIndexPath = eyeBook[indexPath.row]
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Listing", forIndexPath: indexPath)
         (cell.contentView.viewWithTag(1) as! UIButton).setTitle(listingAtIndexPath.listingsymbol, forState: .Normal)
+        if listingAtIndexPath.isSelected {
+            cell.layer.borderWidth = 1.0
+            cell.layer.borderColor = UIColor.blackColor().CGColor
+        }
+        else {
+            cell.layer.borderWidth = 0.0
+            cell.layer.borderColor = UIColor.clearColor().CGColor
+        }
         return cell
     }
     
@@ -127,21 +159,16 @@ class EyeBookViewController: UIViewController, UICollectionViewDelegate, UITable
         }
         else {
             let index = (indexPath.row)-(currentListing.registeredMonthEyes.count)
-            print(currentListing.registeredStrikeEyes.count)
-            print(index)
             let curStrike = currentListing.registeredStrikeEyes[index]
             (cell as! EyeBookTableViewCell).curStrikeEye = curStrike
             (cell.contentView.viewWithTag(5) as! UILabel).text = "\(curStrike.expDate) - \(curStrike.strikePrice)"
-            
+        
             (cell.contentView.viewWithTag(7) as! UILabel).text = ""
             (cell.contentView.viewWithTag(8) as! UILabel).text = "20"
             (cell.contentView.viewWithTag(9) as! UILabel).text = "1000"
             (cell.contentView.viewWithTag(10) as! UILabel).text = "OT"
             (cell.contentView.viewWithTag(11) as! UILabel).text = "True"
-            
         }
-        
-        
         
         return cell
     }

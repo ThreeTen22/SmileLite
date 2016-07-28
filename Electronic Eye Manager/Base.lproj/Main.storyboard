@@ -354,7 +354,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xon-jv-l17" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-447" y="218.5"/>
+            <point key="canvasLocation" x="-566" y="218.5"/>
         </scene>
         <!--Month Eye Main View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -377,7 +377,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Kt-AG-AWJ">
                                 <rect key="frame" x="0.0" y="456" width="546" height="312"/>
                                 <connections>
-                                    <segue destination="4S7-xe-aRu" kind="embed" id="IrQ-X2-kSa"/>
+                                    <segue destination="QRD-ZO-SQe" kind="embed" id="phS-CB-MXY"/>
                                 </connections>
                             </containerView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="yeZ-ed-cmt">
@@ -575,25 +575,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bHA-O0-QUE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="125" y="1209"/>
+            <point key="canvasLocation" x="-555" y="1225"/>
         </scene>
         <!--Edge Rule-->
         <scene sceneID="Xtj-aW-aC2">
             <objects>
                 <tableViewController storyboardIdentifier="EdgeRuleTable" title="Edge Rule" useStoryboardIdentifierAsRestorationIdentifier="YES" id="J8m-d1-1Zh" customClass="EdgeRuleMasterViewController" customModule="Electronic_Eye_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="135" sectionHeaderHeight="1" sectionFooterHeight="1" id="eQh-pc-lWs">
-                        <rect key="frame" x="0.0" y="0.0" width="546" height="312"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EdgeRuleDetails" id="ZVg-Wx-8Zv">
-                                <rect key="frame" x="0.0" y="45" width="546" height="135"/>
+                                <rect key="frame" x="0.0" y="65" width="600" height="135"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZVg-Wx-8Zv" id="mpd-oR-7F5">
-                                    <rect key="frame" x="0.0" y="0.0" width="546" height="134.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="134.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wka-2T-NEQ">
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1.5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wka-2T-NEQ">
                                             <rect key="frame" x="434" y="92" width="62" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="62" id="FJN-0r-7h6"/>
@@ -645,7 +645,7 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="-5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="                   Slope" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BvS-xe-4jt">
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="-5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="                   Slope" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BvS-xe-4jt">
                                             <rect key="frame" x="434" y="36" width="104" height="49"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="104" id="URW-Mp-mW7"/>
@@ -655,7 +655,7 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="-4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Stock Hedge Delta" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mwh-bo-Htz">
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="-4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Max Stock Hedge Delta" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mwh-bo-Htz">
                                             <rect key="frame" x="276" y="36" width="103" height="49"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -673,7 +673,7 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1500" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9re-b7-qNX">
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1500" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9re-b7-qNX">
                                             <rect key="frame" x="276" y="92" width="103" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -789,7 +789,52 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nv-H4-rjD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="125" y="1852.5"/>
+            <point key="canvasLocation" x="-555" y="1946"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="GQy-of-10p">
+            <objects>
+                <tableViewController id="Mge-TM-0CO" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="zRE-7C-M38">
+                        <rect key="frame" x="0.0" y="0.0" width="546" height="312"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="6L1-yU-HZ1">
+                                <rect key="frame" x="0.0" y="72" width="546" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6L1-yU-HZ1" id="wFl-v5-pop">
+                                    <rect key="frame" x="0.0" y="0.0" width="546" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Mge-TM-0CO" id="ZQ3-GI-b79"/>
+                            <outlet property="delegate" destination="Mge-TM-0CO" id="62f-K6-fzc"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="jVr-ya-CrV"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VNt-DH-FQ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="978" y="1208"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="uOk-75-7tm">
+            <objects>
+                <navigationController id="QRD-ZO-SQe" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tXD-jh-GDf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Mge-TM-0CO" kind="relationship" relationship="rootViewController" id="Vwi-n2-0vd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RXr-5m-Cmh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="158" y="1208"/>
         </scene>
         <!--Edit Edge Rule-->
         <scene sceneID="x3z-wk-hBg">
@@ -800,17 +845,17 @@
                         <viewControllerLayoutGuide type="bottom" id="pWN-1j-KfH"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Pw4-0N-ExY">
-                        <rect key="frame" x="0.0" y="0.0" width="546" height="312"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Stock Hedge Delta" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="czB-p2-BCc">
-                                <rect key="frame" x="295" y="44" width="101" height="44"/>
+                                <rect key="frame" x="295" y="332" width="155" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Min Edge" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PzD-ev-bRl">
-                                <rect key="frame" x="184" y="42" width="100" height="44"/>
+                                <rect key="frame" x="184" y="330" width="100" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Xyg-8S-AlB"/>
                                     <constraint firstAttribute="height" constant="44" id="xft-MZ-8Y5"/>
@@ -826,14 +871,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IzB-gx-H36">
-                                <rect key="frame" x="20" y="96" width="506" height="216"/>
+                                <rect key="frame" x="20" y="384" width="560" height="216"/>
                                 <connections>
                                     <outlet property="dataSource" destination="qyU-LN-lP9" id="ev8-7C-Dqw"/>
                                     <outlet property="delegate" destination="qyU-LN-lP9" id="dGz-X6-6gg"/>
                                 </connections>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="Slope" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7TB-lU-db2">
-                                <rect key="frame" x="409" y="46" width="101" height="40"/>
+                                <rect key="frame" x="463" y="334" width="101" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Lkd-PH-Rix"/>
                                     <constraint firstAttribute="width" constant="101" id="bYK-1n-8m7"/>
@@ -843,7 +888,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="Edge Style" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6X-ra-1Bn">
-                                <rect key="frame" x="54" y="46" width="93" height="42"/>
+                                <rect key="frame" x="54" y="334" width="93" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -919,7 +964,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ass-8w-BZW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1122" y="1852"/>
+            <point key="canvasLocation" x="442" y="1946"/>
         </scene>
         <!--Eye Book View Controller-->
         <scene sceneID="e7S-2D-NVE">
@@ -941,7 +986,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsVerticalScrollIndicator="NO" keyboardDismissMode="interactive" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VsX-HH-1Ab" customClass="StockFilterView" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                <rect key="frame" x="206" y="66" width="818" height="44"/>
+                                <rect key="frame" x="206" y="53" width="818" height="69"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="RwV-72-okc">
                                     <size key="itemSize" width="83" height="50"/>
@@ -951,7 +996,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="center" reuseIdentifier="Listing" id="GaZ-9N-3Zs">
-                                        <rect key="frame" x="0.0" y="-3" width="83" height="50"/>
+                                        <rect key="frame" x="0.0" y="9.5" width="83" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="83" height="50"/>
@@ -960,6 +1005,9 @@
                                                 <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Hr-1s-CES">
                                                     <rect key="frame" x="0.0" y="0.0" width="83" height="50"/>
                                                     <state key="normal" title="Stock"/>
+                                                    <connections>
+                                                        <action selector="FilterSymbol:" destination="cOz-in-S0a" eventType="touchUpInside" id="zQA-3g-Gz4"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1080,6 +1128,8 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
+                        <outlet property="eyesTable" destination="c7h-QY-2T8" id="szA-s3-ddU"/>
+                        <outlet property="listingCollection" destination="VsX-HH-1Ab" id="8u9-0y-Sle"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="MonthEye" id="gmP-hz-Emj"/>
                     </connections>
                 </viewController>

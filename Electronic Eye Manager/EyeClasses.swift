@@ -12,6 +12,7 @@ class Listing {
     var listingsymbol = ""
     var registeredMonthEyes = [MonthEye]()
     var registeredStrikeEyes = [StrikeEye]()
+    var isSelected:Bool = false
     
     init() {
         
