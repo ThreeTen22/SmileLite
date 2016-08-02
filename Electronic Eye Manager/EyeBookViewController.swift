@@ -52,28 +52,28 @@ class EyeBookViewController: UIViewController, UICollectionViewDelegate, UITable
     
     
     @IBAction func TestLink(sender: AnyObject) {
-        //performSegueWithIdentifier("MonthEye", sender: sender)
-        
-        var client:TCPClient = TCPClient(addr: "jdempseylxdt05", port: 9400)
-        var (success, errmsg) = client.connect(timeout: 1)
-        if success {
-            var (success, errmsg) = client.send(str: "{\"id\":1,\"target\":\"eye\",\"type\":\"request\",\"clientname\":\"perl\",\"payload\":{ \"command\":\"view_table\", \"tablename\":\"Eye\"}}")
-            if success {
-                let data = client.read(1024*10)
-                if let d=data {
-                    if let str=String(bytes: d, encoding:  NSUTF8StringEncoding) {
-                        print(str)
-                    }
-                }
-            } else {
-                print("no query")
-                print(errmsg)
-            }
-        }
-        else {
-            print("no connection")
-            print(errmsg)
-        }
+        performSegueWithIdentifier("MonthEye", sender: sender)
+//        
+//        var client:TCPClient = TCPClient(addr: "jdempseylxdt05", port: 9400)
+//        var (success, errmsg) = client.connect(timeout: 1)
+//        if success {
+//            var (success, errmsg) = client.send(str: "{\"id\":1,\"target\":\"eye\",\"type\":\"request\",\"clientname\":\"perl\",\"payload\":{ \"command\":\"view_table\", \"tablename\":\"Eye\"}}")
+//            if success {
+//                let data = client.read(1024*10)
+//                if let d=data {
+//                    if let str=String(bytes: d, encoding:  NSUTF8StringEncoding) {
+//                        print(str)
+//                    }
+//                }
+//            } else {
+//                print("no query")
+//                print(errmsg)
+//            }
+//        }
+//        else {
+//            print("no connection")
+//            print(errmsg)
+//        }
     }
 
     override func viewDidLoad() {
@@ -123,7 +123,7 @@ class EyeBookViewController: UIViewController, UICollectionViewDelegate, UITable
         }
         return 1
     }
-
+    
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if currentFilter == FilterType.ShowAll {
             return eyeBook[section].listingsymbol
