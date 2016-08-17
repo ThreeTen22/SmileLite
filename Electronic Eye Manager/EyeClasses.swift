@@ -8,6 +8,14 @@
 
 import UIKit
 
+enum Order {
+    case buyCall
+    case sellCall
+    case buyPut
+    case sellPut
+}
+
+
 class Listing {
     var listingsymbol = ""
     var registeredMonthEyes = [MonthEye]()
@@ -34,6 +42,8 @@ class Eye {
     var isActive = [false, false, false, false]
     var symbol = ""
     var expDate = ""
+    var orderType = ["LMT", "LMT", "LMT", "LMT"]
+    var minEdge = [0.0, 0.0, 0.0, 0.0]
     
     init(symbol sym:String, expDate date:String) {
         symbol = sym
@@ -42,8 +52,14 @@ class Eye {
 }
 
 class MonthEye: Eye {
-    var bcspER = [["Buy Call | Sell Put","$ Edge", "0.00", "0", "0.01"],["0","0","0","0","1"]]
-    var scbpER = [["Sell Call | Buy Put","$ Edge", "0.00", "0", "0.01"],["0","0","0","0","1"]]
+    //for old eye
+    //var bcspER = [["Buy Call | Sell Put","$ Edge", "0.00", "0", "0.01"],["0","0","0","0","1"]]
+    //var scbpER = [["Sell Call | Buy Put","$ Edge", "0.00", "0", "0.01"],["0","0","0","0","1"]]
+    //var eyeParameters = ["Delta","Quanity","Min Edge", "Max Delta","Order Type"]
+    var quantity = [0.0, 0.0, 0.0, 0.0]
+    var quantityDelta = [0.0, 0.0, 0.0, 0.0]
+    var minDelta = [0.0, 0.0, 0.0, 0.0]
+    var maxDelta = [0.0, 0.0, 0.0, 0.0]
 }
 
 class StrikeEye: Eye {

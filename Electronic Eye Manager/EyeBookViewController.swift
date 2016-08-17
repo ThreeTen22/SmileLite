@@ -52,29 +52,47 @@ class EyeBookViewController: UIViewController, UICollectionViewDelegate, UITable
     
     
     @IBAction func TestLink(sender: AnyObject) {
-        performSegueWithIdentifier("MonthEye", sender: sender)
-//        
-//        var client:TCPClient = TCPClient(addr: "jdempseylxdt05", port: 9400)
-//        var (success, errmsg) = client.connect(timeout: 1)
-//        if success {
-//            var (success, errmsg) = client.send(str: "{\"id\":1,\"target\":\"eye\",\"type\":\"request\",\"clientname\":\"perl\",\"payload\":{ \"command\":\"view_table\", \"tablename\":\"Eye\"}}")
-//            if success {
-//                let data = client.read(1024*10)
-//                if let d=data {
-//                    if let str=String(bytes: d, encoding:  NSUTF8StringEncoding) {
-//                        print(str)
-//                    }
-//                }
+        //performSegueWithIdentifier("MonthEye", sender: sender)
+        
+        var client:TCPClient = TCPClient(addr: "smilelxdt07", port: 9400)
+        var (success, errmsg) = client.connect(timeout: 1)
+        let sendStr:String = "{\"id\":1,\"target\":\"eye\",\"type\":\"request\",\"clientname\":\"perl\",\"payload\":{ \"command\":\"view_table\", \"tablename\":\"Eye\"}}                                            "
+        var strLength:UInt = strlen(sendStr)
+        var networkLen:UInt = strLength.bigEndian
+        let data:NSMutableData = NSMutableData(bytes: &networkLen, length: sizeof(Int))
+        data.appendBytes(sendStr, length: Int(strLength))
+        
+        let finalData = NSData(data: data)
+        
+        if success {
+            var (success1, errmsg1) = client.send(data: data)
+            if success1 {
+                print("I sent something (1)")
+                print("strLength: " + "\(strLength)")
+                print("NSDATA:")
+                print(data)
+                print(data.bytes)
+                print(Int32(data.length))
+                
+            } else {
+                print("failure when sending (1)")
+                print(errmsg1)
+                
+            }
+//            var (success2, errmsg2) = client.send(str: sendStr)
+//            if success2 {
+//               print("I sent something (2)")
 //            } else {
-//                print("no query")
-//                print(errmsg)
+//                print("failure when sending (2)")
+//                print(errmsg2)
 //            }
-//        }
-//        else {
-//            print("no connection")
-//            print(errmsg)
-//        }
+        }
+        else {
+            print("no connection")
+            print(errmsg)
+        }
     }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

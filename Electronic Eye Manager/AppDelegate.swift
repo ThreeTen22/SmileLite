@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var newListing = Listing(symbol: "XON")
         var newMonth = MonthEye(symbol: "XON", expDate: "06/17/16")
+        
+        newMonth.minEdge = [0.1, 0.2, 0.3, 0.4]
+        
         newListing.AddEye(MonthEye: newMonth)
         var newStrike = StrikeEye(symbol: "XON", expDate: "06/17/16", strikePrice: 30.0, priceOverride: nil, quantityOverride: nil)
         newListing.AddEye(StrikeEye: newStrike)
@@ -51,6 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         eyeBook.append(newListing)
         
+        print(eyeBook[0].registeredMonthEyes[0].minEdge)
+        currentMonthEye = eyeBook[0].registeredMonthEyes[0]
         return true
     }
 

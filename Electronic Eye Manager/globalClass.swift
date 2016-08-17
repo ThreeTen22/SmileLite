@@ -11,9 +11,17 @@ import UIKit
 var eyeBook:Array = [Listing]()
 var bcspEdgeRule = [["Buy Call | Sell Put","$ Edge", "0.00", "0", "0.01"],["0","0","0","0","1"]]
 var scbpEdgeRule = [["Sell Call | Buy Put","$ Edge", "0.00", "0", "0.01"],["0","0","0","0","1"]]
+var eyeParameters = ["Delta","Quanity","Min Edge", "Max Delta","Order Type"]
+let orderTypeParameters = ["LMT", "EOD"]
+
+var currentMonthEye:MonthEye = MonthEye(symbol: "XON", expDate: "06/27/16")
+var currentStrikeEye:StrikeEye = StrikeEye(symbol: "XON", expDate: "06/27/16", strikePrice: 37.5, priceOverride: 0, quantityOverride: 0)
 
 //                          Stock   Last  Bid 	Ask
 var xonTitleData:NSArray = ["XON", 29.17, 29.14, 29.18]
+
+//will use the keyboard when inputting
+var bWillUseKeyboard = false
 
 //Date[0] Strk[1] CBid[2] CAsk[3] CTheo[4] Cpos[5] PBid[6] PAsk[7] PTheo[8] PPos[9], pDelta[10] cDelta[11] (12 total)
 

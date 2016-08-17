@@ -8,9 +8,12 @@
 
 import UIKit
 
-class MonthEyeMainViewController: UIViewController, UITableViewDelegate {
+class MonthEyeMainViewController: UIViewController, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet var monthEyeActivateTable: UITableView!
+    
+    @IBOutlet var monthEyeParametersContainer: UIView!
+    
     
     @IBAction func sellCallAtn(sender: UIButton) {
         print(sender.superview)
@@ -28,11 +31,22 @@ class MonthEyeMainViewController: UIViewController, UITableViewDelegate {
         changeActiveButton(3, sender)
     }
     
+    @IBAction func useKeyboard(sender: AnyObject) {
+        if bWillUseKeyboard == true {
+            bWillUseKeyboard = false
+        } else {
+            bWillUseKeyboard = true
+        }
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         for i in super.childViewControllers {
                 print(i.title)
         }
+        
         // Do any additional setup after loading the view.
     }
 
@@ -77,5 +91,38 @@ class MonthEyeMainViewController: UIViewController, UITableViewDelegate {
         }
         return cell
     }
+    
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 12
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let numberpad:UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("Number", forIndexPath: indexPath)
+        
+        switch indexPath.row {
+        case 9:
+            (numberpad.contentView.viewWithTag(1) as! UIButton).setTitle("cancel", forState: .Normal)
+        case 10:
+            (numberpad.contentView.viewWithTag(1) as! UIButton).setTitle("0", forState: .Normal)
+        case 11:
+            (numberpad.contentView.viewWithTag(1) as! UIButton).setTitle("return", forState: .Normal)
+        default:
+            (numberpad.contentView.viewWithTag(1) as! UIButton).setTitle("\(indexPath.row+1)", forState: .Normal)
+        }
+        
+        return numberpad
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        
+        let calcHeader = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "Header", forIndexPath: indexPath)
+        
+        return calcHeader
+        
+    }
+    
 
 }
