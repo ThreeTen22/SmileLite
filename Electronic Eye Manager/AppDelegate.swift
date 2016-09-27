@@ -16,46 +16,97 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
         
-        var newListing = Listing(symbol: "XON")
-        var newMonth = MonthEye(symbol: "XON", expDate: "06/17/16")
+        //Override point for customization after application launch.
+        //SMILE DATE FORMATTER
+        smileDateFormat.dateFormat = "MM/dd/yyyy"
         
-        newMonth.minEdge = [0.1, 0.2, 0.3, 0.4]
+        var client:TCPClient = TCPClient(addr: "jdempseylxdt05", port: 9400)
+        var (success, errmsg) = client.connect(timeout: 1)
+        let sendStr:String = "{\"id\":1,\"target\":\"eye\",\"type\":\"request\",\"clientname\":\"perl\",\"payload\":{ \"command\":\"view_table\", \"tablename\":\"Eye\"}}"
+        var strLength:UInt = strlen(sendStr)
+        var networkLen:UInt = strLength.bigEndian
+        let data:NSMutableData = NSMutableData(bytes: &networkLen, length: sizeof(Int))
+        data.appendBytes(sendStr, length: Int(strLength))
         
-        newListing.AddEye(MonthEye: newMonth)
-        var newStrike = StrikeEye(symbol: "XON", expDate: "06/17/16", strikePrice: 30.0, priceOverride: nil, quantityOverride: nil)
-        newListing.AddEye(StrikeEye: newStrike)
+        let finalData = NSData(data: data)
         
-        newStrike = StrikeEye(symbol: "XON", expDate: "06/17/16", strikePrice: 37.5, priceOverride: nil, quantityOverride: nil)
-        newListing.AddEye(StrikeEye: newStrike)
+        if success {
+            var (success1, errmsg1) = client.send(data: data)
+            if success1 {
+                print("I sent something (1)")
+                print("strLength: " + "\(strLength)")
+                print("NSDATA:")
+                
+                var lengthSize:Int = sizeof(Int)
+                let recData = client.read(lengthSize)
+                var lengthDifference:Int = 0
+                if let d = recData {
+                    let recDataNS = NSData(bytes: d, length: lengthSize )
+                    var lengthValue:Int = 0
+                    recDataNS.getBytes(&lengthValue, length: lengthSize )
+                    lengthValue = Int(bigEndian: lengthValue)
+                    
+                    print("First Read: Querying lenghtValue: \(lengthValue)")
+                    lengthDifference = lengthValue
+                    
+                    //let recData2 = client.read(lengthValue)
+                    //print("First Read: Getting RecData2 count: \(recData2!.count)")
+                    
+                    let finalData:[UInt8] = readMoreData(client, readData: client.read(lengthValue), lengthValue: lengthValue, totalData: [UInt8](), isFirst: true)
+                    if let str = String(bytes: finalData, encoding: NSUTF8StringEncoding) {
+                        //print(str)
+                        eyebookJSON = JSON.parse(str)
+                        print(eyebookJSON)
+                    }
+//                    if let d2 = recData2 {
+//                        if d2.count == lengthValue {
+//                            if let str = String(bytes: d2, encoding: NSUTF8StringEncoding) {
+//                                print("Str: ")
+//                                print(str)
+//                                //eyebookJSON = JSON.parse(str)
+//                            }
+//                        }
+//                        else {
+//                            var lengthValue2:Int = lengthValue - d2.count
+//                            print("Second Read: Querying lenghtValue2: \(lengthValue2)")
+//                            
+//                            let recData3 = client.read( lengthValue2 )
+//                            print("Second Read: Getting RecData3 count: \(recData3!.count)" )
+//                            if let d3 = recData3 {
+//                                if d3.count == lengthValue2 {
+//                                    if let str3 = String(bytes: d3, encoding: NSUTF8StringEncoding) {
+//                                        print("Str3: ")
+//                                        print(str3)
+//                                        //eyebookJSON = JSON.parse(str3)
+//                                    }
+//                                }
+//                            }
+//
+//                           
+//                        }
+//                        
+//                    }
+                    
+                }
+            } else {
+                
+                print("failure when sending (1)")
+                print(errmsg1)
+            }
+        }
+        else {
+            print("no connection")
+            print(errmsg)
+            print("Using demo data")
+            eyebookJSON = JSON.parse(eyebookRaw)
+            
+        }
+        //print(eyebookRaw)
         
-        eyeBook.append(newListing)
+        eyeBook = EyeBook(fromJSON: eyebookJSON)
+        //buildEyeBook(eyebookJSON)
         
-        newListing = Listing(symbol: "APPL")
-        newMonth = MonthEye(symbol: "APPL", expDate: "06/17/16")
-        newListing.AddEye(MonthEye: newMonth)
-        newStrike = StrikeEye(symbol: "APPL", expDate: "06/17/16", strikePrice: 30.0, priceOverride: nil, quantityOverride: nil)
-        newListing.AddEye(StrikeEye: newStrike)
-        
-        newStrike = StrikeEye(symbol: "APPL", expDate: "06/17/16", strikePrice: 37.5, priceOverride: nil, quantityOverride: nil)
-        newListing.AddEye(StrikeEye: newStrike)
-        
-        eyeBook.append(newListing)
-        
-        newListing = Listing(symbol: "MSFT")
-        newMonth = MonthEye(symbol: "MSFT", expDate: "06/17/16")
-        newListing.AddEye(MonthEye: newMonth)
-        newStrike = StrikeEye(symbol: "MSFT", expDate: "06/17/16", strikePrice: 30.0, priceOverride: nil, quantityOverride: nil)
-        newListing.AddEye(StrikeEye: newStrike)
-        
-        newStrike = StrikeEye(symbol: "MSFT", expDate: "06/17/16", strikePrice: 37.5, priceOverride: nil, quantityOverride: nil)
-        newListing.AddEye(StrikeEye: newStrike)
-        
-        eyeBook.append(newListing)
-        
-        print(eyeBook[0].registeredMonthEyes[0].minEdge)
-        currentMonthEye = eyeBook[0].registeredMonthEyes[0]
         return true
     }
 

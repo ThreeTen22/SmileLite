@@ -10,7 +10,7 @@ import UIKit
 
 class EyeBookTableViewCell: UITableViewCell {
 
-    var curMonthEye:MonthEye? = nil
+    var curMonthContainer:MonthContainer? = nil
     var curStrikeEye:StrikeEye? = nil
     
     
@@ -32,30 +32,30 @@ class EyeBookTableViewCell: UITableViewCell {
     
     
     func changeActiveButton(index:Int,_ btnToModify:UIButton) {
-        if let curME = curMonthEye {
-            if curME.isActive[index] {
+        if let curME = curMonthContainer {
+            if curME.isActive {
                 btnToModify.backgroundColor = UIColor.whiteColor()
-                curME.isActive[index] = false
+                curME.isActive = false
                 btnToModify.setTitleColor(UIColor.blueColor(), forState: .Normal)
             }
             else {
                 btnToModify.backgroundColor = UIColor.blueColor()
                 btnToModify.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-                curME.isActive[index] = true
+                curME.isActive = true
             }
             return
         }
         
         if let curSE = curStrikeEye {
-            if curSE.isActive[index] {
+            if curSE.isActive {
                 btnToModify.backgroundColor = UIColor.whiteColor()
-                curSE.isActive[index] = false
+                curSE.isActive = false
                 btnToModify.setTitleColor(UIColor.blueColor(), forState: .Normal)
             }
             else {
                 btnToModify.backgroundColor = UIColor.blueColor()
                 btnToModify.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-                curSE.isActive[index] = true
+                curSE.isActive = true
             }
             return
         }

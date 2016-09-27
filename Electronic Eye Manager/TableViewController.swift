@@ -36,7 +36,7 @@ class TableViewController: UITableViewController {
     // Date  Strk CBid CAsk  CTheo Cpos PBid PAsk PTheo, PPos, PutDelta (11 total)
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("strikeCell", forIndexPath: indexPath) as! MonthEyeCell
+        let cell = (self.tableView.dequeueReusableCellWithIdentifier("strikeCell", forIndexPath: indexPath) as! MonthEyeCell)
         let xonRowZero = xonData[indexPath.row] as! NSArray
         if String(xonRowZero[0]) == monthFocus {
             cell.strikePrice?.text = String(xonRowZero[1])
