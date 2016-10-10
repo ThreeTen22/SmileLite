@@ -9,20 +9,15 @@
 import UIKit
 
 class EyeBookTableViewCell: UITableViewCell {
-
-    var curMonthContainer:MonthContainer? = nil
-    var curStrikeEye:StrikeEye? = nil
     
+    weak var curMonthContainer:MonthContainer? = nil
+    weak var curStrikeEye:StrikeEye? = nil
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        for i in 1...4 {
-//            if let btn = self.viewWithTag(i) as! UIButton! {
-//                btn.layer.borderWidth = 1.0
-//                btn.setTitle("", forState: .Normal)
-//            }
-//            
-//        }
+        
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

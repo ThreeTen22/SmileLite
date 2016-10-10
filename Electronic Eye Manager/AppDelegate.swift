@@ -57,7 +57,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     if let str = String(bytes: finalData, encoding: NSUTF8StringEncoding) {
                         //print(str)
                         eyebookJSON = JSON.parse(str)
-                        print(eyebookJSON)
                     }
 //                    if let d2 = recData2 {
 //                        if d2.count == lengthValue {
@@ -105,6 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //print(eyebookRaw)
         
         eyeBook = EyeBook(fromJSON: eyebookJSON)
+        print(eyeBook)
         //buildEyeBook(eyebookJSON)
         
         return true

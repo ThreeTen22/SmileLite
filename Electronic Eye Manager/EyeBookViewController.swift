@@ -22,9 +22,13 @@ class EyeBookViewController: UIViewController, UICollectionViewDelegate, UITable
     var filteredSymbol:Listing = Listing()
     var currentFilter = FilterType.ShowAll
     var selectedSymbol = ""
+    var eyeArray:Array = [AnyObject]()
     
     var focusedListing:Listing?
     var focusedMonthContainer:MonthContainer?
+    
+    var newRowIndex:Int = 0
+    var indxToUse:Int = 0
     
     
     @IBAction func FilterSymbol(sender:UIButton) {
@@ -49,7 +53,7 @@ class EyeBookViewController: UIViewController, UICollectionViewDelegate, UITable
         listingCollection.reloadData()
         
     }
-        
+    
     @IBAction func FocusBtnPressed(sender: UIButton) {
         if let senderCellContainer = sender.superview!.superview as? EyeBookTableViewCell {
             senderCellContainer.changeActiveButton(sender.tag-1, sender)
@@ -58,72 +62,73 @@ class EyeBookViewController: UIViewController, UICollectionViewDelegate, UITable
     
     
     @IBAction func TestLink(sender: AnyObject) {
-//        
-//        //print(eyebookJSON.array![1])
-//        //Override point for customization after application launch.
-//        var client:TCPClient = TCPClient(addr: "jdempseylxdt05", port: 9400)
-//        var (success, errmsg) = client.connect(timeout: 1)
-//        let sendStr:String = "{\"id\":1,\"target\":\"eye\",\"type\":\"request\",\"clientname\":\"perl\",\"payload\":{ \"command\":\"view_table\", \"tablename\":\"Eye\"}}"
-//        var strLength:UInt = strlen(sendStr)
-//        var networkLen:UInt = strLength.bigEndian
-//        let data:NSMutableData = NSMutableData(bytes: &networkLen, length: sizeof(Int))
-//        data.appendBytes(sendStr, length: Int(strLength))
-//        var tempEyebookJSON:JSON?
-//        
-//        let finalData = NSData(data: data)
-//        
-//        if success {
-//            var (success1, errmsg1) = client.send(data: data)
-//            if success1 {
-//                print("I sent something (1)")
-//                print("strLength: " + "\(strLength)")
-//                print("NSDATA:")
-//                
-//                var lengthSize:Int = sizeof(Int)
-//                let recData = client.read(lengthSize)
-//                var lengthDifference:Int = 0
-//                if let d = recData {
-//                    let recDataNS = NSData(bytes: d, length: lengthSize )
-//                    var lengthValue:Int = 0
-//                    recDataNS.getBytes(&lengthValue, length: lengthSize )
-//                    lengthValue = Int(bigEndian: lengthValue)
-//                    
-//                    print("First Read: Querying lenghtValue: \(lengthValue)")
-//                    lengthDifference = lengthValue
-//                    
-//                    //let recData2 = client.read(lengthValue)
-//                    //print("First Read: Getting RecData2 count: \(recData2!.count)")
-//                    
-//                    let finalData:[UInt8] = readMoreData(client, readData: client.read(lengthValue), lengthValue: lengthValue, totalData: [UInt8](), isFirst: true)
-//                    if let str = String(bytes: finalData, encoding: NSUTF8StringEncoding) {
-//                        //print(str)
-//                        tempEyebookJSON = JSON.parse(str)
-//                    }
-//                                      
-//                }
-//            } else {
-//                
-//                print("failure when sending (1)")
-//                print(errmsg1)
-//            }
-//        }
-//        else {
-//            print("no connection")
-//            print(errmsg)
-//            print("Using demo data")
-//            tempEyebookJSON = JSON.parse(eyebookRaw)
-//        }
-//        //print(eyebookRaw)
-//        
-//        print((tempEyebookJSON!["payload"]["rows"].array)![1])
+        //
+        //        //print(eyebookJSON.array![1])
+        //        //Override point for customization after application launch.
+        //        var client:TCPClient = TCPClient(addr: "jdempseylxdt05", port: 9400)
+        //        var (success, errmsg) = client.connect(timeout: 1)
+        //        let sendStr:String = "{\"id\":1,\"target\":\"eye\",\"type\":\"request\",\"clientname\":\"perl\",\"payload\":{ \"command\":\"view_table\", \"tablename\":\"Eye\"}}"
+        //        var strLength:UInt = strlen(sendStr)
+        //        var networkLen:UInt = strLength.bigEndian
+        //        let data:NSMutableData = NSMutableData(bytes: &networkLen, length: sizeof(Int))
+        //        data.appendBytes(sendStr, length: Int(strLength))
+        //        var tempEyebookJSON:JSON?
+        //
+        //        let finalData = NSData(data: data)
+        //
+        //        if success {
+        //            var (success1, errmsg1) = client.send(data: data)
+        //            if success1 {
+        //                print("I sent something (1)")
+        //                print("strLength: " + "\(strLength)")
+        //                print("NSDATA:")
+        //
+        //                var lengthSize:Int = sizeof(Int)
+        //                let recData = client.read(lengthSize)
+        //                var lengthDifference:Int = 0
+        //                if let d = recData {
+        //                    let recDataNS = NSData(bytes: d, length: lengthSize )
+        //                    var lengthValue:Int = 0
+        //                    recDataNS.getBytes(&lengthValue, length: lengthSize )
+        //                    lengthValue = Int(bigEndian: lengthValue)
+        //
+        //                    print("First Read: Querying lenghtValue: \(lengthValue)")
+        //                    lengthDifference = lengthValue
+        //
+        //                    //let recData2 = client.read(lengthValue)
+        //                    //print("First Read: Getting RecData2 count: \(recData2!.count)")
+        //
+        //                    let finalData:[UInt8] = readMoreData(client, readData: client.read(lengthValue), lengthValue: lengthValue, totalData: [UInt8](), isFirst: true)
+        //                    if let str = String(bytes: finalData, encoding: NSUTF8StringEncoding) {
+        //                        //print(str)
+        //                        tempEyebookJSON = JSON.parse(str)
+        //                    }
+        //
+        //                }
+        //            } else {
+        //
+        //                print("failure when sending (1)")
+        //                print(errmsg1)
+        //            }
+        //        }
+        //        else {
+        //            print("no connection")
+        //            print(errmsg)
+        //            print("Using demo data")
+        //            tempEyebookJSON = JSON.parse(eyebookRaw)
+        //        }
+        //        //print(eyebookRaw)
+        //
+        //        print((tempEyebookJSON!["payload"]["rows"].array)![1])
     }
     
     func returnArrayString(keyword:String, source:String) -> [String] {
         return [String]()
     }
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
         
+        super.viewDidLoad()
         if listingSymbols.count == 0 {
             for i in eyeBook.listings {
                 listingSymbols.append(i.listingsymbol)
@@ -140,6 +145,9 @@ class EyeBookViewController: UIViewController, UICollectionViewDelegate, UITable
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         //TEMP MAKING LISTING SELECTABLE HERE FOR TESTING
         
+        let eyeContainer = sender as! EyeBookTableViewCell
+        focusedMonthContainer = eyeContainer.curMonthContainer
+        focusedListing = eyeBook.getListingBySymbol(focusedMonthContainer!.listingSymbol)
         
         if let monthEyeView = (segue.destinationViewController as? MonthEyeMainViewController) {
             monthEyeView.currentListing = focusedListing
@@ -173,9 +181,15 @@ class EyeBookViewController: UIViewController, UICollectionViewDelegate, UITable
     }
     
     func numberOfSectionsInTableView(tableView: UITableView)-> Int {
+        newRowIndex = 0
+        indxToUse = 0
+        if eyeArray.count != 0 {
+            eyeArray.removeAll(keepCapacity: true)
+        }
         if currentFilter == FilterType.ShowAll {
             return eyeBook.listings.count
         }
+        print("Number of sections returned")
         return 1
     }
     
@@ -187,6 +201,7 @@ class EyeBookViewController: UIViewController, UICollectionViewDelegate, UITable
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var emptyEyes = true
         var currentListing:Listing {
             if currentFilter == .ShowAll {
                 return eyeBook.listings[section]
@@ -194,57 +209,64 @@ class EyeBookViewController: UIViewController, UICollectionViewDelegate, UITable
                 return eyeBook.getListingBySymbol(selectedSymbol)!
             }
         }
-            return currentListing.registeredMonthContainers.count + currentListing.registeredStrikeEyes.count
+        print("listing: \(currentListing.listingsymbol)")
+        for container in currentListing.registeredMonthContainers {
+            emptyEyes = true
+            eyeArray.append(container)
+            for eye in container.monthEyes {
+                if eye != nil {
+                    emptyEyes = false
+                    eyeArray.append(eye!)
+                }
+            }
+            if emptyEyes {
+                eyeArray.removeLast()
+            }
+        }
+        print("number of rows in section has returned")
+        print(eyeArray)
+        return eyeArray.count
         
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Test", forIndexPath: indexPath)
-        
-        var currentListing:Listing {
-            if self.selectedSymbol == "" {
-                return eyeBook.listings[indexPath.section]
-            }
-            else {
-                return eyeBook.getListingBySymbol(self.selectedSymbol)!
-            }
-        }
-        
-        if indexPath.row < currentListing.registeredMonthContainers.count {
-            let curMonth = currentListing.registeredMonthContainers[indexPath.row]
-            (cell as! EyeBookTableViewCell).curMonthContainer = curMonth
-            (cell.contentView.viewWithTag(5) as! UILabel).text = "\(curMonth.expDateString)"
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell     {
+        var cell:UITableViewCell?
+        if let curEye = (eyeArray[indexPath.row] as? MonthEye) {
+            cell = tableView.dequeueReusableCellWithIdentifier("MonthDetail", forIndexPath: indexPath)
+            (cell as! EyeBookTableViewCell).curMonthContainer = eyeBook.getListingBySymbol(curEye.symbol)!.getContainerByDate(curEye.expDateString)!
             
-            if curMonth.notifyOnly {
-                (cell.contentView.viewWithTag(7) as! UILabel).text = "N"
-            } else {
-                (cell.contentView.viewWithTag(7) as! UILabel).text = ""
+            switch curEye.order {
+            case .buyCall:
+                ((cell?.contentView.viewWithTag(1)) as! UIButton).setTitle("Buy Call", forState: .Normal)
+            case .sellPut:
+                ((cell?.contentView.viewWithTag(1)) as! UIButton).setTitle("Sell Put", forState: .Normal)
+            case .buyPut:
+                ((cell?.contentView.viewWithTag(1)) as! UIButton).setTitle("Buy Put", forState: .Normal)
+            case .sellCall:
+                ((cell?.contentView.viewWithTag(1)) as! UIButton).setTitle("Sell Call", forState: .Normal)
+            default:
+                print("We Got a Problem")
             }
-            for i in 8...11 {
-                (cell.contentView.viewWithTag(i) as! UILabel).text = ""
-            }
-        }
-        else {
-//            let index = (indexPath.row)-(currentListing.registeredMonthContainers.count)
-//            let curStrike = currentListing.registeredStrikeEyes[index]
-//            (cell as! EyeBookTableViewCell).curStrikeEye = curStrike
-//            (cell.contentView.viewWithTag(5) as! UILabel).text = "\(curStrike.expDateString) - \(curStrike.strikePrice)"
-//        
-//            (cell.contentView.viewWithTag(7) as! UILabel).text = ""
-//            (cell.contentView.viewWithTag(8) as! UILabel).text = "\(curStrike.priceOverride)"
-//            (cell.contentView.viewWithTag(9) as! UILabel).text = "\(curStrike.notifyOnly)"
-//            (cell.contentView.viewWithTag(10) as! UILabel).text = ""
-//            (cell.contentView.viewWithTag(11) as! UILabel).text = "True"
+            
+            ((cell?.contentView.viewWithTag(2)) as! UILabel).text = "\(curEye.currentDelta)"
+            ((cell?.contentView.viewWithTag(3)) as! UILabel).text = "\(curEye.maxDelta)"
+            ((cell?.contentView.viewWithTag(4)) as! UILabel).text = "\(curEye.minEdge)"
+            ((cell?.contentView.viewWithTag(5)) as! UILabel).text = "\(curEye.quantity)"
+            ((cell?.contentView.viewWithTag(6)) as! UILabel).text = "\(curEye.id)"
+            //FILL OUT curCONTAINER INFO
+        } else if let curContainer = (eyeArray[indexPath.row] as? MonthContainer ) {
+            
+            cell = tableView.dequeueReusableCellWithIdentifier("Test", forIndexPath: indexPath)
+            ((cell?.contentView.viewWithTag(5)) as! UILabel).text = curContainer.expDateString
+            (cell as! EyeBookTableViewCell).curMonthContainer = curContainer
+            //FILL OUTcurEYE WITH INFO
         }
         
-        return cell
+        return cell!
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let eyeContainer = tableView.cellForRowAtIndexPath(indexPath) as! EyeBookTableViewCell
-        focusedMonthContainer = eyeContainer.curMonthContainer
-        focusedListing = eyeBook.getListingBySymbol(focusedMonthContainer!.listingSymbol)
-        performSegueWithIdentifier("MonthEye", sender: nil)
+        performSegueWithIdentifier("MonthEye", sender: (tableView.cellForRowAtIndexPath(indexPath)))
     }
     
     
