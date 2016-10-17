@@ -189,7 +189,6 @@ class EyeBookViewController: UIViewController, UICollectionViewDelegate, UITable
         if currentFilter == FilterType.ShowAll {
             return eyeBook.listings.count
         }
-        print("Number of sections returned")
         return 1
     }
     

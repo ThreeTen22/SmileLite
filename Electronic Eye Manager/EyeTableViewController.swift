@@ -23,7 +23,7 @@ class EyeTableViewController: UIViewController, UITableViewDelegate, UICollectio
     var filteredSymbol:Listing = Listing()
     var currentFilter = FilterType.ShowAll
     var selectedSymbol = ""
-    var eyeArray:Array = [AnyObject]()
+    var eyeContainerArray:Array = [AnyObject]()
     
     var focusedListing:Listing?
     var focusedMonthContainer:MonthContainer?
@@ -31,13 +31,21 @@ class EyeTableViewController: UIViewController, UITableViewDelegate, UICollectio
     var newRowIndex:Int = 0
     var indxToUse:Int = 0
     
-    var selectedIndx:Int = 1
+    var sectionRowCounts:Array = [Int]()
+    var selectedListingEyeCount = 1 //TODO : Integrate and update that when listing is selected
+    
+    var selectedIndx:Int = -1
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableViewOutlet.style
+        gatherEyeData(eyeBook)
+        for container in eyeContainerArray {
+            print("EYE ARRAY DATE: \((container as! MonthContainer).expDateString)")
+        }
+        //tableViewOutlet.style
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -49,35 +57,148 @@ class EyeTableViewController: UIViewController, UITableViewDelegate, UICollectio
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - Table view data source
+    
+    
+    func gatherEyeData(myEyeBook: EyeBook) {
+        var containerCount = 0
+        eyeContainerArray.removeAll()
+        sectionRowCounts.removeAll()
+        for listing in myEyeBook.listings {
+            containerCount = 0
+            for container in listing.registeredMonthContainers {
+                for eye in container.monthEyes {
+                    if eye != nil {
+                        eyeContainerArray.append(container)
+                        containerCount += 1
+                        break
+                    }
+                }
+            }
+            sectionRowCounts.append(containerCount)
+        }
+    }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if currentFilter == FilterType.ShowAll {
+            print("Number of sections returned - LISTING COUNT")
+            return eyeBook.listings.count
+        }
+        print("Number of sections returned - SPECIFIC")
         return 1
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var emptyEyes = true
-        var currentListing:Listing {
-            if currentFilter == .ShowAll {
-                return eyeBook.listings[section]
-            } else {
-                return eyeBook.getListingBySymbol(selectedSymbol)!
-            }
+        if currentFilter == .ShowAll {
+            return sectionRowCounts[section]
+        } else {
+            return selectedListingEyeCount
         }
-        //return currentListing.registeredMonthContainers.count
-        //DEBUG
-          return 1
         
     }
 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let curSection = indexPath.section
+        var counter = 0
+        var indx = 0
+        var currentEyeContainer = MonthContainer()
+        
+        while counter < curSection {
+            indx += sectionRowCounts[counter]
+            counter += 1
+        }
+        indx += indexPath.row
+        
+        currentEyeContainer = (eyeContainerArray[indx] as! MonthContainer)
+        
+        
         if indexPath.row != selectedIndx {
-            let cell = tableView.dequeueReusableCellWithIdentifier("Eye", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier("Eye", forIndexPath: indexPath) as! EyeTableViewCell
+            
+            cell.month.text = currentEyeContainer.expDateString
+            
+            if let bcEye = (currentEyeContainer.GetMonthByOrder(Order.buyCall)! as MonthEye?) {
+                cell.bcQE.text = "\(bcEye.quantity) - \(bcEye.minEdge)"
+            } else {
+                //TODO: Grey out Buttons
+                cell.bcQE.text = "eye not created"
+                cell.bcQE.enabled = false
+            }
+            if let bpEye = (currentEyeContainer.GetMonthByOrder(Order.buyPut) as MonthEye?) {
+                cell.bpQE.text = "\(bpEye.quantity) - \(bpEye.minEdge)"
+            } else {
+                //TODO: Grey out Buttons
+                cell.bpQE.text = "eye not created"
+                cell.bpQE.enabled = false
+            }
+            if let scEye = (currentEyeContainer.GetMonthByOrder(Order.sellCall) as MonthEye?) {
+                cell.scQE.text = "\(scEye.quantity) - \(scEye.minEdge)"
+            } else {
+                //TODO: Grey out Buttons
+                cell.scQE.text = "eye not created"
+                cell.scQE.enabled = false
+            }
+            if let spEye = (currentEyeContainer.GetMonthByOrder(Order.sellPut) as MonthEye?) {
+                cell.spQE.text = "\(spEye.quantity) - \(spEye.minEdge)"
+            } else {
+                //TODO: Grey out Buttons
+                cell.spQE.text = "eye not created"
+                cell.spQE.enabled = false
+            }
+            
+            if let deltaTF = (currentEyeContainer.GetMonthByOrder(Order.buyCall) as MonthEye?) {
+                cell.deltaLabel.text = "\(deltaTF.totalDelta)"
+            }
+            //cell.curMonthContainer = currentEyeContainer
+            
             return cell
+            
+            
         } else {
-            let cellExt = tableView.dequeueReusableCellWithIdentifier("ModifyEye", forIndexPath: indexPath)
+            
+            
+            let cellExt = tableView.dequeueReusableCellWithIdentifier("ModifyEye", forIndexPath: indexPath) as! EyeTableViewCellExtended
+            
+            cellExt.month.text = currentEyeContainer.expDateString
+            
+            if let bcEye = (currentEyeContainer.GetMonthByOrder(Order.buyCall)! as MonthEye?) {
+                cellExt.bcQuantityTF.text = "\(bcEye.quantity)"
+                cellExt.bcEdgeTF.text = "\(bcEye.minEdge)"
+            } else {
+                //TODO: Grey out Buttons
+                cellExt.bcQuantityTF.enabled = false
+                cellExt.bcEdgeTF.enabled = false
+
+            }
+            if let bpEye = (currentEyeContainer.GetMonthByOrder(Order.buyPut) as MonthEye?) {
+                cellExt.bpQuantityTF.text = "\(bpEye.quantity)"
+                cellExt.bpEdgeTF.text = "\(bpEye.minEdge)"
+            } else {
+                //TODO: Grey out Buttons
+                cellExt.bpQuantityTF.enabled = false
+                cellExt.bpEdgeTF.enabled = false
+            }
+            if let scEye = (currentEyeContainer.GetMonthByOrder(Order.sellCall) as MonthEye?) {
+                cellExt.scQuantityTF.text = "\(scEye.quantity)"
+                cellExt.scEdgeTF.text = "\(scEye.minEdge)"
+            } else {
+                //TODO: Grey out Buttons
+                cellExt.scQuantityTF.enabled = false
+                cellExt.scEdgeTF.enabled = false
+            }
+            if let spEye = (currentEyeContainer.GetMonthByOrder(Order.sellPut) as MonthEye?) {
+                cellExt.spQuantityTF.text = "\(spEye.quantity)"
+                cellExt.spEdgeTF.text = "\(spEye.minEdge)"
+            } else {
+                //TODO: Grey out Buttons
+                cellExt.spQuantityTF.enabled = false
+                cellExt.spEdgeTF.enabled = false
+            }
+            
+            if let deltaTF = (currentEyeContainer.GetMonthByOrder(Order.buyCall) as MonthEye?) {
+                cellExt.deltaTF.text = "\(deltaTF.totalDelta)"
+            }
+            
             return cellExt
         }
         
@@ -87,7 +208,7 @@ class EyeTableViewController: UIViewController, UITableViewDelegate, UICollectio
         if indexPath.row == selectedIndx{
             return CGFloat(280.0)
         }
-        return CGFloat(100.0)
+        return CGFloat(80.0)
     }
     
     
@@ -129,6 +250,8 @@ class EyeTableViewController: UIViewController, UITableViewDelegate, UICollectio
             let listingAtIndexPath = eyeBook.listings[indexPath.row]
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Listing", forIndexPath: indexPath)
             (cell.contentView.viewWithTag(1) as! UIButton).setTitle(listingAtIndexPath.listingsymbol, forState: .Normal)
+            print("DEBUG: EyeTableViewController: CollectionView(): StockFilterView:  \(listingAtIndexPath.listingsymbol)" )
+            
             if listingAtIndexPath.isSelected {
                 cell.layer.borderWidth = 1.0
                 cell.layer.borderColor = UIColor.blackColor().CGColor

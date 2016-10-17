@@ -188,6 +188,18 @@ var xonData:NSArray = [["06/17/16", 20, 7.4, 11.6, 9.16, 0, 0, 0.2, 0.0090191984
 ["01/19/18", 70, 0.85, 3.8, 2.3982962354, 0, 42, 45.4, 43.6999621319, 0,-74.4849247468, 20.8779199697],
 ["01/19/18", 75, 0.6, 3.4, 2.0609797547, 0, 46.2, 50, 48.2995574007, 0,-77.5614898928, 17.9083694303]]
 
+func addEyesToArray(inout eyeArray:[Eye], listing:Listing, bAddMonthEyes:Bool = true, bAddStrikeEyes:Bool = true) {
+    for monthContainer in listing.registeredMonthContainers {
+        if bAddMonthEyes {
+            for eye in monthContainer.monthEyes {
+              eyeArray.append(eye! as Eye)
+            }
+        }
+        //TODO : addStrikeEyes when available
+    }
+    
+}
+
 
 func removeAfterIndex(Source str:String, CutOffIndex indx:Int) -> String {
     if str.characters.count >= indx {

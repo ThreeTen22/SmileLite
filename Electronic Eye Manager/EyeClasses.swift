@@ -25,7 +25,7 @@ class EyeBook {
     }
     
     init(fromJSON jsonObject:JSON) {
-        
+        // add listings to eyebook
         if let eyebookJSONArray = jsonObject["payload"]["rows"].array {
             addListingsFromJSONArray(eyebookJSONArray)
             
@@ -33,6 +33,18 @@ class EyeBook {
                 var eyeDictionary = eyeJSON.dictionaryValue
                 createAndAddEyeToListing(eyeDictionary, listing: getListingBySymbol(eyeDictionary["name"]!.string!)!)
             }
+        }
+        //Clean up any listings with no eyes
+        var currentIndex = 0
+        var currentListing = Listing()
+        
+        while currentIndex < (listings.count) {
+            currentListing = listings[currentIndex]
+            if currentListing.registeredMonthContainers.count == 0 && currentListing.registeredStrikeEyes.count == 0 {
+                listings.removeAtIndex(currentIndex)
+                continue
+            }
+            currentIndex += 1
         }
         
         
@@ -73,8 +85,9 @@ class EyeBook {
             curContainer.AddMonthEye(newMonth)
         } else {
             let newContainer = MonthContainer(listingSymbol: listing.listingsymbol, exp: eyeExpDate , expString: eyeExpString)
-            newContainer.AddMonthEye(newMonth)
-            listing.AddContainer(newContainer)
+            if newContainer.AddMonthEye(newMonth) {
+                listing.AddContainer(newContainer)
+            }
         }
     }
 }
@@ -128,6 +141,9 @@ class MonthContainer {
     var isActive = true
     var notifyOnly:Bool = false
     
+    init() {
+        
+    }
     
     init(listingSymbol sym:String, exp:NSDate, expString:String) {
         listingSymbol = sym
@@ -135,20 +151,43 @@ class MonthContainer {
         expDate = exp
     }
     
-    func AddMonthEye(eye:MonthEye) {
+    func AddMonthEye(eye:MonthEye) -> Bool {
         switch eye.order {
         case Order.sellCall:
             monthEyes[0] = eye
+            return true
         case Order.buyPut:
             monthEyes[1] = eye
+            return true
         case Order.buyCall:
             monthEyes[2] = eye
+            return true
         case Order.sellPut:
-            monthEyes[3] = eye
+            //monthEyes[3] = eye
+            return false
         default:
             print("AddMonthEye Failed")
+            return false
         }
     }
+    
+    func GetMonthByOrder(order:Order) -> MonthEye? {
+        switch order {
+        case Order.sellCall:
+            return monthEyes[0]
+        case Order.buyPut:
+            return monthEyes[1]
+        case Order.buyCall:
+            return monthEyes[2]
+        case Order.sellPut:
+            return monthEyes[3]
+        default:
+            print("No Month Found")
+            return nil
+        }
+    }
+    
+    
     
 }
 

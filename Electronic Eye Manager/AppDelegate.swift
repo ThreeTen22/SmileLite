@@ -104,7 +104,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //print(eyebookRaw)
         
         eyeBook = EyeBook(fromJSON: eyebookJSON)
-        print(eyeBook)
         //buildEyeBook(eyebookJSON)
         
         return true
