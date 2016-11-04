@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		9B3A7FA21D0EF84E009F96E8 /* EdgeRuleMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A7FA11D0EF84E009F96E8 /* EdgeRuleMasterViewController.swift */; };
 		9B66D35E1D073EFC0099C670 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B66D35D1D073EFC0099C670 /* AppDelegate.swift */; };
-		9B66D3631D073EFC0099C670 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B66D3611D073EFC0099C670 /* Main.storyboard */; };
 		9B66D3661D073EFC0099C670 /* Electronic_Eye_Manager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B66D3641D073EFC0099C670 /* Electronic_Eye_Manager.xcdatamodeld */; };
 		9B66D3681D073EFC0099C670 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B66D3671D073EFC0099C670 /* Assets.xcassets */; };
 		9B66D36B1D073EFC0099C670 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B66D3691D073EFC0099C670 /* LaunchScreen.storyboard */; };
@@ -17,18 +16,19 @@
 		9B7B3B6D1D523A9300F1385D /* MonthEyeParametersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B3B6C1D523A9300F1385D /* MonthEyeParametersTableViewController.swift */; };
 		9BB8DADE1D07523400B6F10C /* MonthEyeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB8DADD1D07523400B6F10C /* MonthEyeCell.swift */; };
 		9BB8DAE21D07558700B6F10C /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB8DAE11D07558700B6F10C /* TableViewController.swift */; };
+		9BC002721DCBC8F700D5C9F1 /* CollectionDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC002711DCBC8F700D5C9F1 /* CollectionDelegates.swift */; };
+		9BC002741DCBCB7200D5C9F1 /* TableViewDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC002731DCBCB7200D5C9F1 /* TableViewDelegates.swift */; };
 		9BC40E8E1D18BEA80074E919 /* MonthEyeMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC40E8D1D18BEA80074E919 /* MonthEyeMainViewController.swift */; };
 		9BC40E901D18C1A60074E919 /* MonthEyeActivateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC40E8F1D18C1A60074E919 /* MonthEyeActivateCell.swift */; };
 		9BCAC2B21D81F76E0091099C /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC2B11D81F76E0091099C /* SwiftyJSON.swift */; };
 		9BCAC2BA1D9C14D20091099C /* Main2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BCAC2B91D9C14D20091099C /* Main2.storyboard */; };
 		9BCAC2BC1D9C2C210091099C /* EyeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC2BB1D9C2C210091099C /* EyeTableViewCell.swift */; };
 		9BCAC2BF1D9C2DF00091099C /* EyeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC2BE1D9C2DF00091099C /* EyeTableViewController.swift */; };
-		9BCAC2C31D9EC2390091099C /* ModifyEyeTableViewCellClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCAC2C21D9EC2390091099C /* ModifyEyeTableViewCellClasses.swift */; };
 		9BD063911D19B8B6006571CB /* GraphContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD063901D19B8B6006571CB /* GraphContainerView.swift */; };
 		9BD063931D19C255006571CB /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD063921D19C255006571CB /* GraphViewController.swift */; };
 		9BD12FD11D0F0D770091AF05 /* EdgeRuleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD12FD01D0F0D770091AF05 /* EdgeRuleDetailViewController.swift */; };
 		9BEA426E1D353ADE00BC4B0C /* EyeBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA426D1D353ADE00BC4B0C /* EyeBookViewController.swift */; };
-		9BEA42701D3701B100BC4B0C /* StockFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA426F1D3701B100BC4B0C /* StockFilterView.swift */; };
+		9BEA42701D3701B100BC4B0C /* CollectionViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA426F1D3701B100BC4B0C /* CollectionViews.swift */; };
 		9BEA42721D392F6E00BC4B0C /* EyeBookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA42711D392F6E00BC4B0C /* EyeBookTableViewCell.swift */; };
 		9BEA42761D3C8DEF00BC4B0C /* EyeClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA42751D3C8DEF00BC4B0C /* EyeClasses.swift */; };
 		9BEA428C1D3EBBA700BC4B0C /* ysocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA42871D3EBBA700BC4B0C /* ysocket.swift */; };
@@ -51,18 +51,19 @@
 		9B7B3B6C1D523A9300F1385D /* MonthEyeParametersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthEyeParametersTableViewController.swift; sourceTree = "<group>"; };
 		9BB8DADD1D07523400B6F10C /* MonthEyeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthEyeCell.swift; path = ../MonthEyeCell.swift; sourceTree = "<group>"; };
 		9BB8DAE11D07558700B6F10C /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		9BC002711DCBC8F700D5C9F1 /* CollectionDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDelegates.swift; sourceTree = "<group>"; };
+		9BC002731DCBCB7200D5C9F1 /* TableViewDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDelegates.swift; sourceTree = "<group>"; };
 		9BC40E8D1D18BEA80074E919 /* MonthEyeMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthEyeMainViewController.swift; sourceTree = "<group>"; };
 		9BC40E8F1D18C1A60074E919 /* MonthEyeActivateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthEyeActivateCell.swift; sourceTree = "<group>"; };
 		9BCAC2B11D81F76E0091099C /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		9BCAC2B91D9C14D20091099C /* Main2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main2.storyboard; sourceTree = "<group>"; };
 		9BCAC2BB1D9C2C210091099C /* EyeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EyeTableViewCell.swift; sourceTree = "<group>"; };
 		9BCAC2BE1D9C2DF00091099C /* EyeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EyeTableViewController.swift; sourceTree = "<group>"; };
-		9BCAC2C21D9EC2390091099C /* ModifyEyeTableViewCellClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyEyeTableViewCellClasses.swift; sourceTree = "<group>"; };
 		9BD063901D19B8B6006571CB /* GraphContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphContainerView.swift; sourceTree = "<group>"; };
 		9BD063921D19C255006571CB /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		9BD12FD01D0F0D770091AF05 /* EdgeRuleDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeRuleDetailViewController.swift; sourceTree = "<group>"; };
 		9BEA426D1D353ADE00BC4B0C /* EyeBookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EyeBookViewController.swift; sourceTree = "<group>"; };
-		9BEA426F1D3701B100BC4B0C /* StockFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockFilterView.swift; sourceTree = "<group>"; };
+		9BEA426F1D3701B100BC4B0C /* CollectionViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViews.swift; sourceTree = "<group>"; };
 		9BEA42711D392F6E00BC4B0C /* EyeBookTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EyeBookTableViewCell.swift; sourceTree = "<group>"; };
 		9BEA42751D3C8DEF00BC4B0C /* EyeClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EyeClasses.swift; sourceTree = "<group>"; };
 		9BEA42861D3EBBA600BC4B0C /* Electronic Eye Manager-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Electronic Eye Manager-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -105,22 +106,22 @@
 			children = (
 				9B66D35D1D073EFC0099C670 /* AppDelegate.swift */,
 				9BCAC2B11D81F76E0091099C /* SwiftyJSON.swift */,
-				9BEA42671D3536A300BC4B0C /* Month Eye */,
+				9BCAC2C41DABD50E0091099C /* Old Month Controllers */,
+				9BEA42671D3536A300BC4B0C /* Old Month Eye */,
 				9B66D3721D073FCE0099C670 /* globalClass.swift */,
 				9BEA42751D3C8DEF00BC4B0C /* EyeClasses.swift */,
-				9BCAC2C41DABD50E0091099C /* Old Month Controllers */,
-				9BEA426F1D3701B100BC4B0C /* StockFilterView.swift */,
-				9B66D3611D073EFC0099C670 /* Main.storyboard */,
+				9BEA426F1D3701B100BC4B0C /* CollectionViews.swift */,
 				9BCAC2B91D9C14D20091099C /* Main2.storyboard */,
-				9BCAC2BE1D9C2DF00091099C /* EyeTableViewController.swift */,
+				9BEA426D1D353ADE00BC4B0C /* EyeBookViewController.swift */,
+				9BC002711DCBC8F700D5C9F1 /* CollectionDelegates.swift */,
+				9BC002731DCBCB7200D5C9F1 /* TableViewDelegates.swift */,
 				9BCAC2BB1D9C2C210091099C /* EyeTableViewCell.swift */,
-				9BCAC2C21D9EC2390091099C /* ModifyEyeTableViewCellClasses.swift */,
 				9BCAC2BD1D9C2C580091099C /* ysocket */,
-				9B66D3671D073EFC0099C670 /* Assets.xcassets */,
 				9B66D3691D073EFC0099C670 /* LaunchScreen.storyboard */,
 				9B66D36C1D073EFC0099C670 /* Info.plist */,
 				9B66D3641D073EFC0099C670 /* Electronic_Eye_Manager.xcdatamodeld */,
 				9BEA42861D3EBBA600BC4B0C /* Electronic Eye Manager-Bridging-Header.h */,
+				9B66D3671D073EFC0099C670 /* Assets.xcassets */,
 			);
 			path = "Electronic Eye Manager";
 			sourceTree = SOURCE_ROOT;
@@ -140,13 +141,14 @@
 		9BCAC2C41DABD50E0091099C /* Old Month Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9BEA426D1D353ADE00BC4B0C /* EyeBookViewController.swift */,
+				9BCAC2BE1D9C2DF00091099C /* EyeTableViewController.swift */,
+				9B66D3611D073EFC0099C670 /* Main.storyboard */,
 				9BEA42711D392F6E00BC4B0C /* EyeBookTableViewCell.swift */,
 			);
 			name = "Old Month Controllers";
 			sourceTree = "<group>";
 		};
-		9BEA42671D3536A300BC4B0C /* Month Eye */ = {
+		9BEA42671D3536A300BC4B0C /* Old Month Eye */ = {
 			isa = PBXGroup;
 			children = (
 				9B3A7FA11D0EF84E009F96E8 /* EdgeRuleMasterViewController.swift */,
@@ -159,7 +161,7 @@
 				9BD063921D19C255006571CB /* GraphViewController.swift */,
 				9BD063901D19B8B6006571CB /* GraphContainerView.swift */,
 			);
-			name = "Month Eye";
+			name = "Old Month Eye";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,7 +226,6 @@
 				9B66D36B1D073EFC0099C670 /* LaunchScreen.storyboard in Resources */,
 				9B66D3681D073EFC0099C670 /* Assets.xcassets in Resources */,
 				9BCAC2BA1D9C14D20091099C /* Main2.storyboard in Resources */,
-				9B66D3631D073EFC0099C670 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,12 +244,13 @@
 				9BCAC2B21D81F76E0091099C /* SwiftyJSON.swift in Sources */,
 				9BEA428F1D3EBBA700BC4B0C /* yudpsocket.c in Sources */,
 				9B3A7FA21D0EF84E009F96E8 /* EdgeRuleMasterViewController.swift in Sources */,
+				9BC002721DCBC8F700D5C9F1 /* CollectionDelegates.swift in Sources */,
 				9BB8DAE21D07558700B6F10C /* TableViewController.swift in Sources */,
 				9BEA42901D3EBBA700BC4B0C /* yudpsocket.swift in Sources */,
 				9BB8DADE1D07523400B6F10C /* MonthEyeCell.swift in Sources */,
 				9BEA42721D392F6E00BC4B0C /* EyeBookTableViewCell.swift in Sources */,
 				9B66D3661D073EFC0099C670 /* Electronic_Eye_Manager.xcdatamodeld in Sources */,
-				9BEA42701D3701B100BC4B0C /* StockFilterView.swift in Sources */,
+				9BEA42701D3701B100BC4B0C /* CollectionViews.swift in Sources */,
 				9B7B3B6D1D523A9300F1385D /* MonthEyeParametersTableViewController.swift in Sources */,
 				9BD063911D19B8B6006571CB /* GraphContainerView.swift in Sources */,
 				9BEA428C1D3EBBA700BC4B0C /* ysocket.swift in Sources */,
@@ -257,8 +259,8 @@
 				9BC40E8E1D18BEA80074E919 /* MonthEyeMainViewController.swift in Sources */,
 				9BEA428D1D3EBBA700BC4B0C /* ytcpsocket.c in Sources */,
 				9BD063931D19C255006571CB /* GraphViewController.swift in Sources */,
+				9BC002741DCBCB7200D5C9F1 /* TableViewDelegates.swift in Sources */,
 				9BD12FD11D0F0D770091AF05 /* EdgeRuleDetailViewController.swift in Sources */,
-				9BCAC2C31D9EC2390091099C /* ModifyEyeTableViewCellClasses.swift in Sources */,
 				9B66D35E1D073EFC0099C670 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

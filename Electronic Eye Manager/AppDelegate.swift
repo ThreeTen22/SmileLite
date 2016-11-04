@@ -50,42 +50,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     print("First Read: Querying lenghtValue: \(lengthValue)")
                     lengthDifference = lengthValue
                     
-                    //let recData2 = client.read(lengthValue)
-                    //print("First Read: Getting RecData2 count: \(recData2!.count)")
-                    
                     let finalData:[UInt8] = readMoreData(client, readData: client.read(lengthValue), lengthValue: lengthValue, totalData: [UInt8](), isFirst: true)
                     if let str = String(bytes: finalData, encoding: NSUTF8StringEncoding) {
                         //print(str)
                         eyebookJSON = JSON.parse(str)
                     }
-//                    if let d2 = recData2 {
-//                        if d2.count == lengthValue {
-//                            if let str = String(bytes: d2, encoding: NSUTF8StringEncoding) {
-//                                print("Str: ")
-//                                print(str)
-//                                //eyebookJSON = JSON.parse(str)
-//                            }
-//                        }
-//                        else {
-//                            var lengthValue2:Int = lengthValue - d2.count
-//                            print("Second Read: Querying lenghtValue2: \(lengthValue2)")
-//                            
-//                            let recData3 = client.read( lengthValue2 )
-//                            print("Second Read: Getting RecData3 count: \(recData3!.count)" )
-//                            if let d3 = recData3 {
-//                                if d3.count == lengthValue2 {
-//                                    if let str3 = String(bytes: d3, encoding: NSUTF8StringEncoding) {
-//                                        print("Str3: ")
-//                                        print(str3)
-//                                        //eyebookJSON = JSON.parse(str3)
-//                                    }
-//                                }
-//                            }
-//
-//                           
-//                        }
-//                        
-//                    }
+
                     
                 }
             } else {
@@ -101,11 +71,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             eyebookJSON = JSON.parse(eyebookRaw)
             
         }
-        //print(eyebookRaw)
+        //print(eyebookJSON)
         
         eyeBook = EyeBook(fromJSON: eyebookJSON)
-        //buildEyeBook(eyebookJSON)
         
+        parseXonString()
+        
+        for i in eyeBook.listings {
+            print("DEBUG: "+i.listingsymbol)
+        }
+        
+        var count = 0
+        while count < xonListingArray.count {
+            print(xonListingArray[count])
+            count += 18
+        }
         return true
     }
 
