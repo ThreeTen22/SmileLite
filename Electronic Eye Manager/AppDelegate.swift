@@ -77,15 +77,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         parseXonString()
         
-        for i in eyeBook.listings {
-            print("DEBUG: "+i.listingsymbol)
-        }
-        
-        var count = 0
-        while count < xonListingArray.count {
-            print(xonListingArray[count])
-            count += 18
-        }
         return true
     }
 

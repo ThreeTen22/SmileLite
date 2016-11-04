@@ -296,9 +296,7 @@ class Eye {
 
 class MonthEye: Eye {
     //for old eye
-    //var bcspER = [["Buy Call | Sell Put","$ Edge", "0.00", "0", "0.01"],["0","0","0","0","1"]]
-    //var scbpER = [["Sell Call | Buy Put","$ Edge", "0.00", "0", "0.01"],["0","0","0","0","1"]]
-    //var eyeParameters = ["Delta","Quanity","Min Edge", "Max Delta","Order Type"]
+    
     var quantityDelta = 0.0
     var lowDelta = 0.0
     var highDelta = 0.0

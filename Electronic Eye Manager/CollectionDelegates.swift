@@ -91,17 +91,20 @@ public struct StrikeCollectionDelegate {
             case 4, 12:
                 strikeCell.backgroundColor = UIColor.lightGrayColor()
                 
-            case 7, 14, 17:
+            case 6, 14, 17:
                 strikeCell.backgroundColor = UIColor.greenColor()
-                if Int(xonListingArray[indx]) == nil {
-                    break
-                }
+                print(xonListingArray[indx] + "  \(indx)")
                 if Int(xonListingArray[indx])! < 0 {
                     strikeLabel.textColor = UIColor.redColor()
                 } else if Int(xonListingArray[indx])! > 0 {
                     strikeLabel.textColor = UIColor.blueColor()
+                } else {
+                    strikeLabel.textColor = UIColor.blackColor()
                 }
-            default: break
+            default:
+                strikeCell.backgroundColor = UIColor.whiteColor()
+                strikeLabel.textColor = UIColor.blackColor()
+                
                 
             }
         }

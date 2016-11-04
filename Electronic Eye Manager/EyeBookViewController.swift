@@ -30,7 +30,7 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.automaticallyAdjustsScrollViewInsets = false
+        //self.automaticallyAdjustsScrollViewInsets = false
         eyeContainerArray.removeAll()
         sectionRowCounts.removeAll()
         
@@ -61,9 +61,10 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return CGFloat(45.0)
-        } else  {
-            
-            return CGFloat(500.0)
+        } else if indexPath.row == 1 && indexPath.section == 0 {
+            return CGFloat(430.0)
+        } else {
+            return CGFloat(30.0)
         }
     }
     
