@@ -78,9 +78,10 @@ class EyeBook {
     }
     
     func createAndAddEyeToListing(eyeDict:[String:JSON], listing:Listing) {
-        let eyeExpString:String = eyeDict["edate"]!.string!
-        let eyeExpDate = smileDateFormat.dateFromString(eyeExpString)!
         
+        let eyeExpDate = smileDateFormat.dateFromString(eyeDict["edate"]!.string!)!
+        print(eyeExpDate)
+        let eyeExpString:String = smileDateFormat.stringFromDate(eyeExpDate)
         let entityType:Int = eyeDict["entitytype"]!.intValue
         let strike:String = eyeDict["strike"]!.stringValue
         
@@ -113,10 +114,21 @@ class EyeBook {
 }
 
 class Listing {
+    
+    internal enum DisplayType {
+        case NoStrikes
+        case AllStrikes
+        case FilteredStrikes
+    }
+    
+    
     var listingsymbol = ""
     var registeredMonthContainers = [MonthContainer]()
     var notifyOnly:Bool = false
-    var isSelected:Bool = false
+    var isSelectedInEyebook:Bool = false
+    
+    //FRONT END DISPLAY VARIABLES
+    var willDisplay:DisplayType = .NoStrikes
     
     init() {
         
@@ -150,6 +162,8 @@ class Listing {
 
 
 class MonthContainer {
+
+    
     var listingSymbol:String = ""
     var expDate = NSDate()
     var expDateString:String = ""
@@ -158,6 +172,8 @@ class MonthContainer {
     var notifyOnly:Bool = false
     
     var strikeEyes:Array = [[StrikeEye](),[StrikeEye](),[StrikeEye](),[StrikeEye]()]
+    
+  
     
     init() {
         

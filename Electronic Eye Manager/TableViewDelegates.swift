@@ -10,37 +10,19 @@ import UIKit
 
 
 
-class EyeBookTableViewDelegate: NSObject, UITableViewDelegate {
-    
+public struct EyebookListingsDelegate {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return eyeBook.listings.count
+        return 1
     }
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            print("cellCreate: Listing")
-            let listingAtIndexPath = eyeBook.listings[indexPath.section]
-            let listingCell = tableView.dequeueReusableCellWithIdentifier("ListingTableCell", forIndexPath: indexPath) as! ListingTableCell
-            
-            listingCell.monthCollection.tag = indexPath.row
-            listingCell.listingSymbol.text = listingAtIndexPath.listingsymbol
-            
-            return listingCell
-        }
-        if indexPath.row == 1 {
-            print("cellCreate: Strikes")
-            let strikeCell = tableView.dequeueReusableCellWithIdentifier("StrikesCell", forIndexPath: indexPath) as! StrikesTableCell
-            return strikeCell
-        }
-        
         return UITableViewCell()
-       
     }
     
     //func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {}

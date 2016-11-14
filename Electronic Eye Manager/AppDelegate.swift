@@ -19,17 +19,146 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Override point for customization after application launch.
         //SMILE DATE FORMATTER
-        smileDateFormat.dateFormat = "MM/dd/yyyy"
+        smileDateFormat.dateFormat = "MM/dd/yy"
+
         
         var client:TCPClient = TCPClient(addr: "jdempseylxdt05", port: 9400)
+        getEyes(client)
+        getPortfolio(client)
+        getMaturities(client, listingID: "9999999")
+        //print(eyebookJSON)
+        eyeBook = EyeBook(fromJSON: eyebookJSON)
+        
+        parseXonString()
+        for listing in eyeBook.listings {
+            print(listing.listingsymbol)
+            for month in listing.registeredMonthContainers {
+                print(month.expDateString)
+                for strikes in month.strikeEyes {
+                    for strike in strikes {
+                        print(strike.strike)
+                    }
+                }
+            }
+        }
+        //print("testJSON:")
+        // print(eyebookJSON)
+        client.close()
+        return true
+    }
+    
+    func getMaturities(client:TCPClient, listingID: String) {
         var (success, errmsg) = client.connect(timeout: 1)
-        let sendStr:String = "{\"id\":1,\"target\":\"eye\",\"type\":\"request\",\"clientname\":\"perl\",\"payload\":{ \"command\":\"view_table\", \"tablename\":\"Eye\"}}"
+        let sendStr:String = "{\"id\":1,\"target\":\"eye\",\"type\":\"request\",\"clientname\":\"perl\",\"payload\":{\"tab_data\":\"\(listingID)\",\"tablename\":\"Maturity\",\"command\":\"view_table\",\"fieldselection\":[\"edate\"]}}"
         var strLength:UInt = strlen(sendStr)
         var networkLen:UInt = strLength.bigEndian
         let data:NSMutableData = NSMutableData(bytes: &networkLen, length: sizeof(Int))
         data.appendBytes(sendStr, length: Int(strLength))
         
         let finalData = NSData(data: data)
+        
+        var usingDemoData = false
+        
+        if success {
+            var (success1, errmsg1) = client.send(data: data)
+            if success1 {
+                print("I sent something (1)")
+                print("strLength: " + "\(strLength)")
+                print("NSDATA:")
+                
+                var lengthSize:Int = sizeof(Int)
+                let recData = client.read(lengthSize)
+                var lengthDifference:Int = 0
+                if let d = recData {
+                    var recDataNS = NSData(bytes: d, length: lengthSize )
+                    var lengthValue:Int = 0
+                    recDataNS.getBytes(&lengthValue, length: lengthSize )
+                    lengthValue = Int(bigEndian: lengthValue)
+                    
+                    print("First Read: Querying lenghtValue: \(lengthValue)")
+                    lengthDifference = lengthValue
+                    let finalData:[UInt8] = readMoreData(client, readData: client.read(lengthValue), lengthValue: lengthValue, totalData: [UInt8](), isFirst: true)
+                    print(finalData.count)
+                    
+                    if let str = String(bytes: finalData, encoding: NSASCIIStringEncoding) {
+                        print("gottenStr: " + str)
+                    }
+                    
+                    
+                }
+            } else {
+                print("FailedToSendData")
+                
+            }
+        }
+        else {
+            print("Portfolio: Couldnt connect to server")
+        }
+        
+    }
+    
+    func getPortfolio(client:TCPClient) {
+        var (success, errmsg) = client.connect(timeout: 1)
+        let sendStr:String = "{\"id\":1,\"target\":\"eye\",\"type\":\"request\",\"clientname\":\"perl\",\"payload\":{ \"command\":\"view_table\",\"fieldselection\":[\"name\",\"id\"],\"tablename\":\"Portfolio\"}}"
+        var strLength:UInt = strlen(sendStr)
+        var networkLen:UInt = strLength.bigEndian
+        let data:NSMutableData = NSMutableData(bytes: &networkLen, length: sizeof(Int))
+        data.appendBytes(sendStr, length: Int(strLength))
+        
+        let finalData = NSData(data: data)
+        
+        var usingDemoData = false
+        
+        if success {
+            var (success1, errmsg1) = client.send(data: data)
+            if success1 {
+                print("I sent something (1)")
+                print("strLength: " + "\(strLength)")
+                print("NSDATA:")
+                
+                var lengthSize:Int = sizeof(Int)
+                let recData = client.read(lengthSize)
+                var lengthDifference:Int = 0
+                if let d = recData {
+                    var recDataNS = NSData(bytes: d, length: lengthSize )
+                    var lengthValue:Int = 0
+                    recDataNS.getBytes(&lengthValue, length: lengthSize )
+                    lengthValue = Int(bigEndian: lengthValue)
+                    
+                    print("First Read: Querying lenghtValue: \(lengthValue)")
+                    lengthDifference = lengthValue
+                    let finalData:[UInt8] = readMoreData(client, readData: client.read(lengthValue), lengthValue: lengthValue, totalData: [UInt8](), isFirst: true)
+                    print(finalData.count)
+                    
+                    if let str = String(bytes: finalData, encoding: NSASCIIStringEncoding) {
+                        print("gottenStr: " + str)
+                    }
+                    
+                    
+                }
+            } else {
+                print("FailedToSendData")
+      
+            }
+        }
+        else {
+            print("Portfolio: Couldnt connect to server")
+        }
+
+    }
+    
+    
+    func getEyes(client:TCPClient) {
+        var (success, errmsg) = client.connect(timeout: 1)
+        let sendStr:String = "{\"id\":1,\"target\":\"eye\",\"type\":\"request\",\"clientname\":\"perl\",\"payload\":{ \"command\":\"view_table\",\"tablename\":\"Eye\"}}"
+        var strLength:UInt = strlen(sendStr)
+        var networkLen:UInt = strLength.bigEndian
+        let data:NSMutableData = NSMutableData(bytes: &networkLen, length: sizeof(Int))
+        data.appendBytes(sendStr, length: Int(strLength))
+        
+        let finalData = NSData(data: data)
+        
+        var usingDemoData = false
         
         if success {
             var (success1, errmsg1) = client.send(data: data)
@@ -49,13 +178,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     print("First Read: Querying lenghtValue: \(lengthValue)")
                     lengthDifference = lengthValue
-                    
                     let finalData:[UInt8] = readMoreData(client, readData: client.read(lengthValue), lengthValue: lengthValue, totalData: [UInt8](), isFirst: true)
-                    if let str = String(bytes: finalData, encoding: NSUTF8StringEncoding) {
-                        //print(str)
+                    print("FinalData Count:")
+                    print(finalData.count)
+                    
+                    if let str = String(bytes: finalData, encoding: NSASCIIStringEncoding) {
+                        //print("gottenStr: " + str)
                         eyebookJSON = JSON.parse(str)
                     }
-
+                    
+                    
                     
                 }
             } else {
@@ -68,17 +200,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("no connection")
             print(errmsg)
             print("Using demo data")
+            usingDemoData = true
             eyebookJSON = JSON.parse(eyebookRaw)
-            
         }
-        //print(eyebookJSON)
-        
-        eyeBook = EyeBook(fromJSON: eyebookJSON)
-        
-        parseXonString()
-        
-        return true
     }
+    
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

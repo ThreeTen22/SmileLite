@@ -8,18 +8,14 @@
 
 import UIKit
 
-public struct ListingCollectionDelegate {
+public struct FilterListingsCollectionDelegate {
    public func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
     
     
    public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("Inside of NumberOfItemsInSection")
-//        if collectionView.isKindOfClass(ListingCollectionView) {
-//            return eyeBook.listings.count
-//        }
-        return 1
+        return eyeBook.listings.count
     }
     
    public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -27,8 +23,10 @@ public struct ListingCollectionDelegate {
         let listingSymbol = eyeBook.listings[index].listingsymbol
         
         let listingCell = collectionView.dequeueReusableCellWithReuseIdentifier("ListingCell", forIndexPath: indexPath)
-        
-        (listingCell.viewWithTag(1) as! UIButton).setTitle(listingSymbol, forState: .Normal)
+        let listingButton = (listingCell.viewWithTag(1) as! ListingFilterButton)
+        listingButton.setTitle(listingSymbol, forState: .Normal)
+        listingButton.listingSymbol = listingSymbol
+    
         return listingCell
         //return oldCollectionView(collectionView, cellForItemAtIndexPath: indexPath)
     }
@@ -48,6 +46,8 @@ public struct MonthCollectionDelegate {
     }
     
     public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("DEBUG: MonthCollectionDelegate.collectionViewNumberOfItemsInSection")
+        print("\(eyeBook.listings[collectionView.tag].registeredMonthContainers.count)")
         return eyeBook.listings[collectionView.tag].registeredMonthContainers.count
     }
     
@@ -90,10 +90,9 @@ public struct StrikeCollectionDelegate {
                 strikeLabel.textColor = UIColor.whiteColor()
             case 4, 12:
                 strikeCell.backgroundColor = UIColor.lightGrayColor()
-                
+                strikeLabel.textColor = UIColor.blackColor()
             case 6, 14, 17:
                 strikeCell.backgroundColor = UIColor.greenColor()
-                print(xonListingArray[indx] + "  \(indx)")
                 if Int(xonListingArray[indx])! < 0 {
                     strikeLabel.textColor = UIColor.redColor()
                 } else if Int(xonListingArray[indx])! > 0 {
@@ -104,12 +103,16 @@ public struct StrikeCollectionDelegate {
             default:
                 strikeCell.backgroundColor = UIColor.whiteColor()
                 strikeLabel.textColor = UIColor.blackColor()
-                
-                
             }
         }
+        
         return strikeCell
-        //return oldCollectionView(collectionView, cellForItemAtIndexPath: indexPath)
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        print("StrikeCollectionDelegate: didSelectItemAtIndexPath: \(indexPath.row)")
+        
     }
     
 }

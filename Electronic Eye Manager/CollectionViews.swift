@@ -9,7 +9,7 @@
 import UIKit
 
 class ListingCollectionView: UICollectionView {
-    
+    var listingSymbol = ""
 }
 
 class MonthCollectionView: UICollectionView {
