@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B30EF891DDA5533007A3C4F /* MonthEyeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB8DADD1D07523400B6F10C /* MonthEyeCell.swift */; };
 		9B3A7FA21D0EF84E009F96E8 /* EdgeRuleMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A7FA11D0EF84E009F96E8 /* EdgeRuleMasterViewController.swift */; };
 		9B66D35E1D073EFC0099C670 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B66D35D1D073EFC0099C670 /* AppDelegate.swift */; };
 		9B66D3661D073EFC0099C670 /* Electronic_Eye_Manager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B66D3641D073EFC0099C670 /* Electronic_Eye_Manager.xcdatamodeld */; };
@@ -238,6 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B30EF891DDA5533007A3C4F /* MonthEyeCell.swift in Sources */,
 				9BEA42761D3C8DEF00BC4B0C /* EyeClasses.swift in Sources */,
 				9BCAC2BF1D9C2DF00091099C /* EyeTableViewController.swift in Sources */,
 				9BCAC2BC1D9C2C210091099C /* EyeTableViewCell.swift in Sources */,

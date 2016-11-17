@@ -55,8 +55,13 @@ public struct MonthCollectionDelegate {
         let monthCell = collectionView.dequeueReusableCellWithReuseIdentifier("MonthCell", forIndexPath: indexPath)
         
         let monthContainer = eyeBook.listings[collectionView.tag].registeredMonthContainers[indexPath.row]
-        (monthCell.viewWithTag(1) as! UIButton).setTitle(monthContainer.expDateString, forState: .Normal)
+        (monthCell.viewWithTag(1) as! UILabel).text = monthContainer.expDateString
         return monthCell
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        print("MonthCollectionDelegate: didSelectItemAtIndexPath: \(indexPath.row)")
+        
     }
     
 }

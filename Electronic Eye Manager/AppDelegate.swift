@@ -16,194 +16,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
         //Override point for customization after application launch.
         //SMILE DATE FORMATTER
         smileDateFormat.dateFormat = "MM/dd/yy"
-
+        client = TCPClient(addr: "jdempseylxdt05", port: 9400)
+        let (success, errmsg) = client.connect(timeout: 5)
+        //getEyes(client)
+        print("Get Portfolio")
+        getPortfolio(success, errmsg: errmsg, client: client)
         
-        var client:TCPClient = TCPClient(addr: "jdempseylxdt05", port: 9400)
-        getEyes(client)
-        getPortfolio(client)
-        getMaturities(client, listingID: "9999999")
+        //getMaturities(success, errmsg: errmsg, client: client, listingID: "9999999")
+        print("Get Eyes")
+        let jsonString = getEyes(success, errmsg: errmsg, client: client)
+        eyebookJSON = JSON.parse(jsonString)
+        //print("eyebookJSON")
         //print(eyebookJSON)
-        eyeBook = EyeBook(fromJSON: eyebookJSON)
+        eyeBook = EyeBook(fromEyesJSON: eyebookJSON)
         
         parseXonString()
-        for listing in eyeBook.listings {
-            print(listing.listingsymbol)
-            for month in listing.registeredMonthContainers {
-                print(month.expDateString)
-                for strikes in month.strikeEyes {
-                    for strike in strikes {
-                        print(strike.strike)
-                    }
-                }
-            }
-        }
+        print("Strike Eyes:")
+//        for listing in eyeBook.listings {
+//            print(listing.listingsymbol)
+//            for month in listing.registeredMonthContainers {
+//                print(month.expDateString)
+//                for strikes in month.strikeEyes {
+//                    for strike in strikes {
+//                        print(strike.strike)
+//                    }
+//                }
+//            }
+//        }
+        
+        getStrikes(success, errmsg: errmsg, client: client, listingID: String(eyeBook.listings[0].listingId), expDate: eyeBook.listings[0].registeredMonthContainers[0].expDate)
         //print("testJSON:")
         // print(eyebookJSON)
-        client.close()
+        //client.close()
+        
         return true
     }
     
-    func getMaturities(client:TCPClient, listingID: String) {
-        var (success, errmsg) = client.connect(timeout: 1)
-        let sendStr:String = "{\"id\":1,\"target\":\"eye\",\"type\":\"request\",\"clientname\":\"perl\",\"payload\":{\"tab_data\":\"\(listingID)\",\"tablename\":\"Maturity\",\"command\":\"view_table\",\"fieldselection\":[\"edate\"]}}"
-        var strLength:UInt = strlen(sendStr)
-        var networkLen:UInt = strLength.bigEndian
-        let data:NSMutableData = NSMutableData(bytes: &networkLen, length: sizeof(Int))
-        data.appendBytes(sendStr, length: Int(strLength))
-        
-        let finalData = NSData(data: data)
-        
-        var usingDemoData = false
-        
-        if success {
-            var (success1, errmsg1) = client.send(data: data)
-            if success1 {
-                print("I sent something (1)")
-                print("strLength: " + "\(strLength)")
-                print("NSDATA:")
-                
-                var lengthSize:Int = sizeof(Int)
-                let recData = client.read(lengthSize)
-                var lengthDifference:Int = 0
-                if let d = recData {
-                    var recDataNS = NSData(bytes: d, length: lengthSize )
-                    var lengthValue:Int = 0
-                    recDataNS.getBytes(&lengthValue, length: lengthSize )
-                    lengthValue = Int(bigEndian: lengthValue)
-                    
-                    print("First Read: Querying lenghtValue: \(lengthValue)")
-                    lengthDifference = lengthValue
-                    let finalData:[UInt8] = readMoreData(client, readData: client.read(lengthValue), lengthValue: lengthValue, totalData: [UInt8](), isFirst: true)
-                    print(finalData.count)
-                    
-                    if let str = String(bytes: finalData, encoding: NSASCIIStringEncoding) {
-                        print("gottenStr: " + str)
-                    }
-                    
-                    
-                }
-            } else {
-                print("FailedToSendData")
-                
-            }
-        }
-        else {
-            print("Portfolio: Couldnt connect to server")
-        }
-        
-    }
-    
-    func getPortfolio(client:TCPClient) {
-        var (success, errmsg) = client.connect(timeout: 1)
-        let sendStr:String = "{\"id\":1,\"target\":\"eye\",\"type\":\"request\",\"clientname\":\"perl\",\"payload\":{ \"command\":\"view_table\",\"fieldselection\":[\"name\",\"id\"],\"tablename\":\"Portfolio\"}}"
-        var strLength:UInt = strlen(sendStr)
-        var networkLen:UInt = strLength.bigEndian
-        let data:NSMutableData = NSMutableData(bytes: &networkLen, length: sizeof(Int))
-        data.appendBytes(sendStr, length: Int(strLength))
-        
-        let finalData = NSData(data: data)
-        
-        var usingDemoData = false
-        
-        if success {
-            var (success1, errmsg1) = client.send(data: data)
-            if success1 {
-                print("I sent something (1)")
-                print("strLength: " + "\(strLength)")
-                print("NSDATA:")
-                
-                var lengthSize:Int = sizeof(Int)
-                let recData = client.read(lengthSize)
-                var lengthDifference:Int = 0
-                if let d = recData {
-                    var recDataNS = NSData(bytes: d, length: lengthSize )
-                    var lengthValue:Int = 0
-                    recDataNS.getBytes(&lengthValue, length: lengthSize )
-                    lengthValue = Int(bigEndian: lengthValue)
-                    
-                    print("First Read: Querying lenghtValue: \(lengthValue)")
-                    lengthDifference = lengthValue
-                    let finalData:[UInt8] = readMoreData(client, readData: client.read(lengthValue), lengthValue: lengthValue, totalData: [UInt8](), isFirst: true)
-                    print(finalData.count)
-                    
-                    if let str = String(bytes: finalData, encoding: NSASCIIStringEncoding) {
-                        print("gottenStr: " + str)
-                    }
-                    
-                    
-                }
-            } else {
-                print("FailedToSendData")
-      
-            }
-        }
-        else {
-            print("Portfolio: Couldnt connect to server")
-        }
-
-    }
-    
-    
-    func getEyes(client:TCPClient) {
-        var (success, errmsg) = client.connect(timeout: 1)
-        let sendStr:String = "{\"id\":1,\"target\":\"eye\",\"type\":\"request\",\"clientname\":\"perl\",\"payload\":{ \"command\":\"view_table\",\"tablename\":\"Eye\"}}"
-        var strLength:UInt = strlen(sendStr)
-        var networkLen:UInt = strLength.bigEndian
-        let data:NSMutableData = NSMutableData(bytes: &networkLen, length: sizeof(Int))
-        data.appendBytes(sendStr, length: Int(strLength))
-        
-        let finalData = NSData(data: data)
-        
-        var usingDemoData = false
-        
-        if success {
-            var (success1, errmsg1) = client.send(data: data)
-            if success1 {
-                print("I sent something (1)")
-                print("strLength: " + "\(strLength)")
-                print("NSDATA:")
-                
-                var lengthSize:Int = sizeof(Int)
-                let recData = client.read(lengthSize)
-                var lengthDifference:Int = 0
-                if let d = recData {
-                    let recDataNS = NSData(bytes: d, length: lengthSize )
-                    var lengthValue:Int = 0
-                    recDataNS.getBytes(&lengthValue, length: lengthSize )
-                    lengthValue = Int(bigEndian: lengthValue)
-                    
-                    print("First Read: Querying lenghtValue: \(lengthValue)")
-                    lengthDifference = lengthValue
-                    let finalData:[UInt8] = readMoreData(client, readData: client.read(lengthValue), lengthValue: lengthValue, totalData: [UInt8](), isFirst: true)
-                    print("FinalData Count:")
-                    print(finalData.count)
-                    
-                    if let str = String(bytes: finalData, encoding: NSASCIIStringEncoding) {
-                        //print("gottenStr: " + str)
-                        eyebookJSON = JSON.parse(str)
-                    }
-                    
-                    
-                    
-                }
-            } else {
-                
-                print("failure when sending (1)")
-                print(errmsg1)
-            }
-        }
-        else {
-            print("no connection")
-            print(errmsg)
-            print("Using demo data")
-            usingDemoData = true
-            eyebookJSON = JSON.parse(eyebookRaw)
-        }
-    }
     
 
     func applicationWillResignActive(application: UIApplication) {

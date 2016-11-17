@@ -24,29 +24,72 @@ class EyeBook {
         
     }
     
-    init(fromJSON jsonObject:JSON) {
-        // add listings to eyebook
-        if let eyebookJSONArray = jsonObject["payload"]["rows"].array {
-            addListingsFromJSONArray(eyebookJSONArray)
-            
-            for eyeJSON in eyebookJSONArray {
+    init(fromEyesJSON jsonEyesObject:JSON, fromPortfolioJSON jsonPortfolioObject:JSON) {
+        // add listings from retrieved eyes
+        var successful = false
+        
+        if addListingsFromEyes(jsonEyesObject) {
+            successful = true
+        }
+        print("Debug: addListingsFromEyes: successful:  \(successful)")
+        
+        successful = false
+        if addListingsFromPortfolio(jsonPortfolioObject) {
+            successful = true
+        }
+        print("Debug: addListingsFromPortfolio: successful:  \(successful)")
+    }
+    
+    init(fromEyesJSON jsonEyesObject:JSON) {
+        var successful = false
+        
+        if addListingsFromEyes(jsonEyesObject) {
+            successful = true
+        }
+        print("Debug: addListingsFromEyes: successful:  \(successful)")
+        
+    }
+    
+    init(fromPortfolioJSON jsonPortfolioObject:JSON) {
+        var successful = false
+        if addListingsFromPortfolio(jsonPortfolioObject) {
+            successful = true
+        }
+        print("Debug: addListingsFromPortfolio: successful:  \(successful)")
+        
+    }
+    
+    func addListingsFromEyes(jsonEyeObject:JSON) -> Bool {
+        if let eyesJSONArray = jsonEyeObject["payload"]["rows"].array {
+            addListingsFromJSONArray(eyesJSONArray)
+            for eyeJSON in eyesJSONArray {
                 var eyeDictionary = eyeJSON.dictionaryValue
                 createAndAddEyeToListing(eyeDictionary, listing: getListingBySymbol(eyeDictionary["name"]!.string!)!)
             }
-        }
-        //Clean up any listings with no eyes
-        var currentIndex = 0
-        var currentListing = Listing()
         
-        while currentIndex < (listings.count) {
-            currentListing = listings[currentIndex]
-            if currentListing.registeredMonthContainers.count == 0 {
-                listings.removeAtIndex(currentIndex)
-                continue
+            //Clean up any listings with no eyes
+            var currentIndex = 0
+            var currentListing = Listing()
+            
+            while currentIndex < (listings.count) {
+                currentListing = listings[currentIndex]
+                if currentListing.registeredMonthContainers.count == 0 {
+                    listings.removeAtIndex(currentIndex)
+                    continue
+                }
+                currentIndex += 1
             }
-            currentIndex += 1
+            return true
         }
-        
+        return false
+    }
+    
+    func addListingsFromPortfolio(jsonPortObject:JSON) -> Bool {
+        if let portJSONArray = jsonPortObject["payload"]["rows"].array {
+            addListingsFromJSONArray(portJSONArray)
+            return true
+        }
+        return false
         
     }
     
@@ -68,7 +111,10 @@ class EyeBook {
             if let symbol = eye["name"].string {
                 if getListingBySymbol(symbol) == nil {
                     //CREATE NEW LISTING
-                    addListing(Listing(symbol: symbol))
+                    let newListing = Listing(symbol: symbol)
+                    print("Debug: addListingFromJSONArray:  securityID: \(eye["securityid"].stringValue)  securityName: \(symbol)")
+                    newListing.listingId = Int(eye["securityid"].stringValue)!
+                    addListing(newListing)
                 }
             } else {
                 print("ERROR: addListingsFromJSON(eyeBookJSON:JSON) 'NAME' field does not exist for: eye -> eye.description")
@@ -123,9 +169,11 @@ class Listing {
     
     
     var listingsymbol = ""
+    var listingId = 0
     var registeredMonthContainers = [MonthContainer]()
     var notifyOnly:Bool = false
     var isSelectedInEyebook:Bool = false
+    
     
     //FRONT END DISPLAY VARIABLES
     var willDisplay:DisplayType = .NoStrikes
@@ -279,15 +327,17 @@ class Eye {
     var entityType = 0
     var quantity = 0
     var delta = 0.0
-    
+    var securityId = 0
     
     
     init(symbol sym:String, expDate date:String) {
         symbol = sym
         expDate = smileDateFormat.dateFromString(date)!
+        
     }
     
     init(eyeDict:[String:JSON]) {
+        
         symbol = eyeDict["name"]!.stringValue
         expDateString = (eyeDict["edate"]!.stringValue)
         expDate = smileDateFormat.dateFromString(expDateString)!
@@ -302,6 +352,8 @@ class Eye {
         entityType = eyeDict["entitytype"]!.intValue
         quantity = eyeDict["quantity"]!.intValue
         delta = eyeDict["delta"]!.doubleValue
+        securityId = eyeDict["securityid"]!.intValue
+        
     }
     
     init() {
@@ -415,10 +467,12 @@ let eyebookRaw:String = "{\"payload\":{\"rows\":[{\"dfiller_45_13\":\"0.00000000
 
 var eyebookJSON:JSON = JSON.parse("")
 
+let strikesDemoString:String = "{\"origrequestid\":1,\"payload\":{\"ADTN:1917\":{\"11/18/2016\":{\"rows\":[{\"CallAsk1\":\"0.55\",\"CallBid1\":\"0.15\",\"CallDelta\":\"0.92039844\",\"CallInventory\":\"0\",\"CallPrice\":\"16.75\",\"CallPriceStatus\":6,\"Fv\":\"29.99960786\",\"Inventory\":\"0\",\"PutAsk1\":\"0.40\",\"PutBid1\":\"0.20\",\"PutDelta\":\"-0.07960681\",\"PutInventory\":\"0\",\"PutPrice\":\"16.82\",\"PutPriceStatus\":6,\"odate\":\"11/18/2016\",\"strike\":\"20.00000000\"},{\"CallAsk1\":\"1.15\",\"CallBid1\":\"0.75\",\"CallDelta\":\"0.92299739\",\"CallInventory\":\"0\",\"CallPrice\":\"16.83\",\"CallPriceStatus\":6,\"Fv\":\"30.00055302\",\"Inventory\":\"0\",\"PutAsk1\":\"0.40\",\"PutBid1\":\"\",\"PutDelta\":\"-0.07700767\",\"PutInventory\":\"0\",\"PutPrice\":\"15.90\",\"PutPriceStatus\":6,\"odate\":\"11/18/2016\",\"strike\":\"19.00000000\"},{\"CallAsk1\":\"2.20\",\"CallBid1\":\"1.60\",\"CallDelta\":\"0.92567113\",\"CallInventory\":\"0\",\"CallPrice\":\"16.91\",\"CallPriceStatus\":6,\"Fv\":\"30.00147800\",\"Inventory\":\"0\",\"PutAsk1\":\"0.20\",\"PutBid1\":\"\",\"PutDelta\":\"-0.07433420\",\"PutInventory\":\"0\",\"PutPrice\":\"14.99\",\"PutPriceStatus\":6,\"odate\":\"11/18/2016\",\"strike\":\"18.00000000\"},{\"CallAsk1\":\"3.10\",\"CallBid1\":\"2.55\",\"CallDelta\":\"0.92843047\",\"CallInventory\":\"0\",\"CallPrice\":\"17.00\",\"CallPriceStatus\":6,\"Fv\":\"30.00238254\",\"Inventory\":\"0\",\"PutAsk1\":\"0.25\",\"PutBid1\":\"\",\"PutDelta\":\"-0.07157410\",\"PutInventory\":\"0\",\"PutPrice\":\"14.07\",\"PutPriceStatus\":6,\"odate\":\"11/18/2016\",\"strike\":\"17.00000000\"},{\"CallAsk1\":\"4.30\",\"CallBid1\":\"3.20\",\"CallDelta\":\"0.93128662\",\"CallInventory\":\"0\",\"CallPrice\":\"17.09\",\"CallPriceStatus\":6,\"Fv\":\"30.00326627\",\"Inventory\":\"0\",\"PutAsk1\":\"0.45\",\"PutBid1\":\"\",\"PutDelta\":\"-0.06871814\",\"PutInventory\":\"0\",\"PutPrice\":\"13.16\",\"PutPriceStatus\":6,\"odate\":\"11/18/2016\",\"strike\":\"16.00000000\"},{\"CallAsk1\":\"5.30\",\"CallBid1\":\"4.20\",\"CallDelta\":\"0.93424996\",\"CallInventory\":\"0\",\"CallPrice\":\"17.18\",\"CallPriceStatus\":6,\"Fv\":\"30.00412889\",\"Inventory\":\"0\",\"PutAsk1\":\"0.25\",\"PutBid1\":\"\",\"PutDelta\":\"-0.06575441\",\"PutInventory\":\"0\",\"PutPrice\":\"12.26\",\"PutPriceStatus\":6,\"odate\":\"11/18/2016\",\"strike\":\"15.00000000\"},{\"CallAsk1\":\"6.30\",\"CallBid1\":\"5.10\",\"CallDelta\":\"0.93732851\",\"CallInventory\":\"0\",\"CallPrice\":\"17.28\",\"CallPriceStatus\":6,\"Fv\":\"30.00497014\",\"Inventory\":\"0\",\"PutAsk1\":\"0.30\",\"PutBid1\":\"\",\"PutDelta\":\"-0.06267593\",\"PutInventory\":\"0\",\"PutPrice\":\"11.36\",\"PutPriceStatus\":6,\"odate\":\"11/18/2016\",\"strike\":\"14.00000000\"},{\"CallAsk1\":\"7.30\",\"CallBid1\":\"6.10\",\"CallDelta\":\"0.94052641\",\"CallInventory\":\"0\",\"CallPrice\":\"17.38\",\"CallPriceStatus\":6,\"Fv\":\"30.00578993\",\"Inventory\":\"0\",\"PutAsk1\":\"0.30\",\"PutBid1\":\"\",\"PutDelta\":\"-0.05947760\",\"PutInventory\":\"0\",\"PutPrice\":\"10.46\",\"PutPriceStatus\":6,\"odate\":\"11/18/2016\",\"strike\":\"13.00000000\"},{\"CallAsk1\":\"10.10\",\"CallBid1\":\"7.10\",\"CallDelta\":\"0.94384294\",\"CallInventory\":\"0\",\"CallPrice\":\"17.49\",\"CallPriceStatus\":6,\"Fv\":\"30.00658828\",\"Inventory\":\"0\",\"PutAsk1\":\"0.20\",\"PutBid1\":\"\",\"PutDelta\":\"-0.05616120\",\"PutInventory\":\"0\",\"PutPrice\":\"9.56\",\"PutPriceStatus\":6,\"odate\":\"11/18/2016\",\"strike\":\"12.00000000\"},{\"CallAsk1\":\"9.30\",\"CallBid1\":\"8.20\",\"CallDelta\":\"0.94727333\",\"CallInventory\":\"0\",\"CallPrice\":\"17.60\",\"CallPriceStatus\":6,\"Fv\":\"30.00736534\",\"Inventory\":\"0\",\"PutAsk1\":\"0.25\",\"PutBid1\":\"\",\"PutDelta\":\"-0.05273169\",\"PutInventory\":\"0\",\"PutPrice\":\"8.68\",\"PutPriceStatus\":6,\"odate\":\"11/18/2016\",\"strike\":\"11.00000000\"},{\"CallAsk1\":\"0.15\",\"CallBid1\":\"\",\"CallDelta\":\"0.91786432\",\"CallInventory\":\"0\",\"CallPrice\":\"16.67\",\"CallPriceStatus\":6,\"Fv\":\"29.99864276\",\"Inventory\":\"0\",\"PutAsk1\":\"1.55\",\"PutBid1\":\"0.70\",\"PutDelta\":\"-0.08214222\",\"PutInventory\":\"0\",\"PutPrice\":\"17.74\",\"PutPriceStatus\":6,\"odate\":\"11/18/2016\",\"strike\":\"21.00000000\"},{\"CallAsk1\":\"0.20\",\"CallBid1\":\"\",\"CallDelta\":\"0.91538593\",\"CallInventory\":\"0\",\"CallPrice\":\"16.59\",\"CallPriceStatus\":6,\"Fv\":\"29.99765983\",\"Inventory\":\"0\",\"PutAsk1\":\"2.55\",\"PutBid1\":\"1.55\",\"PutDelta\":\"-0.08461979\",\"PutInventory\":\"0\",\"PutPrice\":\"18.67\",\"PutPriceStatus\":6,\"odate\":\"11/18/2016\",\"strike\":\"22.00000000\"},{\"CallAsk1\":\"0.10\",\"CallBid1\":\"\",\"CallDelta\":\"0.91295596\",\"CallInventory\":\"0\",\"CallPrice\":\"16.52\",\"CallPriceStatus\":6,\"Fv\":\"29.99666364\",\"Inventory\":\"0\",\"PutAsk1\":\"3.90\",\"PutBid1\":\"2.85\",\"PutDelta\":\"-0.08705096\",\"PutInventory\":\"0\",\"PutPrice\":\"19.59\",\"PutPriceStatus\":6,\"odate\":\"11/18/2016\",\"strike\":\"23.00000000\"},{\"CallAsk1\":\"0.20\",\"CallBid1\":\"\",\"CallDelta\":\"0.91056903\",\"CallInventory\":\"0\",\"CallPrice\":\"16.45\",\"CallPriceStatus\":6,\"Fv\":\"29.99565982\",\"Inventory\":\"0\",\"PutAsk1\":\"4.90\",\"PutBid1\":\"3.70\",\"PutDelta\":\"-0.08943609\",\"PutInventory\":\"0\",\"PutPrice\":\"20.52\",\"PutPriceStatus\":6,\"odate\":\"11/18/2016\",\"strike\":\"24.00000000\"},{\"CallAsk1\":\"0.25\",\"CallBid1\":\"\",\"CallDelta\":\"0.90822143\",\"CallInventory\":\"0\",\"CallPrice\":\"16.38\",\"CallPriceStatus\":6,\"Fv\":\"29.99465409\",\"Inventory\":\"0\",\"PutAsk1\":\"5.90\",\"PutBid1\":\"4.70\",\"PutDelta\":\"-0.09178437\",\"PutInventory\":\"0\",\"PutPrice\":\"21.45\",\"PutPriceStatus\":6,\"odate\":\"11/18/2016\",\"strike\":\"25.00000000\"},{\"CallAsk1\":\"0.30\",\"CallBid1\":\"\",\"CallDelta\":\"0.90591081\",\"CallInventory\":\"0\",\"CallPrice\":\"16.31\",\"CallPriceStatus\":6,\"Fv\":\"29.99365173\",\"Inventory\":\"0\",\"PutAsk1\":\"6.90\",\"PutBid1\":\"5.70\",\"PutDelta\":\"-0.09409579\",\"PutInventory\":\"0\",\"PutPrice\":\"22.38\",\"PutPriceStatus\":6,\"odate\":\"11/18/2016\",\"strike\":\"26.00000000\"},{\"CallAsk1\":\"0.30\",\"CallBid1\":\"\",\"CallDelta\":\"0.90363587\",\"CallInventory\":\"0\",\"CallPrice\":\"16.24\",\"CallPriceStatus\":6,\"Fv\":\"29.99265727\",\"Inventory\":\"0\",\"PutAsk1\":\"7.80\",\"PutBid1\":\"6.70\",\"PutDelta\":\"-0.09637016\",\"PutInventory\":\"0\",\"PutPrice\":\"23.32\",\"PutPriceStatus\":6,\"odate\":\"11/18/2016\",\"strike\":\"27.00000000\"},{\"CallAsk1\":\"0.25\",\"CallBid1\":\"\",\"CallDelta\":\"0.90139609\",\"CallInventory\":\"0\",\"CallPrice\":\"16.18\",\"CallPriceStatus\":6,\"Fv\":\"29.99167437\",\"Inventory\":\"0\",\"PutAsk1\":\"8.90\",\"PutBid1\":\"7.70\",\"PutDelta\":\"-0.09860908\",\"PutInventory\":\"0\",\"PutPrice\":\"24.25\",\"PutPriceStatus\":6,\"odate\":\"11/18/2016\",\"strike\":\"28.00000000\"},{\"CallAsk1\":\"0.25\",\"CallBid1\":\"\",\"CallDelta\":\"0.89919142\",\"CallInventory\":\"0\",\"CallPrice\":\"16.12\",\"CallPriceStatus\":6,\"Fv\":\"29.99070583\",\"Inventory\":\"0\",\"PutAsk1\":\"9.90\",\"PutBid1\":\"8.40\",\"PutDelta\":\"-0.10081424\",\"PutInventory\":\"0\",\"PutPrice\":\"25.19\",\"PutPriceStatus\":6,\"odate\":\"11/18/2016\",\"strike\":\"29.00000000\"}]}}},\"success\":true,\"type\":\"response\"}"
+
 
 //Date[0] Strk[1] CBid[2] CAsk[3] CTheo[4] Cpos[5] PBid[6] PAsk[7] PTheo[8] PPos[9], pDelta[10] cDelta[11] (12 total)
 
-var xonData:NSArray = [["06/17/16", 20, 7.4, 11.6, 9.16, 0, 0, 0.2, 0.0090191984, -81,-0.5283484502, 100.0],
+let xonData:NSArray = [["06/17/16", 20, 7.4, 11.6, 9.16, 0, 0, 0.2, 0.0090191984, -81,-0.5283484502, 100.0],
                        ["06/17/16", 21, 6.4, 10.6, 8.160028459, 0, 0, 0.25, 0.0192737981, 0,-1.0862216339, 99.9268857087],
                        ["06/17/16", 22, 5.5, 9.6, 7.1687611388, -10, 0, 0.25, 0.039092773, 156,-2.1141476529, 98.5544587447],
                        ["06/17/16", 23, 4.5, 8.6, 6.1974402883, 0, 0, 0.25, 0.0754634837, 0,-3.8989373447, 96.5212339718],

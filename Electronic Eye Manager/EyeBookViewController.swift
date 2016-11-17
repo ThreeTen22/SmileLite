@@ -209,6 +209,9 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if collectionView.isKindOfClass(MonthCollectionView) {
+            monthDelegate.collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
+        } else
         if collectionView.isKindOfClass(StrikeCollectionView) {
             strikeDelegate.collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
         }
