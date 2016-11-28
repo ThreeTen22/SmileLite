@@ -17,5 +17,5 @@ class MonthCollectionView: UICollectionView {
 }
 
 class StrikeCollectionView: UICollectionView {
-    var cellWidths:Array = [Double]()
+    weak var currentIndexPath:NSIndexPath?
 }

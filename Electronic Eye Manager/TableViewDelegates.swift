@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 public struct EyebookListingsDelegate {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

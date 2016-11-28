@@ -20,37 +20,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //SMILE DATE FORMATTER
         smileDateFormat.dateFormat = "MM/dd/yy"
         client = TCPClient(addr: "jdempseylxdt05", port: 9400)
-        let (success, errmsg) = client.connect(timeout: 5)
+        (clientSuccess, clientErrmsg) = client.connect(timeout: 5)
         //getEyes(client)
         print("Get Portfolio")
-        getPortfolio(success, errmsg: errmsg, client: client)
         
-        //getMaturities(success, errmsg: errmsg, client: client, listingID: "9999999")
+        //getMaturities(clientSuccess, errmsg: clientErrmsg, client: client, listingID: 2275)
         print("Get Eyes")
-        let jsonString = getEyes(success, errmsg: errmsg, client: client)
+        let jsonString = getEyes(clientSuccess, errmsg: clientErrmsg, client: client)
         eyebookJSON = JSON.parse(jsonString)
-        //print("eyebookJSON")
-        //print(eyebookJSON)
-        eyeBook = EyeBook(fromEyesJSON: eyebookJSON)
         
+        eyeBook = EyeBook(fromEyesJSON: eyebookJSON)
+          
         parseXonString()
         print("Strike Eyes:")
-//        for listing in eyeBook.listings {
-//            print(listing.listingsymbol)
-//            for month in listing.registeredMonthContainers {
-//                print(month.expDateString)
-//                for strikes in month.strikeEyes {
-//                    for strike in strikes {
-//                        print(strike.strike)
-//                    }
-//                }
-//            }
-//        }
+
         
-        getStrikes(success, errmsg: errmsg, client: client, listingID: String(eyeBook.listings[0].listingId), expDate: eyeBook.listings[0].registeredMonthContainers[0].expDate)
+        //getStrikes(success, errmsg: errmsg, client: client, listingID: String(eyeBook.listings[0].listingId), expDate: eyeBook.listings[0].registeredMonthContainers[0].expDate)
         //print("testJSON:")
         // print(eyebookJSON)
-        //client.close()
+        client.close()
         
         return true
     }

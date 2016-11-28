@@ -14,6 +14,7 @@
 		9B66D3681D073EFC0099C670 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B66D3671D073EFC0099C670 /* Assets.xcassets */; };
 		9B66D36B1D073EFC0099C670 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B66D3691D073EFC0099C670 /* LaunchScreen.storyboard */; };
 		9B66D3731D073FCE0099C670 /* globalClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B66D3721D073FCE0099C670 /* globalClass.swift */; };
+		9B759D361DE4A49900D7BEAD /* UIColorHexExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B759D351DE4A49900D7BEAD /* UIColorHexExtension.swift */; };
 		9B7B3B6D1D523A9300F1385D /* MonthEyeParametersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B3B6C1D523A9300F1385D /* MonthEyeParametersTableViewController.swift */; };
 		9BB8DAE21D07558700B6F10C /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB8DAE11D07558700B6F10C /* TableViewController.swift */; };
 		9BC002721DCBC8F700D5C9F1 /* CollectionDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC002711DCBC8F700D5C9F1 /* CollectionDelegates.swift */; };
@@ -49,6 +50,7 @@
 		9B66D36A1D073EFC0099C670 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9B66D36C1D073EFC0099C670 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B66D3721D073FCE0099C670 /* globalClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = globalClass.swift; sourceTree = "<group>"; };
+		9B759D351DE4A49900D7BEAD /* UIColorHexExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorHexExtension.swift; sourceTree = "<group>"; };
 		9B7B3B6C1D523A9300F1385D /* MonthEyeParametersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthEyeParametersTableViewController.swift; sourceTree = "<group>"; };
 		9BB8DADD1D07523400B6F10C /* MonthEyeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MonthEyeCell.swift; path = ../MonthEyeCell.swift; sourceTree = "<group>"; };
 		9BB8DAE11D07558700B6F10C /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				9BC002731DCBCB7200D5C9F1 /* TableViewDelegates.swift */,
 				9BC002751DD2329600D5C9F1 /* ButtonClasses.swift */,
 				9BCAC2BB1D9C2C210091099C /* EyeTableViewCell.swift */,
+				9B759D351DE4A49900D7BEAD /* UIColorHexExtension.swift */,
 				9BCAC2BD1D9C2C580091099C /* ysocket */,
 				9B66D3691D073EFC0099C670 /* LaunchScreen.storyboard */,
 				9B66D36C1D073EFC0099C670 /* Info.plist */,
@@ -258,6 +261,7 @@
 				9B7B3B6D1D523A9300F1385D /* MonthEyeParametersTableViewController.swift in Sources */,
 				9BD063911D19B8B6006571CB /* GraphContainerView.swift in Sources */,
 				9BEA428C1D3EBBA700BC4B0C /* ysocket.swift in Sources */,
+				9B759D361DE4A49900D7BEAD /* UIColorHexExtension.swift in Sources */,
 				9BC40E901D18C1A60074E919 /* MonthEyeActivateCell.swift in Sources */,
 				9BEA428E1D3EBBA700BC4B0C /* ytcpsocket.swift in Sources */,
 				9BC40E8E1D18BEA80074E919 /* MonthEyeMainViewController.swift in Sources */,

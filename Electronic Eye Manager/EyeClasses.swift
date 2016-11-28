@@ -173,6 +173,11 @@ class Listing {
     var registeredMonthContainers = [MonthContainer]()
     var notifyOnly:Bool = false
     var isSelectedInEyebook:Bool = false
+    var visibleStrikes:Array = [JSON]()
+    var listingMaturities:Array = [JSON]()
+    
+    var maturitiesToDisplay:Array = [NSDate]()
+    
     
     
     //FRONT END DISPLAY VARIABLES
@@ -201,10 +206,27 @@ class Listing {
     }
     
     func getContainerByDate(expDateString:String) -> MonthContainer? {
-        let expDate:NSDate = smileDateFormat.dateFromString(expDateString)!
         
+        let expDate:NSDate = dateStringToNSDate(expDateString)
         return getContainerByDate(expDate)
     }
+    
+    func addMaturities(success:Bool, errMsg:String, client:TCPClient) {
+        
+    }
+    
+    func dateStringToNSDate(expDateString:String) -> NSDate {
+        let expDate:NSDate = smileDateFormat.dateFromString(expDateString)!
+        return expDate
+    }
+    
+    func getMaturityIndex(date:NSDate) -> Int {
+        if let indxRange = maturitiesToDisplay.indexOf(date) {
+            return Int(indxRange)
+        }
+        return -1
+    }
+    
 }
 
 
@@ -216,7 +238,9 @@ class MonthContainer {
     var expDate = NSDate()
     var expDateString:String = ""
     var monthEyes:Array = [MonthEye?(), MonthEye?(), MonthEye?(), MonthEye?()]
+    
     var isActive = true
+    
     var notifyOnly:Bool = false
     
     var strikeEyes:Array = [[StrikeEye](),[StrikeEye](),[StrikeEye](),[StrikeEye]()]
@@ -375,7 +399,7 @@ class MonthEye: Eye {
     
     
     init(symbol sym:String, expDate date:String, id:Int, order cmdType:Order, quantity qntity:Int, quanitityDelta qDelta:Double, minDelta mnDelta:Double, maxDelta mxDelta:Double) {
-        let indx = enumToIndex(cmdType)
+        //let indx = enumToIndex(cmdType)
         super.init(symbol: sym, expDate: date)
         self.id = id
         self.order = cmdType
@@ -419,12 +443,6 @@ class StrikeEye: Eye {
     init(symbol sym:String, expDate date:String, strikePrice price:Double, priceOverride priceOvr:Double?, quantityOverride quantityOvr:Int?) {
         super.init(symbol: sym, expDate: date)
         self.strike = price
-//        if priceOvr != nil {
-//            priceOverride = priceOvr!
-//        }
-//        if quantityOvr != nil {
-//            quantityOverride = quantityOvr!
-//        }
     }
     override init() {
         super.init()
