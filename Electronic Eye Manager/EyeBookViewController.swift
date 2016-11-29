@@ -17,25 +17,15 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     var currentFilter = FilterType.ShowAll
     var selectedSymbol = ""
 
-    var eyeContainerArray:Array = [AnyObject]()
-    
-    @IBOutlet var containerView: UIView!
-    
-    @IBOutlet var popOverSegueAnchor: UIView!
     weak var filteredListing:Listing?
     
     var sectionRowCounts:Array = [Int]()
     
-    var selectedIndx:(Int, Int) = (-1, -1)
-    
     var listDelegate = FilterListingsCollectionDelegate()
     var monthDelegate = MonthCollectionDelegate()
     var strikeDelegate = StrikeCollectionDelegate()
-    
     var xonStrikeDelegate = XONStrikeCollectionDelegate()
     
-    
-    var childViewController:UIViewController?
     
     @IBOutlet var eyeBookTableView: UITableView!
     
@@ -79,7 +69,6 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
         monthDelegate.initalize()
         (clientSuccess, clientErrmsg) = client.connect(timeout: 3)
         
-        eyeContainerArray.removeAll()
         sectionRowCounts.removeAll()
         
         //self.popoverPresentationController
@@ -88,16 +77,9 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        childViewController = self.storyboard?.instantiateViewControllerWithIdentifier("ModEyeViewController")
-        //self.addChildViewController(childViewController!)
-        //self.view.addSubview(childViewController!.view)
         
-        
-        //let containerViewController:UIViewController = containerView
-        //presentViewController((self.storyboard?.instantiateViewControllerWithIdentifier("ModEyeViewController"))!, animated: true, completion: .None)
-        
+        let childViewController = self.storyboard?.instantiateViewControllerWithIdentifier("EyePopoverViewController")
         childViewController!.modalPresentationStyle = UIModalPresentationStyle.Popover
-        //childViewController!.transitioningDelegate = self
         childViewController!.view.backgroundColor = UIColor.redColor()
         
         self.presentViewController(childViewController!, animated: true, completion: nil)
@@ -108,21 +90,8 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
         myController.permittedArrowDirections = [UIPopoverArrowDirection.Up, UIPopoverArrowDirection.Down]
         myController.sourceView = self.view
         myController.sourceRect = senderCell.convertRect((senderCell.bounds), toView: myController.sourceView!)
-        
         myController.delegate = self
         return false
-    }
-    
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("prepare for seg")
-       if segue.identifier == "embedEye"
-       {
-        
-        }
-        //popOverSegueAnchor.x
-        //(sender as UICollectionViewCell).rect
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -141,6 +110,27 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
         return eyeBook.listings.count
         
     }
+    
+    func prepareForPopoverPresentation(popoverPresentationController: UIPopoverPresentationController) {
+        let childController = popoverPresentationController.presentedViewController
+        childController.view.tag = 9999
+        childController.modalInPopover = false
+        
+    }
+    
+    // Called on the delegate when the popover controller will dismiss the popover. Return NO to prevent the
+    // dismissal of the view.
+    func popoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        let childViewController = popoverPresentationController.presentedViewController
+        debugPrint("\(self) - ChildTag \(childViewController.view!.tag)")
+        return true
+    }
+    
+    // Called on the delegate when the user has taken action to dismiss the popover. This is not called when the popover is dimissed programatically.
+    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
+        
+    }
+  
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -255,11 +245,15 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     }
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        //collectionView.top
         print("hitheader")
         (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).sectionHeadersPinToVisibleBounds = true
         let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "StrikesHeader", forIndexPath: indexPath)
         let stackView = header.viewWithTag(1) as! UIStackView
+        if stackView.arrangedSubviews.count != 0 {
+            for i in stackView.arrangedSubviews {
+                stackView.removeArrangedSubview(i)
+            }
+        }
         for i in 0...17 {
             let newLabel = UILabel()
             newLabel.text = xonListingArray[i]
@@ -296,7 +290,7 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var newCollectionViewCell:UICollectionViewCell = UICollectionViewCell()
+        var newCollectionViewCell:UICollectionViewCell?
         if collectionView.isKindOfClass(ListingCollectionView) {
             newCollectionViewCell = listDelegate.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
         } else
@@ -312,7 +306,7 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
         } else {
         print("ERROR : EyeBookViewController:numberOfItemsInSection: KindOfClassError")
         }
-        return newCollectionViewCell
+        return newCollectionViewCell!
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -323,7 +317,7 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
             if clientSuccess {
                 strikeDelegate.collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
             } else {
-                xonStrikeDelegate.collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
+                strikeDelegate.collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
             }
         }
     }

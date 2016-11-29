@@ -8,6 +8,10 @@
 
 import UIKit
 
+extension UILabel {
+    
+}
+
 var eyeBook:EyeBook = EyeBook()
 
 

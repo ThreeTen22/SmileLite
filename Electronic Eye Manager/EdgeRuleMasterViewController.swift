@@ -78,8 +78,6 @@ class EdgeRuleMasterViewController: UITableViewController {
         
     }
     
-    
-    
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         var mimicFrom = ["SCBP", "BCSP"]
         var mimicTitle = ""
