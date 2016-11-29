@@ -66,7 +66,7 @@ class EyeBook {
                 var eyeDictionary = eyeJSON.dictionaryValue
                 createAndAddEyeToListing(eyeDictionary, listing: getListingBySymbol(eyeDictionary["name"]!.string!)!)
             }
-        
+            
             //Clean up any listings with no eyes
             var currentIndex = 0
             var currentListing = Listing()
@@ -232,7 +232,7 @@ class Listing {
 
 
 class MonthContainer {
-
+    
     
     var listingSymbol:String = ""
     var expDate = NSDate()
@@ -245,7 +245,7 @@ class MonthContainer {
     
     var strikeEyes:Array = [[StrikeEye](),[StrikeEye](),[StrikeEye](),[StrikeEye]()]
     
-  
+    
     
     init() {
         
@@ -283,7 +283,7 @@ class MonthContainer {
             strikeEyes[0].append(eye)
             return true
         case Order.sellCall:
-           strikeEyes[1].append(eye)
+            strikeEyes[1].append(eye)
             return true
         case Order.buyPut:
             strikeEyes[2].append(eye)
@@ -328,7 +328,7 @@ class MonthContainer {
             return nil
         }
     }
-
+    
     
 }
 
