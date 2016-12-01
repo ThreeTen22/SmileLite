@@ -286,14 +286,10 @@ struct StrikeCollectionDelegate {
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-
-        print("StrikeCollectionDelegate: didSelectItemAtIndexPath: \(indexPath.row)")
-        print("StrikeCollectionDelegate: cellForItem: \(collectionView.cellForItemAtIndexPath(indexPath))")
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! StrikeCollectionViewCell
         let strikesCollectionView:StrikeCollectionView = (collectionView as! StrikeCollectionView)
         strikesCollectionView.currentIndexPath = indexPath
         (collectionView.delegate as! UIViewController).shouldPerformSegueWithIdentifier("selectEye", sender: strikesCollectionView)
-        
-        
     }
     
     func formatMonth(currentDate:NSDate) -> String {
@@ -381,11 +377,11 @@ public struct XONStrikeCollectionDelegate {
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        print("StrikeCollectionDelegate: didSelectItemAtIndexPath: \(indexPath.row)")
-        print("StrikeCollectionDelegate: cellForItem: \(collectionView.cellForItemAtIndexPath(indexPath))")
+        let cell = collectionView.cellForItemAtIndexPath(indexPath)
         let strikesCollectionView:StrikeCollectionView = (collectionView as! StrikeCollectionView)
         strikesCollectionView.currentIndexPath = indexPath
-        (collectionView.delegate as! UIViewController).shouldPerformSegueWithIdentifier("selectEye", sender: strikesCollectionView)
+        //(collectionView.delegate as! UIViewController).shouldPerformSegueWithIdentifier("selectEye", sender: strikesCollectionView)
+        cell?.becomeFirstResponder()
     }
 }
 

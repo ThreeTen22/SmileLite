@@ -161,7 +161,7 @@ class EyeBook {
 
 class Listing {
     
-    internal enum DisplayType {
+    enum DisplayType {
         case NoStrikes
         case AllStrikes
         case FilteredStrikes
@@ -188,6 +188,10 @@ class Listing {
     }
     init(symbol symb:String) {
         listingsymbol = symb
+    }
+    
+    deinit {
+        print("Listing: Deinit")
     }
     
     func AddContainer(monthContainer:MonthContainer) {

@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Modify Eye Popover View Controller-->
+        <!--Eye Popover View Controller-->
         <scene sceneID="oyT-E2-NfT">
             <objects>
-                <viewController storyboardIdentifier="EyePopoverPresentation" id="VSb-2t-Cnb" customClass="ModifyEyePopoverViewController" customModule="Electronic_Eye_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EyePopoverPresentation" id="VSb-2t-Cnb" customClass="EyePopoverViewController" customModule="Electronic_Eye_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="A5d-LS-CZm"/>
                         <viewControllerLayoutGuide type="bottom" id="JB3-mF-8YW"/>
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tEl-4r-rKL">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="263"/>
+                                <rect key="frame" x="0.0" y="37" width="600" height="263"/>
                                 <connections>
                                     <segue destination="0Yb-20-SIG" kind="embed" id="eGH-Xd-GDj"/>
                                 </connections>
@@ -39,6 +39,10 @@
         <scene sceneID="SfS-MA-Tgy">
             <objects>
                 <viewController id="0Yb-20-SIG" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dvf-es-x5B"/>
+                        <viewControllerLayoutGuide type="bottom" id="RuJ-Do-vE8"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wOX-pL-3a7">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="263"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

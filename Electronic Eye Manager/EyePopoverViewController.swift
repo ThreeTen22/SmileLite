@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ModifyEyePopoverViewController: UIViewController {
+class EyePopoverViewController: UIViewController {
     
     @IBAction func BackNavigation(sender: AnyObject) {
         
@@ -16,5 +16,7 @@ class ModifyEyePopoverViewController: UIViewController {
     
     @IBOutlet var quantityTextField: UITextField!
     @IBOutlet var edgeTextField: UITextField!
+    
+    weak var currentListing:Listing?
     
 }
