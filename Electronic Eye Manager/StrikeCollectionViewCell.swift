@@ -9,5 +9,10 @@
 import UIKit
 
 class StrikeCollectionViewCell: UICollectionViewCell {
-    var cellType:CellType = CellType.NULL
+    var listingIndex:Int!
+    var floorIndex:Int!
+    var cellType:StrikeType = StrikeType.null
+    deinit {
+      //print("STRIKE COLLECTIONVIEWCELL: DEINIT")
+    }
 }

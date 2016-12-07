@@ -20,25 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //SMILE DATE FORMATTER
         smileDateFormat.dateFormat = "MM/dd/yy"
         client = TCPClient(addr: "jdempseylxdt05", port: 9400)
-        (clientSuccess, clientErrmsg) = client.connect(timeout: 5)
+        (clientSuccess, clientErrmsg) = client.connect(timeout: timeout)
         //getEyes(client)
-        print("Get Portfolio")
+        //print("Get Portfolio")
         
         //getMaturities(clientSuccess, errmsg: clientErrmsg, client: client, listingID: 2275)
-        print("Get Eyes")
+        //print("Get Eyes")
         let jsonString = getEyes(clientSuccess, errmsg: clientErrmsg, client: client)
-        eyebookJSON = JSON.parse(jsonString)
         
-        eyeBook = EyeBook(fromEyesJSON: eyebookJSON)
-          
-        parseXonString()
-        print("Strike Eyes:")
-
-        
-        //getStrikes(success, errmsg: errmsg, client: client, listingID: String(eyeBook.listings[0].listingId), expDate: eyeBook.listings[0].registeredMonthContainers[0].expDate)
-        //print("testJSON:")
-        // print(eyebookJSON)
-        client.close()
+        if jsonString == eyebookRaw {
+            clientSuccess = false
+        }
         
         return true
     }

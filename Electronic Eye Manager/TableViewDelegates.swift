@@ -22,7 +22,5 @@ public struct EyebookListingsDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         return UITableViewCell()
     }
-    
-    //func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {}
 
 }

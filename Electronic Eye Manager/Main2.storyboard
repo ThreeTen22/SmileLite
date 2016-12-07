@@ -12,7 +12,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="EyePopoverViewController" storyboardName="EyePopover" id="EXs-sP-HyO" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e0V-Q1-7le" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="639" y="-721"/>
+            <point key="canvasLocation" x="773" y="-596"/>
         </scene>
         <!--Eye Book View Controller-->
         <scene sceneID="Ey3-UA-XpJ">
@@ -27,7 +27,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eyebook" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aci-xL-q6Q">
-                                <rect key="frame" x="20" y="39" width="74.5" height="21"/>
+                                <rect key="frame" x="20" y="39" width="75" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -108,7 +108,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MonthCell" id="g9x-eC-LLH">
-                                                            <rect key="frame" x="0.0" y="0.5" width="120" height="28"/>
+                                                            <rect key="frame" x="0.0" y="1" width="120" height="28"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="120" height="28"/>
@@ -194,8 +194,20 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="54" height="25"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
+                                                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KTw-BR-qK9" customClass="StrikeCellTextField" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                                                <rect key="frame" x="-1" y="-2" width="55" height="30"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                <textInputTraits key="textInputTraits"/>
+                                                                                <connections>
+                                                                                    <outlet property="delegate" destination="oNA-WW-NQI" id="dPT-q8-fOp"/>
+                                                                                </connections>
+                                                                            </textField>
                                                                             <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="BVD-yI-efK">
                                                                                 <rect key="frame" x="0.0" y="5" width="54" height="15"/>
+                                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                                <accessibility key="accessibilityConfiguration">
+                                                                                    <bool key="isElement" value="NO"/>
+                                                                                </accessibility>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
@@ -265,6 +277,14 @@
                                     <outlet property="delegate" destination="oNA-WW-NQI" id="Jow-hU-gXu"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7z-Ik-Arr">
+                                <rect key="frame" x="901" y="28" width="46" height="30"/>
+                                <state key="normal" title="Debug"/>
+                                <connections>
+                                    <action selector="testAction:" destination="oNA-WW-NQI" eventType="touchUpInside" id="0A7-VD-U6i"/>
+                                    <segue destination="EXs-sP-HyO" kind="showDetail" action="showViewController:sender:" id="Adv-Gz-sie"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -287,7 +307,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pl2-TI-d8M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="179" y="-144"/>
+            <point key="canvasLocation" x="88" y="-125"/>
         </scene>
     </scenes>
 </document>

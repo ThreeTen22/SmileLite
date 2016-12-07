@@ -16,7 +16,10 @@
 		9B927F011DED169900209D79 /* EyePopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B927F001DED169900209D79 /* EyePopoverViewController.swift */; };
 		9B927F081DED21E300209D79 /* EyePopover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B927F071DED21E300209D79 /* EyePopover.storyboard */; };
 		9B927F5C1DED460F00209D79 /* StrikeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B927F5B1DED460F00209D79 /* StrikeCollectionViewCell.swift */; };
-		9B927F5E1DEFFA2900209D79 /* InputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B927F5D1DEFFA2900209D79 /* InputView.xib */; };
+		9BB51B021DF15D2D005485F4 /* EditEyeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB51B011DF15D2D005485F4 /* EditEyeViewController.swift */; };
+		9BB51B061DF1CD0C005485F4 /* TextFieldClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB51B051DF1CD0C005485F4 /* TextFieldClasses.swift */; };
+		9BB51B0A1DF1D666005485F4 /* LabelClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB51B091DF1D666005485F4 /* LabelClasses.swift */; };
+		9BB51B0C1DF1D7B9005485F4 /* LayoutStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB51B0B1DF1D7B9005485F4 /* LayoutStructs.swift */; };
 		9BC002721DCBC8F700D5C9F1 /* CollectionDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC002711DCBC8F700D5C9F1 /* CollectionDelegates.swift */; };
 		9BC002741DCBCB7200D5C9F1 /* TableViewDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC002731DCBCB7200D5C9F1 /* TableViewDelegates.swift */; };
 		9BC002761DD2329600D5C9F1 /* ButtonClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC002751DD2329600D5C9F1 /* ButtonClasses.swift */; };
@@ -45,7 +48,11 @@
 		9B927F001DED169900209D79 /* EyePopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EyePopoverViewController.swift; sourceTree = "<group>"; };
 		9B927F071DED21E300209D79 /* EyePopover.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EyePopover.storyboard; sourceTree = "<group>"; };
 		9B927F5B1DED460F00209D79 /* StrikeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrikeCollectionViewCell.swift; sourceTree = "<group>"; };
-		9B927F5D1DEFFA2900209D79 /* InputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputView.xib; sourceTree = "<group>"; };
+		9BB51B011DF15D2D005485F4 /* EditEyeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditEyeViewController.swift; sourceTree = "<group>"; };
+		9BB51B031DF15F95005485F4 /* CalculatorInputView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CalculatorInputView.storyboard; sourceTree = "<group>"; };
+		9BB51B051DF1CD0C005485F4 /* TextFieldClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldClasses.swift; sourceTree = "<group>"; };
+		9BB51B091DF1D666005485F4 /* LabelClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelClasses.swift; sourceTree = "<group>"; };
+		9BB51B0B1DF1D7B9005485F4 /* LayoutStructs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutStructs.swift; sourceTree = "<group>"; };
 		9BC002711DCBC8F700D5C9F1 /* CollectionDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDelegates.swift; sourceTree = "<group>"; };
 		9BC002731DCBCB7200D5C9F1 /* TableViewDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDelegates.swift; sourceTree = "<group>"; };
 		9BC002751DD2329600D5C9F1 /* ButtonClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonClasses.swift; sourceTree = "<group>"; };
@@ -97,8 +104,11 @@
 				9B66D3721D073FCE0099C670 /* globalClass.swift */,
 				9BEA42751D3C8DEF00BC4B0C /* EyeClasses.swift */,
 				9BC002751DD2329600D5C9F1 /* ButtonClasses.swift */,
+				9BB51B051DF1CD0C005485F4 /* TextFieldClasses.swift */,
+				9BB51B091DF1D666005485F4 /* LabelClasses.swift */,
 				9B927F051DED1B7800209D79 /* EyeBookStrikesPage */,
 				9B927F041DED1B4100209D79 /* EyePopover */,
+				9BB51AFE1DF15C85005485F4 /* CalculatorView */,
 				9B927F061DED1C1400209D79 /* External APIs */,
 				9B66D3691D073EFC0099C670 /* LaunchScreen.storyboard */,
 				9B66D36C1D073EFC0099C670 /* Info.plist */,
@@ -112,9 +122,9 @@
 		9B927F041DED1B4100209D79 /* EyePopover */ = {
 			isa = PBXGroup;
 			children = (
-				9B927F071DED21E300209D79 /* EyePopover.storyboard */,
-				9B927F5D1DEFFA2900209D79 /* InputView.xib */,
 				9B927F001DED169900209D79 /* EyePopoverViewController.swift */,
+				9B927F071DED21E300209D79 /* EyePopover.storyboard */,
+				9BB51B011DF15D2D005485F4 /* EditEyeViewController.swift */,
 			);
 			name = EyePopover;
 			sourceTree = "<group>";
@@ -127,6 +137,7 @@
 				9BCAC2BB1D9C2C210091099C /* EyeTableViewCell.swift */,
 				9BEA426F1D3701B100BC4B0C /* CollectionViews.swift */,
 				9BC002711DCBC8F700D5C9F1 /* CollectionDelegates.swift */,
+				9BB51B0B1DF1D7B9005485F4 /* LayoutStructs.swift */,
 				9BC002731DCBCB7200D5C9F1 /* TableViewDelegates.swift */,
 				9B927F5B1DED460F00209D79 /* StrikeCollectionViewCell.swift */,
 			);
@@ -141,6 +152,14 @@
 				9BCAC2BD1D9C2C580091099C /* ysocket */,
 			);
 			name = "External APIs";
+			sourceTree = "<group>";
+		};
+		9BB51AFE1DF15C85005485F4 /* CalculatorView */ = {
+			isa = PBXGroup;
+			children = (
+				9BB51B031DF15F95005485F4 /* CalculatorInputView.storyboard */,
+			);
+			name = CalculatorView;
 			sourceTree = "<group>";
 		};
 		9BCAC2BD1D9C2C580091099C /* ysocket */ = {
@@ -218,7 +237,6 @@
 				9B66D3681D073EFC0099C670 /* Assets.xcassets in Resources */,
 				9B927F081DED21E300209D79 /* EyePopover.storyboard in Resources */,
 				9BCAC2BA1D9C14D20091099C /* Main2.storyboard in Resources */,
-				9B927F5E1DEFFA2900209D79 /* InputView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,10 +249,13 @@
 			files = (
 				9BEA42761D3C8DEF00BC4B0C /* EyeClasses.swift in Sources */,
 				9BCAC2BC1D9C2C210091099C /* EyeTableViewCell.swift in Sources */,
+				9BB51B0A1DF1D666005485F4 /* LabelClasses.swift in Sources */,
+				9BB51B0C1DF1D7B9005485F4 /* LayoutStructs.swift in Sources */,
 				9BEA426E1D353ADE00BC4B0C /* EyeBookViewController.swift in Sources */,
 				9B66D3731D073FCE0099C670 /* globalClass.swift in Sources */,
 				9BCAC2B21D81F76E0091099C /* SwiftyJSON.swift in Sources */,
 				9BEA428F1D3EBBA700BC4B0C /* yudpsocket.c in Sources */,
+				9BB51B061DF1CD0C005485F4 /* TextFieldClasses.swift in Sources */,
 				9BC002761DD2329600D5C9F1 /* ButtonClasses.swift in Sources */,
 				9BC002721DCBC8F700D5C9F1 /* CollectionDelegates.swift in Sources */,
 				9BEA42901D3EBBA700BC4B0C /* yudpsocket.swift in Sources */,
@@ -242,6 +263,7 @@
 				9BEA42701D3701B100BC4B0C /* CollectionViews.swift in Sources */,
 				9B927F5C1DED460F00209D79 /* StrikeCollectionViewCell.swift in Sources */,
 				9BEA428C1D3EBBA700BC4B0C /* ysocket.swift in Sources */,
+				9BB51B021DF15D2D005485F4 /* EditEyeViewController.swift in Sources */,
 				9B927F011DED169900209D79 /* EyePopoverViewController.swift in Sources */,
 				9B759D361DE4A49900D7BEAD /* UIColorHexExtension.swift in Sources */,
 				9BEA428E1D3EBBA700BC4B0C /* ytcpsocket.swift in Sources */,

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Eye Popover View Controller-->
@@ -17,41 +18,295 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tEl-4r-rKL">
-                                <rect key="frame" x="0.0" y="37" width="600" height="263"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Usz-IQ-3gq">
+                                <rect key="frame" x="105" y="12" width="171" height="21"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eKs-w4-hpW">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AA3-Yg-wcG">
+                                        <rect key="frame" x="64" y="0.0" width="44" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5FR-rc-TVC">
+                                        <rect key="frame" x="127" y="0.0" width="44" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="ziO-Bt-XVJ"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NOv-JX-1UX">
+                                <rect key="frame" x="509" y="8" width="46" height="30"/>
+                                <state key="normal" title="Debug"/>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrz-IN-UoV" userLabel="CalcView">
+                                <rect key="frame" x="0.0" y="44" width="260" height="256"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="rRf-UR-Zq1">
+                                        <rect key="frame" x="0.0" y="0.0" width="260" height="256"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Ae7-sl-Kc3">
+                                                <rect key="frame" x="0.0" y="0.0" width="65" height="256"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GQG-9B-011">
+                                                        <rect key="frame" x="0.0" y="0.0" width="65" height="64"/>
+                                                        <state key="normal" title="-200"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mqm-I4-fp5">
+                                                        <rect key="frame" x="0.0" y="64" width="65" height="64"/>
+                                                        <state key="normal" title="-100"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XbT-gB-Rc4">
+                                                        <rect key="frame" x="0.0" y="128" width="65" height="64"/>
+                                                        <state key="normal" title="+100"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gsn-ky-7yv">
+                                                        <rect key="frame" x="0.0" y="192" width="65" height="64"/>
+                                                        <state key="normal" title="+200"/>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="el1-i1-zDK">
+                                                <rect key="frame" x="0.0" y="0.0" width="87" height="256"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mcc-9B-15q" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="87" height="64"/>
+                                                        <state key="normal" title="1"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Seg-Gx-Yg8" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="64" width="87" height="64"/>
+                                                        <state key="normal" title="4"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vmy-R5-AdR" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="128" width="87" height="64"/>
+                                                        <state key="normal" title="7"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0zJ-Se-gP8" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="192" width="87" height="64"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <state key="normal" title="c"/>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="BJo-fY-OyG">
+                                                <rect key="frame" x="87" y="0.0" width="87" height="256"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yy6-iH-leT" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="87" height="64"/>
+                                                        <state key="normal" title="2"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THX-6Z-5DC" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="64" width="87" height="64"/>
+                                                        <state key="normal" title="5"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bnu-nb-G6F" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="128" width="87" height="64"/>
+                                                        <state key="normal" title="8"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gGc-ly-k4J" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="192" width="87" height="64"/>
+                                                        <state key="normal" title="0"/>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="4F4-RE-7Ud">
+                                                <rect key="frame" x="174" y="0.0" width="87" height="256"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cLs-aK-3oi" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="87" height="64"/>
+                                                        <state key="normal" title="3"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIm-Dh-lwB" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="64" width="87" height="64"/>
+                                                        <state key="normal" title="6"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8dk-jr-Uv8" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="128" width="87" height="64"/>
+                                                        <state key="normal" title="9"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4r8-yR-eAI" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="192" width="87" height="64"/>
+                                                        <state key="normal" title="."/>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="Ae7-sl-Kc3"/>
+                                            </mask>
+                                        </variation>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="rRf-UR-Zq1" secondAttribute="trailing" id="FJj-f9-TY2"/>
+                                    <constraint firstItem="rRf-UR-Zq1" firstAttribute="leading" secondItem="xrz-IN-UoV" secondAttribute="leading" id="YBP-8V-36J"/>
+                                    <constraint firstItem="rRf-UR-Zq1" firstAttribute="top" secondItem="xrz-IN-UoV" secondAttribute="top" id="dyo-AJ-aGu"/>
+                                    <constraint firstAttribute="bottom" secondItem="rRf-UR-Zq1" secondAttribute="bottom" id="stA-9h-hg6"/>
+                                    <constraint firstAttribute="width" constant="260" id="wP4-xp-5tq"/>
+                                </constraints>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tEl-4r-rKL">
+                                <rect key="frame" x="0.0" y="44" width="600" height="256"/>
                                 <connections>
-                                    <segue destination="0Yb-20-SIG" kind="embed" id="eGH-Xd-GDj"/>
+                                    <segue destination="JaB-dX-di6" kind="embed" identifier="editeye" id="9U5-98-iLP"/>
                                 </connections>
                             </containerView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bZC-IP-z8H">
+                                <rect key="frame" x="306" y="7" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="VSb-2t-Cnb" id="APE-gQ-phk"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F5w-G5-5t5">
+                                <rect key="frame" x="407" y="7" width="36" height="30"/>
+                                <state key="normal" title="Clear"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBr-ut-jOL">
+                                <rect key="frame" x="0.0" y="0.0" width="97" height="45"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="97" id="sOm-Dc-p9b"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.95562900640000004" green="0.95562900640000004" blue="0.95562900640000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="tEl-4r-rKL" firstAttribute="bottom" secondItem="JB3-mF-8YW" secondAttribute="top" id="12x-or-LPi"/>
+                            <constraint firstItem="Usz-IQ-3gq" firstAttribute="centerY" secondItem="NOv-JX-1UX" secondAttribute="centerY" id="1fy-dP-TSJ"/>
+                            <constraint firstItem="mBr-ut-jOL" firstAttribute="centerY" secondItem="Usz-IQ-3gq" secondAttribute="centerY" id="3Kl-zy-dGf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="NOv-JX-1UX" secondAttribute="trailing" constant="25" id="7OZ-E2-cs6"/>
+                            <constraint firstAttribute="trailing" secondItem="tEl-4r-rKL" secondAttribute="trailing" id="8db-xw-9s3"/>
+                            <constraint firstItem="NOv-JX-1UX" firstAttribute="top" secondItem="A5d-LS-CZm" secondAttribute="bottom" constant="8" symbolic="YES" id="ACS-31-fwR"/>
+                            <constraint firstItem="mBr-ut-jOL" firstAttribute="leading" secondItem="tEl-4r-rKL" secondAttribute="leading" id="D9Y-5n-I6Y"/>
+                            <constraint firstItem="tEl-4r-rKL" firstAttribute="trailing" secondItem="xrz-IN-UoV" secondAttribute="trailing" id="Dhw-zA-wG9"/>
+                            <constraint firstItem="Usz-IQ-3gq" firstAttribute="centerY" secondItem="NOv-JX-1UX" secondAttribute="centerY" id="FR1-1L-77v"/>
+                            <constraint firstItem="xrz-IN-UoV" firstAttribute="bottom" secondItem="JB3-mF-8YW" secondAttribute="top" id="Ggu-Xf-Hja"/>
+                            <constraint firstItem="tEl-4r-rKL" firstAttribute="leading" secondItem="6sY-2b-p87" secondAttribute="leading" id="I2R-pm-dVC"/>
+                            <constraint firstItem="mBr-ut-jOL" firstAttribute="leading" secondItem="6sY-2b-p87" secondAttribute="leading" id="IbN-57-OHv"/>
+                            <constraint firstItem="xrz-IN-UoV" firstAttribute="leading" secondItem="6sY-2b-p87" secondAttribute="leading" id="LBy-Lr-bvV"/>
+                            <constraint firstAttribute="trailing" secondItem="xrz-IN-UoV" secondAttribute="trailing" constant="340" id="NOP-DI-0v7"/>
+                            <constraint firstItem="Usz-IQ-3gq" firstAttribute="centerY" secondItem="mBr-ut-jOL" secondAttribute="centerY" id="Pat-lc-LMT"/>
+                            <constraint firstItem="tEl-4r-rKL" firstAttribute="top" secondItem="NOv-JX-1UX" secondAttribute="bottom" constant="6" id="QOM-Xk-ITZ"/>
+                            <constraint firstItem="Usz-IQ-3gq" firstAttribute="leading" secondItem="mBr-ut-jOL" secondAttribute="trailing" constant="8" symbolic="YES" id="Tb0-SB-xWp"/>
+                            <constraint firstItem="xrz-IN-UoV" firstAttribute="top" secondItem="NOv-JX-1UX" secondAttribute="bottom" constant="6" id="Wlu-XL-b1K"/>
+                            <constraint firstAttribute="trailing" secondItem="Usz-IQ-3gq" secondAttribute="trailing" constant="354" id="bHM-57-rFZ"/>
+                            <constraint firstItem="tEl-4r-rKL" firstAttribute="top" secondItem="NOv-JX-1UX" secondAttribute="bottom" constant="6" id="bXf-ol-xcc"/>
+                            <constraint firstItem="tEl-4r-rKL" firstAttribute="top" secondItem="xrz-IN-UoV" secondAttribute="top" id="dFi-Qs-wh4"/>
+                            <constraint firstItem="tEl-4r-rKL" firstAttribute="top" secondItem="NOv-JX-1UX" secondAttribute="bottom" constant="6" id="gkM-aP-mrK"/>
+                            <constraint firstItem="Usz-IQ-3gq" firstAttribute="leading" secondItem="mBr-ut-jOL" secondAttribute="trailing" constant="8" symbolic="YES" id="h89-5i-qZg"/>
+                            <constraint firstItem="JB3-mF-8YW" firstAttribute="top" secondItem="tEl-4r-rKL" secondAttribute="bottom" id="ipb-m5-z9O"/>
+                            <constraint firstItem="mBr-ut-jOL" firstAttribute="top" secondItem="A5d-LS-CZm" secondAttribute="bottom" id="leh-aq-Eee"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="3Kl-zy-dGf"/>
+                                <exclude reference="D9Y-5n-I6Y"/>
+                                <exclude reference="12x-or-LPi"/>
+                                <exclude reference="Dhw-zA-wG9"/>
+                                <exclude reference="QOM-Xk-ITZ"/>
+                                <exclude reference="dFi-Qs-wh4"/>
+                                <exclude reference="gkM-aP-mrK"/>
+                                <exclude reference="NOP-DI-0v7"/>
+                                <exclude reference="FR1-1L-77v"/>
+                                <exclude reference="bHM-57-rFZ"/>
+                                <exclude reference="h89-5i-qZg"/>
+                            </mask>
+                        </variation>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="600" height="300"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="300"/>
+                    <connections>
+                        <outlet property="buySellLabel" destination="mBr-ut-jOL" id="kDd-mb-Eie"/>
+                        <outlet property="calcView" destination="xrz-IN-UoV" id="oBa-oJ-9vZ"/>
+                        <outlet property="containerView" destination="tEl-4r-rKL" id="OyB-md-QWp"/>
+                        <outlet property="govAccumulatedDelta" destination="bZC-IP-z8H" id="gUy-IX-emM"/>
+                        <outlet property="maturity" destination="AA3-Yg-wcG" id="o9i-Vg-wEW"/>
+                        <outlet property="strike" destination="5FR-rc-TVC" id="fwx-3u-jQO"/>
+                        <outlet property="symbol" destination="eKs-w4-hpW" id="dLu-8R-ahk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5oi-W3-PUV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="414" y="508"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="SfS-MA-Tgy">
+        <!--Edit Eye View Controller-->
+        <scene sceneID="zec-uF-SwS">
             <objects>
-                <viewController id="0Yb-20-SIG" sceneMemberID="viewController">
+                <viewController id="JaB-dX-di6" customClass="EditEyeViewController" customModule="Electronic_Eye_Manager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dvf-es-x5B"/>
-                        <viewControllerLayoutGuide type="bottom" id="RuJ-Do-vE8"/>
+                        <viewControllerLayoutGuide type="top" id="aPk-MV-JuH"/>
+                        <viewControllerLayoutGuide type="bottom" id="jcN-zR-Po4"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="wOX-pL-3a7">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="263"/>
+                    <view key="view" contentMode="scaleToFill" id="Q3v-lz-aIi">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="256"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Low Delta" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Umx-gz-YH8" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                <rect key="frame" x="75" y="68" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Max Delta" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xcP-su-1L3" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                <rect key="frame" x="252" y="20" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="High Delta" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wZ4-ae-eZx" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                <rect key="frame" x="252" y="68" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Min Edge" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rCh-AA-NiA" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                <rect key="frame" x="429" y="20" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Total Delta" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wIC-r3-EfR" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                <rect key="frame" x="429" y="68" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Max Quantity" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="puo-6t-z6Z" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                <rect key="frame" x="75" y="20" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="highDelta" destination="wZ4-ae-eZx" id="Ztz-WJ-8R2"/>
+                        <outlet property="lowDelta" destination="Umx-gz-YH8" id="t0g-N1-yZL"/>
+                        <outlet property="maxDelta" destination="xcP-su-1L3" id="aEP-25-Mv0"/>
+                        <outlet property="maxQuantity" destination="puo-6t-z6Z" id="Nva-fY-RP0"/>
+                        <outlet property="minEdge" destination="rCh-AA-NiA" id="xbo-w6-Wtr"/>
+                        <outlet property="totalDelta" destination="wIC-r3-EfR" id="0jk-H2-QlI"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bYb-3o-UjV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lAW-Ly-qrL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="414" y="931.5"/>
+            <point key="canvasLocation" x="1226" y="508"/>
         </scene>
     </scenes>
 </document>

@@ -11,14 +11,18 @@ import UIKit
 
 class ListingTableCell: UITableViewCell {
 
-    @IBOutlet var listingSymbol: UILabel!
-    @IBOutlet var monthCollection: MonthCollectionView!
+    @IBOutlet weak var listingSymbol: UILabel!
+    @IBOutlet weak var monthCollection: MonthCollectionView!
     
 }
 
 
 
 class StrikesTableCell: UITableViewCell {
-    @IBOutlet var strikeCollection: UICollectionView!
+    @IBOutlet weak var strikeCollection: UICollectionView!
+    deinit {
+        //print("StrikesTableCell: Deinit")
+    }
+    
     
 }

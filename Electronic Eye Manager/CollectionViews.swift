@@ -18,4 +18,9 @@ class MonthCollectionView: UICollectionView {
 
 class StrikeCollectionView: UICollectionView {
     weak var currentIndexPath:NSIndexPath?
+    
+    deinit {
+        currentIndexPath = nil
+        //print("I am DEINITING BRAH!")
+    }
 }

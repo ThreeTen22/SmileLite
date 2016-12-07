@@ -9,10 +9,10 @@
 import UIKit
 
 enum Order {
-    case buyCall
-    case sellCall
-    case buyPut
-    case sellPut
+    case buycall
+    case sellcall
+    case buyput
+    case sellput
     case NA
 }
 
@@ -59,17 +59,26 @@ class EyeBook {
         
     }
     
+    
+    
+    func getListingAtIndex(index:Int) -> Listing? {
+        if listings.count <= index {
+            return nil
+        }
+        return listings[index]
+    }
+    
     func addListingsFromEyes(jsonEyeObject:JSON) -> Bool {
         if let eyesJSONArray = jsonEyeObject["payload"]["rows"].array {
             addListingsFromJSONArray(eyesJSONArray)
-            for eyeJSON in eyesJSONArray {
+            for (indx,eyeJSON) in eyesJSONArray.enumerate() {
                 var eyeDictionary = eyeJSON.dictionaryValue
-                createAndAddEyeToListing(eyeDictionary, listing: getListingBySymbol(eyeDictionary["name"]!.string!)!)
+                createAndAddEyeToListing(eyeDictionary, listing: getListingBySymbol(eyeDictionary["name"]!.string!)!, eyeJSONIndex: indx)
             }
             
             //Clean up any listings with no eyes
             var currentIndex = 0
-            var currentListing = Listing()
+            var currentListing:Listing!
             
             while currentIndex < (listings.count) {
                 currentListing = listings[currentIndex]
@@ -112,33 +121,35 @@ class EyeBook {
                 if getListingBySymbol(symbol) == nil {
                     //CREATE NEW LISTING
                     let newListing = Listing(symbol: symbol)
-                    print("Debug: addListingFromJSONArray:  securityID: \(eye["securityid"].stringValue)  securityName: \(symbol)")
+                    //print("Debug: addListingFromJSONArray:  securityID: \(eye["securityid"].stringValue)  securityName: \(symbol)")
                     newListing.listingId = Int(eye["securityid"].stringValue)!
                     addListing(newListing)
                 }
             } else {
-                print("ERROR: addListingsFromJSON(eyeBookJSON:JSON) 'NAME' field does not exist for: eye -> eye.description")
-                print(eye.debugDescription)
+                //print("ERROR: addListingsFromJSON(eyeBookJSON:JSON) 'NAME' field does not exist for: eye -> eye.description")
+                //print(eye.debugDescription)
             }
         }
     }
     
-    func createAndAddEyeToListing(eyeDict:[String:JSON], listing:Listing) {
+    func createAndAddEyeToListing(eyeDict:[String:JSON], listing:Listing, eyeJSONIndex index:Int) {
         
         let eyeExpDate = smileDateFormat.dateFromString(eyeDict["edate"]!.string!)!
-        print(eyeExpDate)
+        //print(eyeExpDate)
         let eyeExpString:String = smileDateFormat.stringFromDate(eyeExpDate)
         let entityType:Int = eyeDict["entitytype"]!.intValue
         let strike:String = eyeDict["strike"]!.stringValue
         
         
-        var newMonth = MonthEye()
-        var newStrike = StrikeEye()
+        var newMonth:MonthEye!
+        var newStrike:StrikeEye!
         
         if strike != "" && entityType != 0 {
             newStrike = StrikeEye(eyeDict: eyeDict)
+            newStrike.jsonIndex = index
         } else {
             newMonth = MonthEye(eyeDict: eyeDict)
+            newMonth.jsonIndex = index
         }
         
         if let curContainer = listing.getContainerByDate(eyeExpDate) {
@@ -191,7 +202,10 @@ class Listing {
     }
     
     deinit {
-        print("Listing: Deinit")
+        //print("Listing: Deinit: Sym: \(listingsymbol)")
+        visibleStrikes.removeAll()
+        listingMaturities.removeAll()
+        maturitiesToDisplay.removeAll()
     }
     
     func AddContainer(monthContainer:MonthContainer) {
@@ -231,6 +245,40 @@ class Listing {
         return -1
     }
     
+    func sortedAppend(strikeJSONData:[JSON]) {
+        var indexToPlace = -1
+        var strikeNumber:Double = 0.0
+        var sortedStrikeArray:Array = [JSON]()
+        
+        for strikeJSON in strikeJSONData {
+            indexToPlace = -1
+            strikeNumber = Double(strikeJSON["strike"].stringValue)!
+            for (indx,strike) in (sortedStrikeArray).enumerate() {
+                let strikeToTest = Double(strike["strike"].stringValue)!
+                //print("SortedAppend: strikeToTest: \(strikeToTest)")
+                if strikeToTest > strikeNumber {
+                    indexToPlace = (indx)
+                    break
+                }
+            }
+            
+            if indexToPlace == -1 {
+                sortedStrikeArray.append(strikeJSON)
+            } else {
+                sortedStrikeArray.insert(strikeJSON, atIndex: indexToPlace)
+            }
+        }
+        
+        visibleStrikes.appendContentsOf(sortedStrikeArray)
+    }
+    
+    func getVisibleStrikes(index:Int) -> JSON? {
+        if visibleStrikes.count <= index {
+            return nil
+        }
+        return visibleStrikes[index]
+    }
+    
 }
 
 
@@ -249,9 +297,13 @@ class MonthContainer {
     
     var strikeEyes:Array = [[StrikeEye](),[StrikeEye](),[StrikeEye](),[StrikeEye]()]
     
-    
+    deinit {
+     //print("MonthContainer: Deinit: listingSymbol: \(listingSymbol)")
+    }
     
     init() {
+        strikeEyes.removeAll()
+        monthEyes.removeAll()
         
     }
     
@@ -263,77 +315,76 @@ class MonthContainer {
     
     func AddMonthEye(eye:MonthEye) -> Bool {
         switch eye.order {
-        case Order.buyCall:
+        case Order.buycall:
             monthEyes[0] = eye
             return true
-        case Order.sellCall:
+        case Order.sellcall:
             monthEyes[1] = eye
             return true
-        case Order.buyPut:
+        case Order.buyput:
             monthEyes[2] = eye
             return true
-        case Order.sellPut:
+        case Order.sellput:
             monthEyes[3] = eye
             return true
         default:
-            print("AddMonthEye Failed")
+            //print("AddMonthEye Failed")
             return false
         }
     }
     
     func AddEye(StrikeEye eye:StrikeEye) -> Bool {
         switch eye.order {
-        case Order.buyCall:
+        case Order.buycall:
             strikeEyes[0].append(eye)
             return true
-        case Order.sellCall:
+        case Order.sellcall:
             strikeEyes[1].append(eye)
             return true
-        case Order.buyPut:
+        case Order.buyput:
             strikeEyes[2].append(eye)
             return true
-        case Order.sellPut:
+        case Order.sellput:
             strikeEyes[3].append(eye)
             return true
         default:
-            print("AddStrikeEye Failed")
+            //print("AddStrikeEye Failed")
             return false
         }
     }
     
     func GetMonthByOrder(order:Order) -> MonthEye? {
         switch order {
-        case Order.buyCall:
+        case Order.buycall:
             return monthEyes[0]
-        case Order.sellCall:
+        case Order.sellcall:
             return monthEyes[1]
-        case Order.buyPut:
+        case Order.buyput:
             return monthEyes[2]
-        case Order.sellPut:
+        case Order.sellput:
             return monthEyes[3]
         default:
-            print("No Month Found")
+            //print("No Month Found")
             return nil
         }
     }
     
     func GetStrikesByOrder(order:Order) -> [StrikeEye]? {
         switch order {
-        case Order.buyCall:
+        case Order.buycall:
             return strikeEyes[0]
-        case Order.sellCall:
+        case Order.sellcall:
             return strikeEyes[1]
-        case Order.buyPut:
+        case Order.buyput:
             return strikeEyes[2]
-        case Order.sellPut:
+        case Order.sellput:
             return strikeEyes[3]
         default:
-            print("No Month Found")
+            //print("No Month Found")
             return nil
         }
     }
-    
-    
+
 }
 
 class Eye {
@@ -347,7 +398,7 @@ class Eye {
     var minEdge = 0.0
     var notifyOnly = false
     var id = 0
-    var autohedge = false
+    var autohedge = "Off"
     var eyeType = "TheoBid"
     var currentDelta = 0.0
     var totalDelta = 1.0
@@ -357,6 +408,12 @@ class Eye {
     var delta = 0.0
     var securityId = 0
     
+    var jsonIndex:Int = -1
+    
+    deinit {
+        //print("Eye: Deinit")
+        
+    }
     
     init(symbol sym:String, expDate date:String) {
         symbol = sym
@@ -372,15 +429,19 @@ class Eye {
         minEdge = eyeDict["edge"]!.doubleValue
         eyeType = eyeDict["eyetype"]!.stringValue
         id = eyeDict["id"]!.intValue
-        autohedge = eyeDict["autohedge"]!.boolValue
-        totalDelta = eyeDict["totaldelta"]!.doubleValue
+        autohedge = eyeDict["autohedge"]!.stringValue
+        totalDelta = Double(eyeDict["totaldelta"]!.stringValue)!
         currentDelta = eyeDict["currentdelta"]!.doubleValue
         cmdType = (eyeDict["command"]!.stringValue, eyeDict["type"]!.stringValue)
         order = getOrderEnum(eyeDict["command"]!.stringValue, type: eyeDict["type"]!.stringValue)
         entityType = eyeDict["entitytype"]!.intValue
         quantity = eyeDict["quantity"]!.intValue
-        delta = eyeDict["delta"]!.doubleValue
-        securityId = eyeDict["securityid"]!.intValue
+        if let deltaReal = Double(eyeDict["delta"]!.stringValue) {
+            delta = deltaReal
+        } else {
+            delta = 0.0
+        }
+        securityId = Int(eyeDict["securityid"]!.stringValue)!
         
     }
     
@@ -415,11 +476,16 @@ class MonthEye: Eye {
     
     override init(eyeDict:[String:JSON]) {
         super.init(eyeDict: eyeDict)
-        lowDelta = eyeDict["mindelta"]!.doubleValue
-        highDelta = eyeDict["maxdelta"]!.doubleValue
+        if clientSuccess {
+            lowDelta = Double(eyeDict["mindelta"]!.stringValue)!
+            highDelta = Double(eyeDict["maxdelta"]!.stringValue)!
+        } else {
+            lowDelta = 0.0
+            highDelta = 100.0
+        }
         
         minDelta = lowDelta
-        highDelta = maxDelta
+        //highDelta = maxDelta
     }
     
     override init(symbol sym: String, expDate date: String) {
@@ -438,10 +504,14 @@ class StrikeEye: Eye {
     
     override init(eyeDict:[String:JSON]) {
         super.init(eyeDict: eyeDict)
-        
-        strike = eyeDict["strike"]!.doubleValue
+        if clientSuccess {
+            //print(eyeDict["strike"]!.doubleValue)
+            strike = eyeDict["strike"]!.doubleValue
+        } else {
+            strike = 15.0
+        }
         deltaOverride = delta
-        
+        print("InitStrike: - \(symbol) \(expDateString) - \(strike) - \(cmdType)")
     }
     
     init(symbol sym:String, expDate date:String, strikePrice price:Double, priceOverride priceOvr:Double?, quantityOverride quantityOvr:Int?) {
@@ -456,14 +526,14 @@ class StrikeEye: Eye {
 
 func getOrderEnum(cmd:String, type:String) -> Order {
     switch (cmd, type) {
-    case ("Sell", "Call"):
-        return Order.sellCall
-    case("Buy", "Put"):
-        return Order.buyPut
     case("Buy", "Call"):
-        return Order.buyCall
+        return Order.buycall
+    case ("Sell", "Call"):
+        return Order.sellcall
+    case("Buy", "Put"):
+        return Order.buyput
     case("Sell","Put"):
-        return Order.sellPut
+        return Order.sellput
     default:
         return Order.NA
     }
@@ -471,16 +541,16 @@ func getOrderEnum(cmd:String, type:String) -> Order {
 
 func enumToIndex(order:Order) -> Int {
     switch order {
-    case Order.sellCall:
+    case Order.buycall:
         return 0
-    case Order.buyPut:
+    case Order.sellcall:
         return 1
-    case Order.buyCall:
+    case Order.buyput:
         return 2
-    case Order.sellPut:
+    case Order.sellput:
         return 3
     default:
-        print("ERROR: enumToIndex(order:Order) DEFAULT HIT")
+        //print("ERROR: enumToIndex(order:Order) DEFAULT HIT")
         return -1
     }
 }
