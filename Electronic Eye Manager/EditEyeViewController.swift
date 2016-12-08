@@ -18,8 +18,6 @@ class EditEyeViewController: UIViewController {
     }
     */
     
-    var isMonthEye = true
-    
     @IBOutlet weak var maxQuantity: UITextField!
     @IBOutlet weak var maxDelta: UITextField!
     @IBOutlet weak var minEdge: UITextField!
@@ -27,12 +25,51 @@ class EditEyeViewController: UIViewController {
     @IBOutlet weak var highDelta: UITextField!
     @IBOutlet weak var totalDelta: UITextField!
     
+    
+    
     weak var delegateController:UITextFieldDelegate?
-    weak var currentEye:Eye?
+    weak var currentListing:Listing?
+    var currentEye:Eye?
+    var strikeJSON:JSON?
+    
+    @IBOutlet var lowDeltaCollection: [UIView]!
+    @IBOutlet var highDeltaCollection: [UIView]!
+    @IBOutlet var totalDeltaCollection: [UIView]!
+    
+    var isMonthEye = true
     
     override func viewDidLoad() {
-        self.view!.backgroundColor = CellLayout.monthEyeBGColor
         
+        if currentEye == nil {
+            if let strikeJS = strikeJSON {
+                print("strikeJS did enter")
+                if isMonthEye {
+                    print("isMonthEye")
+                    let newMonthListing:MonthEye = MonthEye(strikeJSON: strikeJS, Symbol: currentListing!.listingSymbol, SecurityId: currentListing!.listingId)
+                    currentEye = newMonthListing
+                    print(newMonthListing)
+                } else {
+                     print("isStrikeEye")
+                    let newStrikeListing:StrikeEye = StrikeEye(strikeJSON: strikeJS, Symbol: currentListing!.listingSymbol, SecurityId: currentListing!.listingId)
+                    currentEye = newStrikeListing
+                    print(newStrikeListing)
+                }
+            }
+        }
+        print("quantityViewDidLoad: \(currentEye)")
+        
+        if let curEye = currentEye {
+            maxQuantity.text = "\(curEye.quantity)"
+            maxDelta.text = "\(curEye.delta)"
+            minEdge.text = "\(curEye.minEdge)"
+            if isMonthEye {
+                weak var me:MonthEye! = (curEye as? MonthEye)
+                lowDelta.text = "\(me.minDelta)"
+                highDelta.text = "\(me.maxDelta)"
+                me = nil
+            }
+        }
+        // maxQuantity.note
         maxQuantity.delegate = delegateController
         maxDelta.delegate = delegateController
         minEdge.delegate = delegateController
@@ -42,12 +79,33 @@ class EditEyeViewController: UIViewController {
             highDelta.delegate = delegateController
             totalDelta.delegate = delegateController
         } else {
-            lowDelta.hidden = true
-            highDelta.hidden = true
-            totalDelta.hidden = true
+            for view in lowDeltaCollection {
+                view.hidden = true
+            }
+            for view in highDeltaCollection {
+                view.hidden = true
+            }
+            for view in totalDeltaCollection {
+                view.hidden = true
+            }
         }
+        self.view!.backgroundColor = Layout.monthEyeBGColor
+        //self.view.insertSubview(newView as! UIView, atIndex: 0)
+        //self.view.insertSubview(testView, atIndex: 0)
         
     }
+    
+    deinit {
+        currentEye = nil
+        //maxQuantity.delegate = nil
+        //maxDelta.delegate = nil
+        //minEdge.delegate = nil
+        //delegateController = nil
+        //lowDelta.delegate = nil
+        //highDelta.delegate = nil
+        //totalDelta.delegate = nil
+    }
+    
     
     func setDelegates(deleController:UITextFieldDelegate) {
         delegateController = deleController

@@ -8,7 +8,7 @@
 
 import UIKit
 
-public struct CellLayout {
+struct Layout {
     
     static var strikeTitleBGColor = UIColor(red255: 2.0, green: 13.0, blue: 130.0, alpha: 1.0)
     

@@ -74,7 +74,7 @@
                                     <outlet property="delegate" destination="oNA-WW-NQI" id="PbZ-WM-rIp"/>
                                 </connections>
                             </collectionView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gtf-x6-gbV">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gtf-x6-gbV" customClass="EyebookTableView" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                 <rect key="frame" x="20" y="108" width="984" height="660"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -281,8 +281,7 @@
                                 <rect key="frame" x="901" y="28" width="46" height="30"/>
                                 <state key="normal" title="Debug"/>
                                 <connections>
-                                    <action selector="testAction:" destination="oNA-WW-NQI" eventType="touchUpInside" id="0A7-VD-U6i"/>
-                                    <segue destination="EXs-sP-HyO" kind="showDetail" action="showViewController:sender:" id="Adv-Gz-sie"/>
+                                    <action selector="testAction:" destination="oNA-WW-NQI" eventType="touchUpInside" id="ZzG-cI-dFE"/>
                                 </connections>
                             </button>
                         </subviews>

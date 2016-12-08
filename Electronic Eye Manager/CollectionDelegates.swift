@@ -8,22 +8,22 @@
 
 import UIKit
 
-class FilterListingsCollectionDelegate {
-   func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+struct FilterListingsCollectionDelegate {
+   static func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
     
     
-   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+   static func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return eyeBook.listings.count
     }
     
-   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+   static func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let index = indexPath.row
-        let listingSymbol = eyeBook.listings[index].listingsymbol
+        let listingSymbol = eyeBook.listings[index].listingSymbol
         
         unowned let listingCell = collectionView.dequeueReusableCellWithReuseIdentifier("ListingCell", forIndexPath: indexPath)
-        let listingButton = (listingCell.viewWithTag(1) as! ListingFilterButton)
+        unowned let listingButton = (listingCell.viewWithTag(1) as! ListingFilterButton)
         listingButton.setTitle(listingSymbol, forState: .Normal)
         listingButton.listingSymbol = listingSymbol
     
@@ -32,24 +32,25 @@ class FilterListingsCollectionDelegate {
     }
     
     
-   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+   static func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
     
     }
 }
 
 
-class MonthCollectionDelegate {
-    var readableDateformat:NSDateFormatter = NSDateFormatter()
-    
-    func initalize() {
-        readableDateformat.dateFormat = "MM/dd/yyyy"
+struct MonthCollectionDelegate {
+    static var readableDateformat:NSDateFormatter {
+        let newDateFormatter = NSDateFormatter()
+        newDateFormatter.dateFormat = "MM/dd/yyyy"
+        return newDateFormatter
     }
     
-   func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    
+   static func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    static func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if clientSuccess {
             //print("Success")
@@ -57,7 +58,7 @@ class MonthCollectionDelegate {
         return eyeBook.listings[collectionView.tag].registeredMonthContainers.count + 1
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    static func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         unowned let monthCell = collectionView.dequeueReusableCellWithReuseIdentifier("MonthCell", forIndexPath: indexPath)
         if indexPath.row != 0 {
             let monthContainer = eyeBook.listings[collectionView.tag].registeredMonthContainers[indexPath.row - 1]
@@ -69,21 +70,21 @@ class MonthCollectionDelegate {
         return monthCell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let selectedListing = eyeBook.listings[collectionView.tag]
+    static func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        unowned let selectedListing = eyeBook.listings[collectionView.tag]
         //var jsonArray:Array = [JSON]()
         
         selectedListing.maturitiesToDisplay.removeAll()
         selectedListing.visibleStrikes.removeAll()
         
         //print("DEBUG: COLLECTIONVIEW DID SELECT ITEM: ")
-        //print("selected Listing: \(selectedListing.listingsymbol)")
+        //print("selected Listing: \(selectedListing.listingSymbol)")
         if indexPath.row != 0 {
             //print("DEBUG: Inside ListingCell: ")
             selectedListing.willDisplay = Listing.DisplayType.FilteredStrikes
             
             let monthDate:String = (collectionView.cellForItemAtIndexPath(indexPath)?.viewWithTag(1) as! UILabel).text!
-            let selectedMonthContainer = selectedListing.getContainerByDate(monthDate)
+            weak var selectedMonthContainer = selectedListing.getContainerByDate(monthDate)
             
             selectedListing.maturitiesToDisplay.append((selectedMonthContainer?.expDate)!)
             
@@ -112,30 +113,40 @@ class MonthCollectionDelegate {
                 let jsonRaw = getStrikes(clientSuccess, errmsg: clientErrmsg, client: client, listingID: selectedListing.listingId, expDate: date)!
                 //print(jsonRaw)
                 let maturityRawJSON = JSON.parse(jsonRaw)
-                let symID = "\(selectedListing.listingsymbol):\(selectedListing.listingId)"
+                let symID = "\(selectedListing.listingSymbol):\(selectedListing.listingId)"
                 let symDate = readableDateformat.stringFromDate(date)
                 let maturityJSONArray = maturityRawJSON["payload"][symID][symDate]["rows"].arrayValue
                 selectedListing.sortedAppend(maturityJSONArray)
             }
+        } else {
+                let demoStrikeJSON = JSON.parse(adtnMonthDemoData)
+                selectedListing.visibleStrikes.appendContentsOf(demoStrikeJSON.arrayValue)
         }
         
-        (collectionView.delegate as! EyeBookViewController).eyeBookTableView.reloadData()
-        
+        //collectionView.reloadData()
+        let nsCount: NSMutableIndexSet = NSMutableIndexSet()
+        for i in 0..<(collectionView.delegate as! EyeBookViewController).numberOfSectionsInTableView((collectionView.delegate as! EyeBookViewController).eyeBookTableView) {
+            nsCount.addIndex(i)
+        }
+        (collectionView.delegate as! EyeBookViewController).eyeBookTableView.beginUpdates()
+        (collectionView.delegate as! EyeBookViewController).eyeBookTableView.reloadSections(nsCount, withRowAnimation: .Automatic)
+        //(collectionView.delegate as! EyeBookViewController).eyeBookTableView.reloadData()
+        (collectionView.delegate as! EyeBookViewController).eyeBookTableView.endUpdates()
     }
     
 }
 
 
-class StrikeCollectionDelegate {
+struct StrikeCollectionDelegate {
     
-   let dateColor:UIColor = UIColor.blueColor()
+   static let dateColor:UIColor = UIColor.blueColor()
     
     
-   func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+   static func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    static func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let listing = eyeBook.listings[collectionView.tag]
         let listingStrikesCount = (listing.visibleStrikes.count * 18)
         //print("LISTING STRIKES COUNT:  \(listingStrikesCount)")
@@ -143,7 +154,7 @@ class StrikeCollectionDelegate {
         return listingStrikesCount
     }
     
-    func collectionView(collectionView:UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    static func collectionView(collectionView:UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let modIndx = indexPath.row%18
         let floorIndx =  Int(floor(Double(indexPath.row/18)))
         unowned let strikeCell = (collectionView.dequeueReusableCellWithReuseIdentifier("StrikeCell", forIndexPath: indexPath) as! StrikeCollectionViewCell)
@@ -170,13 +181,13 @@ class StrikeCollectionDelegate {
             labelText = formatMonth(currentMonth)
             //labelText = currentDateString
             strikeCell.cellType = StrikeType.date
-            CellLayout.setLayout(strikeCell, label: strikeLabel, type: StrikeType.maturity, altMaturity: isEven(currentMaturityIndex))
+            Layout.setLayout(strikeCell, label: strikeLabel, type: StrikeType.maturity, altMaturity: isEven(currentMaturityIndex))
         case 1:
             let currentMonth = smileDateFormat.dateFromString(strikeJSON["odate"].stringValue)!
             let currentMaturityIndex = listing.getMaturityIndex(currentMonth)
             labelText = strikeJSON["strike"].stringValue
             strikeCell.cellType = StrikeType.strike
-            CellLayout.setLayout(strikeCell, label: strikeLabel, type: StrikeType.strike, altMaturity: isEven(currentMaturityIndex))
+            Layout.setLayout(strikeCell, label: strikeLabel, type: StrikeType.strike, altMaturity: isEven(currentMaturityIndex))
         case 4, 12:
             switch modIndx {
             case 4:
@@ -221,7 +232,7 @@ class StrikeCollectionDelegate {
             labelText = strikeJSON["strike"].stringValue
             //useDefaultColoring = true
             strikeCell.cellType = StrikeType.defaultcell
-            CellLayout.setLayout(strikeCell, label: strikeLabel, type: StrikeType.strike, altMaturity: isEven(currentMaturityIndex))
+            Layout.setLayout(strikeCell, label: strikeLabel, type: StrikeType.strike, altMaturity: isEven(currentMaturityIndex))
         case 6, 14, 17:
             switch modIndx {
             case 6:
@@ -313,14 +324,14 @@ class StrikeCollectionDelegate {
         }
         
         if useDefaultColoring {
-            CellLayout.setLayout(strikeCell, label: strikeLabel, type: .defaultcell)
+            Layout.setLayout(strikeCell, label: strikeLabel, type: .defaultcell)
         }
         
         //strikeLabel.text = "\(modIndx)"
         return strikeCell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    static func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         //let cell = collectionView.cellForItemAtIndexPath(indexPath) as! StrikeCollectionViewCell
         //unowned let strikesCollectionView:StrikeCollectionView = (collectionView as! StrikeCollectionView)
         
@@ -328,12 +339,12 @@ class StrikeCollectionDelegate {
         //(collectionView.delegate as! UIViewController).shouldPerformSegueWithIdentifier("selectEye", sender: strikesCollectionView)
     }
     
-    func formatMonth(currentDate:NSDate) -> String {
+    static func formatMonth(currentDate:NSDate) -> String {
         //currentStrikeMonth = currentDate
         return smileDateFormat.stringFromDate(currentDate)
     }
     
-    func getEyeInfo(listing:Listing, json strikeJSON:JSON, orderType:Order, lookupDelta:String? = nil) -> (Bool, String, String) {
+    static func getEyeInfo(listing:Listing, json strikeJSON:JSON, orderType:Order, lookupDelta:String? = nil) -> (Bool, String, String) {
         var q = ""
         var e = ""
         var success = false
@@ -343,8 +354,8 @@ class StrikeCollectionDelegate {
                 if let curMonthEye = curMonthContainer.GetMonthByOrder(orderType) {
                     if let curDeltaRaw =  Double(strikeJSON[lookupDelta!].stringValue) {
                         
-                        var curLowDelta = curMonthEye.lowDelta/100
-                        var curHighDelta = curMonthEye.highDelta/100
+                        var curLowDelta = curMonthEye.maxDelta/100
+                        var curHighDelta = curMonthEye.minDelta/100
                         var curDelta = curDeltaRaw
                         if lookupDelta!.containsString("Put") {
                             curDelta = abs(curDelta)
@@ -353,7 +364,7 @@ class StrikeCollectionDelegate {
                         }
                         
                         if curDelta*100.0 >= curLowDelta && (curDelta*100.0) <= curHighDelta  {
-                            print("DEBUG: Month DELEGATE:  Currently GETTING \(curMonthEye.cmdType) MQ/E  - lowdelta: \(curMonthEye.lowDelta) - highdelta: \(curMonthEye.highDelta) ")
+                            print("DEBUG: Month DELEGATE:  Currently GETTING \(curMonthEye.cmdType) MQ/E  - lowdelta: \(curMonthEye.minDelta) - highdelta: \(curMonthEye.maxDelta) ")
                             success = true
                             q = "\(curMonthEye.quantity)"
                             e = "\(curMonthEye.minEdge)"
@@ -383,20 +394,20 @@ class StrikeCollectionDelegate {
 }
 
 
-class XONStrikeCollectionDelegate {
+struct XONStrikeCollectionDelegate {
     
-    var currentMonth = ""
-    var isEvenMonth = false
-    
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    static func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    static func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return xonListingArray.count - 18
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    static func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        
+        
         let modIndx = indexPath.row%18
         //let floorIndx =  Int(floor(Double(indexPath.row/18)))
         unowned let strikeCell = (collectionView.dequeueReusableCellWithReuseIdentifier("StrikeCell", forIndexPath: indexPath) as! StrikeCollectionViewCell)
@@ -406,39 +417,39 @@ class XONStrikeCollectionDelegate {
         
         switch modIndx {
         case 0:
-            CellLayout.setLayout(strikeCell, label: strikeLabel, type: StrikeType.maturity, altMaturity: isEven(modIndx))
+            Layout.setLayout(strikeCell, label: strikeLabel, type: StrikeType.maturity, altMaturity: isEven(modIndx))
         case 1:
-            CellLayout.setLayout(strikeCell, label: strikeLabel, type: StrikeType.strike, altMaturity: isEven(modIndx))
+            Layout.setLayout(strikeCell, label: strikeLabel, type: StrikeType.strike, altMaturity: isEven(modIndx))
         case 4, 12:
-            CellLayout.setLayout(strikeCell, label: strikeLabel, type: StrikeType.calltheo)
+            Layout.setLayout(strikeCell, label: strikeLabel, type: StrikeType.calltheo)
         case 6, 14, 17:
-            CellLayout.setLayout(strikeCell, label: strikeLabel, type: StrikeType.position)
+            Layout.setLayout(strikeCell, label: strikeLabel, type: StrikeType.position)
         case 2:
             strikeCell.cellType = StrikeType.buycallmonthqe
-            CellLayout.setDefaultLayout(strikeCell, label: strikeLabel)
+            Layout.setDefaultLayout(strikeCell, label: strikeLabel)
         case 3:
             strikeCell.cellType = StrikeType.buycallstrikeqe
-            CellLayout.setDefaultLayout(strikeCell, label: strikeLabel)
+            Layout.setDefaultLayout(strikeCell, label: strikeLabel)
         case 7:
             strikeCell.cellType = StrikeType.sellcallstrikeqe
-            CellLayout.setDefaultLayout(strikeCell, label: strikeLabel)
+            Layout.setDefaultLayout(strikeCell, label: strikeLabel)
         case 8:
             strikeCell.cellType = StrikeType.sellcallmonthqe
-            CellLayout.setDefaultLayout(strikeCell, label: strikeLabel)
+            Layout.setDefaultLayout(strikeCell, label: strikeLabel)
         case 10:
             strikeCell.cellType = StrikeType.buyputmonthqe
-            CellLayout.setDefaultLayout(strikeCell, label: strikeLabel)
+            Layout.setDefaultLayout(strikeCell, label: strikeLabel)
         case 11:
             strikeCell.cellType = StrikeType.buyputstrikeqe
-            CellLayout.setDefaultLayout(strikeCell, label: strikeLabel)
+            Layout.setDefaultLayout(strikeCell, label: strikeLabel)
         case 15:
             strikeCell.cellType = StrikeType.sellputstrikeqe
-            CellLayout.setDefaultLayout(strikeCell, label: strikeLabel)
+            Layout.setDefaultLayout(strikeCell, label: strikeLabel)
         case 16:
             strikeCell.cellType = StrikeType.sellputmonthqe
-            CellLayout.setDefaultLayout(strikeCell, label: strikeLabel)
+            Layout.setDefaultLayout(strikeCell, label: strikeLabel)
         default:
-            CellLayout.setLayout(strikeCell, label: strikeLabel, type: StrikeType.defaultcell)
+            Layout.setLayout(strikeCell, label: strikeLabel, type: StrikeType.defaultcell)
         }
         
         strikeCell.floorIndex = 0
@@ -448,7 +459,7 @@ class XONStrikeCollectionDelegate {
         
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    static func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         unowned let strikesCollectionView:StrikeCollectionView = (collectionView as! StrikeCollectionView)
         strikesCollectionView.currentIndexPath = indexPath
     }

@@ -14,7 +14,12 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
         
     }
     @IBAction func testChangeValue(sender: AnyObject) {
-        //print("I am inside bro")
+        let senderBtn:QuickChangeButton = (sender as! QuickChangeButton)
+        print(senderBtn.labelToChange)
+        
+    }
+    
+    @IBAction func calcButtonPressed() {
         
     }
     
@@ -37,7 +42,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
                 self.view.frame = newFrame
                 self.preferredContentSize = newFrame.size
                 self.containerView.frame = contFrame
-                }, completion: {finished in print("CompletedAnimation")})
+                }, completion: nil)
         hasShifted = !hasShifted
     }
     
@@ -71,9 +76,10 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
     
     var strikeJSON:JSON?
     
-    var currentContainer:MonthContainer?
-    var currentEye:Eye?
-    var currentDate:NSDate!
+    weak var currentContainer:MonthContainer?
+    weak var currentEye:Eye?
+    weak var currentDate:NSDate!
+    
     
     //weak var newView = ((UINib.init(nibName: "InputView", bundle: nil)).instantiateWithOwner(nil, options: nil)[0] as! UIView)
     //weak var closure:EyePopoverViewController? = (self as? EyePopoverViewController)
@@ -82,12 +88,11 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         
         if let strikeJS = strikeJSON {
-            
             currentDate = smileDateFormat.dateFromString((strikeJS["odate"].stringValue))
             currentContainer = currentListing.getContainerByDate(currentDate)
             if currentContainer == nil {
                 print("had to create Container ")
-                currentListing.AddContainer(MonthContainer(listingSymbol: currentListing.listingsymbol, exp: currentDate, expString: smileDateFormat.stringFromDate(currentDate)))
+                currentListing.AddContainer(MonthContainer(listingSymbol: currentListing.listingSymbol, exp: currentDate, expString: smileDateFormat.stringFromDate(currentDate)))
                 currentContainer = currentListing.getContainerByDate(currentDate)
             }
             
@@ -111,16 +116,18 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
              buySellLabel.backgroundColor = UIColor.redColor()
             }
             
-            symbol.text = currentListing.listingsymbol
+            symbol.text = currentListing.listingSymbol
             maturity.text = smileDateFormat.stringFromDate(currentDate)
             if isMonthEye {
                 strike.text = ""
             } else {
-                strike.text = strikeJS["strike"].stringValue
+                strike.text = removeAfterCharacter(Source: strikeJS["strike"].stringValue, Character: ".", CutOffIndex: 1)
             }
         } else {
-           let demoMonth =  currentListing.registeredMonthContainers[0]
-            symbol.text = currentListing.listingsymbol
+            
+            let demoMonth =  currentListing.registeredMonthContainers[0]
+            
+            symbol.text = currentListing.listingSymbol
             maturity.text = smileDateFormat.stringFromDate(demoMonth.expDate)
             if isMonthEye == true {
                 strike.text = ""
@@ -129,36 +136,31 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
             }
             
         }
-        
+        print("currentEye: viewDidLoad:  \(currentEye)")
         
         print("DEBUG: POPOVER - VIEWDIDLOAD - EyeInfo: \(currentEye)")
-        let view = self.view
-        view.frame = CGRect(x: view.frame.minX, y: view.frame.minY, width: 600.0, height: 300.0)
         super.viewDidLoad()
         
     }
     
     deinit {
-        //print("I am being unloaded")
         strikeJSON = nil
         strikeTextField = nil
         editEyeViewController = nil
         currentListing = nil
+        currentEye = nil
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         view.endEditing(true)
     }
-    
-    
+
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        //print("Test my Way out")
-        //let calcView = storyboard?.instantiateViewControllerWithIdentifier("CalculatorInputViewController")
-        //textField.inputView = calcView?.view
         textField.inputView = UIView()
         return true
     }
     func textFieldDidBeginEditing(textField: UITextField) {
+        strikeTextField = textField
         if hasShifted == false {
             shiftLeft(textField)
         }
@@ -166,17 +168,21 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldDidEndEditing(textField: UITextField) {
         textField.resignFirstResponder()
+        textField.inputView = nil
         shiftLeft(textField)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "editeye" {
             let editEye = (segue.destinationViewController as! EditEyeViewController)
+            print(currentEye)
             editEye.isMonthEye = isMonthEye
+            editEye.currentListing = currentListing
+            editEye.strikeJSON = strikeJSON
+            
             editEye.currentEye = currentEye
+            
             editEye.setDelegates(self)
         }
     }
-    
-    
 }

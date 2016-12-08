@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class EyeBookViewController: UIViewController, UITableViewDelegate, UICollectionViewDelegate, UIPopoverPresentationControllerDelegate, UITextFieldDelegate {
     
     var currentFilter = FilterType.listing
@@ -17,10 +18,10 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     
     //var sectionRowCounts:Array = [Int]()
     
-    var listDelegate = FilterListingsCollectionDelegate()
-    var monthDelegate = MonthCollectionDelegate()
-    var strikeDelegate = StrikeCollectionDelegate()
-    var xonStrikeDelegate = XONStrikeCollectionDelegate()
+    //var listDelegate = FilterListingsCollectionDelegate()
+    //var monthDelegate = MonthCollectionDelegate()
+    //var strikeDelegate = StrikeCollectionDelegate()
+    //var xonStrikeDelegate = XONStrikeCollectionDelegate()
     
     var deleteTable:Bool = false
     
@@ -34,19 +35,44 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     @IBOutlet weak var eyeBookTableView: UITableView!
     
     @IBAction func testAction(sender:AnyObject) {
-        //eyeBookTableView.removeFromSuperview()
+        //eyeBookTableView.hidden = !eyeBookTableView.hidden
+        eyeBookTableView.removeFromSuperview()
+        eyeBookTableView = nil
+        for i in eyeBook.listings {
+            i.listingMaturities.removeAll()
+            i.maturitiesToDisplay.removeAll()
+            i.visibleStrikes.removeAll()
+            for x in i.registeredMonthContainers {
+                x.monthEyes.removeAll()
+                for strikes in 0..<x.strikeEyes.count {
+                    x.strikeEyes[strikes].removeAll()
+                }
+                x.strikeEyes.removeAll()
+            }
+            
+        }
+        eyeBook.listings.removeAll()
+        eyeBook = EyeBook()
+        eyebookRaw = ""
+        
+        
         //filteredListing = nil
         //print("TestButton")
     }
     
     
     @IBAction func pressedListingInFilterCollection(sender: ListingFilterButton) {
+        //.all,  flisting = nil, listingTest = nil
+        //.filter, flisting = selected, listingTest = flisting
+        //.filter, flisting = select
         
+        let sectionset = NSMutableIndexSet()
         let listingTest = eyeBook.getListingBySymbol(sender.listingSymbol)
         var modifyFilteredListing = false
+        var justReload:Bool = false
         
         if let fListing = filteredListing {
-            if fListing.listingsymbol == listingTest?.listingsymbol {
+            if fListing.listingSymbol == listingTest?.listingSymbol {
                 fListing.isSelectedInEyebook = false
                 filteredListing = nil
                 currentFilter = .all
@@ -54,6 +80,7 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
             else {
                 fListing.isSelectedInEyebook = false
                 modifyFilteredListing = true
+                justReload = true
             }
         } else {
             modifyFilteredListing = true
@@ -63,32 +90,45 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
             listingTest?.isSelectedInEyebook = true
             filteredListing = listingTest
             currentFilter = .listing
+            
+            for (indx,listing) in eyeBook.listings.enumerate() {
+                print("\(listing.listingSymbol)  :  \(listing.isSelectedInEyebook)")
+                if listing.isSelectedInEyebook == false {
+                 sectionset.addIndex(indx)
+                }
+            }
         }
         
         
-        //print("DEBUG:  filteredListing: \(filteredListing) + \(filteredListing?.listingsymbol) ")
+        //print("DEBUG:  filteredListing: \(filteredListing) + \(filteredListing?.listingSymbol) ")
         //print("")
         //print("DEBUG:  Listing.isSelectedInEyebook check : ")
-        for listing in eyeBook.listings {
-            print("\(listing.listingsymbol)  :  \(listing.isSelectedInEyebook)")
-        }
-        //print("DEBUG:  reloadData: ")
         
-        eyeBookTableView.reloadData()
+        //print("DEBUG:  reloadData: ")
+        if currentFilter == .all {
+            for (indx,listing) in eyeBook.listings.enumerate() {
+                if listing.listingSymbol != sender.listingSymbol {
+                    sectionset.addIndex(indx)
+                }
+            }
+            eyeBookTableView.beginUpdates()
+            eyeBookTableView.insertSections(sectionset, withRowAnimation: .Automatic)
+            eyeBookTableView.endUpdates()
+        }
+        else if justReload {
+            eyeBookTableView.reloadData()
+        } else if sectionset.count > 1 {
+        eyeBookTableView.beginUpdates()
+        eyeBookTableView.deleteSections(sectionset, withRowAnimation: UITableViewRowAnimation.Automatic)
+        eyeBookTableView.endUpdates()
+        }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        monthDelegate.initalize()
-        deleteTable = false
-        
-        parseXonString()
-        //print("Strike Eyes:")
-        
-    }
-    
-    override func viewWillAppear(animated: Bool) {
+        //monthDelegate.initalize()
         deleteTable = false
         
         let jsonString = getEyes(clientSuccess, errmsg: clientErrmsg, client: client)
@@ -96,8 +136,28 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
             clientSuccess = false
         }
         eyebookJSON = JSON.parse(jsonString)
+        eyeBook = EyeBook(fromEyesJSON: eyebookJSON)
+        
+        
+        
+        parseXonString()
+       
+        //print("Strike Eyes:")
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        /*
+        deleteTable = false
+    
+        let jsonString = getEyes(clientSuccess, errmsg: clientErrmsg, client: client)
+        if jsonString == eyebookRaw {
+            clientSuccess = false
+        }
+        eyebookJSON = JSON.parse(jsonString)
         
         eyeBook = EyeBook(fromEyesJSON: eyebookJSON)
+        */
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -284,7 +344,6 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     
     
     
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         unowned var fListing:Listing {
             if filteredListing != nil {
@@ -332,7 +391,7 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
             let listingCell = (tableView.dequeueReusableCellWithIdentifier("ListingTableCell", forIndexPath: indexPath) as! ListingTableCell)
             if isFiltered {
                 for (indx,listing) in eyeBook.listings.enumerate() {
-                    if listing.listingsymbol == fListing.listingsymbol {
+                    if listing.listingSymbol == fListing.listingSymbol {
                         listingCell.monthCollection.tag = indx
                         break
                     }
@@ -356,14 +415,14 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
             }
             
             
-            listingCell.listingSymbol.text = fListing.listingsymbol
+            listingCell.listingSymbol.text = fListing.listingSymbol
             listingCell.monthCollection.reloadData()
             return listingCell
         } else {
             let strikesCell = tableView.dequeueReusableCellWithIdentifier("StrikesTableCell", forIndexPath: indexPath) as! StrikesTableCell
             if isFiltered {
                 for (indx,listing) in eyeBook.listings.enumerate() {
-                    if listing.listingsymbol == fListing.listingsymbol {
+                    if listing.listingSymbol == fListing.listingSymbol {
                         strikesCell.strikeCollection.tag = indx
                         break
                     }
@@ -383,16 +442,16 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         var returnValue = 1
         if collectionView.isKindOfClass(ListingCollectionView) {
-            returnValue = listDelegate.numberOfSectionsInCollectionView(collectionView)
+            returnValue = FilterListingsCollectionDelegate.numberOfSectionsInCollectionView(collectionView)
         } else
             if collectionView.isKindOfClass(MonthCollectionView) {
-                returnValue = monthDelegate.numberOfSectionsInCollectionView(collectionView)
+                returnValue = MonthCollectionDelegate.numberOfSectionsInCollectionView(collectionView)
             } else
                 if collectionView.isKindOfClass(StrikeCollectionView) {
                     if clientSuccess {
-                        returnValue = strikeDelegate.numberOfSectionsInCollectionView(collectionView)
+                        returnValue = StrikeCollectionDelegate.numberOfSectionsInCollectionView(collectionView)
                     } else {
-                        returnValue = xonStrikeDelegate.numberOfSectionsInCollectionView(collectionView)
+                        returnValue = XONStrikeCollectionDelegate.numberOfSectionsInCollectionView(collectionView)
                     }
         }
         return returnValue
@@ -403,18 +462,14 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
         (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).sectionHeadersPinToVisibleBounds = true
         let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "StrikesHeader", forIndexPath: indexPath)
         let stackView = header.viewWithTag(1) as! UIStackView
-        if stackView.arrangedSubviews.count != 0 {
-            for i in stackView.arrangedSubviews {
-                stackView.removeArrangedSubview(i)
+        if stackView.arrangedSubviews.count == 0 {
+            for i in 0...17 {
+                let newLabel = UILabel()
+                newLabel.text = xonListingArray[i]
+                Layout.setLayout(newLabel, label: newLabel, type: StrikeType.title)
+                stackView.addArrangedSubview(newLabel)
             }
         }
-        for i in 0...17 {
-            let newLabel = UILabel()
-            newLabel.text = xonListingArray[i]
-            CellLayout.setLayout(newLabel, label: newLabel, type: StrikeType.title)
-            stackView.addArrangedSubview(newLabel)
-        }
-        
         return header
     }
     
@@ -423,18 +478,18 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
         var returnValue = 1
         if collectionView.isKindOfClass(ListingCollectionView) {
             //print("cell count: Listing Collection")
-            returnValue = listDelegate.collectionView(collectionView, numberOfItemsInSection: section)
+            returnValue = FilterListingsCollectionDelegate.collectionView(collectionView, numberOfItemsInSection: section)
         } else
             if collectionView.isKindOfClass(MonthCollectionView) {
                 //print("cell count: Month Collection")
-                returnValue = monthDelegate.collectionView(collectionView, numberOfItemsInSection: section)
+                returnValue = MonthCollectionDelegate.collectionView(collectionView, numberOfItemsInSection: section)
             } else
                 if collectionView.isKindOfClass(StrikeCollectionView) {
                     //print("cell count: Strike Collection")
                     if clientSuccess {
-                        returnValue = strikeDelegate.collectionView(collectionView, numberOfItemsInSection: section)
+                        returnValue = StrikeCollectionDelegate.collectionView(collectionView, numberOfItemsInSection: section)
                     } else {
-                        returnValue = xonStrikeDelegate.collectionView(collectionView, numberOfItemsInSection: section)
+                        returnValue = StrikeCollectionDelegate.collectionView(collectionView, numberOfItemsInSection: section)
                     }
                 } else {
                     //print("ERROR : EyeBookViewController:numberOfItemsInSection: KindOfClassError")
@@ -446,15 +501,15 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         weak var newCollectionViewCell:UICollectionViewCell?
         if collectionView.isKindOfClass(ListingCollectionView) {
-            newCollectionViewCell = listDelegate.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
+            newCollectionViewCell = FilterListingsCollectionDelegate.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
         } else
             if collectionView.isKindOfClass(MonthCollectionView) {
-                newCollectionViewCell = monthDelegate.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
+                newCollectionViewCell = MonthCollectionDelegate.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
             } else if collectionView.isKindOfClass(StrikeCollectionView) {
                 if clientSuccess {
-                    newCollectionViewCell = strikeDelegate.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
+                    newCollectionViewCell = StrikeCollectionDelegate.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
                 } else {
-                    newCollectionViewCell = xonStrikeDelegate.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
+                    newCollectionViewCell = StrikeCollectionDelegate.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
                 }
             } else {
                 //print("ERROR : EyeBookViewController:numberOfItemsInSection: KindOfClassError")
@@ -464,10 +519,10 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if collectionView.isKindOfClass(MonthCollectionView) {
-            monthDelegate.collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
+            MonthCollectionDelegate.collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
         } else if collectionView.isKindOfClass(StrikeCollectionView) {
             if clientSuccess {
-                strikeDelegate.collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
+                StrikeCollectionDelegate.collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
             } else {
                 //print("selectedCell")
                 //strikeDelegate.collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
