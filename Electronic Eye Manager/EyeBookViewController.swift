@@ -16,14 +16,6 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     
     weak var filteredListing:Listing?
     
-    //var sectionRowCounts:Array = [Int]()
-    
-    //var listDelegate = FilterListingsCollectionDelegate()
-    //var monthDelegate = MonthCollectionDelegate()
-    //var strikeDelegate = StrikeCollectionDelegate()
-    //var xonStrikeDelegate = XONStrikeCollectionDelegate()
-    
-    var deleteTable:Bool = false
     
     var isTableAnimatedProgramatically = false
     //var newView = ((UINib.init(nibName: "InputView", bundle: nil)).instantiateWithOwner(nil, options: nil)[0] as! UIView)
@@ -94,7 +86,7 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
             for (indx,listing) in eyeBook.listings.enumerate() {
                 print("\(listing.listingSymbol)  :  \(listing.isSelectedInEyebook)")
                 if listing.isSelectedInEyebook == false {
-                 sectionset.addIndex(indx)
+                    sectionset.addIndex(indx)
                 }
             }
         }
@@ -118,18 +110,17 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
         else if justReload {
             eyeBookTableView.reloadData()
         } else if sectionset.count > 1 {
-        eyeBookTableView.beginUpdates()
-        eyeBookTableView.deleteSections(sectionset, withRowAnimation: UITableViewRowAnimation.Automatic)
-        eyeBookTableView.endUpdates()
+            eyeBookTableView.beginUpdates()
+            eyeBookTableView.deleteSections(sectionset, withRowAnimation: UITableViewRowAnimation.Automatic)
+            eyeBookTableView.endUpdates()
         }
-        
+        eyeBookTableView.reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = Layout.eyeBookBGColor
         //monthDelegate.initalize()
-        deleteTable = false
         
         let jsonString = getEyes(clientSuccess, errmsg: clientErrmsg, client: client)
         if jsonString == eyebookRaw {
@@ -141,30 +132,28 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
         
         
         parseXonString()
-       
+        
         //print("Strike Eyes:")
         
     }
     
     override func viewWillAppear(animated: Bool) {
         /*
-        deleteTable = false
-    
-        let jsonString = getEyes(clientSuccess, errmsg: clientErrmsg, client: client)
-        if jsonString == eyebookRaw {
-            clientSuccess = false
-        }
-        eyebookJSON = JSON.parse(jsonString)
-        
-        eyeBook = EyeBook(fromEyesJSON: eyebookJSON)
-        */
+         deleteTable = false
+         
+         let jsonString = getEyes(clientSuccess, errmsg: clientErrmsg, client: client)
+         if jsonString == eyebookRaw {
+         clientSuccess = false
+         }
+         eyebookJSON = JSON.parse(jsonString)
+         
+         eyeBook = EyeBook(fromEyesJSON: eyebookJSON)
+         */
     }
     
     override func viewWillDisappear(animated: Bool) {
         //print("/n EYEBOOK VIEW CONROLLER:  I Disappearing /n")
-        deleteTable = true
-        eyeBookTableView.reloadData()
-        filteredListing = nil
+        //eyeBookTableView.reloadData()
         
     }
     
@@ -218,14 +207,14 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
         
         if isTableAnimatedProgramatically {
             isTableAnimatedProgramatically = false
-            
-            let textField:StrikeCellTextField! = selectedCellTextField
-            let owningCollectionCell = (textField.superview?.superview) as! StrikeCollectionViewCell
             eyePopoverViewController = (self.storyboard?.instantiateViewControllerWithIdentifier("EyePopoverViewController") as? EyePopoverViewController)
             
             if let popOver = eyePopoverViewController {
                 var isMonth = false
                 var isBuy = false
+                
+                let textField:StrikeCellTextField! = selectedCellTextField
+                unowned let owningCollectionCell = (textField.superview?.superview) as! StrikeCollectionViewCell
                 
                 switch owningCollectionCell.cellType {
                 case .buycallmonthqe:
@@ -287,12 +276,6 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
         }
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
-        //textField.inputView = nil
-        //strikeInputViewController = nil
-    }
-    
-    
     
     func prepareForPopoverPresentation(popoverPresentationController: UIPopoverPresentationController) {
         //unowned let popOver = popoverPresentationController.presentedViewController as! EyePopoverViewController
@@ -301,10 +284,10 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     // Called on the delegate when the popover controller will dismiss the popover. Return NO to prevent the
     // dismissal of the view.
     func popoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
-        let childViewController = popoverPresentationController.presentedViewController
+        unowned let childViewController = popoverPresentationController.presentedViewController
         debugPrint("\(self) - ChildTag \(childViewController.view!.tag)")
         
-        //selectedCellTextField!.resignFirstResponder()
+        selectedCellTextField!.resignFirstResponder()
         selectedCellTextField!.backgroundColor = UIColor.clearColor()
         selectedCellTextField = nil
         
@@ -314,7 +297,7 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     // Called on the delegate when the user has taken action to dismiss the popover. This is not called when the popover is dimissed programatically.
     func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
         //popoverPresentationController.presentedViewController.removeFromParentViewController()
-        popoverPresentationController.delegate = nil
+        //popoverPresentationController.delegate = nil
     }
     
     
@@ -331,9 +314,6 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if deleteTable {
-            return 0
-        }
         if filteredListing != nil {
             return 1
         }
@@ -366,7 +346,7 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
         if indexPath.row == 0 {
             return CGFloat(45.0)
         } else if indexPath.row == 1 {
-            return CGFloat(430.0)
+            return (tableView.frame.height - 45.0)
         } else {
             return CGFloat(30.0)
         }

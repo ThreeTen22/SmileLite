@@ -10,11 +10,14 @@ import UIKit
 
 class ListingFilterButton: UIButton {
     var listingSymbol = ""
+    
+    deinit {
+       //print("deinit: listingFilterButton \(listingSymbol)")
+    }
 }
 
 
 class CalcButton: UIButton {
-    
     
     override func awakeFromNib() {
         setTitleColor(UIColor.darkTextColor(), forState: .Normal)
@@ -22,7 +25,7 @@ class CalcButton: UIButton {
         layer.borderColor = UIColor.blackColor().CGColor
         backgroundColor = UIColor.lightGrayColor()
         
-        self.addTarget(nil, action: #selector(EyePopoverViewController.testChangeValue), forControlEvents: .TouchUpInside)
+        self.addTarget(nil, action: #selector(EyePopoverViewController.calcButtonPressed(_:)), forControlEvents: .TouchUpInside)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -34,14 +37,22 @@ class CalcButton: UIButton {
         backgroundColor = UIColor.lightGrayColor()
         super.touchesEnded(touches, withEvent: event)
     }
+    
+    deinit {
+        //print("deinit: calcButton")
+    }
 }
 
 
 class QuickChangeButton: UIButton {
     var labelToChange: String = ""
-    var changeAmount: Int = 0
+    var changeAmount: Double = 0.0
     
     override func awakeFromNib() {
-        self.addTarget(nil, action: #selector(EyePopoverViewController.testChangeValue), forControlEvents: .TouchUpInside)
+        self.addTarget(nil, action: #selector(EditEyeViewController.testChangeValue(_:)), forControlEvents: .TouchUpInside)
+    }
+    
+    deinit {
+     //print("deinit: QuickchangeButton")
     }
 }

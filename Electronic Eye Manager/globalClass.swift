@@ -8,12 +8,9 @@
 
 import UIKit
 
-extension UILabel {
-    
-}
-
 var eyeBook:EyeBook = EyeBook()
 
+var usingDemo = false
 
 var bcspEdgeRule = [["Buy Call | Sell Put","$ Edge", "0.00", "0", "0.01"],["0","0","0","0","1"]]
 var scbpEdgeRule = [["Sell Call | Buy Put","$ Edge", "0.00", "0", "0.01"],["0","0","0","0","1"]]
@@ -107,7 +104,7 @@ func removeAfterCharacter(Source str:String, Character char:Character, CutOffInd
     if let dotIndex = str.characters.indexOf(char) {
         
         let startIndex = str.characters.startIndex.distanceTo(dotIndex)+1
-        print("characterCount: \(str.characters.count)  - startIndex: \(startIndex)")
+        //print("characterCount: \(str.characters.count)  - startIndex: \(startIndex)")
         if (str.characters.count <= startIndex+indx) {
             return str
         }
@@ -153,7 +150,7 @@ func appendZerosToString(numberAsString str:String, MinCharLength charLength:Int
 
 func readMoreData(client:TCPClient, readData:[UInt8]?, lengthValue:Int, totalData:[UInt8], isFirst:Bool) -> [UInt8] {
     var newTotalData:[UInt8] = totalData
-    var recData = readData
+    let recData = readData
 //    var hadError = false
 //    var errorCount = 0
     if recData != nil {

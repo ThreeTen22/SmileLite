@@ -13,36 +13,67 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
     @IBAction func BackNavigation(sender: AnyObject) {
         
     }
-    @IBAction func testChangeValue(sender: AnyObject) {
-        let senderBtn:QuickChangeButton = (sender as! QuickChangeButton)
-        print(senderBtn.labelToChange)
+    
+    @IBAction func calcButtonPressed(sender: CalcButton) {
         
-    }
-    
-    @IBAction func calcButtonPressed() {
-        
-    }
-    
-    
-    @IBAction func shiftLeft(sender: AnyObject) {
-        UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {[unowned self] in
-                var newFrame = self.view.frame
-                if self.hasShifted {
-                    newFrame = CGRect(x: newFrame.minX, y: newFrame.minY, width: newFrame.width-(self.calcView.frame.width), height: newFrame.height)
+        var buttonText:String {
+                if (sender.titleLabel?.text! != nil){
+                    return (sender.titleLabel?.text)!
                 } else {
-                    newFrame = CGRect(x: newFrame.minX, y: newFrame.minY, width: newFrame.width+(self.calcView.frame.width), height: newFrame.height)
+                    return ""
                 }
+        }
+        switch buttonText {
+            case "c":
+                selectedStrikeEyeParameter.placeholder = "prev: \(selectedStrikeEyeParameter.text)"
+                selectedStrikeEyeParameter.text = ""
+            case ".":
+                if !(selectedStrikeEyeParameter.text?.characters.contains("."))! {
+                    selectedStrikeEyeParameter.insertText(buttonText)
+                }
+            default:
+                selectedStrikeEyeParameter.insertText(buttonText)
             
-                var contFrame = self.containerView.frame
+        }
+        
+    }
+    
+    @IBAction func shiftLeft(sender: UITextField) {
+    
+        UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {[unowned self] in
+            
+            
+            var newFrame = self.view.frame
+            
+            if self.hasShifted {
+                newFrame = CGRect(x: newFrame.minX, y: newFrame.minY, width: newFrame.width-(self.calcView.frame.width), height: newFrame.height)
+            } else {
+                newFrame = CGRect(x: newFrame.minX, y: newFrame.minY, width: newFrame.width+(self.calcView.frame.width), height: newFrame.height)
+            }
+            
+            var contFrame = self.containerView.frame
             if self.hasShifted {
                 contFrame.origin.x -= self.calcView.frame.width
             } else {
                 contFrame.origin.x += self.calcView.frame.width
             }
-                self.view.frame = newFrame
-                self.preferredContentSize = newFrame.size
-                self.containerView.frame = contFrame
-                }, completion: nil)
+            self.view.frame = newFrame
+            self.preferredContentSize = newFrame.size
+            self.containerView.frame = contFrame
+            }, completion: {
+                [weak self]finished in
+                print("I AM COMPLETING")
+                if (self != nil) {
+                    if self!.hasShifted {
+                        sender.selectAll(nil)
+                    } else {
+                        self?.selectedStrikeEyeParameter?.unmarkText()
+
+                    }
+                }
+                print("I AM COMPLETED")
+            })
+        
         hasShifted = !hasShifted
     }
     
@@ -66,8 +97,8 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
     
     var currentStrikePrice:Double?
     
-    weak var strikeTextField:UITextField!
-    weak var editEyeViewController:UIViewController?
+    weak var selectedStrikeEyeParameter:UITextField!
+    weak var editEyeViewController:EditEyeViewController?
     
     weak var currentTextField:UITextField?
     
@@ -84,6 +115,16 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
     //weak var newView = ((UINib.init(nibName: "InputView", bundle: nil)).instantiateWithOwner(nil, options: nil)[0] as! UIView)
     //weak var closure:EyePopoverViewController? = (self as? EyePopoverViewController)
     
+    deinit {
+        //print("deinit: eyepopoverVC")
+        /*
+         strikeJSON = nil
+         selectedStrikeEyeParameter = nil
+         editEyeViewController = nil
+         currentListing = nil
+         currentEye = nil
+         */
+    }
     
     override func viewDidLoad() {
         
@@ -112,8 +153,8 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
             }
             
             if isBuy == false {
-             buySellLabel.text = "Sell"
-             buySellLabel.backgroundColor = UIColor.redColor()
+                buySellLabel.text = "Sell"
+                buySellLabel.backgroundColor = UIColor.redColor()
             }
             
             symbol.text = currentListing.listingSymbol
@@ -143,37 +184,34 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    deinit {
-        strikeJSON = nil
-        strikeTextField = nil
-        editEyeViewController = nil
-        currentListing = nil
-        currentEye = nil
-    }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         view.endEditing(true)
     }
-
+    
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         textField.inputView = UIView()
         return true
     }
     func textFieldDidBeginEditing(textField: UITextField) {
-        strikeTextField = textField
+        
+        selectedStrikeEyeParameter = textField
+        
         if hasShifted == false {
             shiftLeft(textField)
         }
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        textField.resignFirstResponder()
-        textField.inputView = nil
         shiftLeft(textField)
+        textField.resignFirstResponder()
+        //textField.inputView = nil
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "editeye" {
+            print("segue")
             let editEye = (segue.destinationViewController as! EditEyeViewController)
             print(currentEye)
             editEye.isMonthEye = isMonthEye
@@ -183,6 +221,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
             editEye.currentEye = currentEye
             
             editEye.setDelegates(self)
+            editEyeViewController = editEye
         }
     }
 }

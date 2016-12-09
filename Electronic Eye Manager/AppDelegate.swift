@@ -30,8 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if jsonString == eyebookRaw {
             clientSuccess = false
+            usingDemo = true
+            client.close()
         }
-        client.close()
+        // client.close()
         return true
     }
     

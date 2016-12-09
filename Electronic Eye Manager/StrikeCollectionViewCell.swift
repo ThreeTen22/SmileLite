@@ -13,6 +13,8 @@ class StrikeCollectionViewCell: UICollectionViewCell {
     var floorIndex:Int!
     var cellType:StrikeType = StrikeType.null
     deinit {
-      //print("STRIKE COLLECTIONVIEWCELL: DEINIT")
+        //print("deinit: strikeCollectionViewCell")
+        listingIndex = nil
+        floorIndex = nil
     }
 }

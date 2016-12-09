@@ -9,4 +9,11 @@
 import UIKit
 
 class EyebookTableView: UITableView {
+    
+    override func awakeFromNib() {
+        backgroundColor = Layout.eyeBookListingTableCellBGColor
+    }
+    deinit {
+        //print("deinit: EyebookTableView")
+    }
 }

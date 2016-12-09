@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="PNe-tz-UsW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PNe-tz-UsW">
+    <device id="ipad9_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Calculator Input View Controller-->
@@ -13,113 +17,114 @@
                         <viewControllerLayoutGuide type="bottom" id="Y8u-6w-nSq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="adF-D2-6zc">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="wdw-sH-dIB">
-                                <rect key="frame" x="400" y="50" width="200" height="550"/>
+                                <rect key="frame" x="400" y="50" width="368" height="974"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="4Uk-FF-tP3">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="550"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="92" height="974"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V7W-KS-CNH">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="138"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="92" height="243.5"/>
                                                 <state key="normal" title="-200"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uM0-9I-5B0">
-                                                <rect key="frame" x="0.0" y="138" width="50" height="138"/>
+                                                <rect key="frame" x="0.0" y="243.5" width="92" height="243.5"/>
                                                 <state key="normal" title="-100"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o91-Yu-cEo">
-                                                <rect key="frame" x="0.0" y="275" width="50" height="138"/>
+                                                <rect key="frame" x="0.0" y="487" width="92" height="243.5"/>
                                                 <state key="normal" title="+100"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gxN-4w-uMK">
-                                                <rect key="frame" x="0.0" y="413" width="50" height="138"/>
+                                                <rect key="frame" x="0.0" y="730.5" width="92" height="243.5"/>
                                                 <state key="normal" title="+200"/>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="DGp-bG-sb3">
-                                        <rect key="frame" x="50" y="0.0" width="50" height="550"/>
+                                        <rect key="frame" x="92" y="0.0" width="92" height="974"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lCh-d9-MVC" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="138"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="92" height="243.5"/>
                                                 <state key="normal" title="1"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8SV-gR-j2j" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="138" width="50" height="138"/>
+                                                <rect key="frame" x="0.0" y="243.5" width="92" height="243.5"/>
                                                 <state key="normal" title="4"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WS8-HP-tOx" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="275" width="50" height="138"/>
+                                                <rect key="frame" x="0.0" y="487" width="92" height="243.5"/>
                                                 <state key="normal" title="7"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGd-2G-3nW" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="413" width="50" height="138"/>
+                                                <rect key="frame" x="0.0" y="730.5" width="92" height="243.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <state key="normal" title="c"/>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="f0C-bL-gYE">
-                                        <rect key="frame" x="100" y="0.0" width="50" height="550"/>
+                                        <rect key="frame" x="184" y="0.0" width="92" height="974"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZBR-7P-jz8" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="138"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="92" height="243.5"/>
                                                 <state key="normal" title="2"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bL2-dE-KfX" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="138" width="50" height="138"/>
+                                                <rect key="frame" x="0.0" y="243.5" width="92" height="243.5"/>
                                                 <state key="normal" title="5"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wrG-cY-6l7" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="275" width="50" height="138"/>
+                                                <rect key="frame" x="0.0" y="487" width="92" height="243.5"/>
                                                 <state key="normal" title="8"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RPg-Lr-TML" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="413" width="50" height="138"/>
+                                                <rect key="frame" x="0.0" y="730.5" width="92" height="243.5"/>
                                                 <state key="normal" title="0"/>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="WNW-9J-LgZ">
-                                        <rect key="frame" x="150" y="0.0" width="50" height="550"/>
+                                        <rect key="frame" x="276" y="0.0" width="92" height="974"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ra-J8-L00" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="138"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="92" height="243.5"/>
                                                 <state key="normal" title="3"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NV8-XN-XGJ" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="138" width="50" height="138"/>
+                                                <rect key="frame" x="0.0" y="243.5" width="92" height="243.5"/>
                                                 <state key="normal" title="6"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t9e-c9-IZ1" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="275" width="50" height="138"/>
+                                                <rect key="frame" x="0.0" y="487" width="92" height="243.5"/>
                                                 <state key="normal" title="9"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vD3-Tz-wSJ" customClass="CalcButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="413" width="50" height="138"/>
+                                                <rect key="frame" x="0.0" y="730.5" width="92" height="243.5"/>
                                                 <state key="normal" title="."/>
                                             </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ppD-Rt-5Py">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ppD-Rt-5Py">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="42"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbQ-3u-l1x">
                                         <rect key="frame" x="8" y="10" width="77" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.95562900641025639" green="0.95562900641025639" blue="0.95562900641025639" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.95562900641025639" green="0.95562900641025639" blue="0.95562900641025639" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ppD-Rt-5Py" firstAttribute="top" secondItem="Q9M-L3-4s1" secondAttribute="bottom" id="164-ku-kWK"/>
                             <constraint firstItem="ppD-Rt-5Py" firstAttribute="leading" secondItem="adF-D2-6zc" secondAttribute="leading" id="5IG-L4-4yk"/>

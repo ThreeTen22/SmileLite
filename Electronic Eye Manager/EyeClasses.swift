@@ -87,13 +87,15 @@ class EyeBook {
             
             //Clean up any listings with no eyes
             var currentIndex = 0
-            var currentListing:Listing!
+            weak var currentListing:Listing?
             
             while currentIndex < (listings.count) {
                 currentListing = listings[currentIndex]
-                if currentListing.registeredMonthContainers.count == 0 {
+                print(currentListing?.listingSymbol)
+                print(currentListing?.registeredMonthContainers.count)
+                if currentListing?.registeredMonthContainers.count == 0 {
                     listings.removeAtIndex(currentIndex)
-                    continue
+                    currentIndex = 0
                 }
                 currentIndex += 1
             }
@@ -142,7 +144,6 @@ class EyeBook {
     }
     
     func createAndAddEyeToListing(eyeDict:JSON, listing:Listing, eyeJSONIndex index:Int) {
-        
         let eyeExpDate = smileDateFormat.dateFromString(eyeDict["edate"].string!)!
         //print(eyeExpDate)
         let eyeExpString:String = smileDateFormat.stringFromDate(eyeExpDate)
@@ -153,7 +154,7 @@ class EyeBook {
         var newMonth:MonthEye!
         var newStrike:StrikeEye!
         
-         print("eyeExpDate: \(eyeExpDate)  entityType: \(entityType)  strike: \(strike)  mindelta: \(minDelta)")
+        print("eyeExpDate: \(listing.listingSymbol)  \(eyeExpString)  entityType: \(entityType)  strike: \(strike)  mindelta: \(minDelta)")
         if entityType != 0 {
             if strike != ""{
                 newStrike = StrikeEye(eyeDict: eyeDict)
@@ -172,10 +173,11 @@ class EyeBook {
                 }
             } else {
                 let newContainer = MonthContainer(listingSymbol: listing.listingSymbol, exp: eyeExpDate , expString: eyeExpString)
-                if strike != "" && entityType != 0 {
+                if strike != "" {
                     newContainer.AddEye(StrikeEye: newStrike)
                     listing.AddContainer(newContainer)
                 } else if newContainer.AddMonthEye(newMonth) {
+                    print("added Eye")
                     listing.AddContainer(newContainer)
                 }
             }
@@ -215,7 +217,7 @@ class Listing {
     }
     
     deinit {
-        //print("Listing: Deinit: Sym: \(listingsymbol)")
+        print("Listing: Deinit: Sym: \(listingSymbol)")
         visibleStrikes.removeAll()
         listingMaturities.removeAll()
         maturitiesToDisplay.removeAll()
@@ -240,10 +242,6 @@ class Listing {
         
         let expDate:NSDate = dateStringToNSDate(expDateString)
         return getContainerByDate(expDate)
-    }
-    
-    func addMaturities(success:Bool, errMsg:String, client:TCPClient) {
-        
     }
     
     func dateStringToNSDate(expDateString:String) -> NSDate {
@@ -311,7 +309,10 @@ class MonthContainer {
     var strikeEyes:Array = [[StrikeEye](),[StrikeEye](),[StrikeEye](),[StrikeEye]()]
     
     deinit {
-     //print("MonthContainer: Deinit: listingSymbol: \(listingSymbol)")
+    
+     //print("deinit:MonthContainer: listingSymbol: \(listingSymbol)")
+     strikeEyes.removeAll()
+     monthEyes.removeAll()
     }
     
     init() {

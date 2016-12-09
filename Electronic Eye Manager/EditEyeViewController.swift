@@ -9,14 +9,14 @@
 import UIKit
 
 class EditEyeViewController: UIViewController {
-
+    
     /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-    }
-    */
+     // Only override drawRect: if you perform custom drawing.
+     // An empty implementation adversely affects performance during animation.
+     override func drawRect(rect: CGRect) {
+     // Drawing code
+     }
+     */
     
     @IBOutlet weak var maxQuantity: UITextField!
     @IBOutlet weak var maxDelta: UITextField!
@@ -29,7 +29,7 @@ class EditEyeViewController: UIViewController {
     
     weak var delegateController:UITextFieldDelegate?
     weak var currentListing:Listing?
-    var currentEye:Eye?
+    weak var currentEye:Eye?
     var strikeJSON:JSON?
     
     @IBOutlet var lowDeltaCollection: [UIView]!
@@ -37,6 +37,29 @@ class EditEyeViewController: UIViewController {
     @IBOutlet var totalDeltaCollection: [UIView]!
     
     var isMonthEye = true
+    
+    @IBAction func testChangeValue(sender: AnyObject) {
+        let senderBtn:QuickChangeButton = (sender as! QuickChangeButton)
+        let amount = senderBtn.changeAmount
+        print(senderBtn.labelToChange)
+        
+        switch senderBtn.labelToChange {
+            case "maxQuantity":
+                modifyTextField(maxQuantity, amount: amount)
+            case "maxDelta":
+                modifyTextField(maxDelta, amount: amount)
+            case "minEdge":
+                modifyTextField(minEdge, amount: amount)
+            case "lowDelta":
+                modifyTextField(lowDelta, amount: amount)
+            case "highDelta":
+                modifyTextField(highDelta, amount: amount)
+            case "totalDelta":
+                modifyTextField(totalDelta, amount: amount)
+        default: break
+            
+        }
+    }
     
     override func viewDidLoad() {
         
@@ -49,7 +72,7 @@ class EditEyeViewController: UIViewController {
                     currentEye = newMonthListing
                     print(newMonthListing)
                 } else {
-                     print("isStrikeEye")
+                    print("isStrikeEye")
                     let newStrikeListing:StrikeEye = StrikeEye(strikeJSON: strikeJS, Symbol: currentListing!.listingSymbol, SecurityId: currentListing!.listingId)
                     currentEye = newStrikeListing
                     print(newStrikeListing)
@@ -66,6 +89,7 @@ class EditEyeViewController: UIViewController {
                 weak var me:MonthEye! = (curEye as? MonthEye)
                 lowDelta.text = "\(me.minDelta)"
                 highDelta.text = "\(me.maxDelta)"
+                totalDelta.text = "\(me.totalDelta)"
                 me = nil
             }
         }
@@ -96,19 +120,26 @@ class EditEyeViewController: UIViewController {
     }
     
     deinit {
-        currentEye = nil
-        //maxQuantity.delegate = nil
-        //maxDelta.delegate = nil
-        //minEdge.delegate = nil
-        //delegateController = nil
-        //lowDelta.delegate = nil
-        //highDelta.delegate = nil
-        //totalDelta.delegate = nil
+        
+        //print("deinit: editEyepopoverVC")
+        
+        //lowDeltaCollection.removeAll()
+        //highDeltaCollection.removeAll()
+        //totalDeltaCollection.removeAll()
+        currentListing = nil
+        delegateController = nil
+
     }
     
     
     func setDelegates(deleController:UITextFieldDelegate) {
         delegateController = deleController
     }
-
+    
+    func modifyTextField(textField:UITextField, amount:Double) {
+        if let textAmount:Double = Double(textField.text!) {
+            textField.text = String(textAmount + amount)
+        }
+    }
+    
 }

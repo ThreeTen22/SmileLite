@@ -73,7 +73,7 @@ struct MonthCollectionDelegate {
     static func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         unowned let selectedListing = eyeBook.listings[collectionView.tag]
         //var jsonArray:Array = [JSON]()
-        
+        print(selectedListing.registeredMonthContainers[0].expDate)
         selectedListing.maturitiesToDisplay.removeAll()
         selectedListing.visibleStrikes.removeAll()
         
@@ -85,9 +85,9 @@ struct MonthCollectionDelegate {
             
             let monthDate:String = (collectionView.cellForItemAtIndexPath(indexPath)?.viewWithTag(1) as! UILabel).text!
             weak var selectedMonthContainer = selectedListing.getContainerByDate(monthDate)
-            
+            print(selectedMonthContainer)
             selectedListing.maturitiesToDisplay.append((selectedMonthContainer?.expDate)!)
-            
+            print(selectedListing.maturitiesToDisplay)
             for monthContainer in selectedListing.registeredMonthContainers {
                 monthContainer.isActive = false
             }
@@ -102,7 +102,7 @@ struct MonthCollectionDelegate {
                 //print("nostrikes: \(selectedListing.willDisplay)")
                 selectedListing.willDisplay = Listing.DisplayType.AllStrikes
                 for maturityJSON in selectedListing.listingMaturities {
-                    //print(maturityJSON["edate"].stringValue)
+                    
                     selectedListing.maturitiesToDisplay.append(readableDateformat.dateFromString(maturityJSON["edate"].stringValue)!)
                 }
             }
@@ -405,9 +405,6 @@ struct XONStrikeCollectionDelegate {
     }
     
     static func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
-        
-        
         let modIndx = indexPath.row%18
         //let floorIndx =  Int(floor(Double(indexPath.row/18)))
         unowned let strikeCell = (collectionView.dequeueReusableCellWithReuseIdentifier("StrikeCell", forIndexPath: indexPath) as! StrikeCollectionViewCell)

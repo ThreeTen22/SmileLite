@@ -22,11 +22,16 @@ class StrikeCellTextField: UITextField {
         let item:UITextInputAssistantItem = inputAssistantItem
         item.leadingBarButtonGroups = []
         item.trailingBarButtonGroups = []
+        clearsOnInsertion = true
     }
     override func caretRectForPosition(position: UITextPosition) -> CGRect {
         return CGRectZero
     }
     
+    deinit {
+     //print("deinit: StrikeCellTextField")
+     delegate = nil
+    }
     
 
 }
@@ -38,4 +43,8 @@ class EditEyeParameter:UITextField {
         item.leadingBarButtonGroups = []
         item.trailingBarButtonGroups = []
     }
+    deinit {
+        //print("deinit: EditEyeParameters")
+    }
+    
 }

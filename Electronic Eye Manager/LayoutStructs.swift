@@ -10,10 +10,16 @@ import UIKit
 
 struct Layout {
     
-    static var strikeTitleBGColor = UIColor(red255: 2.0, green: 13.0, blue: 130.0, alpha: 1.0)
+    static var eyeBookBGColor = UIColor(red255: 254, green: 230, blue: 184)
     
-    static var strikeMaturityBGColorDark = UIColor(red255: 25.0, green: 29.0, blue: 113.0, alpha: 1.0)
-    static var strikeMaturityBGColorLight = UIColor(red255: 74.0, green: 60.0, blue: 138.0, alpha: 1.0)
+    static var eyeBookListingCollectionBGColor = UIColor(red255: 213, green: 181, blue: 142)
+    
+    static var eyeBookListingTableCellBGColor = UIColor(red255: 189, green: 189, blue: 189)
+    
+    static var strikeTitleBGColor = UIColor(red255: 2, green: 13, blue: 130)
+    
+    static var strikeMaturityBGColorDark = UIColor(red255: 25, green: 29, blue: 113)
+    static var strikeMaturityBGColorLight = UIColor(red255: 74, green: 60, blue: 138)
     
     static var strikeDefaultBGColor = UIColor.whiteColor()
     static var strikeDefaultTextColorDark = UIColor.blackColor()
@@ -21,7 +27,7 @@ struct Layout {
     static var strikeDefaultTextColorLight = UIColor.whiteColor()
     
     
-    static var strikePositionBGColor = UIColor(red255: 41.0, green: 250.0, blue: 46.0, alpha: 1.0)
+    static var strikePositionBGColor = UIColor(red255: 41, green: 250, blue: 46)
     static var strikePositionTextColorLong = UIColor.blueColor()
     static var strikePositionTextColorShort = UIColor.redColor()
     
@@ -29,14 +35,13 @@ struct Layout {
     static var strikeTheoBGColorAboveValue = UIColor.blueColor()
     static var strikeTheoBGColorBelowValue = UIColor.redColor()
     
-    static var monthEyeBGColor = UIColor(red255: 205.0, green: 205.0, blue: 225.0, alpha: 1.0)
+    static var monthEyeBGColor = UIColor(red255: 205, green: 205, blue: 225)
     
     static var monthEyeInstallBGColor =  UIColor(rgb: 0x006600)
     static var monthEyeTheoButtonBGColor = UIColor(rgb: 0x99cccc)
     
-    static var errorColor = UIColor(red255: 253.0, green: 123.0, blue: 88.0, alpha: 1.0)
-    
-    
+    static var errorColor = UIColor(red255: 253, green: 123, blue: 88)
+   
     
     static func setLayout(cell:UIView, label:UILabel, type:StrikeType, altMaturity:Bool = false) {
         switch type {
@@ -99,6 +104,7 @@ struct Layout {
         //print("ERROR: setLayout.getPosition - error unwrapping labeltext")
         return Position.null
     }
+    
     
 }
 
