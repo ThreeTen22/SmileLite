@@ -17,13 +17,73 @@ enum Order {
 }
 
 
-struct DefaultEyeParams {
+struct EyeParams {
     static let quantity = 1
     static let minEdge = 0.1
     static let totalDelta = 1000.0
     static let maxDelta = 250.0
     static let lowDelta = 1.0
     static let highDelta = 100.0
+}
+
+struct Exchanges {
+    
+    var exchange1 = 2
+    var exchange2 = 3
+    var exchange3 = 4
+    var exchange4 = 5
+    var exchange5 = 1
+    var exchange6 = 6
+    var exchange7 = 7
+    var exchange8 = 8
+    var exchange9 = 9
+    var exchange10 = 12
+    var exchange11 = 10
+    var exchange12 = 16
+    var exchange13 = 0
+    var exchange14 = 0
+    var exchange15 = 0
+    
+    
+    static func exchangeNames(exchangeNum:Int) ->String {
+        
+        switch exchangeNum {
+        case 1:
+            return "Amex"
+        case 2:
+            return "Cboe"
+        case 3:
+            return "Ise"
+        case 4:
+            return "PCoast"
+        case 5:
+            return "Phlx"
+        case 6:
+            return "Box"
+        case 7:
+            return "Nasdaq"
+        case 8:
+            return "Bats"
+        case 9:
+            return "C2"
+        case 10:
+            return "Miax"
+        case 11:
+            return "Unknown11"
+        case 12:
+            return "Nasdaq-Bx"
+        case 13:
+            return "Unknown13"
+        case 14:
+            return "Unknown14"
+        case 15:
+            return "Unknown15"
+        case 16:
+            return "Edgx"
+        default:
+            return "Unknown17+"
+        }
+    }
 }
 
 class EyeBook {
@@ -472,6 +532,7 @@ class Eye {
     }
     
     init(strikeJSON:JSON,Symbol sym:String,SecurityId securityId:Int, MinEdge edge:Double = 0.1, Quantity qntity:Int = 1, MaxDelta mxDelta:Double, TotalDelta tDelta:Double = 1000.0) {
+        print("init: eye wStrikeJSON")
         symbol = sym
         id = securityId
         minEdge = edge

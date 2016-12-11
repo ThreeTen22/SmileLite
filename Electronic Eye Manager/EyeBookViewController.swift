@@ -214,7 +214,7 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
                 var isBuy = false
                 
                 let textField:StrikeCellTextField! = selectedCellTextField
-                unowned let owningCollectionCell = (textField.superview?.superview) as! StrikeCollectionViewCell
+                let owningCollectionCell = (textField.superview?.superview) as! StrikeCollectionViewCell
                 
                 switch owningCollectionCell.cellType {
                 case .buycallmonthqe:
@@ -254,8 +254,12 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
                     popOver.currentListing = currentListing
                     if let currentJSON = currentListing.getVisibleStrikes(owningCollectionCell.floorIndex) {
                         popOver.strikeJSON = currentJSON
+                        print("currentJSON")
+                        print(currentJSON)
                     }
                 }
+                
+                popOver
                 
                 //popOver.strikeTextField = textField
                 

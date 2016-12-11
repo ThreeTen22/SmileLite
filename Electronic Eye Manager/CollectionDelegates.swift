@@ -108,7 +108,7 @@ struct MonthCollectionDelegate {
             }
             
         }
-        if clientSuccess {
+        if !usingDemo {
             for date in selectedListing.maturitiesToDisplay {
                 let jsonRaw = getStrikes(clientSuccess, errmsg: clientErrmsg, client: client, listingID: selectedListing.listingId, expDate: date)!
                 //print(jsonRaw)
@@ -120,7 +120,9 @@ struct MonthCollectionDelegate {
             }
         } else {
                 let demoStrikeJSON = JSON.parse(adtnMonthDemoData)
-                selectedListing.visibleStrikes.appendContentsOf(demoStrikeJSON.arrayValue)
+                let secondDemoStrikeJSON = JSON.parse(anotheradtnMonthData)
+                selectedListing.sortedAppend(demoStrikeJSON.arrayValue)
+                selectedListing.sortedAppend(secondDemoStrikeJSON.arrayValue)
         }
         
         //collectionView.reloadData()
@@ -222,7 +224,6 @@ struct StrikeCollectionDelegate {
                     labelText = "ERROR"
                     strikeCell.cellType = StrikeType.null
             }
-            print(number)
             strikeCell.backgroundColor = UIColor(red:1.00, green:0.93, blue:0.78, alpha:1.0)
             strikeLabel.textColor = UIColor.blackColor()
             
@@ -354,17 +355,17 @@ struct StrikeCollectionDelegate {
                 if let curMonthEye = curMonthContainer.GetMonthByOrder(orderType) {
                     if let curDeltaRaw =  Double(strikeJSON[lookupDelta!].stringValue) {
                         
-                        var curLowDelta = curMonthEye.maxDelta/100
-                        var curHighDelta = curMonthEye.minDelta/100
+                        var curLowDelta = curMonthEye.minDelta/100
+                        var curHighDelta = curMonthEye.maxDelta/100
                         var curDelta = curDeltaRaw
                         if lookupDelta!.containsString("Put") {
                             curDelta = abs(curDelta)
                             curLowDelta = abs(curLowDelta)
                             curHighDelta = abs(curHighDelta)
                         }
-                        
-                        if curDelta*100.0 >= curLowDelta && (curDelta*100.0) <= curHighDelta  {
-                            print("DEBUG: Month DELEGATE:  Currently GETTING \(curMonthEye.cmdType) MQ/E  - lowdelta: \(curMonthEye.minDelta) - highdelta: \(curMonthEye.maxDelta) ")
+                        //print("curDelta: \(curDelta)  \(curLowDelta)  \(curHighDelta)")
+                        if curDelta >= curLowDelta && curDelta <= curHighDelta  {
+                        print("DEBUG: Month DELEGATE:  Currently GETTING \(curMonthEye.cmdType) MQ/E  - lowdelta: \(curMonthEye.minDelta) - highdelta: \(curMonthEye.maxDelta) ")
                             success = true
                             q = "\(curMonthEye.quantity)"
                             e = "\(curMonthEye.minEdge)"

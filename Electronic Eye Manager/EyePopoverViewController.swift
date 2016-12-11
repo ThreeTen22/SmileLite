@@ -10,6 +10,16 @@ import UIKit
 
 class EyePopoverViewController: UIViewController, UITextFieldDelegate {
     
+    private enum ShiftState:Int {
+        case notshifted = 0
+        case shiftingright = 1
+        case hasshifted = 2
+        case shiftingleft = 3
+        case forceshiftingleft = 4
+    }
+    private var curShiftState:ShiftState = .notshifted
+    
+    
     @IBAction func BackNavigation(sender: AnyObject) {
         
     }
@@ -25,10 +35,16 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
         }
         switch buttonText {
             case "c":
-                selectedStrikeEyeParameter.placeholder = "prev: \(selectedStrikeEyeParameter.text)"
+                selectedStrikeEyeParameter.placeholder = "\(selectedStrikeEyeParameter!.text!)"
                 selectedStrikeEyeParameter.text = ""
             case ".":
                 if !(selectedStrikeEyeParameter.text?.characters.contains("."))! {
+                    selectedStrikeEyeParameter.insertText(buttonText)
+                    break
+                }
+                if selectedStrikeEyeParameter.text == nil {
+                    selectedStrikeEyeParameter.insertText("0"+buttonText)
+                } else {
                     selectedStrikeEyeParameter.insertText(buttonText)
                 }
             default:
@@ -38,43 +54,41 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    @IBAction func shiftLeft(sender: UITextField) {
-    
+    @IBAction func shift(sender: UITextField) {
         UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {[unowned self] in
-            
-            
             var newFrame = self.view.frame
-            
-            if self.hasShifted {
-                newFrame = CGRect(x: newFrame.minX, y: newFrame.minY, width: newFrame.width-(self.calcView.frame.width), height: newFrame.height)
-            } else {
-                newFrame = CGRect(x: newFrame.minX, y: newFrame.minY, width: newFrame.width+(self.calcView.frame.width), height: newFrame.height)
-            }
-            
             var contFrame = self.containerView.frame
-            if self.hasShifted {
-                contFrame.origin.x -= self.calcView.frame.width
-            } else {
+            
+            switch self.curShiftState {
+            case .shiftingleft, .forceshiftingleft:
+                newFrame = CGRect(x: newFrame.minX, y: newFrame.minY, width: newFrame.width-(self.calcView.frame.width), height: newFrame.height)
+                    contFrame.origin.x -= self.calcView.frame.width
+            case .shiftingright:
+                newFrame = CGRect(x: newFrame.minX, y: newFrame.minY, width: newFrame.width+(self.calcView.frame.width), height: newFrame.height)
                 contFrame.origin.x += self.calcView.frame.width
+            default: break
             }
             self.view.frame = newFrame
             self.preferredContentSize = newFrame.size
             self.containerView.frame = contFrame
             }, completion: {
-                [weak self]finished in
+                [weak self, weak sender]finished in
                 print("I AM COMPLETING")
                 if (self != nil) {
-                    if self!.hasShifted {
-                        sender.selectAll(nil)
-                    } else {
-                        self?.selectedStrikeEyeParameter?.unmarkText()
-
+                    switch self?.curShiftState {
+                    case .shiftingright?:
+                       self?.curShiftState = .hasshifted
+                       sender?.becomeFirstResponder()
+                    //sender?.selectAll(nil)
+                    case .shiftingleft?:
+                       self?.curShiftState = .notshifted
+                    case .forceshiftingleft?:
+                        self?.curShiftState = .notshifted
+                    default: break
                     }
-                }
                 print("I AM COMPLETED")
+                }
             })
-        
-        hasShifted = !hasShifted
     }
     
     @IBOutlet weak var buySellLabel: UILabel!
@@ -89,7 +103,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var calcView: UIView!
     
     
-    var orderType:Order = Order.NA
+    
     
     var hasShifted = false
     
@@ -102,32 +116,22 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
     
     weak var currentTextField:UITextField?
     
+    var orderType:Order = Order.NA
     var isMonthEye:Bool = false
     var isBuy:Bool = false
-    
     var strikeJSON:JSON?
+    
     
     weak var currentContainer:MonthContainer?
     weak var currentEye:Eye?
     weak var currentDate:NSDate!
     
-    
-    //weak var newView = ((UINib.init(nibName: "InputView", bundle: nil)).instantiateWithOwner(nil, options: nil)[0] as! UIView)
-    //weak var closure:EyePopoverViewController? = (self as? EyePopoverViewController)
-    
     deinit {
         //print("deinit: eyepopoverVC")
-        /*
-         strikeJSON = nil
-         selectedStrikeEyeParameter = nil
-         editEyeViewController = nil
-         currentListing = nil
-         currentEye = nil
-         */
     }
     
     override func viewDidLoad() {
-        
+        super.viewDidLoad()
         if let strikeJS = strikeJSON {
             currentDate = smileDateFormat.dateFromString((strikeJS["odate"].stringValue))
             currentContainer = currentListing.getContainerByDate(currentDate)
@@ -137,8 +141,10 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
                 currentContainer = currentListing.getContainerByDate(currentDate)
             }
             
+            
             if isMonthEye {
                 currentEye = currentContainer?.GetMonthByOrder(orderType)
+                print("current EYE  \(currentEye)")
                 //currentContainer.GetMonthByOrder()
             } else {
                 if let currentEyes:[StrikeEye] = currentContainer?.GetStrikesByOrder(orderType) {
@@ -164,6 +170,14 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
             } else {
                 strike.text = removeAfterCharacter(Source: strikeJS["strike"].stringValue, Character: ".", CutOffIndex: 1)
             }
+            
+            print(currentEye)
+            editEyeViewController!.isMonthEye = isMonthEye
+            editEyeViewController!.currentListing = currentListing
+            editEyeViewController!.strikeJSON = strikeJSON
+            
+            editEyeViewController!.currentEye = currentEye
+            editEyeViewController!.setDelegates(self)
         } else {
             
             let demoMonth =  currentListing.registeredMonthContainers[0]
@@ -177,34 +191,42 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
             }
             
         }
-        print("currentEye: viewDidLoad:  \(currentEye)")
-        
-        print("DEBUG: POPOVER - VIEWDIDLOAD - EyeInfo: \(currentEye)")
-        super.viewDidLoad()
-        
     }
     
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        curShiftState = .forceshiftingleft
         view.endEditing(true)
+        
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         textField.inputView = UIView()
-        return true
+        switch curShiftState {
+        case .notshifted:
+            curShiftState = .shiftingright
+            shift(textField)
+            return false
+        case .hasshifted:
+            return true
+        default:
+            return false
+        }
+        
     }
     func textFieldDidBeginEditing(textField: UITextField) {
-        
+        textField.selectAll(nil)
         selectedStrikeEyeParameter = textField
-        
-        if hasShifted == false {
-            shiftLeft(textField)
-        }
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        shiftLeft(textField)
-        textField.resignFirstResponder()
+        switch curShiftState {
+        case .forceshiftingleft:
+            curShiftState = .shiftingleft
+            shift(textField)
+        default:
+            textField.resignFirstResponder()
+        }
         //textField.inputView = nil
         
     }
@@ -213,14 +235,6 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
         if segue.identifier == "editeye" {
             print("segue")
             let editEye = (segue.destinationViewController as! EditEyeViewController)
-            print(currentEye)
-            editEye.isMonthEye = isMonthEye
-            editEye.currentListing = currentListing
-            editEye.strikeJSON = strikeJSON
-            
-            editEye.currentEye = currentEye
-            
-            editEye.setDelegates(self)
             editEyeViewController = editEye
         }
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditEyeViewController: UIViewController {
+class EditEyeViewController: UIViewController, UITableViewDelegate {
     
     /*
      // Only override drawRect: if you perform custom drawing.
@@ -25,20 +25,19 @@ class EditEyeViewController: UIViewController {
     @IBOutlet weak var highDelta: UITextField!
     @IBOutlet weak var totalDelta: UITextField!
     
-    
-    
     weak var delegateController:UITextFieldDelegate?
     weak var currentListing:Listing?
     weak var currentEye:Eye?
     var strikeJSON:JSON?
     
+    @IBOutlet weak var MarketTable: UITableView!
     @IBOutlet var lowDeltaCollection: [UIView]!
     @IBOutlet var highDeltaCollection: [UIView]!
     @IBOutlet var totalDeltaCollection: [UIView]!
     
     var isMonthEye = true
     
-    @IBAction func testChangeValue(sender: AnyObject) {
+    func testChangeValue(sender: AnyObject) {
         let senderBtn:QuickChangeButton = (sender as! QuickChangeButton)
         let amount = senderBtn.changeAmount
         print(senderBtn.labelToChange)
@@ -61,21 +60,26 @@ class EditEyeViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
+    func setupValues() {
         
+    }
+    
+    override func viewWillAppear(animated:Bool) {
+        super.viewWillAppear(animated)
         if currentEye == nil {
             if let strikeJS = strikeJSON {
                 print("strikeJS did enter")
                 if isMonthEye {
                     print("isMonthEye")
                     let newMonthListing:MonthEye = MonthEye(strikeJSON: strikeJS, Symbol: currentListing!.listingSymbol, SecurityId: currentListing!.listingId)
-                    currentEye = newMonthListing
-                    print(newMonthListing)
+                    currentEye = newMonthListing as Eye
+                    print(currentEye)
                 } else {
                     print("isStrikeEye")
                     let newStrikeListing:StrikeEye = StrikeEye(strikeJSON: strikeJS, Symbol: currentListing!.listingSymbol, SecurityId: currentListing!.listingId)
-                    currentEye = newStrikeListing
+                    currentEye = newStrikeListing as Eye
                     print(newStrikeListing)
+                    print(currentEye)
                 }
             }
         }
@@ -141,5 +145,7 @@ class EditEyeViewController: UIViewController {
             textField.text = String(textAmount + amount)
         }
     }
+    
+    
     
 }
