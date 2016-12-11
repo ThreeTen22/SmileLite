@@ -129,7 +129,6 @@ class EyeBook {
     }
     
     
-    
     func getListingAtIndex(index:Int) -> Listing? {
         if listings.count <= index {
             return nil

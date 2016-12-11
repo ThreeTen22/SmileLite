@@ -195,9 +195,13 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
     
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        curShiftState = .forceshiftingleft
-        view.endEditing(true)
-        
+        switch curShiftState {
+        case .hasshifted, .shiftingleft:
+            curShiftState = .forceshiftingleft
+            view.endEditing(true)
+        default:
+            break
+        }
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
@@ -220,6 +224,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
+        
         switch curShiftState {
         case .forceshiftingleft:
             curShiftState = .shiftingleft
@@ -227,7 +232,6 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
         default:
             textField.resignFirstResponder()
         }
-        //textField.inputView = nil
         
     }
     
