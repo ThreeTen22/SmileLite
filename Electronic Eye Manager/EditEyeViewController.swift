@@ -18,12 +18,12 @@ class EditEyeViewController: UIViewController, UITableViewDelegate {
      }
      */
     
-    @IBOutlet weak var maxQuantity: UITextField!
-    @IBOutlet weak var maxDelta: UITextField!
-    @IBOutlet weak var minEdge: UITextField!
-    @IBOutlet weak var lowDelta: UITextField!
-    @IBOutlet weak var highDelta: UITextField!
-    @IBOutlet weak var totalDelta: UITextField!
+    @IBOutlet weak var maxQuantity: EditEyeParameter!
+    @IBOutlet weak var maxDelta: EditEyeParameter!
+    @IBOutlet weak var minEdge: EditEyeParameter!
+    @IBOutlet weak var lowDelta: EditEyeParameter!
+    @IBOutlet weak var highDelta: EditEyeParameter!
+    @IBOutlet weak var totalDelta: EditEyeParameter!
     
     weak var delegateController:UITextFieldDelegate?
     weak var currentListing:Listing?
@@ -86,14 +86,15 @@ class EditEyeViewController: UIViewController, UITableViewDelegate {
         print("quantityViewDidLoad: \(currentEye)")
         
         if let curEye = currentEye {
-            maxQuantity.text = "\(curEye.quantity)"
-            maxDelta.text = "\(curEye.delta)"
-            minEdge.text = "\(curEye.minEdge)"
+            
+            maxQuantity.setupText("\(curEye.quantity)")
+            maxDelta.setupText("\(curEye.delta)")
+            minEdge.setupText("\(curEye.minEdge)")
             if isMonthEye {
                 weak var me:MonthEye! = (curEye as? MonthEye)
-                lowDelta.text = "\(me.minDelta)"
-                highDelta.text = "\(me.maxDelta)"
-                totalDelta.text = "\(me.totalDelta)"
+                lowDelta.setupText("\(me.minDelta)")
+                highDelta.setupText("\(me.maxDelta)")
+                totalDelta.setupText("\(me.totalDelta)")
                 me = nil
             }
         }
@@ -140,10 +141,15 @@ class EditEyeViewController: UIViewController, UITableViewDelegate {
         delegateController = deleController
     }
     
-    func modifyTextField(textField:UITextField, amount:Double) {
+    func modifyTextField(textField:EditEyeParameter, amount:Double) {
+        //if textField.textRangeFromPosition(, toPosition: <#T##UITextPosition#>)
         if let textAmount:Double = Double(textField.text!) {
             textField.text = String(textAmount + amount)
+            //textField.replaceRange(textField., withText: <#T##String#>)
+        } else {
+            textField.text = String(amount)
         }
+        
     }
     
     

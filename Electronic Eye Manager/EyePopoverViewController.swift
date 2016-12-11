@@ -35,18 +35,25 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate {
         }
         switch buttonText {
             case "c":
-                selectedStrikeEyeParameter.placeholder = "\(selectedStrikeEyeParameter!.text!)"
                 selectedStrikeEyeParameter.text = ""
             case ".":
-                if !(selectedStrikeEyeParameter.text?.characters.contains("."))! {
-                    selectedStrikeEyeParameter.insertText(buttonText)
+                
+                if selectedStrikeEyeParameter.text! == "" {
+                    selectedStrikeEyeParameter.insertText("0"+buttonText)
                     break
                 }
-                if selectedStrikeEyeParameter.text == nil {
-                    selectedStrikeEyeParameter.insertText("0"+buttonText)
-                } else {
-                    selectedStrikeEyeParameter.insertText(buttonText)
+                
+                if (selectedStrikeEyeParameter.text?.characters.contains(Character(buttonText)))! {
+                    if let textRange = selectedStrikeEyeParameter.selectedTextRange {
+                        if let selectedText = selectedStrikeEyeParameter.textInRange(textRange) {
+                            if selectedText.containsString(buttonText) {
+                             selectedStrikeEyeParameter.insertText(buttonText)
+                            }
+                            break
+                        }
+                    }
                 }
+            
             default:
                 selectedStrikeEyeParameter.insertText(buttonText)
             

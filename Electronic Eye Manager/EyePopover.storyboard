@@ -253,226 +253,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="800" height="256"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0V8-p4-bKk">
-                                <rect key="frame" x="404" y="85" width="184" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Total Delta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fvm-3Z-Bry">
-                                        <rect key="frame" x="0.0" y="0.0" width="184" height="14.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="Ei6-LS-ZNX">
-                                        <rect key="frame" x="0.0" y="14.5" width="184" height="30"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3G-i8-I3j" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
-                                                <state key="normal" title="&lt;&lt;">
-                                                    <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="totalDelta"/>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
-                                                        <integer key="value" value="-100"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jAd-In-azG" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="26" y="0.0" width="30" height="30"/>
-                                                <state key="normal" title="&lt;">
-                                                    <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="totalDelta"/>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
-                                                        <integer key="value" value="-10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="7Ok-4H-6uH" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="52" y="0.0" width="80" height="30"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="80" id="3Hf-GE-wbz"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                                            </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RsT-4j-GVW" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="128" y="0.0" width="30" height="30"/>
-                                                <state key="normal" title="&gt;">
-                                                    <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="totalDelta"/>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wp0-Ml-mfR" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="154" y="0.0" width="30" height="30"/>
-                                                <state key="normal" title="&gt;&gt;">
-                                                    <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="totalDelta"/>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
-                                                        <integer key="value" value="100"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MyX-Sg-4Ni">
-                                <rect key="frame" x="212" y="85" width="184" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="High Delta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xF6-ex-m6f">
-                                        <rect key="frame" x="0.0" y="0.0" width="184" height="14.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="gtP-UD-LtJ">
-                                        <rect key="frame" x="0.0" y="14.5" width="184" height="30"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ezm-OD-AGI" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
-                                                <state key="normal" title="&lt;&lt;">
-                                                    <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="highDelta"/>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
-                                                        <integer key="value" value="-100"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBj-5t-Dcm" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="26" y="0.0" width="30" height="30"/>
-                                                <state key="normal" title="&lt;">
-                                                    <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="highDelta"/>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
-                                                        <integer key="value" value="-10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="3cs-Gp-ZEN" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="52" y="0.0" width="80" height="30"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="80" id="hA6-3C-no9"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                                            </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEx-JH-Gj2" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="128" y="0.0" width="30" height="30"/>
-                                                <state key="normal" title="&gt;">
-                                                    <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="highDelta"/>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YXz-vH-Ee5" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="154" y="0.0" width="30" height="30"/>
-                                                <state key="normal" title="&gt;&gt;">
-                                                    <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="highDelta"/>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
-                                                        <integer key="value" value="100"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1Z5-Ua-sv8">
-                                <rect key="frame" x="20" y="85" width="184" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Low Delta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8k-kP-1Ld">
-                                        <rect key="frame" x="0.0" y="0.0" width="184" height="14.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="hkA-a3-Ei2">
-                                        <rect key="frame" x="0.0" y="14.5" width="184" height="30"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nsb-Wd-bkr" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
-                                                <state key="normal" title="&lt;&lt;">
-                                                    <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="lowDelta"/>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
-                                                        <integer key="value" value="-100"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ee-1b-r2a" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="26" y="0.0" width="30" height="30"/>
-                                                <state key="normal" title="&lt;">
-                                                    <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="lowDelta"/>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
-                                                        <integer key="value" value="-10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Fbu-LT-zns" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="52" y="0.0" width="80" height="30"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="80" id="TrI-og-UzC"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
-                                            </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTa-SV-Ea3" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="128" y="0.0" width="30" height="30"/>
-                                                <state key="normal" title="&gt;">
-                                                    <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="lowDelta"/>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
-                                                        <integer key="value" value="10"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAb-hS-q9V" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                                <rect key="frame" x="154" y="0.0" width="30" height="30"/>
-                                                <state key="normal" title="&gt;&gt;">
-                                                    <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="lowDelta"/>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
-                                                        <integer key="value" value="100"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="O94-0d-1NA">
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="O94-0d-1NA" userLabel="Max Quantity">
                                 <rect key="frame" x="20" y="24" width="184" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -545,7 +326,7 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GNN-nQ-EJj">
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GNN-nQ-EJj" userLabel="Max Delta">
                                 <rect key="frame" x="212" y="24" width="184" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -618,7 +399,7 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5Wr-z2-Aof">
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5Wr-z2-Aof" userLabel="Min Edge">
                                 <rect key="frame" x="404" y="24" width="184" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -691,6 +472,225 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1Z5-Ua-sv8" userLabel="Low Delta">
+                                <rect key="frame" x="20" y="85" width="184" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Low Delta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8k-kP-1Ld">
+                                        <rect key="frame" x="0.0" y="0.0" width="184" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="hkA-a3-Ei2">
+                                        <rect key="frame" x="0.0" y="14.5" width="184" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nsb-Wd-bkr" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="&lt;&lt;">
+                                                    <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="lowDelta"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
+                                                        <integer key="value" value="-100"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ee-1b-r2a" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                <rect key="frame" x="26" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="&lt;">
+                                                    <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="lowDelta"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
+                                                        <integer key="value" value="-10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Fbu-LT-zns" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                <rect key="frame" x="52" y="0.0" width="80" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="80" id="TrI-og-UzC"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTa-SV-Ea3" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                <rect key="frame" x="128" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="&gt;">
+                                                    <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="lowDelta"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAb-hS-q9V" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                <rect key="frame" x="154" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="&gt;&gt;">
+                                                    <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="lowDelta"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
+                                                        <integer key="value" value="100"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MyX-Sg-4Ni" userLabel="High Delta">
+                                <rect key="frame" x="212" y="85" width="184" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="High Delta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xF6-ex-m6f">
+                                        <rect key="frame" x="0.0" y="0.0" width="184" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="gtP-UD-LtJ">
+                                        <rect key="frame" x="0.0" y="14.5" width="184" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ezm-OD-AGI" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="&lt;&lt;">
+                                                    <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="highDelta"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
+                                                        <integer key="value" value="-100"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBj-5t-Dcm" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                <rect key="frame" x="26" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="&lt;">
+                                                    <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="highDelta"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
+                                                        <integer key="value" value="-10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="3cs-Gp-ZEN" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                <rect key="frame" x="52" y="0.0" width="80" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="80" id="hA6-3C-no9"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEx-JH-Gj2" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                <rect key="frame" x="128" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="&gt;">
+                                                    <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="highDelta"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YXz-vH-Ee5" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                <rect key="frame" x="154" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="&gt;&gt;">
+                                                    <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="highDelta"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
+                                                        <integer key="value" value="100"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0V8-p4-bKk" userLabel="Total Delta">
+                                <rect key="frame" x="404" y="85" width="184" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Total Delta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fvm-3Z-Bry">
+                                        <rect key="frame" x="0.0" y="0.0" width="184" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="Ei6-LS-ZNX">
+                                        <rect key="frame" x="0.0" y="14.5" width="184" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3G-i8-I3j" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="&lt;&lt;">
+                                                    <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="totalDelta"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
+                                                        <integer key="value" value="-100"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jAd-In-azG" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                <rect key="frame" x="26" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="&lt;">
+                                                    <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="totalDelta"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
+                                                        <integer key="value" value="-10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="7Ok-4H-6uH" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                <rect key="frame" x="52" y="0.0" width="80" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="80" id="3Hf-GE-wbz"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RsT-4j-GVW" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                <rect key="frame" x="128" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="&gt;">
+                                                    <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="totalDelta"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wp0-Ml-mfR" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                <rect key="frame" x="154" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="&gt;&gt;">
+                                                    <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="totalDelta"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
+                                                        <integer key="value" value="100"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -698,12 +698,12 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="highDelta" destination="3cs-Gp-ZEN" id="oBW-AG-O79"/>
-                        <outlet property="lowDelta" destination="Fbu-LT-zns" id="Q6W-kI-Tgf"/>
-                        <outlet property="maxDelta" destination="F3W-2r-Fib" id="9iN-CB-Juv"/>
-                        <outlet property="maxQuantity" destination="puo-6t-z6Z" id="Nva-fY-RP0"/>
-                        <outlet property="minEdge" destination="gRm-kz-ZZ9" id="di3-OH-n6P"/>
-                        <outlet property="totalDelta" destination="7Ok-4H-6uH" id="bWD-ze-NUz"/>
+                        <outlet property="highDelta" destination="3cs-Gp-ZEN" id="QD4-c6-7oS"/>
+                        <outlet property="lowDelta" destination="Fbu-LT-zns" id="KWW-8v-Eeg"/>
+                        <outlet property="maxDelta" destination="F3W-2r-Fib" id="GOf-DU-VXG"/>
+                        <outlet property="maxQuantity" destination="puo-6t-z6Z" id="gMt-Sv-obv"/>
+                        <outlet property="minEdge" destination="gRm-kz-ZZ9" id="4Jo-Iv-9kf"/>
+                        <outlet property="totalDelta" destination="7Ok-4H-6uH" id="LxO-w3-4kM"/>
                         <outletCollection property="totalDeltaCollection" destination="Fvm-3Z-Bry" collectionClass="NSMutableArray" id="ZTD-8O-7uy"/>
                         <outletCollection property="totalDeltaCollection" destination="Ei6-LS-ZNX" collectionClass="NSMutableArray" id="EMD-IP-zSk"/>
                         <outletCollection property="highDeltaCollection" destination="xF6-ex-m6f" collectionClass="NSMutableArray" id="jAd-ry-2x2"/>

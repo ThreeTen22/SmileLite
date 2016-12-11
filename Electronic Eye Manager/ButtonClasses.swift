@@ -53,7 +53,6 @@ class QuickChangeButton: UIButton {
     }
     
     deinit {
-        self.removeTarget(nil, action: #selector(EditEyeViewController.testChangeValue(_:)), forControlEvents: .TouchUpInside)
      //print("deinit: QuickchangeButton")
     }
 }

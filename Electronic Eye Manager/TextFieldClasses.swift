@@ -33,7 +33,6 @@ class StrikeCellTextField: UITextField {
      delegate = nil
     }
     
-
 }
 
 class EditEyeParameter:UITextField {
@@ -42,7 +41,13 @@ class EditEyeParameter:UITextField {
         let item:UITextInputAssistantItem = inputAssistantItem
         item.leadingBarButtonGroups = []
         item.trailingBarButtonGroups = []
+        text = ""
     }
+    func setupText(str:String) {
+        self.text = str
+        self.placeholder = str
+    }
+    
     deinit {
         //print("deinit: EditEyeParameters")
     }
