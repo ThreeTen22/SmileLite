@@ -9,5 +9,7 @@
 import UIKit
 
 class EyeSymbolLabel:UILabel {
-
+    deinit {
+     print("eyeSymbolLabel Getwrecked")
+    }
 }

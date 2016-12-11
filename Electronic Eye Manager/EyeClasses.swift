@@ -655,14 +655,7 @@ func enumToIndex(order:Order) -> Int {
         return -1
     }
 }
-
-
-
 var eyebookJSON:JSON = JSON.parse("")
-
-
-
-//Date[0] Strk[1] CBid[2] CAsk[3] CTheo[4] Cpos[5] PBid[6] PAsk[7] PTheo[8] PPos[9], pDelta[10] cDelta[11] (12 total)
 
 
 
