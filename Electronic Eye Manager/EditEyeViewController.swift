@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditEyeViewController: UIViewController, UITableViewDelegate {
+class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     /*
      // Only override drawRect: if you perform custom drawing.
@@ -30,12 +30,14 @@ class EditEyeViewController: UIViewController, UITableViewDelegate {
     weak var currentEye:Eye?
     var strikeJSON:JSON?
     
-    @IBOutlet weak var MarketTable: UITableView!
+    @IBOutlet weak var marketTable: UITableView!
     @IBOutlet var lowDeltaCollection: [UIView]!
     @IBOutlet var highDeltaCollection: [UIView]!
     @IBOutlet var totalDeltaCollection: [UIView]!
     
     var isMonthEye = true
+    
+    var exchanges:Exchanges = Exchanges()
     
     func testChangeValue(sender: AnyObject) {
         let senderBtn:QuickChangeButton = (sender as! QuickChangeButton)
@@ -91,10 +93,10 @@ class EditEyeViewController: UIViewController, UITableViewDelegate {
             maxDelta.setupText("\(curEye.delta)")
             minEdge.setupText("\(curEye.minEdge)")
             if isMonthEye {
-                weak var me:MonthEye! = (curEye as? MonthEye)
-                lowDelta.setupText("\(me.minDelta)")
-                highDelta.setupText("\(me.maxDelta)")
-                totalDelta.setupText("\(me.totalDelta)")
+                weak var me:MonthEye? = (curEye as? MonthEye)
+                lowDelta.setupText("\(me?.minDelta)")
+                highDelta.setupText("\(me?.maxDelta)")
+                totalDelta.setupText("\(me?.totalDelta)")
                 me = nil
             }
         }
@@ -119,6 +121,13 @@ class EditEyeViewController: UIViewController, UITableViewDelegate {
             }
         }
         self.view!.backgroundColor = Layout.monthEyeBGColor
+        
+        
+        marketTable.dataSource = self
+        marketTable.delegate = self
+        marketTable.reloadData()
+        
+        delegateController = nil
         //self.view.insertSubview(newView as! UIView, atIndex: 0)
         //self.view.insertSubview(testView, atIndex: 0)
         
@@ -133,9 +142,20 @@ class EditEyeViewController: UIViewController, UITableViewDelegate {
         //totalDeltaCollection.removeAll()
         currentListing = nil
         delegateController = nil
+        //marketTable.dataSource = nil
+        //marketTable.delegate = nil
 
     }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 12
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Market", forIndexPath: indexPath)
+        (cell.viewWithTag(1) as! UILabel).text = exchanges.exchangeNames(indexPath.row)
+        return cell
+    }
     
     func setDelegates(deleController:UITextFieldDelegate) {
         delegateController = deleController

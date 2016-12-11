@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EyePopoverViewController: UIViewController, UITextFieldDelegate {
+class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate  {
     
     private enum ShiftState:Int {
         case notshifted = 0

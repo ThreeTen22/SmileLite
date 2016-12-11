@@ -45,7 +45,7 @@ struct Exchanges {
     var exchange15 = 0
     
     
-    static func exchangeNames(exchangeNum:Int) ->String {
+    func exchangeNames(exchangeNum:Int) ->String {
         
         switch exchangeNum {
         case 1:
