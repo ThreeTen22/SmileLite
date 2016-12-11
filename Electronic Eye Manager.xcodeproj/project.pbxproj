@@ -35,6 +35,7 @@
 		9BEA428E1D3EBBA700BC4B0C /* ytcpsocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA42891D3EBBA700BC4B0C /* ytcpsocket.swift */; };
 		9BEA428F1D3EBBA700BC4B0C /* yudpsocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA428A1D3EBBA700BC4B0C /* yudpsocket.c */; };
 		9BEA42901D3EBBA700BC4B0C /* yudpsocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEA428B1D3EBBA700BC4B0C /* yudpsocket.swift */; };
+		9BF562241DFDF78200B5D517 /* LargeGlobalVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF562231DFDF78200B5D517 /* LargeGlobalVars.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		9BEA42891D3EBBA700BC4B0C /* ytcpsocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ytcpsocket.swift; sourceTree = "<group>"; };
 		9BEA428A1D3EBBA700BC4B0C /* yudpsocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = yudpsocket.c; sourceTree = "<group>"; };
 		9BEA428B1D3EBBA700BC4B0C /* yudpsocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = yudpsocket.swift; sourceTree = "<group>"; };
+		9BF562231DFDF78200B5D517 /* LargeGlobalVars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargeGlobalVars.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 		9B66D35C1D073EFC0099C670 /* Electronic Eye Manager */ = {
 			isa = PBXGroup;
 			children = (
+				9BF562231DFDF78200B5D517 /* LargeGlobalVars.swift */,
 				9B66D35D1D073EFC0099C670 /* AppDelegate.swift */,
 				9B66D3721D073FCE0099C670 /* globalClass.swift */,
 				9BEA42751D3C8DEF00BC4B0C /* EyeClasses.swift */,
@@ -204,7 +207,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = Skullcup;
 				TargetAttributes = {
 					9B66D3591D073EFC0099C670 = {
@@ -266,6 +269,7 @@
 				9BEA42901D3EBBA700BC4B0C /* yudpsocket.swift in Sources */,
 				9B66D3661D073EFC0099C670 /* Electronic_Eye_Manager.xcdatamodeld in Sources */,
 				9BEA42701D3701B100BC4B0C /* CollectionViews.swift in Sources */,
+				9BF562241DFDF78200B5D517 /* LargeGlobalVars.swift in Sources */,
 				9B927F5C1DED460F00209D79 /* StrikeCollectionViewCell.swift in Sources */,
 				9BEA428C1D3EBBA700BC4B0C /* ysocket.swift in Sources */,
 				9BB51B021DF15D2D005485F4 /* EditEyeViewController.swift in Sources */,
@@ -306,8 +310,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -352,8 +358,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -372,6 +380,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
