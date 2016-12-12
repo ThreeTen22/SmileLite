@@ -64,20 +64,20 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
     
     @IBAction func shift(sender: UITextField) {
         UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {[unowned self] in
-            var newFrame = self.view.frame
+            //var newFrame = self.view.frame
             var contFrame = self.containerView.frame
             
             switch self.curShiftState {
             case .shiftingleft, .forceshiftingleft:
-                newFrame = CGRect(x: newFrame.minX, y: newFrame.minY, width: newFrame.width-(self.calcView.frame.width), height: newFrame.height)
-                    contFrame.origin.x -= self.calcView.frame.width
+                //newFrame = CGRect(x: newFrame.minX, y: newFrame.minY, width: newFrame.width-(self.calcView.frame.width), height: newFrame.height)
+                    contFrame.origin.x -= self.calcView.bounds.width
             case .shiftingright:
-                newFrame = CGRect(x: newFrame.minX, y: newFrame.minY, width: newFrame.width+(self.calcView.frame.width), height: newFrame.height)
-                contFrame.origin.x += self.calcView.frame.width
+                //newFrame = CGRect(x: newFrame.minX, y: newFrame.minY, width: newFrame.width+(self.calcView.frame.width), height: newFrame.height)
+                contFrame.origin.x += self.calcView.bounds.width
             default: break
             }
-            self.view.frame = newFrame
-            self.preferredContentSize = newFrame.size
+            //self.view.frame = newFrame
+            //self.preferredContentSize = newFrame.size
             self.containerView.frame = contFrame
             }, completion: {
                 [weak self, weak sender]finished in
@@ -142,7 +142,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        
         closeButton.setFAIcon(FAType.FAClose, iconSize: 30.0, forState: .Normal)
         closeButton.setFATitleColor(Layout.eyeCancelButtonColor)
         
@@ -210,6 +210,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
         //marketTable.dataSource = self
         //marketTable.delegate = self
         //marketTable.reloadData()
+        super.viewDidLoad()
     }
     
     

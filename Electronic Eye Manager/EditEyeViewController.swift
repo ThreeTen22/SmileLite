@@ -99,6 +99,7 @@ class EditEyeViewController: UIViewController {
             }
         }
         self.view!.backgroundColor = Layout.monthEyeBGColor
+        self.view!.viewWithTag(1337)?.backgroundColor = Layout.monthEyeBGColor
         
         
         delegateController = nil

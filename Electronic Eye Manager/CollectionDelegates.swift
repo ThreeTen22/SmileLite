@@ -134,6 +134,7 @@ struct MonthCollectionDelegate {
         //print("selectedListingmaturities: \(selectedListing.listingMaturities) \n\n\n selectedlstingStrikes: \(selectedListing.visibleStrikes)")
         
         //collectionView.reloadData()
+        /*
         let nsCount: NSMutableIndexSet = NSMutableIndexSet()
         for i in 0..<(collectionView.delegate as! EyeBookViewController).numberOfSectionsInTableView((collectionView.delegate as! EyeBookViewController).eyeBookTableView) {
             nsCount.addIndex(i)
@@ -142,6 +143,8 @@ struct MonthCollectionDelegate {
         (collectionView.delegate as! EyeBookViewController).eyeBookTableView.reloadSections(nsCount, withRowAnimation: .Automatic)
         //(collectionView.delegate as! EyeBookViewController).eyeBookTableView.reloadData()
         (collectionView.delegate as! EyeBookViewController).eyeBookTableView.endUpdates()
+         */
+        (collectionView.delegate as! EyeBookViewController).eyeBookTableView.reloadData()
     }
     
 }
