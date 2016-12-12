@@ -9,6 +9,7 @@
 import UIKit
 
 var eyeBook:EyeBook = EyeBook()
+var eyebookJSON:JSON = JSON(nilLiteral: ())
 
 var usingDemo = false
 
@@ -440,10 +441,4 @@ func getEyes(success:Bool, errmsg:String, client:TCPClient) -> String {
     }
     //print("eyes: Using demo data")
     return eyebookRaw
-}
-
-
-
-class globalClass: NSObject {
-
 }

@@ -16,7 +16,7 @@ class ListingFilterButton: UIButton {
     }
 }
 
-
+//button for the calculator
 class CalcButton: UIButton {
     
     override func awakeFromNib() {
@@ -43,7 +43,7 @@ class CalcButton: UIButton {
     }
 }
 
-
+//button to control quick changes to the :labelToChange textfields by :changeAmount
 class QuickChangeButton: UIButton {
     var labelToChange: String = ""
     var changeAmount: Double = 0.0
@@ -56,3 +56,12 @@ class QuickChangeButton: UIButton {
      //print("deinit: QuickchangeButton")
     }
 }
+
+
+class ExchangeOrderType: UIButton {
+    
+    override func awakeFromNib() {
+        //self.bounds.
+    }
+}
+

@@ -44,6 +44,12 @@ struct Exchanges {
     var exchange14 = 0
     var exchange15 = 0
     
+    init() {
+    }
+    
+    init(fromEyeJson eye:JSON) {
+        
+    }
     
     func exchangeNames(exchangeNum:Int) ->String {
         
@@ -81,7 +87,7 @@ struct Exchanges {
         case 16:
             return "Edgx"
         default:
-            return "Unknown17+"
+            return "Unknown17"
         }
     }
 }
@@ -488,7 +494,7 @@ class Eye {
     var quantity = 0
     var delta = 0.0
     var securityId = 0
-    
+    var eyeJson:JSON
     
     var jsonIndex:Int = -1
     
@@ -503,11 +509,11 @@ class Eye {
         expDateString = date
         expDate = smileDateFormat.dateFromString(date)!
         totalDelta = tDelta
-
+        eyeJson = JSON(nilLiteral: ())
     }
     
     init(eyeDict:JSON) {
-        
+        eyeJson = eyeDict
         symbol = eyeDict["name"].stringValue
         expDateString = (eyeDict["edate"].stringValue)
         expDate = smileDateFormat.dateFromString(expDateString)!
@@ -540,7 +546,7 @@ class Eye {
         totalDelta = tDelta
         expDateString = strikeJSON["odate"].stringValue
         expDate = smileDateFormat.dateFromString(expDateString)!
-        
+        eyeJson = JSON(nilLiteral: ())
     }
     
     
@@ -550,6 +556,7 @@ class Eye {
         expDate = NSDate()
         expDateString = ""
         totalDelta = 1000.0
+        eyeJson = JSON(nilLiteral: ())
     }
     
 }
@@ -655,7 +662,6 @@ func enumToIndex(order:Order) -> Int {
         return -1
     }
 }
-var eyebookJSON:JSON = JSON.parse("")
 
 
 

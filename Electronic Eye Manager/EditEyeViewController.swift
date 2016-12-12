@@ -37,7 +37,7 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var isMonthEye = true
     
-    var exchanges:Exchanges = Exchanges()
+    var exchanges:Exchanges!
     
     func testChangeValue(sender: AnyObject) {
         let senderBtn:QuickChangeButton = (sender as! QuickChangeButton)
@@ -62,54 +62,33 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    func setupValues() {
-        
+    func printChar(chars: String.CharacterView) {
+        var newString:String = ""
+        for char in chars {
+            newString += " \(char)"
+        }
+        print(newString)
     }
     
+    
     override func viewWillAppear(animated:Bool) {
-        super.viewWillAppear(animated)
+        
+        
         if currentEye == nil {
-            if let strikeJS = strikeJSON {
-                print("strikeJS did enter")
-                if isMonthEye {
-                    print("isMonthEye")
-                    let newMonthListing:MonthEye = MonthEye(strikeJSON: strikeJS, Symbol: currentListing!.listingSymbol, SecurityId: currentListing!.listingId)
-                    currentEye = newMonthListing as Eye
-                    print(currentEye)
-                } else {
-                    print("isStrikeEye")
-                    let newStrikeListing:StrikeEye = StrikeEye(strikeJSON: strikeJS, Symbol: currentListing!.listingSymbol, SecurityId: currentListing!.listingId)
-                    currentEye = newStrikeListing as Eye
-                    print(newStrikeListing)
-                    print(currentEye)
-                }
-            }
+            createDemoEye()
+            exchanges = Exchanges()
+        } else {
+            exchanges = Exchanges(fromEyeJson: currentEye!.eyeJson)
         }
         print("quantityViewDidLoad: \(currentEye)")
         
         if let curEye = currentEye {
-            
-            maxQuantity.setupText("\(curEye.quantity)")
-            maxDelta.setupText("\(curEye.delta)")
-            minEdge.setupText("\(curEye.minEdge)")
-            if isMonthEye {
-                weak var me:MonthEye? = (curEye as? MonthEye)
-                lowDelta.setupText("\(me?.minDelta)")
-                highDelta.setupText("\(me?.maxDelta)")
-                totalDelta.setupText("\(me?.totalDelta)")
-                me = nil
-            }
+            setupTextFields(curEye)
         }
         // maxQuantity.note
-        maxQuantity.delegate = delegateController
-        maxDelta.delegate = delegateController
-        minEdge.delegate = delegateController
         
-        if isMonthEye {
-            lowDelta.delegate = delegateController
-            highDelta.delegate = delegateController
-            totalDelta.delegate = delegateController
-        } else {
+        linkDelegates()
+        if !isMonthEye {
             for view in lowDeltaCollection {
                 view.hidden = true
             }
@@ -122,15 +101,14 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         self.view!.backgroundColor = Layout.monthEyeBGColor
         
-        
+        marketTable.backgroundColor = Layout.monthEyeBGColor
         marketTable.dataSource = self
         marketTable.delegate = self
         marketTable.reloadData()
         
         delegateController = nil
-        //self.view.insertSubview(newView as! UIView, atIndex: 0)
-        //self.view.insertSubview(testView, atIndex: 0)
         
+        super.viewWillAppear(animated)
     }
     
     deinit {
@@ -147,6 +125,48 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     }
     
+    func createDemoEye() {
+        if let strikeJS = strikeJSON {
+            print("strikeJS did enter")
+            if isMonthEye {
+                print("isMonthEye")
+                let newMonthListing:MonthEye = MonthEye(strikeJSON: strikeJS, Symbol: currentListing!.listingSymbol, SecurityId: currentListing!.listingId)
+                currentEye = newMonthListing as Eye
+                print(currentEye)
+            } else {
+                print("isStrikeEye")
+                let newStrikeListing:StrikeEye = StrikeEye(strikeJSON: strikeJS, Symbol: currentListing!.listingSymbol, SecurityId: currentListing!.listingId)
+                currentEye = newStrikeListing as Eye
+                print(newStrikeListing)
+                print(currentEye)
+            }
+        }
+    }
+    
+    func setupTextFields(curEye:Eye) {
+        maxQuantity.setupText("\(curEye.quantity)")
+        maxDelta.setupText("\(curEye.delta)")
+        minEdge.setupText("\(curEye.minEdge)")
+        if isMonthEye {
+            if let me = (curEye as? MonthEye) {
+                lowDelta.setupText("\(me.minDelta)")
+                highDelta.setupText("\(me.maxDelta)")
+                totalDelta.setupText("\(me.totalDelta)")
+            }
+        }
+    }
+    
+    func linkDelegates() {
+        maxQuantity.delegate = delegateController
+        maxDelta.delegate = delegateController
+        minEdge.delegate = delegateController
+        if isMonthEye {
+            lowDelta.delegate = delegateController
+            highDelta.delegate = delegateController
+            totalDelta.delegate = delegateController
+        }
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 12
     }
@@ -154,24 +174,26 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Market", forIndexPath: indexPath)
         (cell.viewWithTag(1) as! UILabel).text = exchanges.exchangeNames(indexPath.row)
+        //cell.selected = true
+        //cell.accessoryType = UITableViewCellAccessoryType.Checkmark
         return cell
     }
+    
     
     func setDelegates(deleController:UITextFieldDelegate) {
         delegateController = deleController
     }
     
     func modifyTextField(textField:EditEyeParameter, amount:Double) {
-        //if textField.textRangeFromPosition(, toPosition: <#T##UITextPosition#>)
         if let textAmount:Double = Double(textField.text!) {
             textField.text = String(textAmount + amount)
-            //textField.replaceRange(textField., withText: <#T##String#>)
         } else {
             textField.text = String(amount)
         }
         
     }
     
-    
-    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
 }

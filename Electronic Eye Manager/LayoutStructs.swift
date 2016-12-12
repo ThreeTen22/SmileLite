@@ -10,37 +10,40 @@ import UIKit
 
 struct Layout {
     
-    static var eyeBookBGColor = UIColor(red255: 254, green: 230, blue: 184)
+    static let eyeBookBGColor:UIColor = UIColor(red255: 254, green: 230, blue: 184)
     
-    static var eyeBookListingCollectionBGColor = UIColor(red255: 213, green: 181, blue: 142)
+    static let eyeBookListingCollectionBGColor:UIColor = UIColor(red255: 213, green: 181, blue: 142)
     
-    static var eyeBookListingTableCellBGColor = UIColor(red255: 189, green: 189, blue: 189)
+    static let eyeBookListingTableCellBGColor:UIColor = UIColor(red255: 189, green: 189, blue: 189)
     
-    static var strikeTitleBGColor = UIColor(red255: 2, green: 13, blue: 130)
+    static let strikeTitleBGColor:UIColor = UIColor(red255: 2, green: 13, blue: 130)
     
-    static var strikeMaturityBGColorDark = UIColor(red255: 25, green: 29, blue: 113)
-    static var strikeMaturityBGColorLight = UIColor(red255: 74, green: 60, blue: 138)
+    static let strikeMaturityBGColorDark:UIColor = UIColor(red255: 25, green: 29, blue: 113)
+    static let strikeMaturityBGColorLight:UIColor = UIColor(red255: 74, green: 60, blue: 138)
     
-    static var strikeDefaultBGColor = UIColor.whiteColor()
-    static var strikeDefaultTextColorDark = UIColor.blackColor()
+    static let strikeDefaultBGColor:UIColor = UIColor.whiteColor()
+    static let strikeDefaultTextColorDark:UIColor = UIColor.blackColor()
     
-    static var strikeDefaultTextColorLight = UIColor.whiteColor()
+    static let strikeDefaultTextColorLight:UIColor = UIColor.whiteColor()
     
     
-    static var strikePositionBGColor = UIColor(red255: 41, green: 250, blue: 46)
-    static var strikePositionTextColorLong = UIColor.blueColor()
-    static var strikePositionTextColorShort = UIColor.redColor()
+    static let strikePositionBGColor:UIColor = UIColor(red255: 41, green: 250, blue: 46)
+    static let strikePositionTextColorLong:UIColor = UIColor.blueColor()
+    static let strikePositionTextColorShort:UIColor = UIColor.redColor()
     
-    static var strikeTheoBGColorNeutral = UIColor.lightGrayColor()
-    static var strikeTheoBGColorAboveValue = UIColor.blueColor()
-    static var strikeTheoBGColorBelowValue = UIColor.redColor()
+    static let strikeTheoBGColorNeutral:UIColor = UIColor.lightGrayColor()
+    static let strikeTheoBGColorAboveValue:UIColor = UIColor.blueColor()
+    static let strikeTheoBGColorBelowValue:UIColor = UIColor.redColor()
     
-    static var monthEyeBGColor = UIColor(red255: 205, green: 205, blue: 225)
+    static let monthEyeBGColor:UIColor = UIColor(red255: 205, green: 205, blue: 225)
     
-    static var monthEyeInstallBGColor =  UIColor(rgb: 0x006600)
-    static var monthEyeTheoButtonBGColor = UIColor(rgb: 0x99cccc)
+    static let monthEyeInstallBGColor:UIColor =  UIColor(rgb: 0x006600)
+    static let monthEyeTheoButtonBGColor:UIColor = UIColor(rgb: 0x99cccc)
     
-    static var errorColor = UIColor(red255: 253, green: 123, blue: 88)
+    static let eyeDeleteButtonColor:UIColor = UIColor.redColor()
+    static let eyeCancelButtonColor:UIColor = UIColor.redColor()
+    
+    static let errorColor:UIColor = UIColor(red255: 253, green: 123, blue: 88)
    
     
     static func setLayout(cell:UIView, label:UILabel, type:StrikeType, altMaturity:Bool = false) {

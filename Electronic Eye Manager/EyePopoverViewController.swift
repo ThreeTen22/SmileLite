@@ -109,6 +109,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var calcView: UIView!
     
+    @IBOutlet weak var closeButton: UIButton!
     
     
     
@@ -139,6 +140,9 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        closeButton.setFAIcon(FAType.FAClose, iconSize: 30.0, forState: .Normal)
+        closeButton.setFATitleColor(Layout.eyeCancelButtonColor)
+        
         if let strikeJS = strikeJSON {
             currentDate = smileDateFormat.dateFromString((strikeJS["odate"].stringValue))
             currentContainer = currentListing.getContainerByDate(currentDate)
