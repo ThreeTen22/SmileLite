@@ -8,9 +8,16 @@
 
 import UIKit
 
+class ExchangeTableView:UITableView {
+    
+    
+}
+
+
 class ExchangesTableCell: UITableViewCell {
 
     var exchangeSelected = false
+    
     @IBOutlet weak var radioButton: UIButton!
     
     @IBOutlet weak var exchangeOrderType: UIButton!

@@ -28,21 +28,26 @@ struct EyeParams {
 
 struct Exchanges {
     
-    var exchange1 = 2
-    var exchange2 = 3
-    var exchange3 = 4
-    var exchange4 = 5
-    var exchange5 = 1
-    var exchange6 = 6
-    var exchange7 = 7
-    var exchange8 = 8
-    var exchange9 = 9
-    var exchange10 = 12
-    var exchange11 = 10
-    var exchange12 = 16
-    var exchange13 = 0
-    var exchange14 = 0
-    var exchange15 = 0
+    typealias ExchangeInfo = (nameIndx:Int, isActive:Bool)
+    
+    var exchange1:ExchangeInfo = (2,true)
+    var exchange2:ExchangeInfo = (3,true)
+    var exchange3:ExchangeInfo = (4,true)
+    var exchange4:ExchangeInfo = (5,true)
+    var exchange5:ExchangeInfo = (1,true)
+    var exchange6:ExchangeInfo = (6,true)
+    var exchange7:ExchangeInfo = (7,true)
+    var exchange8:ExchangeInfo = (8,true)
+    var exchange9:ExchangeInfo = (9,true)
+    var exchange10:ExchangeInfo = (12,true)
+    var exchange11:ExchangeInfo = (10,true)
+    var exchange12:ExchangeInfo = (16,true)
+    var exchange13:ExchangeInfo = (0,true)
+    var exchange14:ExchangeInfo = (0,true)
+    var exchange15:ExchangeInfo = (0,true)
+    
+    var exchangeCount:Int = 12
+    
     
     init() {
     }
@@ -51,7 +56,48 @@ struct Exchanges {
         
     }
     
-    func exchangeNames(exchangeNum:Int) ->String {
+    func exchangeVarByIndex(indx:Int) -> ExchangeInfo? {
+        switch indx {
+            case 1:
+                return exchange1
+            case 2:
+                return exchange2
+            case 3:
+                return exchange3
+            case 4:
+                return exchange4
+            case 5:
+                return exchange5
+            case 6:
+                return exchange6
+            case 7:
+                return exchange7
+            case 8:
+                return exchange8
+            case 9:
+                return exchange9
+            case 10:
+                return exchange10
+            case 11:
+                return exchange11
+            case 12:
+                return exchange12
+            case 13:
+                return exchange13
+            case 14:
+                return exchange14
+            case 15:
+                return exchange15
+            default:
+                return nil
+        }
+    }
+    
+    func count() -> Int {
+        return exchangeCount
+    }
+    
+    static func exchangeNames(exchangeNum:Int) ->String {
         
         switch exchangeNum {
         case 1:
@@ -106,13 +152,13 @@ class EyeBook {
         if addListingsFromEyes(jsonEyesObject) {
             successful = true
         }
-        print("Debug: addListingsFromEyes: successful:  \(successful)")
+        //print("Debug: addListingsFromEyes: successful:  \(successful)")
         
         successful = false
         if addListingsFromPortfolio(jsonPortfolioObject) {
             successful = true
         }
-        print("Debug: addListingsFromPortfolio: successful:  \(successful)")
+        //print("Debug: addListingsFromPortfolio: successful:  \(successful)")
     }
     
     init(fromEyesJSON jsonEyesObject:JSON) {
@@ -121,7 +167,7 @@ class EyeBook {
         if addListingsFromEyes(jsonEyesObject) {
             successful = true
         }
-        print("Debug: addListingsFromEyes: successful:  \(successful)")
+        //print("Debug: addListingsFromEyes: successful:  \(successful)")
         
     }
     
@@ -130,7 +176,7 @@ class EyeBook {
         if addListingsFromPortfolio(jsonPortfolioObject) {
             successful = true
         }
-        print("Debug: addListingsFromPortfolio: successful:  \(successful)")
+        //print("Debug: addListingsFromPortfolio: successful:  \(successful)")
         
     }
     
@@ -156,8 +202,8 @@ class EyeBook {
             
             while currentIndex < (listings.count) {
                 currentListing = listings[currentIndex]
-                print(currentListing?.listingSymbol)
-                print(currentListing?.registeredMonthContainers.count)
+                //print(currentListing?.listingSymbol)
+                //print(currentListing?.registeredMonthContainers.count)
                 if currentListing?.registeredMonthContainers.count == 0 {
                     listings.removeAtIndex(currentIndex)
                     currentIndex = 0
@@ -218,8 +264,9 @@ class EyeBook {
         
         var newMonth:MonthEye!
         var newStrike:StrikeEye!
+        var success = false
         
-        print("eyeExpDate: \(listing.listingSymbol)  \(eyeExpString)  entityType: \(entityType)  strike: \(strike)  mindelta: \(minDelta)")
+        //print("eyeExpDate: \(listing.listingSymbol)  \(eyeExpString)  entityType: \(entityType)  strike: \(strike)  mindelta: \(minDelta)")
         if entityType != 0 {
             if strike != ""{
                 newStrike = StrikeEye(eyeDict: eyeDict)
@@ -232,17 +279,22 @@ class EyeBook {
             
             if let curContainer = listing.getContainerByDate(eyeExpDate) {
                 if strike != "" {
-                    curContainer.AddEye(StrikeEye: newStrike)
+                    
+                    success = curContainer.AddEye(StrikeEye: newStrike)
+                    //print("added strikeeye - curContainer \(success)")
                 } else {
-                    curContainer.AddMonthEye(newMonth)
+                    success = curContainer.AddMonthEye(newMonth)
+                    //print("added strikeeye - curContainer \(success)")
                 }
             } else {
                 let newContainer = MonthContainer(listingSymbol: listing.listingSymbol, exp: eyeExpDate , expString: eyeExpString)
                 if strike != "" {
-                    newContainer.AddEye(StrikeEye: newStrike)
+                    success = newContainer.AddEye(StrikeEye: newStrike)
                     listing.AddContainer(newContainer)
+                    //print("added montheye - newcontainer \(success)")
                 } else if newContainer.AddMonthEye(newMonth) {
-                    print("added Eye")
+                    success = true
+                    //print("added montheye - newcontainer \(success)")
                     listing.AddContainer(newContainer)
                 }
             }
@@ -260,7 +312,7 @@ class Listing {
     
     
     var listingSymbol = ""
-    var listingId = 0
+    var listingId:Int!
     var registeredMonthContainers = [MonthContainer]()
     var notifyOnly:Bool = false
     var isSelectedInEyebook:Bool = false
@@ -282,7 +334,7 @@ class Listing {
     }
     
     deinit {
-        print("Listing: Deinit: Sym: \(listingSymbol)")
+        //print("Listing: Deinit: Sym: \(listingSymbol)")
         visibleStrikes.removeAll()
         listingMaturities.removeAll()
         maturitiesToDisplay.removeAll()
@@ -345,7 +397,7 @@ class Listing {
             }
         }
         
-        visibleStrikes.appendContentsOf(sortedStrikeArray)
+        visibleStrikes = visibleStrikes + sortedStrikeArray
     }
     
     func getVisibleStrikes(index:Int) -> JSON? {
@@ -360,8 +412,6 @@ class Listing {
 
 
 class MonthContainer {
-    
-    
     var listingSymbol:String = ""
     var expDate = NSDate()
     var expDateString:String = ""
@@ -499,7 +549,7 @@ class Eye {
     var jsonIndex:Int = -1
     
     deinit {
-        print("Eye: Deinit")
+        //print("Eye: Deinit")
         
     }
     
@@ -537,7 +587,7 @@ class Eye {
     }
     
     init(strikeJSON:JSON,Symbol sym:String,SecurityId securityId:Int, MinEdge edge:Double = 0.1, Quantity qntity:Int = 1, MaxDelta mxDelta:Double, TotalDelta tDelta:Double = 1000.0) {
-        print("init: eye wStrikeJSON")
+        //print("init: eye wStrikeJSON")
         symbol = sym
         id = securityId
         minEdge = edge
@@ -572,7 +622,7 @@ class MonthEye: Eye {
     override init(eyeDict:JSON) {
         super.init(eyeDict: eyeDict)
         if clientSuccess {
-            print("Mindelta: \(eyeDict["mindelta"].stringValue)")
+            //print("Mindelta: \(eyeDict["mindelta"].stringValue)")
             minDelta = Double(eyeDict["mindelta"].stringValue)!
             maxDelta = Double(eyeDict["maxdelta"].stringValue)!
         } else {

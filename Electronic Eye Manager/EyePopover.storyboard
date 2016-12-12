@@ -187,9 +187,12 @@
                                     <outlet property="delegate" destination="VSb-2t-Cnb" id="APE-gQ-phk"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="end-S1-f5A">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="end-S1-f5A">
                                 <rect key="frame" x="761" y="8" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="bi4-f2-icS"/>
+                                    <constraint firstAttribute="height" constant="30" id="o7a-eA-XAu"/>
+                                </constraints>
                                 <state key="normal" title="O"/>
                             </button>
                         </subviews>
@@ -204,9 +207,11 @@
                             <constraint firstItem="xrz-IN-UoV" firstAttribute="bottom" secondItem="JB3-mF-8YW" secondAttribute="top" id="Ggu-Xf-Hja"/>
                             <constraint firstItem="Usz-IQ-3gq" firstAttribute="leading" secondItem="mBr-ut-jOL" secondAttribute="trailing" constant="8" symbolic="YES" id="GpC-K0-pbq"/>
                             <constraint firstItem="tEl-4r-rKL" firstAttribute="leading" secondItem="6sY-2b-p87" secondAttribute="leading" id="I2R-pm-dVC"/>
+                            <constraint firstAttribute="trailing" secondItem="end-S1-f5A" secondAttribute="trailing" constant="9" id="I8A-dF-uTg"/>
                             <constraint firstItem="xrz-IN-UoV" firstAttribute="leading" secondItem="6sY-2b-p87" secondAttribute="leading" id="LBy-Lr-bvV"/>
                             <constraint firstItem="mBr-ut-jOL" firstAttribute="leading" secondItem="tEl-4r-rKL" secondAttribute="leading" id="LVa-kx-upG"/>
                             <constraint firstAttribute="trailing" secondItem="xrz-IN-UoV" secondAttribute="trailing" constant="340" id="NOP-DI-0v7"/>
+                            <constraint firstItem="end-S1-f5A" firstAttribute="top" secondItem="A5d-LS-CZm" secondAttribute="bottom" constant="8" id="TFe-pR-1cP"/>
                             <constraint firstAttribute="trailing" secondItem="Usz-IQ-3gq" secondAttribute="trailing" constant="354" id="bHM-57-rFZ"/>
                             <constraint firstItem="bZC-IP-z8H" firstAttribute="top" secondItem="A5d-LS-CZm" secondAttribute="bottom" constant="8" symbolic="YES" id="brl-wq-Gcw"/>
                             <constraint firstItem="mBr-ut-jOL" firstAttribute="centerY" secondItem="F5w-G5-5t5" secondAttribute="centerY" constant="-1" id="cbX-av-5md"/>
@@ -478,8 +483,64 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="30" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uX3-Jm-fLM">
+                                <rect key="frame" x="634" y="41" width="166" height="215"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="215" id="Opq-xK-51m"/>
+                                    <constraint firstAttribute="width" constant="166" id="xv8-Il-rj4"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="Market" id="wpi-Xa-lUS" customClass="ExchangesTableCell" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="166" height="30"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wpi-Xa-lUS" id="P9p-tC-yEx">
+                                            <rect key="frame" x="0.0" y="0.0" width="166" height="29"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PQN-wK-Jot">
+                                                    <rect key="frame" x="0.0" y="0.0" width="125" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <button opaque="NO" tag="8" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0q-Hu-BJA">
+                                                            <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="25" id="OEs-Fm-n81"/>
+                                                                <constraint firstAttribute="height" constant="25" id="bjM-KI-TAA"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="12"/>
+                                                            <state key="normal" title="O"/>
+                                                            <connections>
+                                                                <action selector="radioPressed:" destination="wpi-Xa-lUS" eventType="touchUpInside" id="saf-je-sZi"/>
+                                                            </connections>
+                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Wrecked" lineBreakMode="tailTruncation" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEa-Wg-BQz">
+                                                            <rect key="frame" x="25" y="0.0" width="70" height="25"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="70" id="MVO-17-XsW"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XAs-5g-ZbV" customClass="ExchangeOrderType" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <rect key="frame" x="95" y="0.0" width="30" height="25"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                                            <state key="normal" title="IOC"/>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="exchangeOrderType" destination="XAs-5g-ZbV" id="4N4-xD-GWH"/>
+                                            <outlet property="radioButton" destination="T0q-Hu-BJA" id="38p-LT-gAS"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1Z5-Ua-sv8" userLabel="Low Delta">
-                                <rect key="frame" x="20" y="85" width="184" height="45"/>
+                                <rect key="frame" x="20" y="120" width="184" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Low Delta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8k-kP-1Ld">
@@ -552,7 +613,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MyX-Sg-4Ni" userLabel="High Delta">
-                                <rect key="frame" x="212" y="85" width="184" height="45"/>
+                                <rect key="frame" x="212" y="120" width="184" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="High Delta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xF6-ex-m6f">
@@ -625,7 +686,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0V8-p4-bKk" userLabel="Total Delta">
-                                <rect key="frame" x="404" y="85" width="184" height="45"/>
+                                <rect key="frame" x="404" y="120" width="184" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Total Delta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fvm-3Z-Bry">
@@ -697,60 +758,12 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="30" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uX3-Jm-fLM">
-                                <rect key="frame" x="634" y="41" width="166" height="215"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="Market" id="wpi-Xa-lUS" customClass="ExchangesTableCell" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="166" height="30"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wpi-Xa-lUS" id="P9p-tC-yEx">
-                                            <rect key="frame" x="0.0" y="0.0" width="166" height="29"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PQN-wK-Jot">
-                                                    <rect key="frame" x="0.0" y="0.0" width="141" height="25"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <subviews>
-                                                        <button opaque="NO" tag="8" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0q-Hu-BJA">
-                                                            <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="25" id="OEs-Fm-n81"/>
-                                                                <constraint firstAttribute="height" constant="25" id="bjM-KI-TAA"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="12"/>
-                                                            <state key="normal" title="O"/>
-                                                            <connections>
-                                                                <action selector="radioPressed:" destination="wpi-Xa-lUS" eventType="touchUpInside" id="saf-je-sZi"/>
-                                                            </connections>
-                                                        </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Wrecked" lineBreakMode="tailTruncation" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEa-Wg-BQz">
-                                                            <rect key="frame" x="25" y="0.0" width="70" height="25"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="70" id="MVO-17-XsW"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XAs-5g-ZbV">
-                                                            <rect key="frame" x="95" y="0.0" width="46" height="25"/>
-                                                            <state key="normal" title="Button"/>
-                                                        </button>
-                                                    </subviews>
-                                                </stackView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="exchangeOrderType" destination="XAs-5g-ZbV" id="4N4-xD-GWH"/>
-                                            <outlet property="radioButton" destination="T0q-Hu-BJA" id="38p-LT-gAS"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="jcN-zR-Po4" firstAttribute="top" secondItem="uX3-Jm-fLM" secondAttribute="bottom" id="DNV-hx-o0d"/>
+                            <constraint firstAttribute="trailing" secondItem="uX3-Jm-fLM" secondAttribute="trailing" id="oSz-Dh-kKR"/>
+                        </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -758,7 +771,6 @@
                     <connections>
                         <outlet property="highDelta" destination="3cs-Gp-ZEN" id="QD4-c6-7oS"/>
                         <outlet property="lowDelta" destination="Fbu-LT-zns" id="KWW-8v-Eeg"/>
-                        <outlet property="marketTable" destination="uX3-Jm-fLM" id="iS1-7k-hDb"/>
                         <outlet property="maxDelta" destination="F3W-2r-Fib" id="GOf-DU-VXG"/>
                         <outlet property="maxQuantity" destination="puo-6t-z6Z" id="gMt-Sv-obv"/>
                         <outlet property="minEdge" destination="gRm-kz-ZZ9" id="4Jo-Iv-9kf"/>

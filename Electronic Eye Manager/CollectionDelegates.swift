@@ -71,30 +71,32 @@ struct MonthCollectionDelegate {
     }
     
     static func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        unowned let selectedListing = eyeBook.listings[collectionView.tag]
+        let selectedListing:Listing = eyeBook.listings[collectionView.tag]
         //var jsonArray:Array = [JSON]()
-        print(selectedListing.registeredMonthContainers[0].expDate)
+        var tempUsingDemo = usingDemo
+        tempUsingDemo = selectedListing.listingMaturities.isEmpty
+        
         selectedListing.maturitiesToDisplay.removeAll()
         selectedListing.visibleStrikes.removeAll()
         
         //print("DEBUG: COLLECTIONVIEW DID SELECT ITEM: ")
-        //print("selected Listing: \(selectedListing.listingSymbol)")
+        //print("selected Listing: \(selectedListing.listingSymbol)    \(usingDemo)")
         if indexPath.row != 0 {
             //print("DEBUG: Inside ListingCell: ")
             selectedListing.willDisplay = Listing.DisplayType.FilteredStrikes
             
             let monthDate:String = (collectionView.cellForItemAtIndexPath(indexPath)?.viewWithTag(1) as! UILabel).text!
             weak var selectedMonthContainer = selectedListing.getContainerByDate(monthDate)
-            print(selectedMonthContainer)
+            //print(selectedMonthContainer)
             selectedListing.maturitiesToDisplay.append((selectedMonthContainer?.expDate)!)
-            print(selectedListing.maturitiesToDisplay)
+            //print(selectedListing.maturitiesToDisplay)
             for monthContainer in selectedListing.registeredMonthContainers {
                 monthContainer.isActive = false
             }
 
             selectedMonthContainer!.isActive = true
         } else {
-            //print("DEBUG: Inside StrikesCell: ")
+            //print("DEBUG: Inside MonthCollection: ")
             if selectedListing.willDisplay == .AllStrikes {
                 //print("allstrikes: \(selectedListing.willDisplay)")
                 selectedListing.willDisplay = Listing.DisplayType.NoStrikes
@@ -102,13 +104,22 @@ struct MonthCollectionDelegate {
                 //print("nostrikes: \(selectedListing.willDisplay)")
                 selectedListing.willDisplay = Listing.DisplayType.AllStrikes
                 for maturityJSON in selectedListing.listingMaturities {
-                    
-                    selectedListing.maturitiesToDisplay.append(readableDateformat.dateFromString(maturityJSON["edate"].stringValue)!)
+                    let edate = maturityJSON["edate"].stringValue
+                    //print("edate: \(edate)")
+                    let newDate:NSDate = readableDateformat.dateFromString(edate)!
+                    //print("newdate:  \(newDate)")
+                    selectedListing.maturitiesToDisplay.append(newDate)
                 }
             }
             
         }
-        if !usingDemo {
+        
+        if tempUsingDemo {
+            let demoStrikeJSON = JSON.parse(adtnMonthDemoData)
+            let secondDemoStrikeJSON = JSON.parse(anotheradtnMonthData)
+            selectedListing.sortedAppend(demoStrikeJSON.arrayValue)
+            selectedListing.sortedAppend(secondDemoStrikeJSON.arrayValue)
+        } else {
             for date in selectedListing.maturitiesToDisplay {
                 let jsonRaw = getStrikes(clientSuccess, errmsg: clientErrmsg, client: client, listingID: selectedListing.listingId, expDate: date)!
                 //print(jsonRaw)
@@ -118,12 +129,9 @@ struct MonthCollectionDelegate {
                 let maturityJSONArray = maturityRawJSON["payload"][symID][symDate]["rows"].arrayValue
                 selectedListing.sortedAppend(maturityJSONArray)
             }
-        } else {
-                let demoStrikeJSON = JSON.parse(adtnMonthDemoData)
-                let secondDemoStrikeJSON = JSON.parse(anotheradtnMonthData)
-                selectedListing.sortedAppend(demoStrikeJSON.arrayValue)
-                selectedListing.sortedAppend(secondDemoStrikeJSON.arrayValue)
         }
+        
+        //print("selectedListingmaturities: \(selectedListing.listingMaturities) \n\n\n selectedlstingStrikes: \(selectedListing.visibleStrikes)")
         
         //collectionView.reloadData()
         let nsCount: NSMutableIndexSet = NSMutableIndexSet()
@@ -159,14 +167,17 @@ struct StrikeCollectionDelegate {
     static func collectionView(collectionView:UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let modIndx = indexPath.row%18
         let floorIndx =  Int(floor(Double(indexPath.row/18)))
-        unowned let strikeCell = (collectionView.dequeueReusableCellWithReuseIdentifier("StrikeCell", forIndexPath: indexPath) as! StrikeCollectionViewCell)
-        unowned let strikeLabel = (strikeCell.viewWithTag(1) as! UILabel)
+        let strikeCell = (collectionView.dequeueReusableCellWithReuseIdentifier("StrikeCell", forIndexPath: indexPath) as! StrikeCollectionViewCell)
+        let strikeLabel = (strikeCell.viewWithTag(1) as! UILabel)
         
         var useDefaultColoring = false
         var labelText = ""
         
         let listing = eyeBook.listings[collectionView.tag]
         //print("cellforrow:collectionviewTag \(collectionView.tag)")
+        if floorIndx >= listing.visibleStrikes.count {
+            return strikeCell
+        }
         let strikeJSON = listing.visibleStrikes[floorIndx]
         
         strikeCell.listingIndex = collectionView.tag
@@ -365,7 +376,7 @@ struct StrikeCollectionDelegate {
                         }
                         //print("curDelta: \(curDelta)  \(curLowDelta)  \(curHighDelta)")
                         if curDelta >= curLowDelta && curDelta <= curHighDelta  {
-                        print("DEBUG: Month DELEGATE:  Currently GETTING \(curMonthEye.cmdType) MQ/E  - lowdelta: \(curMonthEye.minDelta) - highdelta: \(curMonthEye.maxDelta) ")
+                        //print("DEBUG: Month DELEGATE:  Currently GETTING \(curMonthEye.cmdType) MQ/E  - lowdelta: \(curMonthEye.minDelta) - highdelta: \(curMonthEye.maxDelta) ")
                             success = true
                             q = "\(curMonthEye.quantity)"
                             e = "\(curMonthEye.minEdge)"

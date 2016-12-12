@@ -15,9 +15,6 @@ var usingDemo = false
 
 //var currentStrikeEye:StrikeEye = StrikeEye(symbol: "XON", expDate: "06/27/16", strikePrice: 37.5, priceOverride: 0, quantityOverride: 0)
 
-//                          Stock   Last  Bid 	Ask
-var xonTitleData:NSArray = ["XON", 29.17, 29.14, 29.18]
-
 //will use the keyboard when inputting
 var bWillUseKeyboard = false
 
@@ -146,27 +143,9 @@ func appendZerosToString(numberAsString str:String, MinCharLength charLength:Int
 func readMoreData(client:TCPClient, readData:[UInt8]?, lengthValue:Int, totalData:[UInt8], isFirst:Bool) -> [UInt8] {
     var newTotalData:[UInt8] = totalData
     let recData = readData
-//    var hadError = false
-//    var errorCount = 0
+    
     if recData != nil {
-//        let testString:String? = String(bytes: recData!, encoding: NSASCIIStringEncoding)
-//        if testString == nil {
-//            hadError = true
-//            //print("NIL: \(recData)")
-////            if errorCount%2 == 1 {
-////                recData!.removeLast()
-////            } else {
-////                recData!.removeFirst()
-////            }
-//          testData(recData!)
-//        }
-//       if hadError {
-//        //print("")
-//        //print("ERROR: \(recData!)")
-//        //print("")
-//       } else {
-//        //print(testString)
-//       }
+
         if recData!.count == lengthValue {
                 newTotalData.appendContentsOf(recData!)
                 return newTotalData
@@ -222,7 +201,7 @@ func stringToDate(str:String) -> NSDate {
 
 
 func numberOrZero(number:Double) -> Double {
-    print(number)
+    //print(number)
     if number <= 0.0 {
         return 0.0
     }
@@ -253,7 +232,7 @@ func getStrikes(success:Bool, errmsg:String, client:TCPClient, listingID: Int, e
     
     //print("Debug: GetStrikes: listingID: \(listingID) expDate: \(expDateString)")
     
-    if success {
+    if success  && (usingDemo == false) {
         let (success1, _) = client.send(data: data)
         if success1 {
             //print("strikes: I sent something (1)")
@@ -285,7 +264,7 @@ func getStrikes(success:Bool, errmsg:String, client:TCPClient, listingID: Int, e
         }
     }
     else {
-        //print("strikes: Couldnt connect to server")
+        return adtnStrikesDemoString
     }
     return nil
     
@@ -293,12 +272,14 @@ func getStrikes(success:Bool, errmsg:String, client:TCPClient, listingID: Int, e
 
 func getMaturities(success:Bool, errmsg:String, client:TCPClient, listingID: Int) -> String? {
     let sendStr:String = "{\"id\":1,\"target\":\"eye\",\"type\":\"request\",\"clientname\":\"perl\",\"payload\":{\"tab_data\":\"\(listingID)\",\"tablename\":\"Maturity\",\"command\":\"view_table\",\"fieldselection\":[\"edate\"]}}"
+    //let sendStr:String = "{\"id\":1,\"target\":\"eye\",\"type\":\"request\",\"clientname\":\"perl\",\"payload\":{\"tab_data\":\"1917\",\"tablename\":\"Maturity\",\"command\":\"view_table\",\"fieldselection\":[\"edate\"]}}"
+
     let strLength:UInt = strlen(sendStr)
     var networkLen:UInt = strLength.bigEndian
     let data:NSMutableData = NSMutableData(bytes: &networkLen, length: sizeof(Int))
     data.appendBytes(sendStr, length: Int(strLength))
     
-    if success {
+    if success && (usingDemo == false) {
         let (success1, _) = client.send(data: data)
         if success1 {
             //print("maturities: I sent something (1)")
@@ -337,11 +318,11 @@ func getMaturities(success:Bool, errmsg:String, client:TCPClient, listingID: Int
         //print("Maturities: Couldnt connect to server")
     }
     //print("Maturities: ERROR")
-    return "NULL"
+    return ""
     
 }
 
-func getPortfolio(success:Bool, errmsg:String, client:TCPClient) {
+func getPortfolio(success:Bool, errmsg:String, client:TCPClient) -> String? {
    
     let sendStr:String = "{\"id\":1,\"target\":\"eye\",\"type\":\"request\",\"clientname\":\"perl\",\"payload\":{ \"command\":\"view_table\",\"fieldselection\":[\"name\",\"id\"],\"tablename\":\"Portfolio\"}}"
     let strLength:UInt = strlen(sendStr)
@@ -350,7 +331,7 @@ func getPortfolio(success:Bool, errmsg:String, client:TCPClient) {
     data.appendBytes(sendStr, length: Int(strLength))
     
     
-    if success {
+    if success && (usingDemo == false) {
         let (success1, _) = client.send(data: data)
         if success1 {
             //print("portfolio: I sent something (1)")
@@ -372,7 +353,7 @@ func getPortfolio(success:Bool, errmsg:String, client:TCPClient) {
                 //print(finalData.count)
                 
                 if let str = String(bytes: finalData, encoding: NSASCIIStringEncoding) {
-                    //print("gottenStr: " + str)
+                    return str
                 }
                 
                 
@@ -385,8 +366,9 @@ func getPortfolio(success:Bool, errmsg:String, client:TCPClient) {
     }
     else {
         //print("Portfolio: Couldnt connect to server")
+        
     }
-    
+    return ""
 }
 
 
@@ -400,7 +382,7 @@ func getEyes(success:Bool, errmsg:String, client:TCPClient) -> String {
     //let finalData = NSData(data: data)
     
     
-    if success {
+    if success && (usingDemo == false) {
         let (success1, errmsg1) = client.send(data: data)
         if success1 {
             //print("eyes: I sent something (1)")

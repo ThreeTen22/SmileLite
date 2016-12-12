@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate  {
+class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource  {
     
     private enum ShiftState:Int {
         case notshifted = 0
@@ -53,6 +53,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
                         }
                     }
                 }
+                selectedStrikeEyeParameter.insertText(buttonText)
             
             default:
                 selectedStrikeEyeParameter.insertText(buttonText)
@@ -80,7 +81,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
             self.containerView.frame = contFrame
             }, completion: {
                 [weak self, weak sender]finished in
-                print("I AM COMPLETING")
+                //print("I AM COMPLETING")
                 if (self != nil) {
                     switch self?.curShiftState {
                     case .shiftingright?:
@@ -93,7 +94,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
                         self?.curShiftState = .notshifted
                     default: break
                     }
-                print("I AM COMPLETED")
+                //print("I AM COMPLETED")
                 }
             })
     }
@@ -110,6 +111,8 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
     @IBOutlet weak var calcView: UIView!
     
     @IBOutlet weak var closeButton: UIButton!
+    
+    @IBOutlet weak var exchangeTable:ExchangeTableView!
     
     
     
@@ -147,7 +150,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
             currentDate = smileDateFormat.dateFromString((strikeJS["odate"].stringValue))
             currentContainer = currentListing.getContainerByDate(currentDate)
             if currentContainer == nil {
-                print("had to create Container ")
+                //print("had to create Container ")
                 currentListing.AddContainer(MonthContainer(listingSymbol: currentListing.listingSymbol, exp: currentDate, expString: smileDateFormat.stringFromDate(currentDate)))
                 currentContainer = currentListing.getContainerByDate(currentDate)
             }
@@ -155,12 +158,12 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
             
             if isMonthEye {
                 currentEye = currentContainer?.GetMonthByOrder(orderType)
-                print("current EYE  \(currentEye)")
+                //print("current EYE  \(currentEye)")
                 //currentContainer.GetMonthByOrder()
             } else {
                 if let currentEyes:[StrikeEye] = currentContainer?.GetStrikesByOrder(orderType) {
                     for eye in currentEyes {
-                        print("Debug: popover:viewdidLoad: strikeEyeArrayCheck: eye - \(eye)")
+                        //print("Debug: popover:viewdidLoad: strikeEyeArrayCheck: eye - \(eye)")
                         if eye.strike == Double(strikeJS["strike"].stringValue)! {
                             currentEye = eye
                             break
@@ -182,7 +185,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
                 strike.text = removeAfterCharacter(Source: strikeJS["strike"].stringValue, Character: ".", CutOffIndex: 1)
             }
             
-            print(currentEye)
+            //print(currentEye)
             editEyeViewController!.isMonthEye = isMonthEye
             editEyeViewController!.currentListing = currentListing
             editEyeViewController!.strikeJSON = strikeJSON
@@ -202,6 +205,11 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
             }
             
         }
+        
+        //marketTable.backgroundColor = Layout.monthEyeBGColor
+        //marketTable.dataSource = self
+        //marketTable.delegate = self
+        //marketTable.reloadData()
     }
     
     
@@ -246,9 +254,23 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
         
     }
     
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 12
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Market", forIndexPath: indexPath)
+        (cell.viewWithTag(1) as! UILabel).text = Exchanges.exchangeNames(indexPath.row)
+        //cell.selected = true
+        //cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        return cell
+    }
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "editeye" {
-            print("segue")
+            //print("segue")
             let editEye = (segue.destinationViewController as! EditEyeViewController)
             editEyeViewController = editEye
         }

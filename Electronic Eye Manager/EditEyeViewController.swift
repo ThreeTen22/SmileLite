@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class EditEyeViewController: UIViewController {
     
     /*
      // Only override drawRect: if you perform custom drawing.
@@ -30,7 +30,6 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
     weak var currentEye:Eye?
     var strikeJSON:JSON?
     
-    @IBOutlet weak var marketTable: UITableView!
     @IBOutlet var lowDeltaCollection: [UIView]!
     @IBOutlet var highDeltaCollection: [UIView]!
     @IBOutlet var totalDeltaCollection: [UIView]!
@@ -42,7 +41,7 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
     func testChangeValue(sender: AnyObject) {
         let senderBtn:QuickChangeButton = (sender as! QuickChangeButton)
         let amount = senderBtn.changeAmount
-        print(senderBtn.labelToChange)
+        //print(senderBtn.labelToChange)
         
         switch senderBtn.labelToChange {
             case "maxQuantity":
@@ -67,7 +66,7 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
         for char in chars {
             newString += " \(char)"
         }
-        print(newString)
+        //print(newString)
     }
     
     
@@ -80,7 +79,7 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
         } else {
             exchanges = Exchanges(fromEyeJson: currentEye!.eyeJson)
         }
-        print("quantityViewDidLoad: \(currentEye)")
+        //print("quantityViewDidLoad: \(currentEye)")
         
         if let curEye = currentEye {
             setupTextFields(curEye)
@@ -101,10 +100,6 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         self.view!.backgroundColor = Layout.monthEyeBGColor
         
-        marketTable.backgroundColor = Layout.monthEyeBGColor
-        marketTable.dataSource = self
-        marketTable.delegate = self
-        marketTable.reloadData()
         
         delegateController = nil
         
@@ -127,18 +122,18 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func createDemoEye() {
         if let strikeJS = strikeJSON {
-            print("strikeJS did enter")
+            //print("strikeJS did enter")
             if isMonthEye {
-                print("isMonthEye")
+                //print("isMonthEye")
                 let newMonthListing:MonthEye = MonthEye(strikeJSON: strikeJS, Symbol: currentListing!.listingSymbol, SecurityId: currentListing!.listingId)
                 currentEye = newMonthListing as Eye
-                print(currentEye)
+                //print(currentEye)
             } else {
-                print("isStrikeEye")
+                //print("isStrikeEye")
                 let newStrikeListing:StrikeEye = StrikeEye(strikeJSON: strikeJS, Symbol: currentListing!.listingSymbol, SecurityId: currentListing!.listingId)
                 currentEye = newStrikeListing as Eye
-                print(newStrikeListing)
-                print(currentEye)
+                //print(newStrikeListing)
+                //print(currentEye)
             }
         }
     }
@@ -167,17 +162,7 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 12
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Market", forIndexPath: indexPath)
-        (cell.viewWithTag(1) as! UILabel).text = exchanges.exchangeNames(indexPath.row)
-        //cell.selected = true
-        //cell.accessoryType = UITableViewCellAccessoryType.Checkmark
-        return cell
-    }
+ 
     
     
     func setDelegates(deleController:UITextFieldDelegate) {

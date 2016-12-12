@@ -24,11 +24,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let jsonString = getEyes(clientSuccess, errmsg: clientErrmsg, client: client)
         
+        usingDemo = false
+        
         if jsonString == eyebookRaw {
             clientSuccess = false
+            //print("settingToTrue")
             usingDemo = true
             client.close()
         }
+        
+        let portfolio = getPortfolio(clientSuccess, errmsg: clientErrmsg, client: client)
+        //print(portfolio)
         // client.close()
         return true
     }

@@ -84,7 +84,7 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
             currentFilter = .listing
             
             for (indx,listing) in eyeBook.listings.enumerate() {
-                print("\(listing.listingSymbol)  :  \(listing.isSelectedInEyebook)")
+                //print("\(listing.listingSymbol)  :  \(listing.isSelectedInEyebook)")
                 if listing.isSelectedInEyebook == false {
                     sectionset.addIndex(indx)
                 }
@@ -125,9 +125,11 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
         let jsonString = getEyes(clientSuccess, errmsg: clientErrmsg, client: client)
         if jsonString == eyebookRaw {
             clientSuccess = false
+            
         }
         eyebookJSON = JSON.parse(jsonString)
         eyeBook = EyeBook(fromEyesJSON: eyebookJSON)
+        
         
         
         
@@ -170,7 +172,7 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
         let owningCollectionCell = (textField.superview?.superview) as! StrikeCollectionViewCell
         selectedCellTextField = textField as? StrikeCellTextField
         
-        print(owningCollectionCell.cellType)
+        //print(owningCollectionCell.cellType)
         switch owningCollectionCell.cellType {
         case .buyputmonthqe,.buyputstrikeqe,.buycallmonthqe,.buycallstrikeqe:
             break
@@ -197,7 +199,6 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     }
     
     func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
-        //print(#function)
         
         //let owningCollectionView = (textField.superview?.superview?.superview as! StrikeCollectionView)
         //let owningIndexPath = owningCollectionView.indexPathForCell(owningCollectionCell)
@@ -254,12 +255,10 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
                     popOver.currentListing = currentListing
                     if let currentJSON = currentListing.getVisibleStrikes(owningCollectionCell.floorIndex) {
                         popOver.strikeJSON = currentJSON
-                        print("currentJSON")
-                        print(currentJSON)
+                        //print("currentJSON")
+                        //print(currentJSON)
                     }
                 }
-                
-                popOver
                 
                 //popOver.strikeTextField = textField
                 
@@ -288,8 +287,8 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     // Called on the delegate when the popover controller will dismiss the popover. Return NO to prevent the
     // dismissal of the view.
     func popoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
-        unowned let childViewController = popoverPresentationController.presentedViewController
-        debugPrint("\(self) - ChildTag \(childViewController.view!.tag)")
+        //unowned let childViewController = popoverPresentationController.presentedViewController
+        //debug//print("\(self) - ChildTag \(childViewController.view!.tag)")
         
         selectedCellTextField!.resignFirstResponder()
         selectedCellTextField!.backgroundColor = UIColor.clearColor()
@@ -350,7 +349,13 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
         if indexPath.row == 0 {
             return CGFloat(45.0)
         } else if indexPath.row == 1 {
+            let listing:Listing = eyeBook.listings[indexPath.section]
+            if listing.willDisplay == Listing.DisplayType.FilteredStrikes {
+                //print("HEIGHT FOR ROW   \(listing.visibleStrikes.count)")
+             return CGFloat(45*listing.visibleStrikes.count)
+            } else {
             return (tableView.frame.height - 45.0)
+            }
         } else {
             return CGFloat(30.0)
         }
@@ -385,9 +390,16 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
             }
             
             if fListing.listingMaturities.count == 0 {
-                //print("Making Maturities")
-                let maturityJSON = JSON.parse(getMaturities(clientSuccess, errmsg: clientErrmsg, client: client, listingID: fListing.listingId)!)
+                //print("Making Maturities - \(fListing.listingSymbol)")
+                let maturityString:String = getMaturities(clientSuccess, errmsg: clientErrmsg, client: client, listingID: fListing.listingId)!
+                let maturityJSON = JSON.parse(maturityString)
                 //print("Maturities: \(maturityJSON)")
+                if maturityJSON["payload"].isEmpty {
+                    //print("PAYLOAD FAILED!")
+                    listingCell.listingSymbol.text = fListing.listingSymbol
+                    return listingCell
+                    
+                }
                 if let maturityArray = maturityJSON["payload"]["rows"].array {
                     fListing.listingMaturities.appendContentsOf(maturityArray)
                 } else {

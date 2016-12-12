@@ -61,7 +61,13 @@ class QuickChangeButton: UIButton {
 class ExchangeOrderType: UIButton {
     
     override func awakeFromNib() {
-        //self.bounds.
+        layer.cornerRadius = 5
+        clipsToBounds = true
+        layer.borderWidth = 0.5
+        backgroundColor = Layout.strikeTheoBGColorNeutral
+        setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        
     }
+    
 }
 
