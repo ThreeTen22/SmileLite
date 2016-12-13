@@ -301,7 +301,7 @@ func getMaturities(success:Bool, errmsg:String, client:TCPClient, listingID: Int
                 
                 //print("NSDATA:")
                 if let str = String(bytes: finalData, encoding: NSASCIIStringEncoding) {
-                    //print("Maturities: " + str)
+                    print("Maturities: " + str)
                     return str
                     
                 }
@@ -405,7 +405,7 @@ func getEyes(success:Bool, errmsg:String, client:TCPClient) -> String {
                 //print(finalData.count)
                 
                 if let str = String(bytes: finalData, encoding: NSASCIIStringEncoding) {
-                    //print("gottenStr: " + str)
+                    //print(str)
                     //eyebookJSON = JSON.parse(str)
                     return str
                 }

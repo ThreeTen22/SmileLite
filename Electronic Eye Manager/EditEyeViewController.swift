@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditEyeViewController: UIViewController {
+class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     /*
      // Only override drawRect: if you perform custom drawing.
@@ -33,6 +33,8 @@ class EditEyeViewController: UIViewController {
     @IBOutlet var lowDeltaCollection: [UIView]!
     @IBOutlet var highDeltaCollection: [UIView]!
     @IBOutlet var totalDeltaCollection: [UIView]!
+    
+    @IBOutlet weak var exchangeTable:ExchangeTableView!
     
     var isMonthEye = true
     
@@ -72,7 +74,6 @@ class EditEyeViewController: UIViewController {
     
     override func viewWillAppear(animated:Bool) {
         
-        
         if currentEye == nil {
             createDemoEye()
             exchanges = Exchanges()
@@ -101,9 +102,10 @@ class EditEyeViewController: UIViewController {
         self.view!.backgroundColor = Layout.monthEyeBGColor
         self.view!.viewWithTag(1337)?.backgroundColor = Layout.monthEyeBGColor
         
+        exchangeTable.dataSource = self
+        exchangeTable.delegate = self
         
         delegateController = nil
-        
         super.viewWillAppear(animated)
     }
     
@@ -116,8 +118,8 @@ class EditEyeViewController: UIViewController {
         //totalDeltaCollection.removeAll()
         currentListing = nil
         delegateController = nil
-        //marketTable.dataSource = nil
-        //marketTable.delegate = nil
+        //exchangeTable.dataSource = nil
+        //exchangeTable.delegate = nil
 
     }
     
@@ -163,9 +165,6 @@ class EditEyeViewController: UIViewController {
         }
     }
     
- 
-    
-    
     func setDelegates(deleController:UITextFieldDelegate) {
         delegateController = deleController
     }
@@ -177,6 +176,20 @@ class EditEyeViewController: UIViewController {
             textField.text = String(amount)
         }
         
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 12
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Market", forIndexPath: indexPath)
+        (cell.viewWithTag(1) as! UILabel).text = Exchanges.exchangeNames(indexPath.row)
+        
+        cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+        cell.selected = true
+
+        return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

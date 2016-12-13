@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource  {
+class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
     
     private enum ShiftState:Int {
         case notshifted = 0
@@ -21,7 +21,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
     
     
     @IBAction func BackNavigation(sender: AnyObject) {
-        
+        //var you:UITableViewHeaderFooterView
     }
     
     @IBAction func calcButtonPressed(sender: CalcButton) {
@@ -111,8 +111,6 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
     @IBOutlet weak var calcView: UIView!
     
     @IBOutlet weak var closeButton: UIButton!
-    
-    @IBOutlet weak var exchangeTable:ExchangeTableView!
     
     
     
@@ -253,19 +251,6 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
             textField.resignFirstResponder()
         }
         
-    }
-    
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 12
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Market", forIndexPath: indexPath)
-        (cell.viewWithTag(1) as! UILabel).text = Exchanges.exchangeNames(indexPath.row)
-        //cell.selected = true
-        //cell.accessoryType = UITableViewCellAccessoryType.Checkmark
-        return cell
     }
     
     

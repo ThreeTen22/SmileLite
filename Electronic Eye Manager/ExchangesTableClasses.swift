@@ -8,11 +8,27 @@
 
 import UIKit
 
-class ExchangeTableView:UITableView {
+class TableHeaderView: UIView {
     
+    @IBOutlet weak var selectAllButton:UIButton!
     
+    override func awakeFromNib() {
+        selectAllButton.setFAText(prefixText: " ", icon: FAType.FASquareO, postfixText: "  select all markets", size: 15.0, forState: .Normal)
+    }
 }
 
+class ExchangeTableView:UITableView {
+    var exchanges:Exchanges!
+    
+    @IBOutlet weak var tableHeader:TableHeaderView!
+    
+    var allSelected: Bool = false
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        print(tableHeaderView)
+    }
+}
 
 class ExchangesTableCell: UITableViewCell {
 
@@ -26,8 +42,10 @@ class ExchangesTableCell: UITableViewCell {
         exchangeSelected = !exchangeSelected
         if exchangeSelected {
             sender.setFAIcon(FAType.FADotCircleO, iconSize: 20, forState: .Normal)
+            sender.setFATitleColor(UIColor.blueColor())
         } else {
             sender.setFAIcon(FAType.FACircleO, iconSize: 20, forState: .Normal)
+            sender.setFATitleColor(UIColor.lightGrayColor())
         }
     }
     

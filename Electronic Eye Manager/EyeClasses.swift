@@ -28,35 +28,54 @@ struct EyeParams {
 
 struct Exchanges {
     
-    typealias ExchangeInfo = (nameIndx:Int, isActive:Bool)
+    typealias ExInfo = (nameIndx:Int, isActive:Bool)
     
-    var exchange1:ExchangeInfo = (2,true)
-    var exchange2:ExchangeInfo = (3,true)
-    var exchange3:ExchangeInfo = (4,true)
-    var exchange4:ExchangeInfo = (5,true)
-    var exchange5:ExchangeInfo = (1,true)
-    var exchange6:ExchangeInfo = (6,true)
-    var exchange7:ExchangeInfo = (7,true)
-    var exchange8:ExchangeInfo = (8,true)
-    var exchange9:ExchangeInfo = (9,true)
-    var exchange10:ExchangeInfo = (12,true)
-    var exchange11:ExchangeInfo = (10,true)
-    var exchange12:ExchangeInfo = (16,true)
-    var exchange13:ExchangeInfo = (0,true)
-    var exchange14:ExchangeInfo = (0,true)
-    var exchange15:ExchangeInfo = (0,true)
+    var exchange1:ExInfo = (2,true)
+    var exchange2:ExInfo = (3,true)
+    var exchange3:ExInfo = (4,true)
+    var exchange4:ExInfo = (5,true)
+    var exchange5:ExInfo = (1,true)
+    var exchange6:ExInfo = (6,true)
+    var exchange7:ExInfo = (7,true)
+    var exchange8:ExInfo = (8,true)
+    var exchange9:ExInfo = (9,true)
+    var exchange10:ExInfo = (12,true)
+    var exchange11:ExInfo = (10,true)
+    var exchange12:ExInfo = (16,true)
+    var exchange13:ExInfo = (0,true)
+    var exchange14:ExInfo = (0,true)
+    var exchange15:ExInfo = (0,true)
     
     var exchangeCount:Int = 12
     
-    
     init() {
+        
+    }
+    init(e1:ExInfo, e2:ExInfo, e3:ExInfo, e4:ExInfo, e5:ExInfo, e6:ExInfo, e7:ExInfo, e8:ExInfo, e9:ExInfo, e10:ExInfo, e11:ExInfo, e12:ExInfo, e13:ExInfo, e14:ExInfo, e15:ExInfo) {
+        
+        exchange1 = e1
+        exchange2 = e2
+        exchange3 = e3
+        exchange4 = e4
+        exchange5 = e5
+        exchange6 = e6
+        exchange7 = e7
+        exchange8 = e8
+        exchange9 = e9
+        exchange10 = e10
+        exchange11 = e11
+        exchange12 = e12
+        exchange13 = e13
+        exchange14 = e14
+        exchange15 = e15
+        
     }
     
     init(fromEyeJson eye:JSON) {
         
     }
     
-    func exchangeVarByIndex(indx:Int) -> ExchangeInfo? {
+    func exchangeVarByIndex(indx:Int) -> ExInfo? {
         switch indx {
             case 1:
                 return exchange1

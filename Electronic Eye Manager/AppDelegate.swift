@@ -23,7 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         (clientSuccess, clientErrmsg) = client.connect(timeout: timeout)
         
         let jsonString = getEyes(clientSuccess, errmsg: clientErrmsg, client: client)
-        
+        print(jsonString)
+        raise(Int32(ErrorInvalidJSON))
         usingDemo = false
         
         if jsonString == eyebookRaw {
