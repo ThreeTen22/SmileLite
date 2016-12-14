@@ -23,8 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         (clientSuccess, clientErrmsg) = client.connect(timeout: timeout)
         
         let jsonString = getEyes(clientSuccess, errmsg: clientErrmsg, client: client)
-        print(jsonString)
-        raise(Int32(ErrorInvalidJSON))
+        //print(jsonString)
+        //raise(Int32(ErrorInvalidJSON))
         usingDemo = false
         
         if jsonString == eyebookRaw {
@@ -34,7 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             client.close()
         }
         
-        let portfolio = getPortfolio(clientSuccess, errmsg: clientErrmsg, client: client)
+        
+        //let portfolio = getPortfolio(clientSuccess, errmsg: clientErrmsg, client: client)
         //print(portfolio)
         // client.close()
         return true

@@ -10,23 +10,34 @@ import UIKit
 
 class TableHeaderView: UIView {
     
+    var exchangeInfo:Exchanges!
+    
     @IBOutlet weak var selectAllButton:UIButton!
     
+    @IBAction func radioPressed(sender: UIButton) {
+        print("I have been pressed")
+        
+    }
+    
     override func awakeFromNib() {
-        selectAllButton.setFAText(prefixText: " ", icon: FAType.FASquareO, postfixText: "  select all markets", size: 15.0, forState: .Normal)
+        super.awakeFromNib()
+        //selectAllButton.setFAText(prefixText: " ", icon: FAType.FASquareO, postfixText: "  select all markets", size: 12.0, forState: .Normal, iconSize: 20.0)
+        //selectAllButton.addTarget(nil, action: #selector(TableHeaderView.radioPressed(_:)), forControlEvents: .TouchUpInside)
+        //selectAllButton.set
     }
 }
 
 class ExchangeTableView:UITableView {
     var exchanges:Exchanges!
     
-    @IBOutlet weak var tableHeader:TableHeaderView!
+    //@IBOutlet weak var tableHeader:TableHeaderView!
     
     var allSelected: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
         print(tableHeaderView)
+        
     }
 }
 

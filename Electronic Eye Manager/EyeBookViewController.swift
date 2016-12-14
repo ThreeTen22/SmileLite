@@ -328,13 +328,8 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        unowned var fListing:Listing {
-            if filteredListing != nil {
-                return filteredListing!
-            } else {
-                return eyeBook.listings[section]
-            }
-        }
+        
+        unowned let fListing:Listing = filteredListing ?? eyeBook.listings[section]
         let willDisplayType = fListing.willDisplay
         
         switch willDisplayType {
@@ -363,17 +358,11 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        unowned var fListing:Listing {
-            if filteredListing != nil {
-                return filteredListing!
-            } else {
-                return eyeBook.listings[indexPath.section]
-            }
-        }
+        unowned let fListing:Listing = filteredListing ?? eyeBook.listings[indexPath.section]
         
-        var isFiltered:Bool {
+        let isFiltered:Bool = {
             return (currentFilter == .listing)
-        }
+        }()
         
         
         if indexPath.row == 0 {

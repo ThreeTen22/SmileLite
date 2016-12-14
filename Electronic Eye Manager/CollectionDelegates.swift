@@ -39,11 +39,11 @@ struct FilterListingsCollectionDelegate {
 
 
 struct MonthCollectionDelegate {
-    static var readableDateformat:NSDateFormatter {
+    static var readableDateformat:NSDateFormatter = {
         let newDateFormatter = NSDateFormatter()
         newDateFormatter.dateFormat = "MM/dd/yyyy"
         return newDateFormatter
-    }
+    }()
     
     
    static func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {

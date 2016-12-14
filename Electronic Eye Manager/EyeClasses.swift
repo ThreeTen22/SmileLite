@@ -26,137 +26,6 @@ struct EyeParams {
     static let highDelta = 100.0
 }
 
-struct Exchanges {
-    
-    typealias ExInfo = (nameIndx:Int, isActive:Bool)
-    
-    var exchange1:ExInfo = (2,true)
-    var exchange2:ExInfo = (3,true)
-    var exchange3:ExInfo = (4,true)
-    var exchange4:ExInfo = (5,true)
-    var exchange5:ExInfo = (1,true)
-    var exchange6:ExInfo = (6,true)
-    var exchange7:ExInfo = (7,true)
-    var exchange8:ExInfo = (8,true)
-    var exchange9:ExInfo = (9,true)
-    var exchange10:ExInfo = (12,true)
-    var exchange11:ExInfo = (10,true)
-    var exchange12:ExInfo = (16,true)
-    var exchange13:ExInfo = (0,true)
-    var exchange14:ExInfo = (0,true)
-    var exchange15:ExInfo = (0,true)
-    
-    var exchangeCount:Int = 12
-    
-    init() {
-        
-    }
-    init(e1:ExInfo, e2:ExInfo, e3:ExInfo, e4:ExInfo, e5:ExInfo, e6:ExInfo, e7:ExInfo, e8:ExInfo, e9:ExInfo, e10:ExInfo, e11:ExInfo, e12:ExInfo, e13:ExInfo, e14:ExInfo, e15:ExInfo) {
-        
-        exchange1 = e1
-        exchange2 = e2
-        exchange3 = e3
-        exchange4 = e4
-        exchange5 = e5
-        exchange6 = e6
-        exchange7 = e7
-        exchange8 = e8
-        exchange9 = e9
-        exchange10 = e10
-        exchange11 = e11
-        exchange12 = e12
-        exchange13 = e13
-        exchange14 = e14
-        exchange15 = e15
-        
-    }
-    
-    init(fromEyeJson eye:JSON) {
-        
-    }
-    
-    func exchangeVarByIndex(indx:Int) -> ExInfo? {
-        switch indx {
-            case 1:
-                return exchange1
-            case 2:
-                return exchange2
-            case 3:
-                return exchange3
-            case 4:
-                return exchange4
-            case 5:
-                return exchange5
-            case 6:
-                return exchange6
-            case 7:
-                return exchange7
-            case 8:
-                return exchange8
-            case 9:
-                return exchange9
-            case 10:
-                return exchange10
-            case 11:
-                return exchange11
-            case 12:
-                return exchange12
-            case 13:
-                return exchange13
-            case 14:
-                return exchange14
-            case 15:
-                return exchange15
-            default:
-                return nil
-        }
-    }
-    
-    func count() -> Int {
-        return exchangeCount
-    }
-    
-    static func exchangeNames(exchangeNum:Int) ->String {
-        
-        switch exchangeNum {
-        case 1:
-            return "Amex"
-        case 2:
-            return "Cboe"
-        case 3:
-            return "Ise"
-        case 4:
-            return "PCoast"
-        case 5:
-            return "Phlx"
-        case 6:
-            return "Box"
-        case 7:
-            return "Nasdaq"
-        case 8:
-            return "Bats"
-        case 9:
-            return "C2"
-        case 10:
-            return "Miax"
-        case 11:
-            return "Unknown11"
-        case 12:
-            return "Nasdaq-Bx"
-        case 13:
-            return "Unknown13"
-        case 14:
-            return "Unknown14"
-        case 15:
-            return "Unknown15"
-        case 16:
-            return "Edgx"
-        default:
-            return "Unknown17"
-        }
-    }
-}
-
 class EyeBook {
     var listings:Array = [Listing]()
     
@@ -294,7 +163,7 @@ class EyeBook {
                 newMonth = MonthEye(eyeDict: eyeDict)
                 newMonth.jsonIndex = index
             }
-           
+            
             
             if let curContainer = listing.getContainerByDate(eyeExpDate) {
                 if strike != "" {
@@ -443,10 +312,10 @@ class MonthContainer {
     var strikeEyes:Array = [[StrikeEye](),[StrikeEye](),[StrikeEye](),[StrikeEye]()]
     
     deinit {
-    
-     //print("deinit:MonthContainer: listingSymbol: \(listingSymbol)")
-     strikeEyes.removeAll()
-     monthEyes.removeAll()
+        
+        //print("deinit:MonthContainer: listingSymbol: \(listingSymbol)")
+        strikeEyes.removeAll()
+        monthEyes.removeAll()
     }
     
     init() {
@@ -532,7 +401,7 @@ class MonthContainer {
             return nil
         }
     }
-
+    
 }
 
 //????????????
