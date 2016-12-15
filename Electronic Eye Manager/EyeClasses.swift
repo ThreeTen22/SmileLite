@@ -432,6 +432,9 @@ class Eye {
     var quantity = 0
     var delta = 0.0
     var securityId = 0
+    
+    var exchangeData = Exchanges()
+    
     var eyeJson:JSON
     
     var jsonIndex:Int = -1
@@ -451,6 +454,7 @@ class Eye {
     }
     
     init(eyeDict:JSON) {
+        
         eyeJson = eyeDict
         symbol = eyeDict["name"].stringValue
         expDateString = (eyeDict["edate"].stringValue)
@@ -471,10 +475,13 @@ class Eye {
             delta = 0.0
         }
         securityId = Int(eyeDict["securityid"].stringValue)!
+        exchangeData = Exchanges(fromEyeJson: eyeDict)
         
     }
     
-    init(strikeJSON:JSON,Symbol sym:String,SecurityId securityId:Int, MinEdge edge:Double = 0.1, Quantity qntity:Int = 1, MaxDelta mxDelta:Double, TotalDelta tDelta:Double = 1000.0) {
+    init(strikeJSON:JSON,Symbol sym:String,SecurityId securityId:Int, MinEdge edge:Double = 0.1, Quantity qntity:Int = 1, MaxDelta
+        
+        mxDelta:Double, TotalDelta tDelta:Double = 1000.0) {
         //print("init: eye wStrikeJSON")
         symbol = sym
         id = securityId
@@ -485,6 +492,7 @@ class Eye {
         expDateString = strikeJSON["odate"].stringValue
         expDate = smileDateFormat.dateFromString(expDateString)!
         eyeJson = JSON(nilLiteral: ())
+        
     }
     
     

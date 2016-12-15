@@ -10,8 +10,6 @@ import UIKit
 
 class TableHeaderView: UIView {
     
-    var exchangeInfo:Exchanges!
-    
     @IBOutlet weak var selectAllButton:UIButton!
     
     @IBAction func radioPressed(sender: UIButton) {
@@ -43,15 +41,19 @@ class ExchangeTableView:UITableView {
 
 class ExchangesTableCell: UITableViewCell {
 
-    var exchangeSelected = false
+    var exchange:ExInfo!
     
     @IBOutlet weak var radioButton: UIButton!
     
     @IBOutlet weak var exchangeOrderType: UIButton!
     
     @IBAction func radioPressed(sender: UIButton) {
-        exchangeSelected = !exchangeSelected
-        if exchangeSelected {
+      exchange.orderValidity.OneOrZero()
+      setRadioState(sender)
+    }
+    
+    func setRadioState(sender:UIButton) {
+        if exchange.orderValidity == 1 {
             sender.setFAIcon(FAType.FADotCircleO, iconSize: 20, forState: .Normal)
             sender.setFATitleColor(UIColor.blueColor())
         } else {
@@ -63,7 +65,8 @@ class ExchangesTableCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = Layout.monthEyeBGColor
-        radioPressed(radioButton)
+        //setRadioState(radioButton)
+        radioButton.addTarget(self, action: #selector(ExchangesTableCell.radioPressed(_:)), forControlEvents: .TouchUpInside)
         
         //setSelected(true, animated: false)
     }

@@ -69,7 +69,7 @@ struct Exchanges {
             case 15:
                 return exchange15
             default:
-                assertionFailure("Provided Exchange Number Out of Bounds")
+                assertionFailure("Get: Provided Exchange Number Out of Bounds")
                 return exchange15
             }
         }
@@ -106,6 +106,7 @@ struct Exchanges {
             case 15:
                 exchange15 = newValue
             default:
+                assertionFailure("Set: Provided Exchange Number Out of Bounds")
                 break
             }
             
@@ -133,6 +134,7 @@ struct Exchanges {
         exchange13 = (e13, 0)
         exchange14 = (e14, 0)
         exchange15 = (e15, 0)
+        updateCounts()
         
     }
     init(map:[ExInfo]) {
@@ -152,6 +154,7 @@ struct Exchanges {
         exchange13 = map[13]
         exchange14 = map[14]
         exchange15 = map[15]
+        updateCounts()
     }
     
     init(Full e1:ExInfo, e2:ExInfo, e3:ExInfo, e4:ExInfo, e5:ExInfo, e6:ExInfo, e7:ExInfo, e8:ExInfo, e9:ExInfo, e10:ExInfo, e11:ExInfo, e12:ExInfo, e13:ExInfo, e14:ExInfo, e15:ExInfo) {
@@ -171,7 +174,7 @@ struct Exchanges {
         exchange13 = e13
         exchange14 = e14
         exchange15 = e15
-        
+        updateCounts()
     }
     
     init(fromEyeJson eye:JSON) {
@@ -215,7 +218,7 @@ struct Exchanges {
         exchange15.orderValidity = eye["ordervalidity15"].intValue
         //get isActive
         
-        
+        updateCounts()
     }
     
 
@@ -246,7 +249,11 @@ func != (left:Exchanges, right:Exchanges) -> Bool {
 }
 
 extension Exchanges {
-    
+    var visibleExchangeCount:Int {
+        get {
+            return orderValidities
+        }
+    }
     
     subscript(isActive index:Int) -> Bool {
         get {
@@ -257,12 +264,24 @@ extension Exchanges {
         }
     }
     
+    subscript(mappedIndx index:Int) -> ExInfo {
+        get {
+            return self[index+1]
+        }
+    }
+    
+    subscript(namedIndx index:Int) -> Int {
+        get {
+            return self[index].nameIndx
+        }
+    }
+    
     mutating func updateCounts() {
         var exchanges:Int = 0
         var listExchanges:Int = 0
         var orderValidities:Int = 0
         var orderPrefs:Int = 0
-        let exchangesArray  = self.map()
+        let exchangesArray = self.map()
         
         for ex in exchangesArray {
             if ex.nameIndx.isNotZero() {
@@ -351,6 +370,14 @@ extension Exchanges {
 }
 
 extension Int {
+    mutating func OneOrZero() -> Void {
+        if self == 0 {
+            self = 1
+        } else {
+            self = 0
+        }
+    }
+    
     func toBool() -> Bool? {
         switch self {
         case 0:

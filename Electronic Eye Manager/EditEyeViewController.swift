@@ -104,6 +104,7 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         exchangeTable.dataSource = self
         exchangeTable.delegate = self
+        exchangeTable.exchanges = currentEye?.exchangeData ?? Exchanges()
         
         delegateController = nil
         super.viewWillAppear(animated)
@@ -179,20 +180,36 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 12
+        return (tableView as! ExchangeTableView).exchanges.visibleExchangeCount
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Market", forIndexPath: indexPath)
-        (cell.viewWithTag(1) as! UILabel).text = Exchanges.exchangeNames(indexPath.row)
-        
-        cell.accessoryType = UITableViewCellAccessoryType.Checkmark
-        cell.selected = true
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("Market", forIndexPath: indexPath) as! ExchangesTableCell
+        let exchangeTable = (tableView as! ExchangeTableView)
+        (cell.viewWithTag(1) as! UILabel).text = Exchanges.exchangeNames(exchangeTable.exchanges[namedIndx: indexPath.row+1])
+        cell.exchange = exchangeTable.exchanges[indexPath.row+1]
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        let exchangeCell = cell as! ExchangesTableCell
+        let exchangeTable = (tableView as! ExchangeTableView)
+        print("willDisplay")
+        exchangeCell.exchange = exchangeTable.exchanges[indexPath.row+1]
+        exchangeCell.setRadioState(exchangeCell.radioButton)
+    }
+    
+    func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        let exchangeCell = cell as! ExchangesTableCell
+        let exchangeTable = tableView as! ExchangeTableView
+        print("didEndDisplay")
+        //if exchangeTable.exchanges[indexPath.row+1] != exchangeCell.exchange {
+            exchangeTable.exchanges[indexPath.row+1] = exchangeCell.exchange
+        //}
         
     }
 }

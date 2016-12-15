@@ -27,6 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //raise(Int32(ErrorInvalidJSON))
         usingDemo = false
         
+        //let newExchange = Exchanges()
+        // let newValue = newExchange[16]
+        
         if jsonString == eyebookRaw {
             clientSuccess = false
             //print("settingToTrue")
