@@ -30,15 +30,13 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
     weak var currentEye:Eye?
     var strikeJSON:JSON?
     
-    @IBOutlet var lowDeltaCollection: [UIView]!
-    @IBOutlet var highDeltaCollection: [UIView]!
-    @IBOutlet var totalDeltaCollection: [UIView]!
+    @IBOutlet var monthParameters:UIStackView!
     
     @IBOutlet weak var exchangeTable:ExchangeTableView!
     
     var isMonthEye = true
     
-    var exchanges:Exchanges!
+    
     
     func testChangeValue(sender: AnyObject) {
         let senderBtn:QuickChangeButton = (sender as! QuickChangeButton)
@@ -73,30 +71,19 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     override func viewWillAppear(animated:Bool) {
-        
-        if currentEye == nil {
-            createDemoEye()
-            exchanges = Exchanges()
-        } else {
-            exchanges = Exchanges(fromEyeJson: currentEye!.eyeJson)
-        }
         //print("quantityViewDidLoad: \(currentEye)")
         
-        if let curEye = currentEye {
-            setupTextFields(curEye)
-        }
+        //if let curEye = currentEye {
+            //setupTextFields(curEye)
+        //}
+        
+        
         // maxQuantity.note
         
         linkDelegates()
         if !isMonthEye {
-            for view in lowDeltaCollection {
-                view.hidden = true
-            }
-            for view in highDeltaCollection {
-                view.hidden = true
-            }
-            for view in totalDeltaCollection {
-                view.hidden = true
+            for view in monthParameters.arrangedSubviews {
+             view.hidden = true
             }
         }
         self.view!.backgroundColor = Layout.monthEyeBGColor
@@ -112,16 +99,9 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     deinit {
         
-        //print("deinit: editEyepopoverVC")
-        
-        //lowDeltaCollection.removeAll()
-        //highDeltaCollection.removeAll()
-        //totalDeltaCollection.removeAll()
         currentListing = nil
         delegateController = nil
-        //exchangeTable.dataSource = nil
-        //exchangeTable.delegate = nil
-
+        
     }
     
     func createDemoEye() {
@@ -155,6 +135,17 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+    func setupTextFields(eyeParams:EyeParams) {
+        maxQuantity.setupText(eyeParams.quantity)
+        maxDelta.setupText(eyeParams.delta)
+        minEdge.setupText(eyeParams.minEdge)
+        if eyeParams.useMonthParams {
+            lowDelta.setupText(eyeParams.minDelta)
+            highDelta.setupText(eyeParams.maxDelta)
+            totalDelta.setupText(eyeParams.totalDelta)
+        }
+    }
+    
     func linkDelegates() {
         maxQuantity.delegate = delegateController
         maxDelta.delegate = delegateController
@@ -170,8 +161,8 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
         delegateController = deleController
     }
     
-    func modifyTextField(textField:EditEyeParameter, amount:Double) {
-        if let textAmount:Double = Double(textField.text!) {
+    func modifyTextField(textField:EditEyeParameter, amount:Float) {
+        if let textAmount:Float = Float(textField.text!) {
             textField.text = String(textAmount + amount)
         } else {
             textField.text = String(amount)
@@ -184,32 +175,23 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Market", forIndexPath: indexPath) as! ExchangesTableCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Market") as! ExchangesTableCell
         let exchangeTable = (tableView as! ExchangeTableView)
-        (cell.viewWithTag(1) as! UILabel).text = Exchanges.exchangeNames(exchangeTable.exchanges[namedIndx: indexPath.row+1])
-        cell.exchange = exchangeTable.exchanges[indexPath.row+1]
+        cell.exchangeName.text = Exchanges.exchangeNames(exchangeTable.exchanges[namedIndx: indexPath.row+1])
+        cell.radioButton.tag = (indexPath.row+1)
+        //Layout.setRadioButtonLayout(cell.radioButton, isOn: exchangeTable.exchanges[isActiveExchange: cell.radioButton.tag])
         return cell
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         let exchangeCell = cell as! ExchangesTableCell
         let exchangeTable = (tableView as! ExchangeTableView)
-        print("willDisplay")
-        exchangeCell.exchange = exchangeTable.exchanges[indexPath.row+1]
-        exchangeCell.setRadioState(exchangeCell.radioButton)
+        Layout.setRadioButtonLayout(exchangeCell.radioButton, isOn: exchangeTable.exchanges[isActiveExchange: exchangeCell.radioButton.tag])
     }
     
-    func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        let exchangeCell = cell as! ExchangesTableCell
-        let exchangeTable = tableView as! ExchangeTableView
-        print("didEndDisplay")
-        //if exchangeTable.exchanges[indexPath.row+1] != exchangeCell.exchange {
-            exchangeTable.exchanges[indexPath.row+1] = exchangeCell.exchange
-        //}
+    /*
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
     }
+    */
 }

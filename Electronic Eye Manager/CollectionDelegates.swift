@@ -22,8 +22,8 @@ struct FilterListingsCollectionDelegate {
         let index = indexPath.row
         let listingSymbol = eyeBook.listings[index].listingSymbol
         
-        unowned let listingCell = collectionView.dequeueReusableCellWithReuseIdentifier("ListingCell", forIndexPath: indexPath)
-        unowned let listingButton = (listingCell.viewWithTag(1) as! ListingFilterButton)
+        let listingCell = collectionView.dequeueReusableCellWithReuseIdentifier("ListingCell", forIndexPath: indexPath)
+        let listingButton = (listingCell.viewWithTag(1) as! ListingFilterButton)
         listingButton.setTitle(listingSymbol, forState: .Normal)
         listingButton.listingSymbol = listingSymbol
     

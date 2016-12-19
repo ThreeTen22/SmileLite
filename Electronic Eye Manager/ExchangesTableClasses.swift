@@ -19,55 +19,47 @@ class TableHeaderView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        //selectAllButton.setFAText(prefixText: " ", icon: FAType.FASquareO, postfixText: "  select all markets", size: 12.0, forState: .Normal, iconSize: 20.0)
-        //selectAllButton.addTarget(nil, action: #selector(TableHeaderView.radioPressed(_:)), forControlEvents: .TouchUpInside)
-        //selectAllButton.set
     }
 }
 
 class ExchangeTableView:UITableView {
-    var exchanges:Exchanges!
+    
+    var exchanges:Exchanges = Exchanges()
     
     //@IBOutlet weak var tableHeader:TableHeaderView!
     
     var allSelected: Bool = false
     
+    @IBAction func radioPressed(sender: UIButton) {
+        if exchanges[isActiveExchange: sender.tag] == true {
+            exchanges[isActiveExchange: sender.tag] = false
+        } else {
+            exchanges[isActiveExchange: sender.tag] = true
+        }
+        setButtonLayout(sender)
+    
+        //exchanges[isActive: sender.tag] = !exchanges[isActive: sender.tag]
+        
+    }
+    func setButtonLayout(sender:UIButton) {
+        Layout.setRadioButtonLayout(sender, isOn: exchanges[isActiveExchange: sender.tag])
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        print(tableHeaderView)
-        
     }
 }
 
 class ExchangesTableCell: UITableViewCell {
-
-    var exchange:ExInfo!
     
-    @IBOutlet weak var radioButton: UIButton!
+    @IBOutlet weak var radioButton: RadioButton!
     
+    @IBOutlet weak var exchangeName: UILabel!
     @IBOutlet weak var exchangeOrderType: UIButton!
     
-    @IBAction func radioPressed(sender: UIButton) {
-      exchange.orderValidity.OneOrZero()
-      setRadioState(sender)
-    }
-    
-    func setRadioState(sender:UIButton) {
-        if exchange.orderValidity == 1 {
-            sender.setFAIcon(FAType.FADotCircleO, iconSize: 20, forState: .Normal)
-            sender.setFATitleColor(UIColor.blueColor())
-        } else {
-            sender.setFAIcon(FAType.FACircleO, iconSize: 20, forState: .Normal)
-            sender.setFATitleColor(UIColor.lightGrayColor())
-        }
-    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = Layout.monthEyeBGColor
-        //setRadioState(radioButton)
-        radioButton.addTarget(self, action: #selector(ExchangesTableCell.radioPressed(_:)), forControlEvents: .TouchUpInside)
-        
-        //setSelected(true, animated: false)
     }
 }

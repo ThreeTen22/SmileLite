@@ -46,7 +46,7 @@ class CalcButton: UIButton {
 //button to control quick changes to the :labelToChange textfields by :changeAmount
 class QuickChangeButton: UIButton {
     var labelToChange: String = ""
-    var changeAmount: Double = 0.0
+    var changeAmount: Float = 0.0
     
     override func awakeFromNib() {
         self.addTarget(nil, action: #selector(EditEyeViewController.testChangeValue(_:)), forControlEvents: .TouchUpInside)
@@ -71,3 +71,11 @@ class ExchangeOrderType: UIButton {
     
 }
 
+class RadioButton:UIButton {
+    // var exchange:ExInfo!
+    override func awakeFromNib() {
+         Layout.setRadioButtonLayout(self)
+        //self.addTarget(nil, action: #selector(ExchangesTableCell.radioPressed(_:)), forControlEvents: .TouchUpInside)
+    }
+    
+}

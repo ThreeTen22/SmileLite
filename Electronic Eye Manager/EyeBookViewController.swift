@@ -287,20 +287,32 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
     // Called on the delegate when the popover controller will dismiss the popover. Return NO to prevent the
     // dismissal of the view.
     func popoverPresentationControllerShouldDismissPopover(popoverPresentationController: UIPopoverPresentationController) -> Bool {
-        //unowned let childViewController = popoverPresentationController.presentedViewController
-        //debug//print("\(self) - ChildTag \(childViewController.view!.tag)")
+        unowned let cVC = popoverPresentationController.presentedViewController as! EyePopoverViewController
         
-        selectedCellTextField!.resignFirstResponder()
-        selectedCellTextField!.backgroundColor = UIColor.clearColor()
-        selectedCellTextField = nil
+        let newExchanges:Exchanges = cVC.exchangeInfo
+        //debug//print("\(self) - ChildTag \(childViewController.view!.tag)")
+        if let eye:Eye = cVC.currentEye! {
+            if newExchanges != eye.exchangeData {
+                eye.exchangeData = newExchanges
+            }
+        }
         
         return true
     }
     
     // Called on the delegate when the user has taken action to dismiss the popover. This is not called when the popover is dimissed programatically.
     func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
-        //popoverPresentationController.presentedViewController.removeFromParentViewController()
-        //popoverPresentationController.delegate = nil
+        
+        unowned let owningCollectionView = (selectedCellTextField!.superview?.superview?.superview as! StrikeCollectionView)
+        
+        if selectedCellTextField!.isFirstResponder() {
+            selectedCellTextField!.resignFirstResponder()
+        }
+        
+        owningCollectionView.reloadData()
+        
+        selectedCellTextField!.backgroundColor = UIColor.clearColor()
+        selectedCellTextField = nil
     }
     
     
@@ -457,7 +469,6 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
         }
         return header
     }
-    
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var returnValue = 1

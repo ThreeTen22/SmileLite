@@ -26,13 +26,8 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
     
     @IBAction func calcButtonPressed(sender: CalcButton) {
         
-        var buttonText:String {
-                if (sender.titleLabel?.text! != nil){
-                    return (sender.titleLabel?.text)!
-                } else {
-                    return ""
-                }
-        }
+        let buttonText:String = (sender.titleLabel?.text)! ?? ""
+        
         switch buttonText {
             case "c":
                 selectedStrikeEyeParameter.text = ""
@@ -69,10 +64,8 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
             
             switch self.curShiftState {
             case .shiftingleft, .forceshiftingleft:
-                //newFrame = CGRect(x: newFrame.minX, y: newFrame.minY, width: newFrame.width-(self.calcView.frame.width), height: newFrame.height)
-                    contFrame.origin.x -= self.calcView.bounds.width
+                contFrame.origin.x -= self.calcView.bounds.width
             case .shiftingright:
-                //newFrame = CGRect(x: newFrame.minX, y: newFrame.minY, width: newFrame.width+(self.calcView.frame.width), height: newFrame.height)
                 contFrame.origin.x += self.calcView.bounds.width
             default: break
             }
@@ -121,7 +114,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
     var currentStrikePrice:Double?
     
     weak var selectedStrikeEyeParameter:UITextField!
-    weak var editEyeViewController:EditEyeViewController?
+    var editEyeViewController:EditEyeViewController?
     
     weak var currentTextField:UITextField?
     
@@ -130,17 +123,24 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
     var isBuy:Bool = false
     var strikeJSON:JSON?
     
+    var eyeParams:EyeParams = EyeParams()
+    var tempEye:StrikeEye?
     
     weak var currentContainer:MonthContainer?
     weak var currentEye:Eye?
     weak var currentDate:NSDate!
     
+    var exchangeInfo:Exchanges {
+      return (self.editEyeViewController?.exchangeTable.exchanges)!
+    }
+    
+    
     deinit {
-        //print("deinit: eyepopoverVC")
+        print("deinit: eyepopoverVC")
     }
     
     override func viewDidLoad() {
-        
+        super.viewDidLoad()
         closeButton.setFAIcon(FAType.FAClose, iconSize: 30.0, forState: .Normal)
         closeButton.setFATitleColor(Layout.eyeCancelButtonColor)
         
@@ -167,6 +167,11 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
                             break
                         }
                     }
+                    if currentEye == nil {
+                       tempEye = StrikeEye(strikeJSON: strikeJS, Symbol: currentListing.listingSymbol, SecurityId: currentListing.listingId)
+                        currentEye = tempEye
+                    }
+                    
                 }
             }
             
@@ -189,7 +194,15 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
             editEyeViewController!.strikeJSON = strikeJSON
             
             editEyeViewController!.currentEye = currentEye
+            if currentEye != nil {
+                eyeParams = currentEye!.eyeParams
+            } else {
+                eyeParams = EyeParams(isMonthEye)
+            }
             editEyeViewController!.setDelegates(self)
+            
+            editEyeViewController!.setupTextFields(eyeParams)
+           
         } else {
             
             let demoMonth =  currentListing.registeredMonthContainers[0]
@@ -203,13 +216,12 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
             }
             
         }
-        
-        //marketTable.backgroundColor = Layout.monthEyeBGColor
-        //marketTable.dataSource = self
-        //marketTable.delegate = self
-        //marketTable.reloadData()
-        super.viewDidLoad()
     }
+    
+    override func viewDidDisappear(animated: Bool) {
+        editEyeViewController = nil
+    }
+    
     
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

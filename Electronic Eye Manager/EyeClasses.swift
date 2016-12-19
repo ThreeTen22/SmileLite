@@ -16,16 +16,6 @@ enum Order {
     case NA
 }
 
-
-struct EyeParams {
-    static let quantity = 1
-    static let minEdge = 0.1
-    static let totalDelta = 1000.0
-    static let maxDelta = 250.0
-    static let lowDelta = 1.0
-    static let highDelta = 100.0
-}
-
 class EyeBook {
     var listings:Array = [Listing]()
     
@@ -413,7 +403,11 @@ class MonthContainer {
 
 
 class Eye {
-    //             SC      BP     BC     SP
+    //     SC      BP     BC     SP
+    
+    
+    
+    
     var order:Order = Order.NA
     var isActive = false
     var symbol:String
@@ -423,7 +417,7 @@ class Eye {
     var minEdge = 0.0
     var notifyOnly = false
     var id:Int = 0
-    var autohedge = "Off"
+    var autoHedge = "Off"
     var eyeType = "TheoBid"
     var currentDelta = 0.0
     var totalDelta:Double
@@ -435,6 +429,8 @@ class Eye {
     
     var exchangeData = Exchanges()
     
+    var eyeParams = EyeParams()
+    
     var eyeJson:JSON
     
     var jsonIndex:Int = -1
@@ -443,6 +439,8 @@ class Eye {
         //print("Eye: Deinit")
         
     }
+    
+    
     
     init(Symbol sym:String, ExpDate date:String, MinEdge edge:Double = 0.0,Quantity quantitiy:Int = 1, MaxDelta delta:Double,  TotalDelta tDelta:Double = 1000.0) {
         self.delta = delta
@@ -462,19 +460,20 @@ class Eye {
         minEdge = eyeDict["edge"].doubleValue
         eyeType = eyeDict["eyetype"].stringValue
         id = eyeDict["id"].intValue
-        autohedge = eyeDict["autohedge"].stringValue
+        autoHedge = eyeDict["autohedge"].stringValue
         totalDelta = Double(eyeDict["totaldelta"].stringValue)!
         currentDelta = eyeDict["currentdelta"].doubleValue
         cmdType = (eyeDict["command"].stringValue, eyeDict["type"].stringValue)
         order = getOrderEnum(eyeDict["command"].stringValue, type: eyeDict["type"].stringValue)
         entityType = eyeDict["entitytype"].intValue
         quantity = eyeDict["quantity"].intValue
+        
         if let deltaReal = Double(eyeDict["delta"].stringValue) {
             delta = deltaReal
-        } else {
-            delta = 0.0
         }
         securityId = Int(eyeDict["securityid"].stringValue)!
+        
+        eyeParams = EyeParams(eyeDict)
         exchangeData = Exchanges(fromEyeJson: eyeDict)
         
     }
@@ -511,6 +510,7 @@ class MonthEye: Eye {
     //for old eye
     var quantityDelta = 0.0
     
+    
     var minDelta = 1.0
     var maxDelta = 100.0
     
@@ -521,9 +521,6 @@ class MonthEye: Eye {
             //print("Mindelta: \(eyeDict["mindelta"].stringValue)")
             minDelta = Double(eyeDict["mindelta"].stringValue)!
             maxDelta = Double(eyeDict["maxdelta"].stringValue)!
-        } else {
-            minDelta = 0.0
-            maxDelta = 100.0
         }
         //highDelta = maxDelta
     }

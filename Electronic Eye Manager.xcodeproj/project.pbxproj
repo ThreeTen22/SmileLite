@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B33FB331E07ABD70019665C /* EyeParameterStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B33FB321E07ABD70019665C /* EyeParameterStruct.swift */; };
+		9B33FB351E07CD2B0019665C /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B33FB341E07CD2B0019665C /* ClassExtensions.swift */; };
 		9B3BBF761DFE0E6800395CDA /* ExchangesTableClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3BBF751DFE0E6800395CDA /* ExchangesTableClasses.swift */; };
 		9B3BBF781DFE772300395CDA /* FAIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3BBF771DFE772300395CDA /* FAIcon.swift */; };
 		9B3BBF7B1DFE778D00395CDA /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B3BBF7A1DFE778D00395CDA /* FontAwesome.ttf */; };
@@ -44,6 +46,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B33FB321E07ABD70019665C /* EyeParameterStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EyeParameterStruct.swift; sourceTree = "<group>"; };
+		9B33FB341E07CD2B0019665C /* ClassExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
 		9B3BBF751DFE0E6800395CDA /* ExchangesTableClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangesTableClasses.swift; sourceTree = "<group>"; };
 		9B3BBF771DFE772300395CDA /* FAIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAIcon.swift; sourceTree = "<group>"; };
 		9B3BBF7A1DFE778D00395CDA /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
@@ -132,7 +136,9 @@
 				9BB51B091DF1D666005485F4 /* LabelClasses.swift */,
 				9BB51B0B1DF1D7B9005485F4 /* LayoutStructs.swift */,
 				9BABE8DD1DF900020055C05F /* TableViews.swift */,
+				9B33FB321E07ABD70019665C /* EyeParameterStruct.swift */,
 				9BAECE7A1DFFDF1E00C5B9AF /* ExchangesStruct.swift */,
+				9B33FB341E07CD2B0019665C /* ClassExtensions.swift */,
 				9B927F051DED1B7800209D79 /* EyeBookStrikesPage */,
 				9B927F041DED1B4100209D79 /* EyePopover */,
 				9BB51AFE1DF15C85005485F4 /* CalculatorView */,
@@ -288,6 +294,7 @@
 				9BCAC2B21D81F76E0091099C /* SwiftyJSON.swift in Sources */,
 				9BEA428F1D3EBBA700BC4B0C /* yudpsocket.c in Sources */,
 				9B3BBF781DFE772300395CDA /* FAIcon.swift in Sources */,
+				9B33FB331E07ABD70019665C /* EyeParameterStruct.swift in Sources */,
 				9BB51B061DF1CD0C005485F4 /* TextFieldClasses.swift in Sources */,
 				9BC002761DD2329600D5C9F1 /* ButtonClasses.swift in Sources */,
 				9BC002721DCBC8F700D5C9F1 /* CollectionDelegates.swift in Sources */,
@@ -296,6 +303,7 @@
 				9BEA42701D3701B100BC4B0C /* CollectionViews.swift in Sources */,
 				9BF562241DFDF78200B5D517 /* LargeGlobalVars.swift in Sources */,
 				9B927F5C1DED460F00209D79 /* StrikeCollectionViewCell.swift in Sources */,
+				9B33FB351E07CD2B0019665C /* ClassExtensions.swift in Sources */,
 				9BEA428C1D3EBBA700BC4B0C /* ysocket.swift in Sources */,
 				9BB51B021DF15D2D005485F4 /* EditEyeViewController.swift in Sources */,
 				9B927F011DED169900209D79 /* EyePopoverViewController.swift in Sources */,

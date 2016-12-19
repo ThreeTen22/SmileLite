@@ -714,6 +714,24 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9AA-8U-2wu">
+                                        <rect key="frame" x="211" y="188" width="358" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="Market"/>
+                                            <segment title="Theo"/>
+                                            <segment title="TheoBid"/>
+                                            <segment title="TheoAsk"/>
+                                        </segments>
+                                    </segmentedControl>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="P5z-3E-whx">
+                                        <rect key="frame" x="19" y="188" width="173" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="Limit"/>
+                                            <segment title="Market"/>
+                                        </segments>
+                                    </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -733,24 +751,24 @@
                                     <rect key="frame" x="0.0" y="0.0" width="210" height="20"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Exchange" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIq-Cn-Xzv">
-                                            <rect key="frame" x="24" y="-1" width="62" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Order" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BDj-BQ-nrS">
-                                            <rect key="frame" x="95" y="-1" width="40" height="21"/>
+                                            <rect key="frame" x="122" y="-1" width="31" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notify Only" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kX3-Gy-dZk">
-                                            <rect key="frame" x="142" y="-1" width="68" height="21"/>
+                                            <rect key="frame" x="161" y="-1" width="49" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Exchange" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIq-Cn-Xzv">
+                                            <rect key="frame" x="37" y="-1" width="71" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -768,7 +786,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PQN-wK-Jot">
                                                     <rect key="frame" x="0.0" y="0.0" width="205" height="25"/>
                                                     <subviews>
-                                                        <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0q-Hu-BJA">
+                                                        <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0q-Hu-BJA" customClass="RadioButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="25" id="OEs-Fm-n81"/>
@@ -777,7 +795,7 @@
                                                             <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="12"/>
                                                             <state key="normal" title="O"/>
                                                             <connections>
-                                                                <action selector="radioPressed:" destination="wpi-Xa-lUS" eventType="touchUpInside" id="saf-je-sZi"/>
+                                                                <action selector="radioPressed:" destination="uX3-Jm-fLM" eventType="touchUpInside" id="GK0-T3-BJl"/>
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wrecked" lineBreakMode="tailTruncation" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEa-Wg-BQz">
@@ -802,9 +820,6 @@
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="12"/>
                                                             <state key="normal" title="O"/>
-                                                            <connections>
-                                                                <action selector="radioPressed:" destination="wpi-Xa-lUS" eventType="touchUpInside" id="pYx-qi-VZD"/>
-                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
@@ -815,6 +830,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="exchangeName" destination="KEa-Wg-BQz" id="IR0-lJ-KVo"/>
                                             <outlet property="exchangeOrderType" destination="XAs-5g-ZbV" id="4N4-xD-GWH"/>
                                             <outlet property="radioButton" destination="T0q-Hu-BJA" id="38p-LT-gAS"/>
                                         </connections>
@@ -844,18 +860,13 @@
                         <outlet property="maxDelta" destination="F3W-2r-Fib" id="GOf-DU-VXG"/>
                         <outlet property="maxQuantity" destination="puo-6t-z6Z" id="gMt-Sv-obv"/>
                         <outlet property="minEdge" destination="gRm-kz-ZZ9" id="4Jo-Iv-9kf"/>
+                        <outlet property="monthParameters" destination="5Wm-fF-cBf" id="XcD-VY-3mf"/>
                         <outlet property="totalDelta" destination="7Ok-4H-6uH" id="LxO-w3-4kM"/>
-                        <outletCollection property="highDeltaCollection" destination="xF6-ex-m6f" collectionClass="NSMutableArray" id="jAd-ry-2x2"/>
-                        <outletCollection property="totalDeltaCollection" destination="Fvm-3Z-Bry" collectionClass="NSMutableArray" id="ZTD-8O-7uy"/>
-                        <outletCollection property="totalDeltaCollection" destination="Ei6-LS-ZNX" collectionClass="NSMutableArray" id="EMD-IP-zSk"/>
-                        <outletCollection property="highDeltaCollection" destination="gtP-UD-LtJ" collectionClass="NSMutableArray" id="IXT-nk-4mm"/>
-                        <outletCollection property="lowDeltaCollection" destination="hkA-a3-Ei2" collectionClass="NSMutableArray" id="SZx-Bh-yn6"/>
-                        <outletCollection property="lowDeltaCollection" destination="o8k-kP-1Ld" collectionClass="NSMutableArray" id="1ib-84-CFj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lAW-Ly-qrL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1320.3125" y="528.515625"/>
+            <point key="canvasLocation" x="1318.75" y="519.7265625"/>
         </scene>
     </scenes>
 </document>

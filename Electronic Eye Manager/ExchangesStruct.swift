@@ -9,26 +9,44 @@
 import Foundation
 
 
+//typealias ExInfo = (nameIndx:Int, orderValidity:Int)
 
-typealias ExInfo = (nameIndx:Int, orderValidity:Int)
+struct ExInfo:Equatable {
+    var nameIndx:Int
+    var orderValidity:Int
+    var orderPref:Int
+    
+    init(_ n:Int,_ o:Int, t:Int = 2) {
+     nameIndx = n
+     orderValidity = o
+     orderPref = t
+    }
+}
 
+func ==(lhs:ExInfo, rhs:ExInfo) -> Bool {
+    return (lhs.nameIndx == rhs.nameIndx) && (lhs.orderValidity == rhs.orderValidity)
+}
 
-struct Exchanges {
-    var exchange1:ExInfo = (2,1)
-    var exchange2:ExInfo = (3,1)
-    var exchange3:ExInfo = (4,1)
-    var exchange4:ExInfo = (5,1)
-    var exchange5:ExInfo = (1,1)
-    var exchange6:ExInfo = (6,1)
-    var exchange7:ExInfo = (7,1)
-    var exchange8:ExInfo = (8,1)
-    var exchange9:ExInfo = (9,1)
-    var exchange10:ExInfo = (12,1)
-    var exchange11:ExInfo = (10,1)
-    var exchange12:ExInfo = (16,1)
-    var exchange13:ExInfo = (0,0)
-    var exchange14:ExInfo = (0,0)
-    var exchange15:ExInfo = (0,0)
+func !=(lhs:ExInfo, rhs:ExInfo) -> Bool {
+    return (lhs.nameIndx != rhs.nameIndx) || (lhs.orderValidity != rhs.orderValidity)
+}
+
+struct Exchanges:Equatable {
+    var exchange1:ExInfo = ExInfo(2,1)
+    var exchange2:ExInfo = ExInfo(3,1)
+    var exchange3:ExInfo = ExInfo(4,1)
+    var exchange4:ExInfo = ExInfo(5,1)
+    var exchange5:ExInfo = ExInfo(1,1)
+    var exchange6:ExInfo = ExInfo(6,1)
+    var exchange7:ExInfo = ExInfo(7,1)
+    var exchange8:ExInfo = ExInfo(8,1)
+    var exchange9:ExInfo = ExInfo(9,1)
+    var exchange10:ExInfo = ExInfo(12,1)
+    var exchange11:ExInfo = ExInfo(10,1)
+    var exchange12:ExInfo = ExInfo(16,1)
+    var exchange13:ExInfo = ExInfo(0,0)
+    var exchange14:ExInfo = ExInfo(0,0)
+    var exchange15:ExInfo = ExInfo(0,0)
     
     private var exchanges:Int = 12
     private var listExchanges:Int = 12
@@ -73,7 +91,7 @@ struct Exchanges {
                 return exchange15
             }
         }
-        set {
+        set(newValue) {
             switch index {
             case 1:
                 exchange1 = newValue
@@ -113,27 +131,107 @@ struct Exchanges {
         }
     }
     
+    subscript(isActiveExchange index:Int) -> Bool {
+        get {
+            switch index {
+            case 1:
+                return exchange1.orderValidity.isNotZero()
+            case 2:
+                return exchange2.orderValidity.isNotZero()
+            case 3:
+                return exchange3.orderValidity.isNotZero()
+            case 4:
+                return exchange4.orderValidity.isNotZero()
+            case 5:
+                return exchange5.orderValidity.isNotZero()
+            case 6:
+                return exchange6.orderValidity.isNotZero()
+            case 7:
+                return exchange7.orderValidity.isNotZero()
+            case 8:
+                return exchange8.orderValidity.isNotZero()
+            case 9:
+                return exchange9.orderValidity.isNotZero()
+            case 10:
+                return exchange10.orderValidity.isNotZero()
+            case 11:
+                return exchange11.orderValidity.isNotZero()
+            case 12:
+                return exchange12.orderValidity.isNotZero()
+            case 13:
+                return exchange13.orderValidity.isNotZero()
+            case 14:
+                return exchange14.orderValidity.isNotZero()
+            case 15:
+                return exchange15.orderValidity.isNotZero()
+            default:
+                assertionFailure("Get: Provided Exchange Number Out of Bounds")
+                return exchange15.orderValidity.isNotZero()
+            }
+        }
+        set(newValue) {
+            switch index {
+            case 1:
+                exchange1 = ExInfo(exchange1.nameIndx, newValue.hashValue)
+                
+            case 2:
+                exchange2.orderValidity = newValue.hashValue
+            case 3:
+                exchange3.orderValidity = newValue.hashValue
+            case 4:
+                exchange4.orderValidity = newValue.hashValue
+            case 5:
+                exchange5.orderValidity = newValue.hashValue
+            case 6:
+                exchange6.orderValidity = newValue.hashValue
+            case 7:
+                exchange7.orderValidity = newValue.hashValue
+            case 8:
+                exchange8.orderValidity = newValue.hashValue
+            case 9:
+                exchange9.orderValidity = newValue.hashValue
+            case 10:
+                exchange10.orderValidity = newValue.hashValue
+            case 11:
+                exchange11.orderValidity = newValue.hashValue
+            case 12:
+                exchange12.orderValidity = newValue.hashValue
+            case 13:
+                exchange13.orderValidity = newValue.hashValue
+            case 14:
+                exchange14.orderValidity = newValue.hashValue
+            case 15:
+                exchange15.orderValidity = newValue.hashValue
+            default:
+                assertionFailure("Set: Provided Exchange Number Out of Bounds")
+                break
+            }
+            
+        }
+    }
+    
+    
     init() {
         
     }
     
     init(nameIndx e1:Int, e2:Int, e3:Int, e4:Int, e5:Int, e6:Int, e7:Int, e8:Int, e9:Int, e10:Int, e11:Int, e12:Int, e13:Int, e14:Int, e15:Int) {
         
-        exchange1 = (e1, 0)
-        exchange2 = (e2, 0)
-        exchange3 = (e3, 0)
-        exchange4 = (e4, 0)
-        exchange5 = (e5, 0)
-        exchange6 = (e6, 0)
-        exchange7 = (e7, 0)
-        exchange8 = (e8, 0)
-        exchange9 = (e9, 0)
-        exchange10 = (e10, 0)
-        exchange11 = (e11, 0)
-        exchange12 = (e12, 0)
-        exchange13 = (e13, 0)
-        exchange14 = (e14, 0)
-        exchange15 = (e15, 0)
+        exchange1 =  ExInfo(e1, 0)
+        exchange2 =  ExInfo(e2, 0)
+        exchange3 =  ExInfo(e3, 0)
+        exchange4 =  ExInfo(e4, 0)
+        exchange5 =  ExInfo(e5, 0)
+        exchange6 =  ExInfo(e6, 0)
+        exchange7 =  ExInfo(e7, 0)
+        exchange8 =  ExInfo(e8, 0)
+        exchange9 =  ExInfo(e9, 0)
+        exchange10 = ExInfo(e10, 0)
+        exchange11 = ExInfo(e11, 0)
+        exchange12 = ExInfo(e12, 0)
+        exchange13 = ExInfo(e13, 0)
+        exchange14 = ExInfo(e14, 0)
+        exchange15 = ExInfo(e15, 0)
         updateCounts()
         
     }
@@ -183,6 +281,8 @@ struct Exchanges {
         orderValidities = eye["orderprefs"].intValue
         listExchanges = eye["listexchanges"].intValue
         
+        
+        
         //Get Listing Names
         exchange1.nameIndx = eye["listexchange1"].intValue
         exchange2.nameIndx = eye["listexchange2"].intValue
@@ -218,15 +318,47 @@ struct Exchanges {
         exchange15.orderValidity = eye["ordervalidity15"].intValue
         //get isActive
         
+        exchange1.orderPref =  eye["orderpref1"].intValue
+        exchange2.orderPref =  eye["orderpref2"].intValue
+        exchange3.orderPref =  eye["orderpref3"].intValue
+        exchange4.orderPref =  eye["orderpref4"].intValue
+        exchange5.orderPref =  eye["orderpref5"].intValue
+        exchange6.orderPref =  eye["orderpref6"].intValue
+        exchange7.orderPref =  eye["orderpref7"].intValue
+        exchange8.orderPref =  eye["orderpref8"].intValue
+        exchange9.orderPref =  eye["orderpref9"].intValue
+        exchange10.orderPref = eye["orderpref10"].intValue
+        exchange11.orderPref = eye["orderpref11"].intValue
+        exchange12.orderPref = eye["orderpref12"].intValue
+        exchange13.orderPref = eye["orderpref13"].intValue
+        exchange14.orderPref = eye["orderpref14"].intValue
+        exchange15.orderPref = eye["orderpref15"].intValue
+        
         updateCounts()
     }
-    
+    func printExchanges() {
+        print(exchange1)
+        print(exchange2)
+        print(exchange3)
+        print(exchange4)
+        print(exchange5)
+        print(exchange6)
+        print(exchange7)
+        print(exchange8)
+        print(exchange9)
+        print(exchange10)
+        print(exchange11)
+        print(exchange12)
+        print(exchange13)
+        print(exchange14)
+        print(exchange15)
+    }
 
 }
 
 
 
-func == (left:Exchanges, right:Exchanges) -> Bool {
+func ==(left:Exchanges, right:Exchanges) -> Bool {
     let leftMap = left.map()
     let rightMap = right.map()
     for (indx,leftElement) in leftMap.enumerate() {
@@ -237,7 +369,7 @@ func == (left:Exchanges, right:Exchanges) -> Bool {
     return true
 }
 
-func != (left:Exchanges, right:Exchanges) -> Bool {
+func !=(left:Exchanges, right:Exchanges) -> Bool {
     let leftMap = left.map()
     let rightMap = right.map()
     for (indx,leftElement) in leftMap.enumerate() {
@@ -254,15 +386,20 @@ extension Exchanges {
             return orderValidities
         }
     }
-    
+    /*
     subscript(isActive index:Int) -> Bool {
         get {
             return self[index].orderValidity.isNotZero()
         }
-        set {
-            self[index].orderValidity = newValue.hashValue
+        mutating set {
+            var newExchange = self[index]
+            print(newExchange)
+            newExchange.orderValidity = newValue.hashValue
+            self[index] = newExchange
+            print(self[index])
         }
     }
+    */
     
     subscript(mappedIndx index:Int) -> ExInfo {
         get {
@@ -369,43 +506,4 @@ extension Exchanges {
     }
 }
 
-extension Int {
-    mutating func OneOrZero() -> Void {
-        if self == 0 {
-            self = 1
-        } else {
-            self = 0
-        }
-    }
-    
-    func toBool() -> Bool? {
-        switch self {
-        case 0:
-            return false
-        case 1:
-            return true
-        default:
-            return nil
-        }
-    }
-    
-    func isNotZero() -> Bool {
-        if self != 0 {
-            return true
-        }
-        return false
-    }
-    
-    func isZero() -> Bool {
-        if self != 0 {
-            return false
-        }
-        return true
-    }
-    func isZeroHash() -> Int {
-        if self != 0 {
-            return 1
-        }
-        return 0
-    }
-}
+

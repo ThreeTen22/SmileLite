@@ -44,7 +44,21 @@ struct Layout {
     static let eyeCancelButtonColor:UIColor = UIColor.redColor()
     
     static let errorColor:UIColor = UIColor(red255: 253, green: 123, blue: 88)
+    
+    static let radioButtonColorOn = UIColor.blueColor()
+    static let radioButtonColorOff = UIColor.lightGrayColor()
    
+    static func setRadioButtonLayout(sender:UIButton, isOn:Bool = false) {
+        if isOn {
+            sender.setFAIcon(FAType.FADotCircleO, iconSize: 20, forState: .Normal)
+            sender.setFATitleColor(radioButtonColorOn)
+        } else {
+            sender.setFAIcon(FAType.FACircleO, iconSize: 20, forState: .Normal)
+            sender.setFATitleColor(radioButtonColorOff)
+
+        }
+    }
+    
     
     static func setLayout(cell:UIView, label:UILabel, type:StrikeType, altMaturity:Bool = false) {
         switch type {
