@@ -41,6 +41,7 @@ class ExchangeTableView:UITableView {
         //exchanges[isActive: sender.tag] = !exchanges[isActive: sender.tag]
         
     }
+    
     func setButtonLayout(sender:UIButton) {
         Layout.setRadioButtonLayout(sender, isOn: exchanges[isActiveExchange: sender.tag])
     }
@@ -48,6 +49,7 @@ class ExchangeTableView:UITableView {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
 }
 
 class ExchangesTableCell: UITableViewCell {

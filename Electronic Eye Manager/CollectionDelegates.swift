@@ -368,9 +368,9 @@ struct StrikeCollectionDelegate {
             if lookupDelta != nil {
                 if let curMonthEye = curMonthContainer.GetMonthByOrder(orderType) {
                     if let curDeltaRaw =  Double(strikeJSON[lookupDelta!].stringValue) {
-                        
-                        var curLowDelta = curMonthEye.minDelta/100
-                        var curHighDelta = curMonthEye.maxDelta/100
+                        let eyeParams = curMonthEye.eyeParams
+                        var curLowDelta = eyeParams.minDelta.asDouble()!/100
+                        var curHighDelta = eyeParams.maxDelta.asDouble()!/100
                         var curDelta = curDeltaRaw
                         if lookupDelta!.containsString("Put") {
                             curDelta = abs(curDelta)
@@ -381,8 +381,8 @@ struct StrikeCollectionDelegate {
                         if curDelta >= curLowDelta && curDelta <= curHighDelta  {
                         //print("DEBUG: Month DELEGATE:  Currently GETTING \(curMonthEye.cmdType) MQ/E  - lowdelta: \(curMonthEye.minDelta) - highdelta: \(curMonthEye.maxDelta) ")
                             success = true
-                            q = "\(curMonthEye.quantity)"
-                            e = "\(curMonthEye.minEdge)"
+                            q = eyeParams.quantity
+                            e = eyeParams.minEdge
                             
                         }
                     }
@@ -390,13 +390,14 @@ struct StrikeCollectionDelegate {
             } else {
                 //print("trying STRIKE DELEGATE  - \(strikeJSON["strike"].stringValue)")
                 if let curStrikeEyes = curMonthContainer.GetStrikesByOrder(orderType) {
-                    if let curStrikeDbl = Double(strikeJSON["strike"].stringValue) {
+                    if let curStrikeDbl = strikeJSON["strike"].double {
                         for strike in curStrikeEyes {
+                            let eyeParams = strike.eyeParams
                             if strike.strike == curStrikeDbl {
                                 //print("DEBUG: STRIKE DELEGATE:  Currently GETTING \(orderType) Q/E ")
                                 success = true
-                                q = "\(strike.quantity)"
-                                e = "\(strike.minEdge)"
+                                q = eyeParams.quantity
+                                e = eyeParams.minEdge
                             }
                         }
                     }

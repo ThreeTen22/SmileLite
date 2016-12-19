@@ -435,6 +435,8 @@ class Eye {
     
     var jsonIndex:Int = -1
     
+    var showDebug = false
+    
     deinit {
         //print("Eye: Deinit")
         
@@ -508,8 +510,8 @@ class Eye {
 
 class MonthEye: Eye {
     //for old eye
-    var quantityDelta = 0.0
     
+    var quantityDelta = 0.0
     
     var minDelta = 1.0
     var maxDelta = 100.0
@@ -543,6 +545,7 @@ class MonthEye: Eye {
 }
 
 class StrikeEye: Eye {
+    
     var strike = 0.0
     var isUsingEdgeRule = false
     var quantityOverride = 0
@@ -571,6 +574,12 @@ class StrikeEye: Eye {
         super.init(strikeJSON: strikeJSON, Symbol: sym, SecurityId: securityId, MinEdge: edge, Quantity: qntity, MaxDelta: delta, TotalDelta: tDelta)
         strike = strikeJSON["strike"].doubleValue
         
+    }
+    
+    deinit {
+        if showDebug {
+         print("demoStrikeDeiniting")
+        }
     }
     
 }

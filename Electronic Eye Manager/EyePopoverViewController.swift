@@ -12,10 +12,10 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
     
     private enum ShiftState:Int {
         case notshifted = 0
-        case shiftingright = 1
+        case shiftingleft = 1
         case hasshifted = 2
-        case shiftingleft = 3
-        case forceshiftingleft = 4
+        case shiftingright = 3
+        case forceshiftingright = 4
     }
     private var curShiftState:ShiftState = .notshifted
     
@@ -57,16 +57,26 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
         
     }
     
+    
+    
+    @IBAction func eyeTypeSelected(sender:UISegmentedControl) {
+        
+    }
+    
+    @IBAction func orderTypeSelected(sender:UISegmentedControl) {
+        
+    }
+    
     @IBAction func shift(sender: UITextField) {
         UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {[unowned self] in
             //var newFrame = self.view.frame
             var contFrame = self.containerView.frame
             
             switch self.curShiftState {
-            case .shiftingleft, .forceshiftingleft:
-                contFrame.origin.x -= self.calcView.bounds.width
-            case .shiftingright:
+            case .shiftingright, .forceshiftingright:
                 contFrame.origin.x += self.calcView.bounds.width
+            case .shiftingleft:
+                contFrame.origin.x -= self.calcView.bounds.width
             default: break
             }
             //self.view.frame = newFrame
@@ -77,13 +87,13 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
                 //print("I AM COMPLETING")
                 if (self != nil) {
                     switch self?.curShiftState {
-                    case .shiftingright?:
+                    case .shiftingleft?:
                        self?.curShiftState = .hasshifted
                        sender?.becomeFirstResponder()
                     //sender?.selectAll(nil)
-                    case .shiftingleft?:
+                    case .shiftingright?:
                        self?.curShiftState = .notshifted
-                    case .forceshiftingleft?:
+                    case .forceshiftingright?:
                         self?.curShiftState = .notshifted
                     default: break
                     }
@@ -104,10 +114,6 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
     @IBOutlet weak var calcView: UIView!
     
     @IBOutlet weak var closeButton: UIButton!
-    
-    
-    
-    var hasShifted = false
     
     weak var currentListing:Listing!
     
@@ -137,6 +143,9 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
     
     deinit {
         print("deinit: eyepopoverVC")
+        //tempEye = nil
+        //currentEye = nil
+        currentDate = nil
     }
     
     override func viewDidLoad() {
@@ -169,6 +178,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
                     }
                     if currentEye == nil {
                        tempEye = StrikeEye(strikeJSON: strikeJS, Symbol: currentListing.listingSymbol, SecurityId: currentListing.listingId)
+                        tempEye?.showDebug = true
                         currentEye = tempEye
                     }
                     
@@ -219,15 +229,15 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
     }
     
     override func viewDidDisappear(animated: Bool) {
-        editEyeViewController = nil
+        //editEyeViewController = nil
     }
     
     
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         switch curShiftState {
-        case .hasshifted, .shiftingleft:
-            curShiftState = .forceshiftingleft
+        case .hasshifted, .shiftingright:
+            curShiftState = .forceshiftingright
             view.endEditing(true)
         default:
             break
@@ -238,7 +248,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
         textField.inputView = UIView()
         switch curShiftState {
         case .notshifted:
-            curShiftState = .shiftingright
+            curShiftState = .shiftingleft
             shift(textField)
             return false
         case .hasshifted:
@@ -256,8 +266,8 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
     func textFieldDidEndEditing(textField: UITextField) {
         
         switch curShiftState {
-        case .forceshiftingleft:
-            curShiftState = .shiftingleft
+        case .forceshiftingright:
+            curShiftState = .shiftingright
             shift(textField)
         default:
             textField.resignFirstResponder()

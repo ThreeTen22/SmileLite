@@ -79,3 +79,8 @@ class RadioButton:UIButton {
     }
     
 }
+
+class OrderTypeSegmentControl:UISegmentedControl {
+    
+    
+}

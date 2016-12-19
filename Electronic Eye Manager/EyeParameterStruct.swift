@@ -15,7 +15,9 @@ struct EyeParams:Equatable {
     var minEdge = "0.1"
     var delta = "250.0"
     var eyeType = "Theo"
+    var orderType = "LMT"
     var autoHedge = "OFF"
+    var price = "0.0"
     
     var minDelta = ""
     var maxDelta = ""
@@ -38,8 +40,10 @@ struct EyeParams:Equatable {
         minEdge = eyeDict["edge"].stringValue.removeAfterChar(".", indx: 1)
         delta = eyeDict["delta"].stringValue.removeAfterChar(".", indx: 1)
         eyeType = eyeDict["eyetype"].stringValue.removeAfterChar(".", indx: 1)
+        orderType = eyeDict["ordertype"].stringValue.removeAfterChar(".", indx: 1)
         autoHedge = eyeDict["autohedge"].stringValue.removeAfterChar(".", indx: 1)
-        if eyeDict["entitytype"].intValue != 0 &&  eyeDict["strike"].double == nil {
+        price = eyeDict["price"].stringValue.removeAfterChar(".", indx: 1)
+        if eyeDict["entitytype"].intValue != 0 && eyeDict["strike"].double == nil {
             useMonthParams = true
             minDelta = eyeDict["mindelta"].stringValue.removeAfterChar(".", indx: 1)
             maxDelta = eyeDict["maxdelta"].stringValue.removeAfterChar(".", indx: 1)

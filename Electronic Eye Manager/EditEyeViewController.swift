@@ -24,6 +24,7 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var lowDelta: EditEyeParameter!
     @IBOutlet weak var highDelta: EditEyeParameter!
     @IBOutlet weak var totalDelta: EditEyeParameter!
+    @IBOutlet weak var price: EditEyeParameter!
     
     weak var delegateController:UITextFieldDelegate?
     weak var currentListing:Listing?
@@ -35,6 +36,9 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var exchangeTable:ExchangeTableView!
     
     var isMonthEye = true
+    
+    @IBOutlet var orderTypeControl: UISegmentedControl!
+    @IBOutlet var eyeTypeControl: UISegmentedControl!
     
     
     
@@ -71,20 +75,10 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     override func viewWillAppear(animated:Bool) {
-        //print("quantityViewDidLoad: \(currentEye)")
-        
-        //if let curEye = currentEye {
-            //setupTextFields(curEye)
-        //}
-        
-        
-        // maxQuantity.note
         
         linkDelegates()
         if !isMonthEye {
-            for view in monthParameters.arrangedSubviews {
-             view.hidden = true
-            }
+            monthParameters.hidden = true
         }
         self.view!.backgroundColor = Layout.monthEyeBGColor
         self.view!.viewWithTag(1337)?.backgroundColor = Layout.monthEyeBGColor
@@ -98,7 +92,7 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     deinit {
-        
+        print("editEyeVC deinit")
         currentListing = nil
         delegateController = nil
         
@@ -150,6 +144,7 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
         maxQuantity.delegate = delegateController
         maxDelta.delegate = delegateController
         minEdge.delegate = delegateController
+        price.delegate = delegateController
         if isMonthEye {
             lowDelta.delegate = delegateController
             highDelta.delegate = delegateController
@@ -167,7 +162,6 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
         } else {
             textField.text = String(amount)
         }
-        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

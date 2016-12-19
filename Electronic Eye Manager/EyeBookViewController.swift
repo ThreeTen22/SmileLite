@@ -291,12 +291,11 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
         
         let newExchanges:Exchanges = cVC.exchangeInfo
         //debug//print("\(self) - ChildTag \(childViewController.view!.tag)")
-        if let eye:Eye = cVC.currentEye! {
+        if let eye:Eye = cVC.currentEye {
             if newExchanges != eye.exchangeData {
                 eye.exchangeData = newExchanges
             }
         }
-        
         return true
     }
     

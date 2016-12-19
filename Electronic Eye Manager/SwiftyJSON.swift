@@ -859,6 +859,12 @@ extension JSON {
             switch self.type {
             case .Number, .Bool:
                 return self.rawNumber
+            case .String:
+                let decimal = NSDecimalNumber(string: self.object as? String)
+                if decimal == NSDecimalNumber.notANumber() {  // indicates parse error
+                    return nil
+                }
+                return decimal
             default:
                 return nil
             }
