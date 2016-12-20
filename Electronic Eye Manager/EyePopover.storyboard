@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VSb-2t-Cnb">
-    <device id="ipad9_7" orientation="portrait">
+    <device id="retina3_5" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -228,8 +228,8 @@
                                 <exclude reference="12x-or-LPi"/>
                                 <exclude reference="Dhw-zA-wG9"/>
                                 <exclude reference="dFi-Qs-wh4"/>
-                                <exclude reference="NOP-DI-0v7"/>
                                 <exclude reference="bHM-57-rFZ"/>
+                                <exclude reference="NOP-DI-0v7"/>
                             </mask>
                         </variation>
                     </view>
@@ -309,13 +309,13 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PQN-wK-Jot">
                                                     <rect key="frame" x="0.0" y="0.0" width="205" height="25"/>
                                                     <subviews>
-                                                        <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0q-Hu-BJA" customClass="RadioButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                        <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0q-Hu-BJA" customClass="RadioButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="25" id="OEs-Fm-n81"/>
                                                                 <constraint firstAttribute="height" constant="25" id="bjM-KI-TAA"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="12"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <state key="normal" title="O"/>
                                                             <connections>
                                                                 <action selector="radioPressed:" destination="uX3-Jm-fLM" eventType="touchUpInside" id="GK0-T3-BJl"/>
@@ -341,7 +341,7 @@
                                                                 <constraint firstAttribute="width" constant="25" id="fYV-Wx-ZDv"/>
                                                                 <constraint firstAttribute="height" constant="25" id="xg1-ng-XYI"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="12"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <state key="normal" title="O"/>
                                                         </button>
                                                     </subviews>
@@ -408,7 +408,7 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="80" id="5cU-Oq-Ja9"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                             </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6bV-5S-ZOU" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
@@ -900,7 +900,7 @@
                                                             <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="totalDelta"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="price"/>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
                                                                 <integer key="value" value="100"/>
                                                             </userDefinedRuntimeAttribute>
@@ -950,7 +950,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lAW-Ly-qrL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1318.75" y="519.7265625"/>
+            <point key="canvasLocation" x="1535" y="548"/>
         </scene>
     </scenes>
 </document>

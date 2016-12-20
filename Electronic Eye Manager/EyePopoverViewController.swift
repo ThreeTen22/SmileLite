@@ -61,14 +61,14 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
     
     @IBAction func eyeTypeSelected(sender:UISegmentedControl) {
         let newSelectionTitle = sender.titleForSegmentAtIndex(sender.selectedSegmentIndex)
-        if newSelectionTitle?.containsString("Mkt") {
-            
-        }
+        //if newSelectionTitle?.containsString("Mkt") {
+          print("eyetypeSelected")
+        //}
         
     }
     
     @IBAction func orderTypeSelected(sender:UISegmentedControl) {
-        
+        print("orderTypeSelected")
     }
     
     @IBAction func shift(sender: UITextField) {
