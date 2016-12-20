@@ -60,6 +60,10 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
     
     
     @IBAction func eyeTypeSelected(sender:UISegmentedControl) {
+        let newSelectionTitle = sender.titleForSegmentAtIndex(sender.selectedSegmentIndex)
+        if newSelectionTitle?.containsString("Mkt") {
+            
+        }
         
     }
     

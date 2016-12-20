@@ -40,6 +40,9 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet var orderTypeControl: UISegmentedControl!
     @IBOutlet var eyeTypeControl: UISegmentedControl!
     
+    @IBOutlet var priceParamCollection: [UIView]!
+    
+    
     
     
     func testChangeValue(sender: AnyObject) {

@@ -940,6 +940,12 @@
                         <outlet property="orderTypeControl" destination="P5z-3E-whx" id="ZcX-YD-91j"/>
                         <outlet property="price" destination="6VQ-TW-iZ9" id="VhT-2Z-vHb"/>
                         <outlet property="totalDelta" destination="7Ok-4H-6uH" id="LxO-w3-4kM"/>
+                        <outletCollection property="priceParamCollection" destination="3rc-Fr-y7u" collectionClass="NSMutableArray" id="ogx-1V-fI4"/>
+                        <outletCollection property="priceParamCollection" destination="RBd-sV-vVF" collectionClass="NSMutableArray" id="TrS-h4-fph"/>
+                        <outletCollection property="priceParamCollection" destination="XmF-sL-chU" collectionClass="NSMutableArray" id="n8o-qM-15e"/>
+                        <outletCollection property="priceParamCollection" destination="6VQ-TW-iZ9" collectionClass="NSMutableArray" id="IbM-cQ-inW"/>
+                        <outletCollection property="priceParamCollection" destination="65W-d2-qDA" collectionClass="NSMutableArray" id="xMm-75-4K0"/>
+                        <outletCollection property="priceParamCollection" destination="j2U-WS-YDD" collectionClass="NSMutableArray" id="shM-4x-eBA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lAW-Ly-qrL" userLabel="First Responder" sceneMemberID="firstResponder"/>
