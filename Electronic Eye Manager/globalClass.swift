@@ -61,12 +61,15 @@ enum StrikeType {
     case null
 }
 
-public enum Position {
+enum Position {
     case long
     case short
     case neutral
     case null
 }
+
+let dotChar:Character = "."
+let dotString:String = "."
 
 func parseXonString() {
     xonListingArray = (xonListingData.characters.split(",", maxSplit: Int.max, allowEmptySlices: true).map(String.init))
@@ -88,6 +91,27 @@ func addEyesToArray(inout eyeArray:[Eye], listing:Listing, bAddMonthEyes:Bool = 
 func removeAfterIndex(Source str:String, CutOffIndex indx:Int) -> String {
     if str.characters.count >= indx {
         return str.stringByPaddingToLength(indx, withString: "", startingAtIndex: (str.characters.count-1))
+    }
+    return str
+}
+
+func removeExtraZeros(str:String, alsoBeforeDot:Bool = true) -> String {
+    if let strDouble = str.asDouble() {
+        if alsoBeforeDot {
+            if strDouble < 1.0 {
+                return removeBeforeCharacter(Source: String(strDouble), Character: ".")
+            }
+        }
+    return String(strDouble)
+    
+    }
+    return str
+}
+
+func removeBeforeCharacter(Source str:String, Character char:Character) -> String {
+    if let charIndex = str.characters.indexOf(char) {
+        let subStr = str.substringFromIndex(charIndex)
+        return subStr
     }
     return str
 }

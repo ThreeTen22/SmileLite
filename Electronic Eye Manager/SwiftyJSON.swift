@@ -1004,6 +1004,26 @@ extension JSON {
         }
     }
     
+    public var trueInt: Int? {
+        get {
+            if let num = self.number as? NSDecimalNumber {
+                let intLong = num.longValue
+                    if num == intLong {
+                        return intLong
+                    }
+                    return nil
+            }
+            return self.number?.longValue
+        }
+        set {
+            if let newValue = newValue {
+                self.object = NSNumber(integer: newValue)
+            } else {
+                self.object = NSNull()
+            }
+        }
+    }
+    
     public var intValue: Int {
         get {
             return self.numberValue.integerValue

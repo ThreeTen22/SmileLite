@@ -31,6 +31,7 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
     weak var currentEye:Eye?
     var strikeJSON:JSON?
     
+    
     @IBOutlet var monthParameters:UIStackView!
     
     @IBOutlet weak var exchangeTable:ExchangeTableView!
@@ -52,7 +53,7 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         switch senderBtn.labelToChange {
             case "maxQuantity":
-                modifyTextField(maxQuantity, amount: amount)
+                modifyTextField(maxQuantity, Int: Int(amount))
             case "maxDelta":
                 modifyTextField(maxDelta, amount: amount)
             case "minEdge":
@@ -63,6 +64,8 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
                 modifyTextField(highDelta, amount: amount)
             case "totalDelta":
                 modifyTextField(totalDelta, amount: amount)
+            case "price":
+                modifyTextField(price, amount: amount)
         default: break
             
         }
@@ -119,19 +122,6 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    func setupTextFields(curEye:Eye) {
-        maxQuantity.setupText("\(curEye.quantity)")
-        maxDelta.setupText("\(curEye.delta)")
-        minEdge.setupText("\(curEye.minEdge)")
-        if isMonthEye {
-            if let me = (curEye as? MonthEye) {
-                lowDelta.setupText("\(me.minDelta)")
-                highDelta.setupText("\(me.maxDelta)")
-                totalDelta.setupText("\(me.totalDelta)")
-            }
-        }
-    }
-    
     func setupTextFields(eyeParams:EyeParams) {
         maxQuantity.setupText(eyeParams.quantity)
         maxDelta.setupText(eyeParams.delta)
@@ -155,12 +145,16 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    func setDelegates(deleController:UITextFieldDelegate) {
-        delegateController = deleController
-    }
-    
     func modifyTextField(textField:EditEyeParameter, amount:Float) {
         if let textAmount:Float = Float(textField.text!) {
+            textField.text = String(textAmount + amount)
+        } else {
+            textField.text = String(amount)
+        }
+    }
+    
+    func modifyTextField(textField:EditEyeParameter, Int amount:Int) {
+        if let textAmount:Int = Int(textField.text!) {
             textField.text = String(textAmount + amount)
         } else {
             textField.text = String(amount)
@@ -185,10 +179,26 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
         let exchangeTable = (tableView as! ExchangeTableView)
         Layout.setRadioButtonLayout(exchangeCell.radioButton, isOn: exchangeTable.exchanges[isActiveExchange: exchangeCell.radioButton.tag])
     }
+
     
-    /*
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-    }
-    */
 }
+
+
+/*
+ func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+ 
+ }
+ 
+func setupTextFields(curEye:Eye) {
+    maxQuantity.setupText("\(curEye.quantity)")
+    maxDelta.setupText("\(curEye.delta)")
+    minEdge.setupText("\(curEye.minEdge)")
+    if isMonthEye {
+        if let me = (curEye as? MonthEye) {
+            lowDelta.setupText("\(me.minDelta)")
+            highDelta.setupText("\(me.maxDelta)")
+            totalDelta.setupText("\(me.totalDelta)")
+        }
+    }
+}
+ */

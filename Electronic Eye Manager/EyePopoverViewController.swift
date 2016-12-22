@@ -213,7 +213,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
             } else {
                 eyeParams = EyeParams(isMonthEye)
             }
-            editEyeViewController!.setDelegates(self)
+            editEyeViewController!.delegateController = self
             
             editEyeViewController!.setupTextFields(eyeParams)
            

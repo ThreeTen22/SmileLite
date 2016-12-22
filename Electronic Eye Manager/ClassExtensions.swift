@@ -37,6 +37,25 @@ extension String {
     func removeAfterChar(char:Character, indx:Int) -> String {
         return removeAfterCharacter(Source: self, Character: char, CutOffIndex: indx)
     }
+    
+    func formatNumberForTextField(removeDot:Bool = true) -> String {
+        if let dblSelf = Double(self) {
+            if remainder(dblSelf, 1) == 0 && dblSelf > 0.0 {
+                if removeDot {
+                    return String(Int(self))
+                }
+                return String(Int(self)) + dotString
+            }
+            if dblSelf < 1.0 {
+               return removeBeforeCharacter(Source: String(dblSelf), Character: dotChar)
+            }
+        }
+        return self
+    }
+    
+    func removeZeros(beforeDot:Bool = true) -> String {
+      return removeExtraZeros(self, alsoBeforeDot: beforeDot)
+    }
 }
 
 extension Int {

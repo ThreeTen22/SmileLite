@@ -475,6 +475,8 @@ class Eye {
         }
         securityId = Int(eyeDict["securityid"].stringValue)!
         
+        //print("eyeTest:  \(eyeDict["id"].trueInt)")
+        
         eyeParams = EyeParams(eyeDict)
         exchangeData = Exchanges(fromEyeJson: eyeDict)
         
