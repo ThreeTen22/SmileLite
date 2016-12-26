@@ -290,10 +290,15 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
         unowned let cVC = popoverPresentationController.presentedViewController as! EyePopoverViewController
         
         let newExchanges:Exchanges = cVC.exchangeInfo
+        let newParams:EyeParams = cVC.eyeParams
         //debug//print("\(self) - ChildTag \(childViewController.view!.tag)")
         if let eye:Eye = cVC.currentEye {
             if newExchanges != eye.exchangeData {
                 eye.exchangeData = newExchanges
+            }
+            
+            if newParams != eye.eyeParams {
+                eye.eyeParams = newParams
             }
         }
         return true

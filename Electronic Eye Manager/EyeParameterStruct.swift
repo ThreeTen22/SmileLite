@@ -10,13 +10,23 @@ import Foundation
 
 
 struct EyeParams:Equatable {
+    enum params {
+     case quantity
+     case minEdge
+     case delta
+     case eyeType
+     case orderType
+     case autoHedge
+     case price
+     case minDelta
+     case maxDelta
+     case totalDelta
+    }
+    
+    
     var useMonthParams = false
     var quantity = "1"
-    var minEdge = "0.1" {
-        didSet(setValue) {
-            setMinEdgeF(setValue)
-        }
-    }
+    var minEdge = "0.1"
     var delta = "250.0"
     var eyeType = "Theo"
     var orderType = "LMT"
@@ -28,6 +38,64 @@ struct EyeParams:Equatable {
     var totalDelta = ""
     
     var minEdgeF = "0.1"
+    
+    subscript(param:params) -> String {
+        get {
+            switch param{
+            case .quantity:
+                return quantity
+            case .minEdge:
+                return minEdge
+            case .delta:
+                return delta
+            case .eyeType:
+                return eyeType
+            case .orderType:
+                return orderType
+            case .autoHedge:
+                return autoHedge
+            case .price:
+                return price
+            case .minDelta:
+                return minDelta
+            case .maxDelta:
+                return maxDelta
+            case .totalDelta:
+                return totalDelta
+            }
+        }
+        
+        set {
+            switch param {
+            case .quantity:
+                quantity = newValue
+            case .minEdge:
+                minEdge = newValue
+                minEdgeF = newValue.removeZeros(true)
+            case .delta:
+                delta = newValue
+            case .eyeType:
+                eyeType = newValue
+            case .orderType:
+                orderType = newValue
+            case .autoHedge:
+                autoHedge = newValue
+            case .price:
+                price = newValue
+            case .minDelta:
+                minDelta = newValue
+            case .maxDelta:
+                maxDelta = newValue
+            case .totalDelta:
+                totalDelta = newValue
+            }
+        }
+    }
+    
+    
+    
+    
+    
     
     init() {
     }
@@ -43,23 +111,23 @@ struct EyeParams:Equatable {
     
     init(_ eyeDict:JSON) {
         quantity = eyeDict["quantity"].stringValue
-        minEdge = eyeDict["edge"].stringValue.removeZeros(false)
-        delta = eyeDict["delta"].stringValue.removeZeros(false)
+        minEdge = eyeDict["edge"].stringValue.removeZeros()
+        delta = eyeDict["delta"].stringValue.removeZeros()
         eyeType = eyeDict["eyetype"].stringValue
         orderType = eyeDict["ordertype"].stringValue
         autoHedge = eyeDict["autohedge"].stringValue
-        price = eyeDict["price"].stringValue.removeZeros(false)
+        price = eyeDict["price"].stringValue.removeZeros()
         if eyeDict["entitytype"].intValue != 0 && eyeDict["strike"].double == nil {
             useMonthParams = true
-            minDelta = eyeDict["mindelta"].stringValue
-            maxDelta = eyeDict["maxdelta"].stringValue
-            totalDelta = eyeDict["totaldelta"].stringValue
+            minDelta = eyeDict["mindelta"].stringValue.removeZeros()
+            maxDelta = eyeDict["maxdelta"].stringValue.removeZeros()
+            totalDelta = eyeDict["totaldelta"].stringValue.removeZeros()
         }
-        setMinEdgeF(minEdge)
+        minEdgeF = minEdge.removeZeros(true)
         
     }
     mutating func setMinEdgeF(str:String) {
-        minEdgeF = str.removeZeros()
+        minEdgeF = str.removeZeros(true)
         
     }
 }

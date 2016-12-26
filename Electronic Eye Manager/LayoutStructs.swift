@@ -37,11 +37,13 @@ struct Layout {
     
     static let monthEyeBGColor:UIColor = UIColor(red255: 205, green: 205, blue: 225)
     
-    static let monthEyeInstallBGColor:UIColor =  UIColor(rgb: 0x006600)
-    static let monthEyeTheoButtonBGColor:UIColor = UIColor(rgb: 0x99cccc)
+    static let eyeInstallBGColor:UIColor =  UIColor(rgb: 0x006600)
+    static let eyeTheoButtonBGColor:UIColor = UIColor(rgb: 0x99cccc)
     
     static let eyeDeleteButtonColor:UIColor = UIColor.redColor()
     static let eyeCancelButtonColor:UIColor = UIColor.redColor()
+    
+    static let eyeSaveButtonColor:UIColor = UIColor.greenColor()
     
     static let errorColor:UIColor = UIColor(red255: 253, green: 123, blue: 88)
     

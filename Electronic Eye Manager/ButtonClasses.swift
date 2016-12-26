@@ -46,13 +46,14 @@ class CalcButton: UIButton {
 //button to control quick changes to the :labelToChange textfields by :changeAmount
 class QuickChangeButton: UIButton {
     var labelToChange: String = ""
-    var changeAmount: Float = 0.0
+    var changeAmount: Double = 0.0
     
     override func awakeFromNib() {
-        self.addTarget(nil, action: #selector(EditEyeViewController.testChangeValue(_:)), forControlEvents: .TouchUpInside)
+        self.addTarget(nil, action: #selector(EyePopoverViewController.testChangeValue(_:)), forControlEvents: .TouchUpInside)
     }
     
     deinit {
+        //self.removeTarget(nil, action: #selector(EyePopoverViewController.testChangeValue(_:)), forControlEvents: .TouchUpInside)
      //print("deinit: QuickchangeButton")
     }
 }

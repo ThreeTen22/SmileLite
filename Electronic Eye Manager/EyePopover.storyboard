@@ -173,11 +173,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F5w-G5-5t5">
-                                <rect key="frame" x="675" y="8" width="36" height="30"/>
+                                <rect key="frame" x="419" y="7" width="36" height="30"/>
                                 <state key="normal" title="Clear"/>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bZC-IP-z8H">
-                                <rect key="frame" x="570" y="8" width="97" height="30"/>
+                                <rect key="frame" x="314" y="7" width="97" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="97" id="dNd-fv-t8Z"/>
                                 </constraints>
@@ -195,11 +195,20 @@
                                 </constraints>
                                 <state key="normal" title="O"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8FY-TR-bET">
+                                <rect key="frame" x="693" y="8" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="DOa-MZ-TFz"/>
+                                    <constraint firstAttribute="height" constant="30" id="jHl-Gv-7jx"/>
+                                </constraints>
+                                <state key="normal" title="O"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.95562900640000004" green="0.95562900640000004" blue="0.95562900640000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="tEl-4r-rKL" firstAttribute="bottom" secondItem="JB3-mF-8YW" secondAttribute="top" id="12x-or-LPi"/>
-                            <constraint firstItem="tEl-4r-rKL" firstAttribute="top" secondItem="bZC-IP-z8H" secondAttribute="bottom" constant="6" id="5qd-kT-ec8"/>
+                            <constraint firstItem="end-S1-f5A" firstAttribute="leading" secondItem="8FY-TR-bET" secondAttribute="trailing" constant="38" id="4fX-TB-zDx"/>
+                            <constraint firstItem="tEl-4r-rKL" firstAttribute="top" secondItem="bZC-IP-z8H" secondAttribute="bottom" constant="7" id="5qd-kT-ec8"/>
                             <constraint firstItem="xrz-IN-UoV" firstAttribute="top" secondItem="mBr-ut-jOL" secondAttribute="bottom" id="6JP-oc-9UK"/>
                             <constraint firstAttribute="trailing" secondItem="tEl-4r-rKL" secondAttribute="trailing" id="8db-xw-9s3"/>
                             <constraint firstItem="mBr-ut-jOL" firstAttribute="centerY" secondItem="Usz-IQ-3gq" secondAttribute="centerY" id="9jl-5D-2Ue"/>
@@ -212,13 +221,14 @@
                             <constraint firstItem="mBr-ut-jOL" firstAttribute="leading" secondItem="tEl-4r-rKL" secondAttribute="leading" id="LVa-kx-upG"/>
                             <constraint firstAttribute="trailing" secondItem="xrz-IN-UoV" secondAttribute="trailing" constant="340" id="NOP-DI-0v7"/>
                             <constraint firstItem="end-S1-f5A" firstAttribute="top" secondItem="A5d-LS-CZm" secondAttribute="bottom" constant="8" id="TFe-pR-1cP"/>
+                            <constraint firstItem="8FY-TR-bET" firstAttribute="top" secondItem="A5d-LS-CZm" secondAttribute="bottom" constant="8" id="Xtu-gz-A7K"/>
                             <constraint firstAttribute="trailing" secondItem="Usz-IQ-3gq" secondAttribute="trailing" constant="354" id="bHM-57-rFZ"/>
-                            <constraint firstItem="bZC-IP-z8H" firstAttribute="top" secondItem="A5d-LS-CZm" secondAttribute="bottom" constant="8" symbolic="YES" id="brl-wq-Gcw"/>
-                            <constraint firstItem="mBr-ut-jOL" firstAttribute="centerY" secondItem="F5w-G5-5t5" secondAttribute="centerY" constant="-1" id="cbX-av-5md"/>
+                            <constraint firstItem="bZC-IP-z8H" firstAttribute="top" secondItem="A5d-LS-CZm" secondAttribute="bottom" constant="7" id="brl-wq-Gcw"/>
+                            <constraint firstItem="mBr-ut-jOL" firstAttribute="centerY" secondItem="F5w-G5-5t5" secondAttribute="centerY" id="cbX-av-5md"/>
                             <constraint firstItem="tEl-4r-rKL" firstAttribute="top" secondItem="xrz-IN-UoV" secondAttribute="top" id="dFi-Qs-wh4"/>
                             <constraint firstItem="F5w-G5-5t5" firstAttribute="leading" secondItem="bZC-IP-z8H" secondAttribute="trailing" constant="8" symbolic="YES" id="eol-5c-Zfa"/>
-                            <constraint firstItem="mBr-ut-jOL" firstAttribute="centerY" secondItem="bZC-IP-z8H" secondAttribute="centerY" constant="-1" id="faV-Bv-XQA"/>
-                            <constraint firstAttribute="trailing" secondItem="bZC-IP-z8H" secondAttribute="trailing" constant="133" id="gse-z8-2NL"/>
+                            <constraint firstItem="mBr-ut-jOL" firstAttribute="centerY" secondItem="bZC-IP-z8H" secondAttribute="centerY" id="faV-Bv-XQA"/>
+                            <constraint firstAttribute="trailing" secondItem="bZC-IP-z8H" secondAttribute="trailing" constant="389" id="gse-z8-2NL"/>
                             <constraint firstItem="JB3-mF-8YW" firstAttribute="top" secondItem="tEl-4r-rKL" secondAttribute="bottom" id="ipb-m5-z9O"/>
                             <constraint firstItem="mBr-ut-jOL" firstAttribute="top" secondItem="A5d-LS-CZm" secondAttribute="bottom" id="ssC-7v-cYf"/>
                             <constraint firstItem="Usz-IQ-3gq" firstAttribute="leading" secondItem="mBr-ut-jOL" secondAttribute="trailing" constant="8" id="ycT-b0-xoF"/>
@@ -244,6 +254,7 @@
                         <outlet property="containerView" destination="tEl-4r-rKL" id="OyB-md-QWp"/>
                         <outlet property="govAccumulatedDelta" destination="bZC-IP-z8H" id="gUy-IX-emM"/>
                         <outlet property="maturity" destination="AA3-Yg-wcG" id="o9i-Vg-wEW"/>
+                        <outlet property="saveButton" destination="8FY-TR-bET" id="Ymb-Y4-knS"/>
                         <outlet property="strike" destination="5FR-rc-TVC" id="fwx-3u-jQO"/>
                         <outlet property="symbol" destination="eKs-w4-hpW" id="dLu-8R-ahk"/>
                     </connections>
@@ -303,7 +314,7 @@
                                         <rect key="frame" x="0.0" y="21" width="210" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wpi-Xa-lUS" id="P9p-tC-yEx">
-                                            <rect key="frame" x="0.0" y="0.0" width="210" height="29.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="210" height="29"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PQN-wK-Jot">
@@ -807,22 +818,7 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="P5z-3E-whx">
-                                        <rect key="frame" x="21" y="163" width="358" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <segments>
-                                            <segment title="LMT"/>
-                                            <segment title="MOC"/>
-                                            <segment title="Stop"/>
-                                            <segment title="Blk"/>
-                                            <segment title="Fac"/>
-                                            <segment title="Mkt"/>
-                                        </segments>
-                                        <connections>
-                                            <action selector="orderTypeSelected:" destination="lAW-Ly-qrL" eventType="valueChanged" id="3ua-62-zCo"/>
-                                        </connections>
-                                    </segmentedControl>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9AA-8U-2wu">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="9AA-8U-2wu">
                                         <rect key="frame" x="19" y="218" width="358" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <segments>
@@ -841,7 +837,7 @@
                                         <rect key="frame" x="386" y="201" width="184" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3rc-Fr-y7u">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3rc-Fr-y7u">
                                                 <rect key="frame" x="0.0" y="0.0" width="184" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -850,31 +846,31 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="Sr0-52-rkl">
                                                 <rect key="frame" x="0.0" y="14.5" width="184" height="30"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RBd-sV-vVF" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RBd-sV-vVF" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                         <state key="normal" title="&lt;&lt;">
                                                             <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="totalDelta"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="price"/>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
-                                                                <integer key="value" value="-100"/>
+                                                                <integer key="value" value="-1"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XmF-sL-chU" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XmF-sL-chU" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                         <rect key="frame" x="26" y="0.0" width="30" height="30"/>
                                                         <state key="normal" title="&lt;">
                                                             <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="totalDelta"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="price"/>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
-                                                                <integer key="value" value="-10"/>
+                                                                <real key="value" value="-0.5"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="6VQ-TW-iZ9" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="6VQ-TW-iZ9" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                         <rect key="frame" x="52" y="0.0" width="80" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="80" id="WEL-UA-Pkb"/>
@@ -882,19 +878,19 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                     </textField>
-                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="65W-d2-qDA" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="65W-d2-qDA" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                         <rect key="frame" x="128" y="0.0" width="30" height="30"/>
                                                         <state key="normal" title="&gt;">
                                                             <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="totalDelta"/>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="price"/>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
-                                                                <integer key="value" value="10"/>
+                                                                <real key="value" value="0.5"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j2U-WS-YDD" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j2U-WS-YDD" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                         <rect key="frame" x="154" y="0.0" width="30" height="30"/>
                                                         <state key="normal" title="&gt;&gt;">
                                                             <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -902,7 +898,7 @@
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="price"/>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
-                                                                <integer key="value" value="100"/>
+                                                                <integer key="value" value="1"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
@@ -910,6 +906,21 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="P5z-3E-whx">
+                                        <rect key="frame" x="19" y="162" width="358" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="LMT"/>
+                                            <segment title="MOC"/>
+                                            <segment title="Stop"/>
+                                            <segment title="Blk"/>
+                                            <segment title="Fac"/>
+                                            <segment title="Mkt"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="orderTypeSelected:" destination="lAW-Ly-qrL" eventType="valueChanged" id="3ua-62-zCo"/>
+                                        </connections>
+                                    </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -940,12 +951,12 @@
                         <outlet property="orderTypeControl" destination="P5z-3E-whx" id="ZcX-YD-91j"/>
                         <outlet property="price" destination="6VQ-TW-iZ9" id="VhT-2Z-vHb"/>
                         <outlet property="totalDelta" destination="7Ok-4H-6uH" id="LxO-w3-4kM"/>
-                        <outletCollection property="priceParamCollection" destination="3rc-Fr-y7u" collectionClass="NSMutableArray" id="ogx-1V-fI4"/>
                         <outletCollection property="priceParamCollection" destination="RBd-sV-vVF" collectionClass="NSMutableArray" id="TrS-h4-fph"/>
                         <outletCollection property="priceParamCollection" destination="XmF-sL-chU" collectionClass="NSMutableArray" id="n8o-qM-15e"/>
                         <outletCollection property="priceParamCollection" destination="6VQ-TW-iZ9" collectionClass="NSMutableArray" id="IbM-cQ-inW"/>
                         <outletCollection property="priceParamCollection" destination="65W-d2-qDA" collectionClass="NSMutableArray" id="xMm-75-4K0"/>
                         <outletCollection property="priceParamCollection" destination="j2U-WS-YDD" collectionClass="NSMutableArray" id="shM-4x-eBA"/>
+                        <outletCollection property="priceParamCollection" destination="3rc-Fr-y7u" collectionClass="NSMutableArray" id="Skn-wg-774"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lAW-Ly-qrL" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -45,31 +45,7 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     
-    
-    func testChangeValue(sender: AnyObject) {
-        let senderBtn:QuickChangeButton = (sender as! QuickChangeButton)
-        let amount = senderBtn.changeAmount
-        //print(senderBtn.labelToChange)
-        
-        switch senderBtn.labelToChange {
-            case "maxQuantity":
-                modifyTextField(maxQuantity, Int: Int(amount))
-            case "maxDelta":
-                modifyTextField(maxDelta, amount: amount)
-            case "minEdge":
-                modifyTextField(minEdge, amount: amount)
-            case "lowDelta":
-                modifyTextField(lowDelta, amount: amount)
-            case "highDelta":
-                modifyTextField(highDelta, amount: amount)
-            case "totalDelta":
-                modifyTextField(totalDelta, amount: amount)
-            case "price":
-                modifyTextField(price, amount: amount)
-        default: break
-            
-        }
-    }
+
     
     func printChar(chars: String.CharacterView) {
         var newString:String = ""
@@ -83,9 +59,11 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewWillAppear(animated:Bool) {
         
         linkDelegates()
+        
         if !isMonthEye {
             monthParameters.hidden = true
         }
+        
         self.view!.backgroundColor = Layout.monthEyeBGColor
         self.view!.viewWithTag(1337)?.backgroundColor = Layout.monthEyeBGColor
         
@@ -122,15 +100,32 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    func setupTextFields(eyeParams:EyeParams) {
+    func setupParams(eyeParams:EyeParams) {
+        
         maxQuantity.setupText(eyeParams.quantity)
-        maxDelta.setupText(eyeParams.delta)
-        minEdge.setupText(eyeParams.minEdge)
+        maxDelta.setupText(eyeParams.delta.removeZeros())
+        minEdge.setupText(eyeParams.minEdge.removeZeros(true))
+        price.setupText(eyeParams.price)
+        
         if eyeParams.useMonthParams {
-            lowDelta.setupText(eyeParams.minDelta)
-            highDelta.setupText(eyeParams.maxDelta)
-            totalDelta.setupText(eyeParams.totalDelta)
+            lowDelta.setupText(eyeParams.minDelta.removeZeros())
+            highDelta.setupText(eyeParams.maxDelta.removeZeros())
+            totalDelta.setupText(eyeParams.totalDelta.removeZeros())
         }
+        for indx in 0..<orderTypeControl.numberOfSegments {
+            if orderTypeControl.titleForSegmentAtIndex(indx) == eyeParams.orderType {
+                orderTypeControl.selectedSegmentIndex = indx
+            }
+        }
+        
+        for indx in 0..<eyeTypeControl.numberOfSegments {
+            if eyeTypeControl.titleForSegmentAtIndex(indx) == eyeParams.eyeType {
+                eyeTypeControl.selectedSegmentIndex = indx
+            }
+        }
+        
+        
+        
     }
     
     func linkDelegates() {
@@ -144,23 +139,7 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
             totalDelta.delegate = delegateController
         }
     }
-    
-    func modifyTextField(textField:EditEyeParameter, amount:Float) {
-        if let textAmount:Float = Float(textField.text!) {
-            textField.text = String(textAmount + amount)
-        } else {
-            textField.text = String(amount)
-        }
-    }
-    
-    func modifyTextField(textField:EditEyeParameter, Int amount:Int) {
-        if let textAmount:Int = Int(textField.text!) {
-            textField.text = String(textAmount + amount)
-        } else {
-            textField.text = String(amount)
-        }
-    }
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (tableView as! ExchangeTableView).exchanges.visibleExchangeCount
     }

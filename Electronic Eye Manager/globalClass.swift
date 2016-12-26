@@ -95,7 +95,7 @@ func removeAfterIndex(Source str:String, CutOffIndex indx:Int) -> String {
     return str
 }
 
-func removeExtraZeros(str:String, alsoBeforeDot:Bool = true) -> String {
+func removeExtraZeros(str:String, alsoBeforeDot:Bool = false) -> String {
     if let strDouble = str.asDouble() {
         if alsoBeforeDot {
             if strDouble < 1.0 {

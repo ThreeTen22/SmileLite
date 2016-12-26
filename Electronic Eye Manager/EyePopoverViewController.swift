@@ -10,12 +10,12 @@ import UIKit
 
 class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
     
-    private enum ShiftState:Int {
-        case notshifted = 0
-        case shiftingleft = 1
-        case hasshifted = 2
-        case shiftingright = 3
-        case forceshiftingright = 4
+    private enum ShiftState {
+        case notshifted
+        case shiftingleft
+        case hasshifted
+        case shiftingright
+        case forceshiftingright
     }
     private var curShiftState:ShiftState = .notshifted
     
@@ -57,19 +57,35 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
         
     }
     
-    
-    
-    @IBAction func eyeTypeSelected(sender:UISegmentedControl) {
-        let newSelectionTitle = sender.titleForSegmentAtIndex(sender.selectedSegmentIndex)
-        //if newSelectionTitle?.containsString("Mkt") {
-          print("eyetypeSelected")
-        //}
+    @IBAction func orderTypeSelected(sender:UISegmentedControl) {
+        
+        let sindx = sender.selectedSegmentIndex
+        let indxTitle = sender.titleForSegmentAtIndex(sindx)
+        
+        eyeParams.orderType = indxTitle ?? ""
         
     }
     
-    @IBAction func orderTypeSelected(sender:UISegmentedControl) {
-        print("orderTypeSelected")
+    
+    @IBAction func eyeTypeSelected(sender:UISegmentedControl) {
+        
+        let sindx = sender.selectedSegmentIndex
+        let indxTitle = sender.titleForSegmentAtIndex(sindx)!
+        
+        eyeParams.eyeType = indxTitle ?? ""
+        
+        if indxTitle.containsString("Mkt") {
+            enableOrDisablePrice(true)
+        } else {
+            eyeParams.price = ""
+            print("Im disabled")
+            enableOrDisablePrice(false)
+        }
+        
     }
+    
+    
+
     
     @IBAction func shift(sender: UITextField) {
         UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {[unowned self] in
@@ -118,12 +134,13 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
     @IBOutlet weak var calcView: UIView!
     
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var saveButton:UIButton!
     
     weak var currentListing:Listing!
     
     var currentStrikePrice:Double?
     
-    weak var selectedStrikeEyeParameter:UITextField!
+    weak var selectedStrikeEyeParameter:EditEyeParameter!
     var editEyeViewController:EditEyeViewController?
     
     weak var currentTextField:UITextField?
@@ -147,15 +164,17 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
     
     deinit {
         print("deinit: eyepopoverVC")
-        //tempEye = nil
-        //currentEye = nil
         currentDate = nil
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         closeButton.setFAIcon(FAType.FAClose, iconSize: 30.0, forState: .Normal)
         closeButton.setFATitleColor(Layout.eyeCancelButtonColor)
+        
+        saveButton.setFAIcon(FAType.FACheck, iconSize: 30.0, forState: .Normal)
+        saveButton.setFATitleColor(Layout.eyeInstallBGColor)
         
         if let strikeJS = strikeJSON {
             currentDate = smileDateFormat.dateFromString((strikeJS["odate"].stringValue))
@@ -215,8 +234,10 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
             }
             editEyeViewController!.delegateController = self
             
-            editEyeViewController!.setupTextFields(eyeParams)
-           
+            editEyeViewController!.setupParams(eyeParams)
+            
+            eyeTypeSelected(editEyeViewController!.eyeTypeControl)
+            
         } else {
             
             let demoMonth =  currentListing.registeredMonthContainers[0]
@@ -230,6 +251,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
             }
             
         }
+        
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -262,9 +284,97 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
         }
         
     }
+    
+    func enableOrDisablePrice(isEnabled:Bool) {
+        var alpha:CGFloat = 0.5
+        if isEnabled {
+            alpha = 1.0
+        }
+        for element in (editEyeViewController?.priceParamCollection)! {
+            if let lbl = element as? UILabel {
+                lbl.enabled = isEnabled
+                lbl.alpha = alpha
+                print("label enabled \(lbl.enabled)")
+                continue
+            }
+            if let btn = element as? UIButton {
+                btn.enabled = isEnabled
+                btn.alpha = alpha
+                //print("btn enabled \(btn.enabled)")
+                continue
+            }
+            
+            if let tf = element as? UITextField {
+                tf.enabled = isEnabled
+                tf.alpha = alpha
+                //print("tf enabled \(tf.enabled)")
+                continue
+            }
+        }
+    }
+    
+    
+    func testChangeValue(sender: AnyObject) {
+        let senderBtn:QuickChangeButton = (sender as! QuickChangeButton)
+        let amount = senderBtn.changeAmount
+        //print(senderBtn.labelToChange)
+        
+        switch senderBtn.labelToChange {
+        case "maxQuantity":
+            modifyTextField(editEyeViewController!.maxQuantity, Int: Int(amount))
+            eyeParams[.quantity] = editEyeViewController!.maxQuantity.text!
+        case "maxDelta":
+            modifyTextField(editEyeViewController!.maxDelta, amount: amount)
+            eyeParams[.delta] = editEyeViewController!.maxDelta.text!.removeZeros()
+        case "minEdge":
+            modifyTextField(editEyeViewController!.minEdge, amount: amount)
+            eyeParams[.minEdge] = editEyeViewController!.minEdge.text!.removeZeros()
+        case "lowDelta":
+            modifyTextField(editEyeViewController!.lowDelta, amount: amount)
+            eyeParams[.minDelta] = editEyeViewController!.lowDelta.text!.removeZeros()
+        case "highDelta":
+            modifyTextField(editEyeViewController!.highDelta, amount: amount)
+            eyeParams[.maxDelta] = editEyeViewController!.highDelta.text!.removeZeros()
+        case "totalDelta":
+            modifyTextField(editEyeViewController!.totalDelta, amount: amount)
+            eyeParams[.totalDelta] = editEyeViewController!.totalDelta.text!.removeZeros()
+        case "price":
+            modifyTextField(editEyeViewController!.price, amount: amount)
+            eyeParams[.price] = editEyeViewController!.price.text!.removeZeros()
+        default: break
+            
+        }
+    }
+    
+    func modifyTextField(textField:EditEyeParameter, amount:Double) {
+        print("\(Double(textField.text!))  + \(amount)")
+        if let textAmount:Double = Double(textField.text!) {
+            let newAmount = textAmount + amount
+            if newAmount < 0 {
+                textField.text = String(0.0)
+            } else if remainder(newAmount, 1.0) != 0.0 {
+                textField.text = String(newAmount).removeZeros(true)
+            } else {
+                textField.text = String(newAmount).removeZeros(false)
+            }
+        } else {
+            textField.text = String(amount)
+        }
+    }
+    
+    func modifyTextField(textField:EditEyeParameter, Int amount:Int) {
+        if let textAmount:Int = Int(textField.text!) {
+            let newAmount = textAmount + amount
+            textField.text = String(newAmount)
+        } else {
+            textField.text = String(amount)
+        }
+    }
+    
+    
     func textFieldDidBeginEditing(textField: UITextField) {
         textField.selectAll(nil)
-        selectedStrikeEyeParameter = textField
+        selectedStrikeEyeParameter = textField as! EditEyeParameter
     }
     
     func textFieldDidEndEditing(textField: UITextField) {

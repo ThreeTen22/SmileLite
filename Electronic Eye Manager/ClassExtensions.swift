@@ -53,7 +53,7 @@ extension String {
         return self
     }
     
-    func removeZeros(beforeDot:Bool = true) -> String {
+    func removeZeros(beforeDot:Bool = false) -> String {
       return removeExtraZeros(self, alsoBeforeDot: beforeDot)
     }
 }
