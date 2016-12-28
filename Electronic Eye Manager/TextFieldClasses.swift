@@ -37,6 +37,10 @@ class StrikeCellTextField: UITextField {
 
 class EditEyeParameter:UITextField {
     
+    //var originalText:String = ""
+    
+    var valueChanged = false
+    
     override func awakeFromNib() {
         let item:UITextInputAssistantItem = inputAssistantItem
         item.leadingBarButtonGroups = []
@@ -46,6 +50,7 @@ class EditEyeParameter:UITextField {
     func setupText(str:String) {
         self.text = str
         self.placeholder = str
+        //originalText = str
     }
     
     deinit {

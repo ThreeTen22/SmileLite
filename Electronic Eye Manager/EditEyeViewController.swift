@@ -70,6 +70,7 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
         exchangeTable.dataSource = self
         exchangeTable.delegate = self
         exchangeTable.exchanges = currentEye?.exchangeData ?? Exchanges()
+        // exchangeTable.eyeExchanges = currentEye?.exchangeData ?? Exchanges()
         
         delegateController = nil
         super.viewWillAppear(animated)
@@ -138,6 +139,26 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
             highDelta.delegate = delegateController
             totalDelta.delegate = delegateController
         }
+    }
+    
+    func anyParamsChanged() -> Bool {
+    if  maxQuantity.valueChanged ||
+        maxDelta.valueChanged ||
+        minEdge.valueChanged ||
+        lowDelta.valueChanged ||
+        highDelta.valueChanged ||
+        totalDelta.valueChanged ||
+        price.valueChanged {
+            return true
+        }
+        return false
+    }
+        
+    func anyExchangesChanged() -> Bool {
+        if exchangeTable.exchanges != currentEye?.exchangeData {
+           return true
+        }
+        return false
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

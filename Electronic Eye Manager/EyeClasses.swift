@@ -435,7 +435,7 @@ class Eye {
     
     var jsonIndex:Int = -1
     
-    var showDebug = false
+    var isTempEye = false
     
     deinit {
         //print("Eye: Deinit")
@@ -579,7 +579,7 @@ class StrikeEye: Eye {
     }
     
     deinit {
-        if showDebug {
+        if isTempEye {
          print("demoStrikeDeiniting")
         }
     }

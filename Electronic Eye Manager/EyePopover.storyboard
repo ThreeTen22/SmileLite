@@ -156,7 +156,7 @@
                                     <constraint firstAttribute="width" constant="260" id="wP4-xp-5tq"/>
                                 </constraints>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tEl-4r-rKL">
+                            <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tEl-4r-rKL">
                                 <rect key="frame" x="0.0" y="44" width="800" height="306"/>
                                 <connections>
                                     <segue destination="JaB-dX-di6" kind="embed" identifier="editeye" id="9U5-98-iLP"/>
@@ -187,27 +187,33 @@
                                     <outlet property="delegate" destination="VSb-2t-Cnb" id="APE-gQ-phk"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="end-S1-f5A">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="end-S1-f5A" customClass="SaveCancelButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                 <rect key="frame" x="761" y="8" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="bi4-f2-icS"/>
                                     <constraint firstAttribute="height" constant="30" id="o7a-eA-XAu"/>
                                 </constraints>
                                 <state key="normal" title="O"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSaveButton" value="NO"/>
+                                </userDefinedRuntimeAttributes>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8FY-TR-bET">
-                                <rect key="frame" x="693" y="8" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8FY-TR-bET" customClass="SaveCancelButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                <rect key="frame" x="711" y="8" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="DOa-MZ-TFz"/>
                                     <constraint firstAttribute="height" constant="30" id="jHl-Gv-7jx"/>
                                 </constraints>
                                 <state key="normal" title="O"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSaveButton" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.95562900640000004" green="0.95562900640000004" blue="0.95562900640000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="tEl-4r-rKL" firstAttribute="bottom" secondItem="JB3-mF-8YW" secondAttribute="top" id="12x-or-LPi"/>
-                            <constraint firstItem="end-S1-f5A" firstAttribute="leading" secondItem="8FY-TR-bET" secondAttribute="trailing" constant="38" id="4fX-TB-zDx"/>
+                            <constraint firstItem="end-S1-f5A" firstAttribute="leading" secondItem="8FY-TR-bET" secondAttribute="trailing" constant="20" id="4fX-TB-zDx"/>
                             <constraint firstItem="tEl-4r-rKL" firstAttribute="top" secondItem="bZC-IP-z8H" secondAttribute="bottom" constant="7" id="5qd-kT-ec8"/>
                             <constraint firstItem="xrz-IN-UoV" firstAttribute="top" secondItem="mBr-ut-jOL" secondAttribute="bottom" id="6JP-oc-9UK"/>
                             <constraint firstAttribute="trailing" secondItem="tEl-4r-rKL" secondAttribute="trailing" id="8db-xw-9s3"/>
@@ -632,7 +638,7 @@
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="labelToChange" value="highDelta"/>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="changeAmount">
-                                                                        <integer key="value" value="-10"/>
+                                                                        <real key="value" value="-10"/>
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>

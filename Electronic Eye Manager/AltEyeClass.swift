@@ -8,11 +8,18 @@
 
 import UIKit
 
-class EyeJson {
-
-    var autohedge = "Off"
-    var collection = "45"
-    var command = "Buy"
+public class EyeJson: NSObject {
+    
+    enum CommandType:String {
+        case buy = "Buy"
+        case sell = "Sell"
+    }
+    
+    @IBInspectable var autoHedge:Bool
+    @IBInspectable var collection:String = "45"
+    
+    var command:CommandType = .buy
+    
     var currentdelta = "0.00000000"
     var delta = "1500.00000000"
     var dfiller_45_1 = "0.00000000"
@@ -166,5 +173,9 @@ class EyeJson {
     var totaldelta = "1500.00000000"
     var trader = "61"
     var type = "Put"
-
+    
+    override init() {
+        autoHedge = false
+        super.init()
+    }
 }

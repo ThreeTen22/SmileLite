@@ -23,12 +23,14 @@ class TableHeaderView: UIView {
 }
 
 class ExchangeTableView:UITableView {
-    
+    //var eyeExchanges:Exchanges = Exchanges()
     var exchanges:Exchanges = Exchanges()
     
     //@IBOutlet weak var tableHeader:TableHeaderView!
     
-    var allSelected: Bool = false
+    var allSelected:Bool = false
+    
+    var valueChanged:Bool = false
     
     @IBAction func radioPressed(sender: UIButton) {
         if exchanges[isActiveExchange: sender.tag] == true {
@@ -37,13 +39,18 @@ class ExchangeTableView:UITableView {
             exchanges[isActiveExchange: sender.tag] = true
         }
         setButtonLayout(sender)
-    
+        //checkForChanges()
+        sender.sendAction(#selector(EyePopoverViewController.activateSaveIfNecessary), to: nil, forEvent: nil)
         //exchanges[isActive: sender.tag] = !exchanges[isActive: sender.tag]
         
     }
     
     func setButtonLayout(sender:UIButton) {
         Layout.setRadioButtonLayout(sender, isOn: exchanges[isActiveExchange: sender.tag])
+    }
+    
+    func checkForChanges() {
+        // valueChanged = (exchanges != eyeExchanges)
     }
     
     override func awakeFromNib() {

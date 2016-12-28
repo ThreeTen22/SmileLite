@@ -30,13 +30,15 @@ class CalcButton: UIButton {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         backgroundColor = UIColor.grayColor()
-        super.touchesBegan(touches, withEvent: event)
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
         backgroundColor = UIColor.lightGrayColor()
-        super.touchesEnded(touches, withEvent: event)
+        sendAction(#selector(EyePopoverViewController.calcValueChanged(_:)), to: nil, forEvent: nil)
+
     }
+    
     
     deinit {
         //print("deinit: calcButton")
@@ -45,8 +47,8 @@ class CalcButton: UIButton {
 
 //button to control quick changes to the :labelToChange textfields by :changeAmount
 class QuickChangeButton: UIButton {
-    var labelToChange: String = ""
-    var changeAmount: Double = 0.0
+    @IBInspectable var labelToChange: String = ""
+    @IBInspectable var changeAmount: Double = 0.0
     
     override func awakeFromNib() {
         self.addTarget(nil, action: #selector(EyePopoverViewController.testChangeValue(_:)), forControlEvents: .TouchUpInside)
@@ -81,7 +83,16 @@ class RadioButton:UIButton {
     
 }
 
-class OrderTypeSegmentControl:UISegmentedControl {
+class SaveCancelButton:UIButton {
+    //set in inspecter
+    @IBInspectable var isSaveButton:Bool = false
+    
+    override func awakeFromNib() {
+        Layout.setSaveCancelButton(self, isSaveButton: isSaveButton)
+        addTarget(nil, action: #selector(EyePopoverViewController.saveCancelButtonPressed(_:)), forControlEvents: .TouchUpInside)
+    }
+    
+    
     
     
 }

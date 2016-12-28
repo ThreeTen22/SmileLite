@@ -529,4 +529,8 @@ class EyeBookViewController: UIViewController, UITableViewDelegate, UICollection
             }
         }
     }
+    
+    deinit {
+        print("EyeBook Has Deinit")
+    }
 }

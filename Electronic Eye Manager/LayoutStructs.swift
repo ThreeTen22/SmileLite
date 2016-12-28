@@ -26,7 +26,6 @@ struct Layout {
     
     static let strikeDefaultTextColorLight:UIColor = UIColor.whiteColor()
     
-    
     static let strikePositionBGColor:UIColor = UIColor(red255: 41, green: 250, blue: 46)
     static let strikePositionTextColorLong:UIColor = UIColor.blueColor()
     static let strikePositionTextColorShort:UIColor = UIColor.redColor()
@@ -37,28 +36,44 @@ struct Layout {
     
     static let monthEyeBGColor:UIColor = UIColor(red255: 205, green: 205, blue: 225)
     
-    static let eyeInstallBGColor:UIColor =  UIColor(rgb: 0x006600)
+    static let eyeInstallTextColor:UIColor =  UIColor(rgb: 0x006600)
+    static let eyeInstallTextColorDisabled:UIColor = UIColor.lightGrayColor()
+    
+    static let eyeCancelTextColor:UIColor = UIColor.redColor()
+    
     static let eyeTheoButtonBGColor:UIColor = UIColor(rgb: 0x99cccc)
     
-    static let eyeDeleteButtonColor:UIColor = UIColor.redColor()
-    static let eyeCancelButtonColor:UIColor = UIColor.redColor()
-    
-    static let eyeSaveButtonColor:UIColor = UIColor.greenColor()
+    //static let eyeDeleteButtonColor:UIColor = UIColor.redColor()
+    //static let eyeCancelButtonColor:UIColor = UIColor.redColor()
     
     static let errorColor:UIColor = UIColor(red255: 253, green: 123, blue: 88)
     
     static let radioButtonColorOn = UIColor.blueColor()
     static let radioButtonColorOff = UIColor.lightGrayColor()
+    
+    static let faiconSmall:CGFloat = 20.0
+    static let faiconLarge:CGFloat = 30.0
+    
    
     static func setRadioButtonLayout(sender:UIButton, isOn:Bool = false) {
         if isOn {
-            sender.setFAIcon(FAType.FADotCircleO, iconSize: 20, forState: .Normal)
+            sender.setFAIcon(FAType.FADotCircleO, iconSize: faiconSmall, forState: .Normal)
             sender.setFATitleColor(radioButtonColorOn)
         } else {
-            sender.setFAIcon(FAType.FACircleO, iconSize: 20, forState: .Normal)
+            sender.setFAIcon(FAType.FACircleO, iconSize: faiconSmall, forState: .Normal)
             sender.setFATitleColor(radioButtonColorOff)
 
         }
+    }
+    
+    static func setSaveCancelButton(sender:SaveCancelButton, isSaveButton:Bool) {
+        if isSaveButton {
+            sender.setFAIcon(FAType.FACheck, iconSize: faiconLarge, forState: .Normal)
+            sender.setFATitleColor(eyeInstallTextColor)
+            return
+        }
+        sender.setFAIcon(FAType.FAClose, iconSize: faiconLarge, forState: .Normal)
+        sender.setFATitleColor(eyeCancelTextColor)
     }
     
     
