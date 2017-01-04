@@ -16,6 +16,9 @@ class ListingFilterButton: UIButton {
     }
 }
 
+
+
+
 //button for the calculator
 class CalcButton: UIButton {
     
@@ -25,7 +28,8 @@ class CalcButton: UIButton {
         layer.borderColor = UIColor.blackColor().CGColor
         backgroundColor = UIColor.lightGrayColor()
         
-        self.addTarget(nil, action: #selector(EyePopoverViewController.calcButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        //Debug: add target has stopped working now.  I dunno if it is because it is fully hidden when this is called, must be a bug.  Workaround is manually sending actions.
+        //self.addTarget(nil, action: #selector(EyePopoverViewController.calcButtonPressed(_:)), forControlEvents: .TouchUpInside)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -33,9 +37,8 @@ class CalcButton: UIButton {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
         backgroundColor = UIColor.lightGrayColor()
-        sendAction(#selector(EyePopoverViewController.calcValueChanged(_:)), to: nil, forEvent: nil)
+        sendAction(#selector(EyePopoverViewController.calcButtonPressed(_:)), to: nil, forEvent: nil)
 
     }
     
@@ -77,7 +80,7 @@ class ExchangeOrderType: UIButton {
 class RadioButton:UIButton {
     // var exchange:ExInfo!
     override func awakeFromNib() {
-         Layout.setRadioButtonLayout(self)
+        //Layout.setRadioButtonLayout(self)
         //self.addTarget(nil, action: #selector(ExchangesTableCell.radioPressed(_:)), forControlEvents: .TouchUpInside)
     }
     
@@ -86,13 +89,14 @@ class RadioButton:UIButton {
 class SaveCancelButton:UIButton {
     //set in inspecter
     @IBInspectable var isSaveButton:Bool = false
+    @IBInspectable var isPlaceholder:Bool = false
     
     override func awakeFromNib() {
         Layout.setSaveCancelButton(self, isSaveButton: isSaveButton)
-        addTarget(nil, action: #selector(EyePopoverViewController.saveCancelButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        if isPlaceholder == false {
+            addTarget(nil, action: #selector(EyePopoverViewController.saveCancelButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        } else {
+         setFATitleColor(Layout.eyeInstallTextColorDisabled)
+        }
     }
-    
-    
-    
-    
 }

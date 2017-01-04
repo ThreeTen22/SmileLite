@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class EditEyeViewController: UIViewController {
     
     /*
      // Only override drawRect: if you perform custom drawing.
@@ -26,10 +26,10 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var totalDelta: EditEyeParameter!
     @IBOutlet weak var price: EditEyeParameter!
     
-    weak var delegateController:UITextFieldDelegate?
+    weak var delegateController:EyePopoverViewController?
     weak var currentListing:Listing?
     weak var currentEye:Eye?
-    var strikeJSON:JSON?
+    var eyeJSON:JSON?
     
     
     @IBOutlet var monthParameters:UIStackView!
@@ -67,12 +67,12 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.view!.backgroundColor = Layout.monthEyeBGColor
         self.view!.viewWithTag(1337)?.backgroundColor = Layout.monthEyeBGColor
         
-        exchangeTable.dataSource = self
-        exchangeTable.delegate = self
-        exchangeTable.exchanges = currentEye?.exchangeData ?? Exchanges()
+
+        
         // exchangeTable.eyeExchanges = currentEye?.exchangeData ?? Exchanges()
         
         delegateController = nil
+        exchangeTable.reloadData()
         super.viewWillAppear(animated)
     }
     
@@ -84,16 +84,16 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func createDemoEye() {
-        if let strikeJS = strikeJSON {
+        if let eyeJS = eyeJSON {
             //print("strikeJS did enter")
             if isMonthEye {
                 //print("isMonthEye")
-                let newMonthListing:MonthEye = MonthEye(strikeJSON: strikeJS, Symbol: currentListing!.listingSymbol, SecurityId: currentListing!.listingId)
+                let newMonthListing:MonthEye = MonthEye(monthJSON: eyeJS, Symbol: currentListing!.listingSymbol, SecurityId: currentListing!.listingId)
                 currentEye = newMonthListing as Eye
                 //print(currentEye)
             } else {
                 //print("isStrikeEye")
-                let newStrikeListing:StrikeEye = StrikeEye(strikeJSON: strikeJS, Symbol: currentListing!.listingSymbol, SecurityId: currentListing!.listingId)
+                let newStrikeListing:StrikeEye = StrikeEye(strikeJSON: eyeJS, Symbol: currentListing!.listingSymbol, SecurityId: currentListing!.listingId)
                 currentEye = newStrikeListing as Eye
                 //print(newStrikeListing)
                 //print(currentEye)
@@ -139,6 +139,8 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
             highDelta.delegate = delegateController
             totalDelta.delegate = delegateController
         }
+        exchangeTable.dataSource = delegateController
+        exchangeTable.delegate = delegateController
     }
     
     func anyParamsChanged() -> Bool {
@@ -153,32 +155,9 @@ class EditEyeViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         return false
     }
-        
-    func anyExchangesChanged() -> Bool {
-        if exchangeTable.exchanges != currentEye?.exchangeData {
-           return true
-        }
-        return false
-    }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (tableView as! ExchangeTableView).exchanges.visibleExchangeCount
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Market") as! ExchangesTableCell
-        let exchangeTable = (tableView as! ExchangeTableView)
-        cell.exchangeName.text = Exchanges.exchangeNames(exchangeTable.exchanges[namedIndx: indexPath.row+1])
-        cell.radioButton.tag = (indexPath.row+1)
-        //Layout.setRadioButtonLayout(cell.radioButton, isOn: exchangeTable.exchanges[isActiveExchange: cell.radioButton.tag])
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        let exchangeCell = cell as! ExchangesTableCell
-        let exchangeTable = (tableView as! ExchangeTableView)
-        Layout.setRadioButtonLayout(exchangeCell.radioButton, isOn: exchangeTable.exchanges[isActiveExchange: exchangeCell.radioButton.tag])
-    }
+
+
 
     
 }

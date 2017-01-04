@@ -70,43 +70,44 @@ struct MonthCollectionDelegate {
     }
     
     static func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
         let selectedListing:Listing = eyeBook.listings[collectionView.tag]
-        //var jsonArray:Array = [JSON]()
         var tempUsingDemo = usingDemo
         tempUsingDemo = selectedListing.listingMaturities.isEmpty
         
         selectedListing.maturitiesToDisplay.removeAll()
         selectedListing.visibleStrikes.removeAll()
         
-        //print("DEBUG: COLLECTIONVIEW DID SELECT ITEM: ")
-        //print("selected Listing: \(selectedListing.listingSymbol)    \(usingDemo)")
+
         if indexPath.row != 0 {
             //print("DEBUG: Inside ListingCell: ")
             selectedListing.willDisplay = Listing.DisplayType.FilteredStrikes
             
             let monthDate:String = (collectionView.cellForItemAtIndexPath(indexPath)?.viewWithTag(1) as! UILabel).text!
+            
             weak var selectedMonthContainer = selectedListing.getContainerByDate(monthDate)
-            //print(selectedMonthContainer)
+            
             selectedListing.maturitiesToDisplay.append((selectedMonthContainer?.expDate)!)
-            //print(selectedListing.maturitiesToDisplay)
+           
             for monthContainer in selectedListing.registeredMonthContainers {
                 monthContainer.isActive = false
             }
 
             selectedMonthContainer!.isActive = true
         } else {
-            //print("DEBUG: Inside MonthCollection: ")
+           
             if selectedListing.willDisplay == .AllStrikes {
-                //print("allstrikes: \(selectedListing.willDisplay)")
+                
                 selectedListing.willDisplay = Listing.DisplayType.NoStrikes
             } else {
-                //print("nostrikes: \(selectedListing.willDisplay)")
+                
                 selectedListing.willDisplay = Listing.DisplayType.AllStrikes
+                
                 for maturityJSON in selectedListing.listingMaturities {
+                    
                     let edate = maturityJSON["edate"].stringValue
-                    //print("edate: \(edate)")
                     let newDate:NSDate = readableDateformat.dateFromString(edate)!
-                    //print("newdate:  \(newDate)")
+                    
                     selectedListing.maturitiesToDisplay.append(newDate)
                 }
             }
@@ -130,19 +131,6 @@ struct MonthCollectionDelegate {
             }
         }
         
-        //print("selectedListingmaturities: \(selectedListing.listingMaturities) \n\n\n selectedlstingStrikes: \(selectedListing.visibleStrikes)")
-        
-        //collectionView.reloadData()
-        /*
-        let nsCount: NSMutableIndexSet = NSMutableIndexSet()
-        for i in 0..<(collectionView.delegate as! EyeBookViewController).numberOfSectionsInTableView((collectionView.delegate as! EyeBookViewController).eyeBookTableView) {
-            nsCount.addIndex(i)
-        }
-        (collectionView.delegate as! EyeBookViewController).eyeBookTableView.beginUpdates()
-        (collectionView.delegate as! EyeBookViewController).eyeBookTableView.reloadSections(nsCount, withRowAnimation: .Automatic)
-        //(collectionView.delegate as! EyeBookViewController).eyeBookTableView.reloadData()
-        (collectionView.delegate as! EyeBookViewController).eyeBookTableView.endUpdates()
-         */
         (collectionView.delegate as! EyeBookViewController).eyeBookTableView.reloadData()
     }
     
@@ -163,9 +151,10 @@ struct StrikeCollectionDelegate {
     static let putInventory:String = "PutInventory"
     static let inventory:String = "Inventory"
     static let put:String = "Put"
+    static let nonSelectableStrikeCellReuse:String = "OtherStrikeCell"
     static let strikeCellReuse:String = "StrikeCell"
     
-   static func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    static func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
     
@@ -179,17 +168,33 @@ struct StrikeCollectionDelegate {
     
     static func collectionView(collectionView:UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let modIndx = indexPath.row%18
+        let strikeType:StrikeType = StrikeCellOrder.strikeCellTypeAt(modIndx)
         let floorIndx =  Int(floor(Double(indexPath.row/18)))
-        let strikeCell = (collectionView.dequeueReusableCellWithReuseIdentifier(strikeCellReuse, forIndexPath: indexPath) as! StrikeCollectionViewCell)
+        
+
+        let strikeCell:StrikeCollectionViewCell = {
+            switch strikeType {
+            case .buycallmonthqe, .buycallstrikeqe, .sellcallstrikeqe, .sellcallmonthqe, .buyputmonthqe, .buyputstrikeqe, .sellputstrikeqe, .sellputmonthqe:
+                return (collectionView.dequeueReusableCellWithReuseIdentifier(strikeCellReuse, forIndexPath: indexPath) as! StrikeCollectionViewCell)
+            default:
+                return (collectionView.dequeueReusableCellWithReuseIdentifier(nonSelectableStrikeCellReuse, forIndexPath: indexPath) as! StrikeCollectionViewCell)
+                
+            }
+        }()
+        
+        //let strikeCell:StrikeCollectionViewCell = (collectionView.dequeueReusableCellWithReuseIdentifier(strikeCellReuse, forIndexPath: indexPath) as! StrikeCollectionViewCell)
         let strikeLabel = (strikeCell.viewWithTag(1) as! UILabel)
-        let strikeTF = (strikeCell.viewWithTag(2) as! UITextField)
+        let strikeTF = (strikeCell.viewWithTag(2) as? UITextField)
         
         var useDefaultColoring = false
         var labelText = ""
         
         let listing = eyeBook.listings[collectionView.tag]
         //print("cellforrow:collectionviewTag \(collectionView.tag)")
-        strikeTF.backgroundColor = UIColor.clearColor()
+        
+        strikeTF?.backgroundColor = UIColor.clearColor()
+        
+        
         if floorIndx >= listing.visibleStrikes.count {
             return strikeCell
         }
@@ -198,148 +203,123 @@ struct StrikeCollectionDelegate {
         strikeCell.listingIndex = collectionView.tag
         strikeCell.floorIndex = floorIndx
         
-        strikeLabel.text = ""
+        strikeCell.cellType = strikeType
         
-        //strikeCell.viewWithTag(1)
-        
-        switch modIndx {
-        case 0:
+        switch strikeType {
+        case .maturity:
             let currentMonth = smileDateFormat.dateFromString(strikeJSON[oDate].stringValue)!
             let currentMaturityIndex = listing.getMaturityIndex(currentMonth)
             labelText = formatMonth(currentMonth)
             //labelText = currentDateString
-            strikeCell.cellType = StrikeType.date
             Layout.setLayout(strikeCell, label: strikeLabel, type: StrikeType.maturity, altMaturity: isEven(currentMaturityIndex))
-        case 1:
+        case .strike:
             let currentMonth = smileDateFormat.dateFromString(strikeJSON[oDate].stringValue)!
             let currentMaturityIndex = listing.getMaturityIndex(currentMonth)
             labelText = strikeJSON[strike].stringValue
-            strikeCell.cellType = StrikeType.strike
             Layout.setLayout(strikeCell, label: strikeLabel, type: StrikeType.strike, altMaturity: isEven(currentMaturityIndex))
-        case 4, 12:
+        case .calltheo, .puttheo:
             switch modIndx {
             case 4:
                 //strikeLabel.text = strikeJSON[""]
                 labelText = cTheo
-                strikeCell.cellType = StrikeType.calltheo
             case 12:
                 labelText = pTheo
-                strikeCell.cellType = StrikeType.puttheo
             default:
                 labelText = error
-                strikeCell.cellType = StrikeType.null
             }
             strikeCell.backgroundColor = UIColor.lightGrayColor()
             strikeLabel.textColor = UIColor.blackColor()
             
-        case 5, 13:
+        case .calldelta, .putdelta:
             var number:Double = 0.0
             switch modIndx {
-                case 5:
-                   number = numberOrZero(Double(strikeJSON[callDelta].stringValue)!) * 100.0
-                   labelText = String(number)
-                   strikeCell.cellType = StrikeType.calldelta
-                case 13:
-                    number = Double(strikeJSON[putDelta].stringValue)! * 100.0
-                    if number > 0.0 {
-                        number = 0.0
-                    }
-                    labelText = String(number)
-                    strikeCell.cellType = StrikeType.putdelta
-                default:
-                    labelText = error
-                    strikeCell.cellType = StrikeType.null
+            case 5:
+                number = numberOrZero(Double(strikeJSON[callDelta].stringValue)!) * 100.0
+                labelText = String(number)
+            case 13:
+                number = Double(strikeJSON[putDelta].stringValue)! * 100.0
+                if number > 0.0 {
+                    number = 0.0
+                }
+                labelText = String(number)
+            default:
+                labelText = error
             }
             strikeCell.backgroundColor = UIColor(red:1.00, green:0.93, blue:0.78, alpha:1.0)
             strikeLabel.textColor = UIColor.blackColor()
             
-        case 9:
+        case .defaultcell:
             let currentMonth = smileDateFormat.dateFromString(strikeJSON[oDate].stringValue)!
             let currentMaturityIndex = listing.getMaturityIndex(currentMonth)
             labelText = strikeJSON[strike].stringValue
             //useDefaultColoring = true
-            strikeCell.cellType = StrikeType.defaultcell
             Layout.setLayout(strikeCell, label: strikeLabel, type: StrikeType.strike, altMaturity: isEven(currentMaturityIndex))
-        case 6, 14, 17:
+        case .callinventory, .putinventory, .inventory:
             switch modIndx {
             case 6:
                 labelText = strikeJSON[callInventory].stringValue
-                strikeCell.cellType = .callinventory
             case 14:
                 labelText = strikeJSON[putInventory].stringValue
-                strikeCell.cellType = .putinventory
             case 17:
                 labelText = strikeJSON[inventory].stringValue
-                strikeCell.cellType = .inventory
             default:
                 labelText = error
-                strikeCell.cellType = .null
             }
             strikeCell.backgroundColor = UIColor.greenColor()
             strikeLabel.textColor = UIColor.blackColor()
-        
-        case 2:
+            
+        case .buycallmonthqe:
             let (success, mq, e) = getEyeInfo(listing, json:  strikeJSON, orderType:  Order.buycall, lookupDelta: callDelta)
             if success {
                 labelText = "\(mq)|\(e)"
             }
             useDefaultColoring = true
-            strikeCell.cellType = StrikeType.buycallmonthqe
-        case 3:
+        case .buycallstrikeqe:
             let (success, q, e) = getEyeInfo(listing, json:  strikeJSON, orderType:  Order.buycall, lookupDelta: nil)
             if success {
                 labelText = "\(q)|\(e)"
             }
             useDefaultColoring = true
-            strikeCell.cellType = StrikeType.buycallstrikeqe
-        case 7:
+        case .sellcallstrikeqe:
             let (success, q, e) = getEyeInfo(listing, json:  strikeJSON, orderType:  Order.sellcall, lookupDelta: nil)
             if success {
                 labelText = "\(q)|\(e)"
             }
             useDefaultColoring = true
-            strikeCell.cellType = StrikeType.sellcallstrikeqe
-        case 8:
+        case .sellcallmonthqe:
             let (success, mq, e) = getEyeInfo(listing, json:  strikeJSON, orderType:  Order.sellcall, lookupDelta: callDelta)
             if success {
                 labelText = "\(mq)|\(e)"
             }
             useDefaultColoring = true
-            strikeCell.cellType = StrikeType.sellcallmonthqe
-        case 10:
+        case .buyputmonthqe:
             let (success, mq, e) = getEyeInfo(listing, json:  strikeJSON, orderType:  Order.buyput, lookupDelta: putDelta)
             if success {
                 labelText = "\(mq)|\(e)"
             }
             useDefaultColoring = true
-            strikeCell.cellType = StrikeType.buyputmonthqe
-        case 11:
+        case .buyputstrikeqe:
             let (success, q, e) = getEyeInfo(listing, json:  strikeJSON, orderType:  Order.buyput, lookupDelta: nil)
             if success {
                 labelText = "\(q)|\(e)"
             }
             useDefaultColoring = true
-            strikeCell.cellType = StrikeType.buyputstrikeqe
-        case 15:
+        case .sellputstrikeqe:
             let (success, q, e) = getEyeInfo(listing, json:  strikeJSON, orderType:  Order.sellput, lookupDelta: nil)
             if success {
                 labelText = "\(q)|\(e)"
             }
             useDefaultColoring = true
-            strikeCell.cellType = StrikeType.sellputstrikeqe
-        case 16:
+        case .sellputmonthqe:
             let (success, mq, e) = getEyeInfo(listing, json:  strikeJSON, orderType:  Order.sellput, lookupDelta: putDelta)
             if success {
                 labelText = "\(mq)|\(e)"
             }
             useDefaultColoring = true
-            strikeCell.cellType = StrikeType.sellputmonthqe
         default:
             //strikeLabel.text = "ERROR"
             useDefaultColoring = true
-            strikeCell.cellType = StrikeType.defaultcell
         }
-        
         
         switch modIndx {
         case 1:

@@ -8,6 +8,10 @@
 
 import UIKit
 
+
+
+
+
 public class EyeJson: NSObject {
     
     enum CommandType:String {

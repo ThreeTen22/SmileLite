@@ -55,14 +55,13 @@ struct Layout {
     static let faiconLarge:CGFloat = 30.0
     
    
-    static func setRadioButtonLayout(sender:UIButton, isOn:Bool = false) {
+    static func setRadioButtonLayout(sender:UIButton?, isOn:Bool = false) {
         if isOn {
-            sender.setFAIcon(FAType.FADotCircleO, iconSize: faiconSmall, forState: .Normal)
-            sender.setFATitleColor(radioButtonColorOn)
+            sender?.setFAIcon(FAType.FADotCircleO, iconSize: faiconSmall, forState: .Normal)
+            sender?.setFATitleColor(radioButtonColorOn)
         } else {
-            sender.setFAIcon(FAType.FACircleO, iconSize: faiconSmall, forState: .Normal)
-            sender.setFATitleColor(radioButtonColorOff)
-
+            sender?.setFAIcon(FAType.FACircleO, iconSize: faiconSmall, forState: .Normal)
+            sender?.setFATitleColor(radioButtonColorOff)
         }
     }
     
@@ -96,7 +95,7 @@ struct Layout {
             
         case .position, .callposition, .putposition:
             cell.backgroundColor = strikePositionBGColor
-            switch getPosition(label) {
+            switch getPosition(label.text) {
             case .neutral:
                 label.textColor = strikeDefaultTextColorDark
             case .long:
@@ -121,9 +120,9 @@ struct Layout {
         label.textColor = strikeDefaultTextColorDark
     }
     
-    static func getPosition(label:UILabel) -> Position {
-        if let labelText = label.text {
-            if let curPos = Int(labelText) {
+    static func getPosition(labelText:String?) -> Position {
+        if let text = labelText {
+            if let curPos = Int(text) {
                 if curPos > 0 {
                     return Position.long
                 }

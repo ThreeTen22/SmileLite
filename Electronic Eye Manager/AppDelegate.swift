@@ -18,17 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //Override point for customization after application launch.
         //SMILE DATE FORMATTER
-        smileDateFormat.dateFormat = "MM/dd/yy"
+        
         client = TCPClient(addr: "jdempseylxdt05", port: 9400)
         (clientSuccess, clientErrmsg) = client.connect(timeout: timeout)
         
         let jsonString = getEyes(clientSuccess, errmsg: clientErrmsg, client: client)
-        //print(jsonString)
-        //raise(Int32(ErrorInvalidJSON))
         usingDemo = false
-        
-        //let newExchange = Exchanges()
-        // let newValue = newExchange[16]
         
         if jsonString == eyebookRaw {
             clientSuccess = false
@@ -41,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //let portfolio = getPortfolio(clientSuccess, errmsg: clientErrmsg, client: client)
         //print(portfolio)
         // client.close()
+        //assertionFailure("debug:  Stop Program")
         return true
     }
     

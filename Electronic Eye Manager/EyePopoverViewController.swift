@@ -9,7 +9,7 @@
 import UIKit
 
 
-class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
+class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource  {
     
     private enum ShiftState {
         case notshifted
@@ -23,10 +23,10 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
     
     
     //IBAction
-    func calcButtonPressed(sender: CalcButton) {
-        
+    @IBAction func calcButtonPressed(sender: UIButton) {
+        //print("pressed")
         let buttonText:String = (sender.titleLabel?.text)! ?? ""
-        
+        if curShiftState != .hasshifted { return }
         switch buttonText {
         case "c":
             selectedStrikeEyeParameter.text = ""
@@ -53,11 +53,30 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
             selectedStrikeEyeParameter.insertText(buttonText)
             
         }
+        updateParam(selectedStrikeEyeParameter!, value: selectedStrikeEyeParameter!.text!)
+        // activateSaveIfNecessary()
         
     }
     
+    
+    @IBAction func radioPressed(sender: UIButton) {
+        if exchangeData[isActiveExchange: sender.tag] == true {
+            exchangeData[isActiveExchange: sender.tag] = false
+        } else {
+            exchangeData[isActiveExchange: sender.tag] = true
+        }
+        setButtonLayout(sender)
+        //checkForChanges()
+        //exchanges[isActive: sender.tag] = !exchanges[isActive: sender.tag]
+        sender.sendAction(#selector(EyePopoverViewController.activateSaveIfNecessary), to: nil, forEvent: nil)
+    }
+    
+    func setButtonLayout(sender:UIButton) {
+        Layout.setRadioButtonLayout(sender, isOn: exchangeData[isActiveExchange: sender.tag])
+    }
+    
     //IBAction
-    func orderTypeSelected(sender:UISegmentedControl) {
+    @IBAction func orderTypeSelected(sender:UISegmentedControl) {
         
         let sindx = sender.selectedSegmentIndex
         let indxTitle = sender.titleForSegmentAtIndex(sindx)
@@ -67,7 +86,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
     }
     
     //IBAction
-    func eyeTypeSelected(sender:UISegmentedControl) {
+    @IBAction func eyeTypeSelected(sender:UISegmentedControl) {
         
         let sindx = sender.selectedSegmentIndex
         let indxTitle = sender.titleForSegmentAtIndex(sindx)!
@@ -82,12 +101,10 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
             togglePriceParam(false)
         }
         
-        
-        activateSaveIfNecessary()
     }
     
     //IBAction
-    func shift(sender: UITextField) {
+    @IBAction func shift(sender: UITextField) {
         UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {[unowned self] in
             //var newFrame = self.view.frame
             var contFrame = self.containerView.frame
@@ -109,7 +126,9 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
                     switch self?.curShiftState {
                     case .shiftingleft?:
                         self?.curShiftState = .hasshifted
-                        sender?.becomeFirstResponder()
+                        if sender?.isFirstResponder() == false {
+                            sender?.becomeFirstResponder()
+                        }
                     //sender?.selectAll(nil)
                     case .shiftingright?:
                         self?.curShiftState = .notshifted
@@ -117,7 +136,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
                         self?.curShiftState = .notshifted
                     default: break
                     }
-                    //print("I AM COMPLETED")
+                    print("I AM COMPLETED")
                 }
             })
     }
@@ -126,10 +145,14 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
     //IBAction
     func saveCancelButtonPressed(sender:SaveCancelButton) {
         if sender.isSaveButton {
+            if saveButtonEnabled == false {return}
             print("Saved")
         } else {
             print("Cancelled")
         }
+        saveCreateEye = sender.isSaveButton
+        //dismissViewControllerAnimated(true, completion: nil)
+        sender.sendAction(#selector(EyeBookViewController.dismissPopoverProgramatically), to: nil, forEvent: nil)
     }
     
     @IBOutlet weak var buySellLabel: UILabel!
@@ -151,28 +174,44 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
     var currentStrikePrice:Double?
     
     weak var selectedStrikeEyeParameter:EditEyeParameter!
+    
     var editEyeViewController:EditEyeViewController?
+    
+    var saveButtonEnabled:Bool = false
     
     var orderType:Order = Order.NA
     var isMonthEye:Bool = false
     var isBuy:Bool = false
-    var strikeJSON:JSON?
+    var eyeJSON:JSON?
+    var finishedSetup:Bool = false
     
-    var eyeParams:EyeParams = EyeParams()
-    var tempEye:StrikeEye?
+    var eyeParams:EyeParams = EyeParams() {
+        didSet {
+            if finishedSetup {
+                activateSaveIfNecessary()
+            }
+        }
+    }
+    //var eyeParams:EyeParams = EyeParams()
+    
+    var exchangeData:Exchanges = Exchanges()
+    
+    var tempStrikeEye:StrikeEye?
+    var tempMonthEye:MonthEye?
     
     weak var currentContainer:MonthContainer?
     weak var currentEye:Eye?
     weak var currentDate:NSDate!
     
-    var exchangeInfo:Exchanges {
-        return (self.editEyeViewController?.exchangeTable.exchanges)!
-    }
+    var saveCreateEye:Bool = false
     
     var sourceEyeParams:EyeParams {
         return currentEye!.eyeParams
     }
     
+    var sourceExchangeData:Exchanges {
+        return currentEye!.exchangeData
+    }
     
     
     deinit {
@@ -182,15 +221,14 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
     
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         closeButton.setFAIcon(FAType.FAClose, iconSize: 30.0, forState: .Normal)
         closeButton.setFATitleColor(Layout.eyeCancelTextColor)
         
         saveButton.setFAIcon(FAType.FACheck, iconSize: 30.0, forState: .Normal)
         saveButton.setFATitleColor(Layout.eyeInstallTextColor)
         
-        if let strikeJS = strikeJSON {
-            currentDate = smileDateFormat.dateFromString((strikeJS["odate"].stringValue))
+        if let eyeJS = eyeJSON {
+            currentDate = smileDateFormat.dateFromString((eyeJS["odate"].stringValue))
             currentContainer = currentListing.getContainerByDate(currentDate)
             if currentContainer == nil {
                 //print("had to create Container ")
@@ -203,20 +241,29 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
                 currentEye = currentContainer?.GetMonthByOrder(orderType)
                 //print("current EYE  \(currentEye)")
                 //currentContainer.GetMonthByOrder()
+                
+                if currentEye == nil {
+                    tempMonthEye = MonthEye(monthJSON: eyeJS, Symbol: currentListing.listingSymbol, SecurityId: currentListing.listingId)
+                    tempMonthEye?.order = orderType
+                    tempMonthEye?.isTempEye = true
+                    currentEye = tempMonthEye
+                }
+                
+                
             } else {
                 if let currentEyes:[StrikeEye] = currentContainer?.GetStrikesByOrder(orderType) {
                     for eye in currentEyes {
                         //print("Debug: popover:viewdidLoad: strikeEyeArrayCheck: eye - \(eye)")
-                        if eye.strike == Double(strikeJS["strike"].stringValue)! {
+                        if eye.strike == Double(eyeJS["strike"].stringValue)! {
                             currentEye = eye
                             break
                         }
                     }
                     if currentEye == nil {
-                        tempEye = StrikeEye(strikeJSON: strikeJS, Symbol: currentListing.listingSymbol, SecurityId: currentListing.listingId)
-                        tempEye?.order = orderType
-                        tempEye?.isTempEye = true
-                        currentEye = tempEye
+                        tempStrikeEye = StrikeEye(strikeJSON: eyeJS, Symbol: currentListing.listingSymbol, SecurityId: currentListing.listingId)
+                        tempStrikeEye?.order = orderType
+                        tempStrikeEye?.isTempEye = true
+                        currentEye = tempStrikeEye
                     }
                     
                 }
@@ -232,20 +279,23 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
             if isMonthEye {
                 strike.text = ""
             } else {
-                strike.text = removeAfterCharacter(Source: strikeJS["strike"].stringValue, Character: ".", CutOffIndex: 1)
+                strike.text = removeAfterCharacter(Source: eyeJS["strike"].stringValue, Character: ".", CutOffIndex: 1)
             }
             
             //print(currentEye)
             editEyeViewController!.isMonthEye = isMonthEye
             editEyeViewController!.currentListing = currentListing
-            editEyeViewController!.strikeJSON = strikeJSON
+            editEyeViewController!.eyeJSON = eyeJSON
             
             editEyeViewController!.currentEye = currentEye
+            
             if currentEye != nil {
-                eyeParams = currentEye!.eyeParams
+                eyeParams = sourceEyeParams
+                exchangeData = sourceExchangeData
             } else {
                 eyeParams = EyeParams(isMonthEye)
             }
+            
             editEyeViewController!.delegateController = self
             
             editEyeViewController!.setupParams(eyeParams)
@@ -265,7 +315,10 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
             }
             
         }
+        activateSaveIfNecessary()
+        finishedSetup = true
         
+        super.viewDidLoad()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -278,28 +331,19 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
         }
     }
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        textField.inputView = UIView()
-        switch curShiftState {
-        case .notshifted:
-            curShiftState = .shiftingleft
-            shift(textField)
-            return false
-        case .hasshifted:
-            return true
-        default:
-            return false
-        }
-        
-    }
+    
+    
+ 
     
     func toggleSaveButton(isEnabled:Bool) {
-        saveButton.enabled = isEnabled
+        saveButtonEnabled = isEnabled
         if isEnabled {
-            saveButton.setFATitleColor(Layout.eyeInstallTextColor)
+            saveButton.hidden = false
+            //saveButton.setFATitleColor(Layout.eyeInstallTextColor)
             return
         }
-        saveButton.setFATitleColor(Layout.eyeInstallTextColorDisabled)
+        saveButton.hidden = true
+        //saveButton.setFATitleColor(Layout.eyeInstallTextColorDisabled)
     }
     
     func togglePriceParam(isEnabled:Bool) {
@@ -331,7 +375,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
     
     func activateSaveIfNecessary() {
         
-       toggleSaveButton( (sourceEyeParams != eyeParams) || (currentEye!.exchangeData != exchangeInfo) )
+       toggleSaveButton((currentEye!.isTempEye) || (sourceExchangeData != exchangeData) || (sourceEyeParams != eyeParams) )
         
         /*
         if editEyeViewController!.anyParamsChanged() || editEyeViewController!.exchangeTable.valueChanged {
@@ -342,13 +386,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
          */
         
     }
-    
-    func calcValueChanged(sender:UIButton) {
-        //unowned let tf = (selectedStrikeEyeParameter as! EditEyeParameter)
-        //updateForChanges(selectedStrikeEyeParameter)
-        activateSaveIfNecessary()
-    }
-    
+    /*
     func updateForChanges(tf:EditEyeParameter) {
         
         if labelTextsMatch(tf.text, tf.placeholder) {
@@ -360,6 +398,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
         
         
     }
+     */
     
     func labelTextsMatch(rlbl:String?,_ llbl:String?) -> Bool {
         //let rl = rlbl ?? ""
@@ -369,6 +408,15 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
         } else {
             return false
         }
+    }
+    
+    func addEyeToContainer() {
+        if isMonthEye {
+            currentContainer?.AddEye(MonthEye: currentEye as! MonthEye)
+        } else {
+            currentContainer?.AddEye(StrikeEye: currentEye as! StrikeEye)
+        }
+        
     }
     
     
@@ -397,51 +445,113 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
         case "highDelta":
             modifyTextField(editEyeViewController!.highDelta, amount: amount)
             eyeParams[.maxDelta] = editEyeViewController!.highDelta.text!.removeZeros()
-            //updateForChanges(editEyeViewController!.highDelta)
         case "totalDelta":
             modifyTextField(editEyeViewController!.totalDelta, amount: amount)
             eyeParams[.totalDelta] = editEyeViewController!.totalDelta.text!.removeZeros()
-            //updateForChanges(editEyeViewController!.totalDelta)
         case "price":
-            modifyTextField(editEyeViewController!.price, amount: amount)
+            modifyTextField(editEyeViewController!.price, amount: amount, keepPositive: true)
             eyeParams[.price] = editEyeViewController!.price.text!.removeZeros()
-            //updateForChanges(editEyeViewController!.price)
         default: break
             
         }
-        activateSaveIfNecessary()
     }
     
-    func modifyTextField(textField:EditEyeParameter, amount:Double) {
+    func updateParam(textField:EditEyeParameter, value:String) {
+        
+        switch textField.paramName {
+        case "maxQuantity":
+            eyeParams[.quantity] = value
+        //updateForChanges(editEyeViewController!.maxQuantity)
+        case "maxDelta":
+            eyeParams[.delta] = value
+        //updateForChanges(editEyeViewController!.maxDelta)
+        case "minEdge":
+            eyeParams[.minEdge] = value
+        //updateForChanges(editEyeViewController!.minEdge)
+        case "lowDelta":
+            eyeParams[.minDelta] = value
+        //updateForChanges(editEyeViewController!.lowDelta)
+        case "highDelta":
+            eyeParams[.maxDelta] = value
+        case "totalDelta":
+            eyeParams[.totalDelta] = value
+        case "price":
+            eyeParams[.price] = value
+        default: break
+            
+        }
+        
+    }
+    
+    func modifyTextField(textField:EditEyeParameter, amount:Double, keepPositive:Bool = true) {
         print("\(Double(textField.text!))  + \(amount)")
+        var newText:String = ""
         if let textAmount:Double = Double(textField.text!) {
             let newAmount = textAmount + amount
-            if newAmount < 0 {
-                textField.text = String(0.0)
-            } else if remainder(newAmount, 1.0) != 0.0 {
-                textField.text = String(newAmount).removeZeros(true)
+             if remainder(newAmount, 1.0) != 0.0 {
+                newText = String(newAmount).removeZeros(true)
             } else {
-                textField.text = String(newAmount).removeZeros(false)
+                newText = String(newAmount).removeZeros(false)
+            }
+            if keepPositive {
+                if newAmount < 0.0 {
+                    newText = "0.0"
+                }
             }
         } else {
-            textField.text = String(amount)
+                newText = String(amount)
         }
+        textField.text = newText
+        
     }
     
-    func modifyTextField(textField:EditEyeParameter, Int amount:Int) {
+    func modifyTextField(textField:EditEyeParameter, Int amount:Int, keepPositive:Bool = true) {
+        var newText:String = ""
         if let textAmount:Int = Int(textField.text!) {
             let newAmount = textAmount + amount
-            textField.text = String(newAmount)
+            newText = String(newAmount)
+            if keepPositive {
+                if textAmount < 0 {
+                    newText = "0"
+                }
+            }
         } else {
-            textField.text = String(amount)
+            newText = String(amount)
         }
+        
+        if keepPositive {
+            if let textAmount:Int = Int(newText) {
+                if textAmount < 0 {
+                newText = "0"
+                }
+            }
+        }
+        
+        textField.text = newText
+    }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        textField.inputView = UIView()
+        switch curShiftState {
+        case .notshifted:
+            curShiftState = .shiftingleft
+            shift(textField)
+            return false
+        case .hasshifted:
+            return true
+        default:
+            return false
+        }
+        
     }
     
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        textField.selectAll(nil)
         selectedStrikeEyeParameter = textField as! EditEyeParameter
+        selectedStrikeEyeParameter.selectAll(nil)
+        
     }
+    
     
     func textFieldDidEndEditing(textField: UITextField) {
         switch curShiftState {
@@ -454,6 +564,21 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate  {
         
     }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return exchangeData.visibleExchangeCount
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Market") as! ExchangesTableCell
+        cell.exchangeName.text = Exchanges.exchangeNames(exchangeData[namedIndx: (indexPath.row+1)])
+        cell.radioButton.tag = (indexPath.row+1)
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        Layout.setRadioButtonLayout((cell as? ExchangesTableCell)?.radioButton, isOn: exchangeData[isActiveExchange: (indexPath.row+1)])
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "editeye" {

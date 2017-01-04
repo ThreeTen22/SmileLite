@@ -39,7 +39,11 @@ class EditEyeParameter:UITextField {
     
     //var originalText:String = ""
     
-    var valueChanged = false
+    @IBInspectable var paramName: String = ""
+    
+    var valueChanged:Bool  {
+        return (self.text == self.placeholder)
+    }
     
     override func awakeFromNib() {
         let item:UITextInputAssistantItem = inputAssistantItem

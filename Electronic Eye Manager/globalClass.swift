@@ -18,7 +18,12 @@ var usingDemo = false
 //will use the keyboard when inputting
 var bWillUseKeyboard = false
 
-let smileDateFormat = NSDateFormatter()
+let smileDateFormat:NSDateFormatter = {
+    let newSmileDate = NSDateFormatter()
+    newSmileDate.dateFormat = "MM/dd/yy"
+    return newSmileDate
+}()
+
 
 var xonListingArray:Array = [String]()
 
@@ -33,6 +38,7 @@ enum FilterType {
 }
 
 enum StrikeType {
+    
     case buycallmonthqe
     case buycallstrikeqe
     case buyputmonthqe
@@ -43,7 +49,6 @@ enum StrikeType {
     case calltheo
     case callvolume
     case defaultcell
-    case date
     case inventory
     case maturity
     case position
@@ -59,7 +64,68 @@ enum StrikeType {
     case strike
     case title
     case null
+    
 }
+
+struct StrikeCellOrder {
+    
+    static var visibleCellPositionIndx:[StrikeType] = [.maturity,
+                                      .strike,
+                                      .buycallmonthqe,
+                                      .buycallstrikeqe,
+                                      .calltheo,
+                                      .calldelta,
+                                      .callinventory,
+                                      .sellcallstrikeqe,
+                                      .sellcallmonthqe,
+                                      .defaultcell,
+                                      .buyputmonthqe,
+                                      .buyputstrikeqe,
+                                      .puttheo,
+                                      .putdelta,
+                                      .putinventory,
+                                      .sellputstrikeqe,
+                                      .sellputmonthqe,
+                                      .inventory]
+    
+    static var allStrikes:[StrikeType] = [.maturity,
+                                      .strike,
+                                      .buycallmonthqe,
+                                      .buycallstrikeqe,
+                                      .calltheo,
+                                      .calldelta,
+                                      .callinventory,
+                                      .sellcallstrikeqe,
+                                      .sellcallmonthqe,
+                                      .defaultcell,
+                                      .buyputmonthqe,
+                                      .buyputstrikeqe,
+                                      .puttheo,
+                                      .putdelta,
+                                      .putinventory,
+                                      .sellputstrikeqe,
+                                      .sellputmonthqe,
+                                      .inventory,
+                                      .callposition,
+                                      .callvolume,
+                                      .position,
+                                      .putposition,
+                                      .putvolume,
+                                      .title]
+    
+    
+    static func strikeCellTypeAt(indx:Int) -> StrikeType {
+        if let strikeType  = visibleCellPositionIndx[tryWith: indx] {
+            return strikeType
+        }
+        return StrikeType.null
+    }
+    
+}
+
+//typealias StrikeType = Int
+
+
 
 enum Position {
     case long
@@ -74,6 +140,7 @@ let dotString:String = "."
 func parseXonString() {
     xonListingArray = (xonListingData.characters.split(",", maxSplit: Int.max, allowEmptySlices: true).map(String.init))
 }
+/*
 
 func addEyesToArray(inout eyeArray:[Eye], listing:Listing, bAddMonthEyes:Bool = true, bAddStrikeEyes:Bool = true) {
     for monthContainer in listing.registeredMonthContainers {
@@ -86,6 +153,7 @@ func addEyesToArray(inout eyeArray:[Eye], listing:Listing, bAddMonthEyes:Bool = 
     }
     
 }
+*/
 
 
 func removeAfterIndex(Source str:String, CutOffIndex indx:Int) -> String {

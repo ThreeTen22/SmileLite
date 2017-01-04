@@ -165,15 +165,14 @@ struct Exchanges:Equatable {
             case 15:
                 return exchange15.orderValidity.isNotZero()
             default:
-                assertionFailure("Get: Provided Exchange Number Out of Bounds")
+                assertionFailure("Get: Provided Exchange Number Out of Bounds \(index)")
                 return exchange15.orderValidity.isNotZero()
             }
         }
         set(newValue) {
             switch index {
             case 1:
-                exchange1 = ExInfo(exchange1.nameIndx, newValue.hashValue)
-                
+                exchange1.orderValidity = newValue.hashValue
             case 2:
                 exchange2.orderValidity = newValue.hashValue
             case 3:
@@ -361,6 +360,8 @@ struct Exchanges:Equatable {
 func ==(left:Exchanges, right:Exchanges) -> Bool {
     let leftMap = left.map()
     let rightMap = right.map()
+    
+    
     for (indx,leftElement) in leftMap.enumerate() {
         if leftElement != rightMap[indx] {
             return false

@@ -30,18 +30,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eyebook" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aci-xL-q6Q">
-                                <rect key="frame" x="20" y="20" width="75" height="21"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z7z-Ik-Arr">
                                 <rect key="frame" x="901" y="28" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Debug"/>
                             </button>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" directionalLockEnabled="YES" scrollEnabled="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="k0O-JG-VW8" customClass="ListingCollectionView" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" directionalLockEnabled="YES" scrollEnabled="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k0O-JG-VW8" customClass="ListingCollectionView" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                 <rect key="frame" x="20" y="48" width="984" height="40"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -102,7 +96,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SIG-kh-hOA" customClass="MonthCollectionView" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SIG-kh-hOA" customClass="MonthCollectionView" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                     <rect key="frame" x="112" y="8" width="864" height="29"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="g0W-Xh-GHH">
@@ -164,7 +158,7 @@
                                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0xL-o9-bhF">
                                                     <rect key="frame" x="0.0" y="0.0" width="984" height="439"/>
                                                     <subviews>
-                                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Es7-sC-PNX" customClass="StrikeCollectionView" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                        <collectionView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Es7-sC-PNX" customClass="StrikeCollectionView" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="972" height="439"/>
                                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
@@ -184,18 +178,17 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="54" height="25"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KTw-BR-qK9" customClass="StrikeCellTextField" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KTw-BR-qK9" customClass="StrikeCellTextField" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                                 <rect key="frame" x="-1" y="-2" width="58" height="30"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                                <gestureRecognizers/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                 <textInputTraits key="textInputTraits"/>
                                                                                 <connections>
                                                                                     <outlet property="delegate" destination="oNA-WW-NQI" id="dPT-q8-fOp"/>
                                                                                 </connections>
                                                                             </textField>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="BVD-yI-efK">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="BVD-yI-efK">
                                                                                 <rect key="frame" x="0.0" y="5" width="57" height="15"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <accessibility key="accessibilityConfiguration">
                                                                                     <bool key="isElement" value="NO"/>
@@ -206,17 +199,57 @@
                                                                             </label>
                                                                         </subviews>
                                                                     </view>
+                                                                    <gestureRecognizers/>
+                                                                    <constraints>
+                                                                        <constraint firstItem="KTw-BR-qK9" firstAttribute="centerY" secondItem="BVD-yI-efK" secondAttribute="centerY" id="0SZ-D5-ulV"/>
+                                                                        <constraint firstItem="KTw-BR-qK9" firstAttribute="top" secondItem="YJX-3b-4I9" secondAttribute="topMargin" constant="-10" id="8hZ-We-27b"/>
+                                                                        <constraint firstItem="KTw-BR-qK9" firstAttribute="trailing" secondItem="BVD-yI-efK" secondAttribute="trailing" id="9W5-jR-3cN"/>
+                                                                        <constraint firstItem="BVD-yI-efK" firstAttribute="leading" secondItem="YJX-3b-4I9" secondAttribute="leading" id="MWa-Ut-ff4"/>
+                                                                        <constraint firstItem="KTw-BR-qK9" firstAttribute="centerX" secondItem="BVD-yI-efK" secondAttribute="centerX" id="XY9-nB-Teb"/>
+                                                                        <constraint firstItem="BVD-yI-efK" firstAttribute="centerY" secondItem="YJX-3b-4I9" secondAttribute="centerY" id="Z6w-Kr-t3W"/>
+                                                                        <constraint firstAttribute="trailingMargin" secondItem="BVD-yI-efK" secondAttribute="trailing" constant="-11" id="k88-qd-suj"/>
+                                                                    </constraints>
+                                                                </collectionViewCell>
+                                                                <collectionViewCell opaque="NO" clipsSubviews="YES" contentMode="center" reuseIdentifier="OtherStrikeCell" id="Eog-pW-uc0" customClass="StrikeCollectionViewCell" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                                    <rect key="frame" x="54" y="25" width="54" height="25"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="54" height="25"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="VZu-rt-jCL">
+                                                                                <rect key="frame" x="0.0" y="5" width="57" height="15"/>
+                                                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                <accessibility key="accessibilityConfiguration">
+                                                                                    <bool key="isElement" value="NO"/>
+                                                                                </accessibility>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                    </view>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="trailingMargin" secondItem="VZu-rt-jCL" secondAttribute="trailing" constant="-11" id="Dr5-qq-DP4"/>
+                                                                        <constraint firstItem="VZu-rt-jCL" firstAttribute="leading" secondItem="Eog-pW-uc0" secondAttribute="leading" id="Shm-d0-8qE"/>
+                                                                        <constraint firstItem="VZu-rt-jCL" firstAttribute="centerY" secondItem="Eog-pW-uc0" secondAttribute="centerY" id="sFu-KK-d7g"/>
+                                                                    </constraints>
                                                                 </collectionViewCell>
                                                             </cells>
                                                             <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StrikesHeader" id="0L1-QG-EQj">
                                                                 <rect key="frame" x="0.0" y="0.0" width="972" height="25"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <subviews>
-                                                                    <stackView opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cag-RN-xhV">
+                                                                    <stackView opaque="NO" tag="1" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cag-RN-xhV">
                                                                         <rect key="frame" x="0.0" y="0.0" width="972" height="25"/>
-                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     </stackView>
                                                                 </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="cag-RN-xhV" firstAttribute="leading" secondItem="0L1-QG-EQj" secondAttribute="leading" id="5tk-A6-pRM"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="cag-RN-xhV" secondAttribute="trailing" id="CNd-Pk-7ZP"/>
+                                                                    <constraint firstItem="cag-RN-xhV" firstAttribute="top" secondItem="0L1-QG-EQj" secondAttribute="top" id="KJv-hJ-Jwf"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="cag-RN-xhV" secondAttribute="bottom" id="NgH-j1-0UI"/>
+                                                                </constraints>
                                                             </collectionReusableView>
                                                             <connections>
                                                                 <outlet property="dataSource" destination="oNA-WW-NQI" id="E46-aP-jzb"/>
@@ -256,19 +289,27 @@
                                     <outlet property="delegate" destination="oNA-WW-NQI" id="Jow-hU-gXu"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hRQ-Qp-ZDo">
+                                <rect key="frame" x="20" y="15" width="75" height="34"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="Eyebook"/>
+                                <connections>
+                                    <action selector="minimizeAll:" destination="oNA-WW-NQI" eventType="touchUpInside" id="NcP-0m-w5D"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="k0O-JG-VW8" firstAttribute="top" secondItem="aci-xL-q6Q" secondAttribute="bottom" constant="7" id="JsS-BC-cWj"/>
+                            <constraint firstItem="Gtf-x6-gbV" firstAttribute="top" secondItem="hRQ-Qp-ZDo" secondAttribute="bottom" constant="39" id="01Y-Tc-diG"/>
+                            <constraint firstItem="k0O-JG-VW8" firstAttribute="leading" secondItem="hRQ-Qp-ZDo" secondAttribute="leading" id="Akd-PT-sgx"/>
                             <constraint firstItem="Gtf-x6-gbV" firstAttribute="trailing" secondItem="VEO-Mq-XVD" secondAttribute="trailingMargin" id="Lio-GU-9RC"/>
                             <constraint firstItem="k0O-JG-VW8" firstAttribute="trailing" secondItem="Gtf-x6-gbV" secondAttribute="trailing" id="PI7-SZ-MXi"/>
+                            <constraint firstItem="hRQ-Qp-ZDo" firstAttribute="top" secondItem="VEO-Mq-XVD" secondAttribute="topMargin" constant="15" id="Q5V-CK-mcP"/>
                             <constraint firstItem="Gtf-x6-gbV" firstAttribute="top" secondItem="k0O-JG-VW8" secondAttribute="bottom" id="QtY-dh-pIH"/>
                             <constraint firstItem="Gtf-x6-gbV" firstAttribute="bottom" secondItem="br1-vQ-yAL" secondAttribute="top" id="Stb-Qo-Z25"/>
                             <constraint firstItem="k0O-JG-VW8" firstAttribute="top" secondItem="VEO-Mq-XVD" secondAttribute="top" constant="48" id="Ujk-Rx-4z6"/>
-                            <constraint firstItem="aci-xL-q6Q" firstAttribute="leading" secondItem="VEO-Mq-XVD" secondAttribute="leadingMargin" id="Xtr-l6-Tpn"/>
-                            <constraint firstItem="k0O-JG-VW8" firstAttribute="leading" secondItem="aci-xL-q6Q" secondAttribute="leading" id="Yvz-EZ-uWT"/>
                             <constraint firstItem="k0O-JG-VW8" firstAttribute="leading" secondItem="Gtf-x6-gbV" secondAttribute="leading" id="jOC-5N-1Iy"/>
-                            <constraint firstItem="aci-xL-q6Q" firstAttribute="top" secondItem="jbx-y9-T4r" secondAttribute="bottom" id="wXz-Hc-GjI"/>
+                            <constraint firstItem="hRQ-Qp-ZDo" firstAttribute="leading" secondItem="VEO-Mq-XVD" secondAttribute="leadingMargin" id="wOT-D4-B2a"/>
                         </constraints>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="768" height="1024"/>

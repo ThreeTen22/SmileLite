@@ -161,7 +161,7 @@ class EyeBook {
                     success = curContainer.AddEye(StrikeEye: newStrike)
                     //print("added strikeeye - curContainer \(success)")
                 } else {
-                    success = curContainer.AddMonthEye(newMonth)
+                    success = curContainer.AddEye(MonthEye: newMonth)
                     //print("added strikeeye - curContainer \(success)")
                 }
             } else {
@@ -170,7 +170,7 @@ class EyeBook {
                     success = newContainer.AddEye(StrikeEye: newStrike)
                     listing.AddContainer(newContainer)
                     //print("added montheye - newcontainer \(success)")
-                } else if newContainer.AddMonthEye(newMonth) {
+                } else if newContainer.AddEye(MonthEye: newMonth) {
                     success = true
                     //print("added montheye - newcontainer \(success)")
                     listing.AddContainer(newContainer)
@@ -219,6 +219,16 @@ class Listing {
     }
     
     func AddContainer(monthContainer:MonthContainer) {
+        
+        for (indx, month) in registeredMonthContainers.enumerate() {
+            if month.expDate.compare(monthContainer.expDate) != .OrderedDescending {
+                continue
+            }
+            registeredMonthContainers.insert(monthContainer, atIndex: indx)
+            print(monthContainer.expDate.timeIntervalSinceNow)
+            return
+        }
+        
         registeredMonthContainers.append(monthContainer)
     }
     
@@ -320,7 +330,7 @@ class MonthContainer {
         expDate = exp
     }
     
-    func AddMonthEye(eye:MonthEye) -> Bool {
+    func AddEye(MonthEye eye:MonthEye) -> Bool {
         switch eye.order {
         case Order.buycall:
             monthEyes[0] = eye
@@ -434,6 +444,7 @@ class Eye {
     var eyeJson:JSON
     
     var jsonIndex:Int = -1
+    //check to see if this eye was "created" in order to display an addition to an eye that was previously unavailable.
     
     var isTempEye = false
     
@@ -482,7 +493,7 @@ class Eye {
         
     }
     
-    init(strikeJSON:JSON,Symbol sym:String,SecurityId securityId:Int, MinEdge edge:Double = 0.1, Quantity qntity:Int = 1, MaxDelta
+    init(eyeJSON:JSON,Symbol sym:String,SecurityId securityId:Int, MinEdge edge:Double = 0.1, Quantity qntity:Int = 1, MaxDelta
         
         mxDelta:Double, TotalDelta tDelta:Double = 1000.0) {
         //print("init: eye wStrikeJSON")
@@ -492,7 +503,7 @@ class Eye {
         quantity = qntity
         delta = mxDelta
         totalDelta = tDelta
-        expDateString = strikeJSON["odate"].stringValue
+        expDateString = eyeJSON["odate"].stringValue
         expDate = smileDateFormat.dateFromString(expDateString)!
         eyeJson = JSON(nilLiteral: ())
         
@@ -540,8 +551,9 @@ class MonthEye: Eye {
         totalDelta = tDelta
     }
     
-    init(strikeJSON:JSON,Symbol sym:String,SecurityId securityId:Int, MinEdge edge:Double = 0.1, MaxDelta delta:Double = 100.0, Quantity qntity:Int = 1, TotalDelta tDelta:Double = 1000.0) {
-        super.init(strikeJSON: strikeJSON, Symbol: sym, SecurityId: securityId, MinEdge: edge, Quantity: qntity, MaxDelta: delta, TotalDelta: tDelta)
+    init(monthJSON:JSON,Symbol sym:String,SecurityId securityId:Int, MinEdge edge:Double = 0.1, MaxDelta delta:Double = 100.0, Quantity qntity:Int = 1, TotalDelta tDelta:Double = 1000.0) {
+        super.init(eyeJSON: monthJSON, Symbol: sym, SecurityId: securityId, MinEdge: edge, Quantity: qntity, MaxDelta: delta, TotalDelta: tDelta)
+        eyeParams = EyeParams(true)
         
     }
 }
@@ -573,9 +585,8 @@ class StrikeEye: Eye {
     }
     
     init(strikeJSON:JSON,Symbol sym:String,SecurityId securityId:Int, MinEdge edge:Double = 0.1, MaxDelta delta:Double = 100.0, Quantity qntity:Int = 1, TotalDelta tDelta:Double = 1000.0) {
-        super.init(strikeJSON: strikeJSON, Symbol: sym, SecurityId: securityId, MinEdge: edge, Quantity: qntity, MaxDelta: delta, TotalDelta: tDelta)
+        super.init(eyeJSON: strikeJSON, Symbol: sym, SecurityId: securityId, MinEdge: edge, Quantity: qntity, MaxDelta: delta, TotalDelta: tDelta)
         strike = strikeJSON["strike"].doubleValue
-        
     }
     
     deinit {

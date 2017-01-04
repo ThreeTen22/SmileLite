@@ -131,13 +131,14 @@ struct EyeParams:Equatable {
         
     }
 }
-
+/*
 func ==(left:EyeParams, right:EyeParams) -> Bool {
     if (left.useMonthParams == true) && (left.useMonthParams == right.useMonthParams)  {
         if  left.quantity == right.quantity &&
             left.minEdge == right.minEdge &&
             left.delta == right.delta &&
             left.eyeType == right.eyeType &&
+            left.orderType == right.orderType &&
             left.autoHedge == right.autoHedge &&
             left.minDelta == right.minDelta &&
             left.maxDelta == right.maxDelta &&
@@ -146,11 +147,12 @@ func ==(left:EyeParams, right:EyeParams) -> Bool {
             return true
         }
         return false
-    } else if (left.useMonthParams == right.useMonthParams) {
+    } else {
         if  left.quantity == right.quantity &&
             left.minEdge == right.minEdge &&
             left.delta == right.delta &&
             left.eyeType == right.eyeType &&
+            left.orderType == right.orderType &&
             left.autoHedge == right.autoHedge &&
             left.price == right.price {
             return true
@@ -159,6 +161,27 @@ func ==(left:EyeParams, right:EyeParams) -> Bool {
     }
     return false
 }
+*/
+
+func ==(left:EyeParams, right:EyeParams) -> Bool {
+    
+        if  left.quantity == right.quantity &&
+            left.minEdge == right.minEdge &&
+            left.delta == right.delta &&
+            left.eyeType == right.eyeType &&
+            left.orderType == right.orderType &&
+            left.autoHedge == right.autoHedge &&
+            left.minDelta == right.minDelta &&
+            left.maxDelta == right.maxDelta &&
+            left.totalDelta == right.totalDelta &&
+            left.price == right.price {
+            return true
+        } else {
+            return false
+    }
+}
+
+    
 
 func !=(left:EyeParams, right:EyeParams) -> Bool {
     return !(left == right)

@@ -9,7 +9,16 @@
 import Foundation
 
 
-
+extension Array {
+    subscript(tryWith indx:Int) -> Element? {
+        get {
+            if indx < self.count {
+                return self[indx]
+            }
+            return nil
+        }
+    }
+}
 extension String {
     func asInt() -> Int? {
         return Int(self)
@@ -23,11 +32,11 @@ extension String {
         return Double(self)
     }
     
-    func toBool() -> Bool? {
+    func asBool() -> Bool? {
         switch self {
-        case "On":
+        case "On","true","1":
             return true
-        case "Off":
+        case "Off","false","0":
             return false
         default:
             return nil
