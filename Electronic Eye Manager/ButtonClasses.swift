@@ -79,6 +79,12 @@ class ExchangeOrderType: UIButton {
 
 class RadioButton:UIButton {
     // var exchange:ExInfo!
+    
+    static let NotifyOnlyString = "NotifyOnly"
+    static let ToggleString = "Toggle"
+    
+    @IBInspectable var buttonTag:String = ""
+    
     override func awakeFromNib() {
         //Layout.setRadioButtonLayout(self)
         //self.addTarget(nil, action: #selector(ExchangesTableCell.radioPressed(_:)), forControlEvents: .TouchUpInside)

@@ -10,9 +10,11 @@ import UIKit
 
 struct Layout {
     
-    static let eyeBookBGColor:UIColor = UIColor(red255: 254, green: 230, blue: 184)
+    //static let eyeBookBGColor:UIColor = UIColor(red255: 254, green: 230, blue: 184)
+    static let eyeBookBGColor:UIColor = UIColor.whiteColor()
+    //static let eyeBookListingCollectionBGColor:UIColor = UIColor(red255: 213, green: 181, blue: 142)
+    static let eyeBookListingCollectionBGColor:UIColor = UIColor.whiteColor()
     
-    static let eyeBookListingCollectionBGColor:UIColor = UIColor(red255: 213, green: 181, blue: 142)
     
     static let eyeBookListingTableCellBGColor:UIColor = UIColor(red255: 189, green: 189, blue: 189)
     
@@ -55,7 +57,7 @@ struct Layout {
     static let faiconLarge:CGFloat = 30.0
     
    
-    static func setRadioButtonLayout(sender:UIButton?, isOn:Bool = false) {
+    static func setRadioButtonLayout(sender:RadioButton?, isOn:Bool = false) {
         if isOn {
             sender?.setFAIcon(FAType.FADotCircleO, iconSize: faiconSmall, forState: .Normal)
             sender?.setFATitleColor(radioButtonColorOn)

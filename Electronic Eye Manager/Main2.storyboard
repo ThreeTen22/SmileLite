@@ -16,7 +16,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="EyePopoverViewController" storyboardName="EyePopover" id="EXs-sP-HyO" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e0V-Q1-7le" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="470" y="-484"/>
+            <point key="canvasLocation" x="357" y="-466"/>
         </scene>
         <!--Eye Book View Controller-->
         <scene sceneID="Ey3-UA-XpJ">

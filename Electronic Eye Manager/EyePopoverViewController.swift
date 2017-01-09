@@ -60,19 +60,37 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
     
     
     @IBAction func radioPressed(sender: UIButton) {
-        if exchangeData[isActiveExchange: sender.tag] == true {
-            exchangeData[isActiveExchange: sender.tag] = false
-        } else {
-            exchangeData[isActiveExchange: sender.tag] = true
-        }
+        print("radioPressed")
         setButtonLayout(sender)
         //checkForChanges()
         //exchanges[isActive: sender.tag] = !exchanges[isActive: sender.tag]
         sender.sendAction(#selector(EyePopoverViewController.activateSaveIfNecessary), to: nil, forEvent: nil)
     }
     
-    func setButtonLayout(sender:UIButton) {
-        Layout.setRadioButtonLayout(sender, isOn: exchangeData[isActiveExchange: sender.tag])
+    func setButtonLayout(senderOp:UIButton) {
+        if let sender = senderOp as? RadioButton {
+            print("setButtonLayout \(sender.buttonTag)")
+            if sender.buttonTag == RadioButton.ToggleString {
+                if exchangeData[isActiveExchange: sender.tag] == true {
+                    exchangeData[isActiveExchange: sender.tag] = false
+                } else {
+                    exchangeData[isActiveExchange: sender.tag] = true
+                }
+                
+                Layout.setRadioButtonLayout(sender, isOn: exchangeData[isActiveExchange: sender.tag])
+                return
+            }
+            if sender.buttonTag == RadioButton.NotifyOnlyString {
+                print("entered NotifyONly  \(exchangeData[notifyOnly: sender.tag])")
+                if exchangeData[notifyOnly: sender.tag] == true {
+                    exchangeData[notifyOnly: sender.tag] = false
+                } else {
+                    exchangeData[notifyOnly: sender.tag] = true
+                }
+                print("after  \(exchangeData[notifyOnly: sender.tag])")
+                Layout.setRadioButtonLayout(sender, isOn: exchangeData[notifyOnly: sender.tag])
+            }
+        }
     }
     
     //IBAction
@@ -571,13 +589,15 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Market") as! ExchangesTableCell
         cell.exchangeName.text = Exchanges.exchangeNames(exchangeData[namedIndx: (indexPath.row+1)])
-        cell.radioButton.tag = (indexPath.row+1)
-        
+        cell.toggleRadioButton.tag = (indexPath.row+1)
+        cell.notifyOnlyradioButton.tag = (indexPath.row+1)
         return cell
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        Layout.setRadioButtonLayout((cell as? ExchangesTableCell)?.radioButton, isOn: exchangeData[isActiveExchange: (indexPath.row+1)])
+        weak var cellRB:ExchangesTableCell? = (cell as? ExchangesTableCell)
+        Layout.setRadioButtonLayout(cellRB?.toggleRadioButton, isOn: exchangeData[isActiveExchange: (indexPath.row+1)])
+        Layout.setRadioButtonLayout(cellRB?.notifyOnlyradioButton, isOn: exchangeData[notifyOnly: (indexPath.row+1)])
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

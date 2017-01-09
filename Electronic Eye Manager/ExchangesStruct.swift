@@ -15,20 +15,22 @@ struct ExInfo:Equatable {
     var nameIndx:Int
     var orderValidity:Int
     var orderPref:Int
+    var notifyOnly:Bool
     
-    init(_ n:Int,_ o:Int, t:Int = 2) {
+    init(_ n:Int,_ o:Int, t:Int = 2, no:Bool = false) {
      nameIndx = n
      orderValidity = o
      orderPref = t
+     notifyOnly = no
     }
 }
 
 func ==(lhs:ExInfo, rhs:ExInfo) -> Bool {
-    return (lhs.nameIndx == rhs.nameIndx) && (lhs.orderValidity == rhs.orderValidity)
+    return (lhs.nameIndx == rhs.nameIndx) && (lhs.orderValidity == rhs.orderValidity)  && (lhs.notifyOnly == rhs.notifyOnly)
 }
 
 func !=(lhs:ExInfo, rhs:ExInfo) -> Bool {
-    return (lhs.nameIndx != rhs.nameIndx) || (lhs.orderValidity != rhs.orderValidity)
+    return (lhs.nameIndx != rhs.nameIndx) || (lhs.orderValidity != rhs.orderValidity) || (lhs.notifyOnly != rhs.notifyOnly)
 }
 
 struct Exchanges:Equatable {
@@ -209,6 +211,83 @@ struct Exchanges:Equatable {
         }
     }
     
+    subscript(notifyOnly index:Int) -> Bool {
+        get {
+            switch index {
+            case 1:
+                return exchange1.notifyOnly
+            case 2:
+                return exchange2.notifyOnly
+            case 3:
+                return exchange3.notifyOnly
+            case 4:
+                return exchange4.notifyOnly
+            case 5:
+                return exchange5.notifyOnly
+            case 6:
+                return exchange6.notifyOnly
+            case 7:
+                return exchange7.notifyOnly
+            case 8:
+                return exchange8.notifyOnly
+            case 9:
+                return exchange9.notifyOnly
+            case 10:
+                return exchange10.notifyOnly
+            case 11:
+                return exchange11.notifyOnly
+            case 12:
+                return exchange12.notifyOnly
+            case 13:
+                return exchange13.notifyOnly
+            case 14:
+                return exchange14.notifyOnly
+            case 15:
+                return exchange15.notifyOnly
+            default:
+                assertionFailure("Get: Provided Exchange Number Out of Bounds \(index)")
+                return exchange15.notifyOnly
+            }
+        }
+        set(newValue) {
+            switch index {
+            case 1:
+                exchange1.notifyOnly = newValue
+            case 2:
+                exchange2.notifyOnly = newValue
+            case 3:
+                exchange3.notifyOnly = newValue
+            case 4:
+                exchange4.notifyOnly = newValue
+            case 5:
+                exchange5.notifyOnly = newValue
+            case 6:
+                exchange6.notifyOnly = newValue
+            case 7:
+                exchange7.notifyOnly = newValue
+            case 8:
+                exchange8.notifyOnly = newValue
+            case 9:
+                exchange9.notifyOnly = newValue
+            case 10:
+                exchange10.notifyOnly = newValue
+            case 11:
+                exchange11.notifyOnly = newValue
+            case 12:
+                exchange12.notifyOnly = newValue
+            case 13:
+                exchange13.notifyOnly = newValue
+            case 14:
+                exchange14.notifyOnly = newValue
+            case 15:
+                exchange15.notifyOnly = newValue
+            default:
+                assertionFailure("Set: Provided Exchange Number Out of Bounds")
+                break
+            }
+            
+        }
+    }
     
     init() {
         

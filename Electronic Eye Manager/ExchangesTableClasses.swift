@@ -39,6 +39,9 @@ class ExchangesTableCell: UITableViewCell {
     
     @IBOutlet weak var radioButton: RadioButton!
     
+    @IBOutlet weak var toggleRadioButton: RadioButton!
+    @IBOutlet weak var notifyOnlyradioButton:RadioButton!
+    
     @IBOutlet weak var exchangeName: UILabel!
     @IBOutlet weak var exchangeOrderType: UIButton!
     

@@ -276,25 +276,25 @@
                                     <constraint firstAttribute="width" constant="210" id="gQv-hZ-gPe"/>
                                 </constraints>
                                 <view key="tableHeaderView" tag="15" contentMode="scaleToFill" id="BtK-6A-jnC" customClass="TableHeaderView" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="210" height="20"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="210" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Order" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BDj-BQ-nrS">
-                                            <rect key="frame" x="122" y="-1" width="31" height="21"/>
+                                            <rect key="frame" x="120" y="9" width="31" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notify Only" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kX3-Gy-dZk">
-                                            <rect key="frame" x="161" y="-1" width="49" height="21"/>
+                                            <rect key="frame" x="161" y="9" width="49" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Exchange" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIq-Cn-Xzv">
-                                            <rect key="frame" x="37" y="-1" width="71" height="21"/>
+                                            <rect key="frame" x="37" y="9" width="71" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                             <nil key="textColor"/>
@@ -305,7 +305,7 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="Market" id="wpi-Xa-lUS" customClass="ExchangesTableCell" customModule="Electronic_Eye_Manager" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="21" width="210" height="30"/>
+                                        <rect key="frame" x="0.0" y="31" width="210" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wpi-Xa-lUS" id="P9p-tC-yEx">
                                             <rect key="frame" x="0.0" y="0.0" width="210" height="29"/>
@@ -322,6 +322,9 @@
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <state key="normal" title="O"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="buttonTag" value="Toggle"/>
+                                                            </userDefinedRuntimeAttributes>
                                                             <connections>
                                                                 <action selector="radioPressed:" destination="lAW-Ly-qrL" eventType="touchUpInside" id="35k-kT-lfW"/>
                                                             </connections>
@@ -340,7 +343,7 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                                             <state key="normal" title="IOC"/>
                                                         </button>
-                                                        <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKj-3E-PHN">
+                                                        <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IKj-3E-PHN" customClass="RadioButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                             <rect key="frame" x="180" y="0.0" width="25" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="25" id="fYV-Wx-ZDv"/>
@@ -348,6 +351,12 @@
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <state key="normal" title="O"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="buttonTag" value="NotifyOnly"/>
+                                                            </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <action selector="radioPressed:" destination="lAW-Ly-qrL" eventType="touchUpInside" id="Yyq-lk-ZQe"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
@@ -360,7 +369,8 @@
                                         <connections>
                                             <outlet property="exchangeName" destination="KEa-Wg-BQz" id="IR0-lJ-KVo"/>
                                             <outlet property="exchangeOrderType" destination="XAs-5g-ZbV" id="4N4-xD-GWH"/>
-                                            <outlet property="radioButton" destination="T0q-Hu-BJA" id="38p-LT-gAS"/>
+                                            <outlet property="notifyOnlyradioButton" destination="IKj-3E-PHN" id="dzw-Pk-OV0"/>
+                                            <outlet property="toggleRadioButton" destination="T0q-Hu-BJA" id="vPf-ku-zwH"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -972,7 +982,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lAW-Ly-qrL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1625" y="548"/>
+            <point key="canvasLocation" x="1625" y="547.5"/>
         </scene>
     </scenes>
 </document>
