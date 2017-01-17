@@ -13,6 +13,8 @@ var eyebookJSON:JSON = JSON(nilLiteral: ())
 
 var usingDemo = false
 
+var xonDemoData:Array = [String]()
+
 //var currentStrikeEye:StrikeEye = StrikeEye(symbol: "XON", expDate: "06/27/16", strikePrice: 37.5, priceOverride: 0, quantityOverride: 0)
 
 //will use the keyboard when inputting

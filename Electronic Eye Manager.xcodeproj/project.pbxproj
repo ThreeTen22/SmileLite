@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B1D25E31E2E968C008772E8 /* XonJan17DemoData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9B1D25E21E2E968C008772E8 /* XonJan17DemoData.txt */; };
 		9B33FB331E07ABD70019665C /* EyeParameterStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B33FB321E07ABD70019665C /* EyeParameterStruct.swift */; };
 		9B33FB351E07CD2B0019665C /* ClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B33FB341E07CD2B0019665C /* ClassExtensions.swift */; };
 		9B3BBF761DFE0E6800395CDA /* ExchangesTableClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3BBF751DFE0E6800395CDA /* ExchangesTableClasses.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B1D25E21E2E968C008772E8 /* XonJan17DemoData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = XonJan17DemoData.txt; sourceTree = "<group>"; };
 		9B33FB321E07ABD70019665C /* EyeParameterStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EyeParameterStruct.swift; sourceTree = "<group>"; };
 		9B33FB341E07CD2B0019665C /* ClassExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassExtensions.swift; sourceTree = "<group>"; };
 		9B3BBF751DFE0E6800395CDA /* ExchangesTableClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangesTableClasses.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 		9B66D35C1D073EFC0099C670 /* Electronic Eye Manager */ = {
 			isa = PBXGroup;
 			children = (
+				9B1D25E21E2E968C008772E8 /* XonJan17DemoData.txt */,
 				9B66D35D1D073EFC0099C670 /* AppDelegate.swift */,
 				9BC002751DD2329600D5C9F1 /* ButtonClasses.swift */,
 				9B33FB341E07CD2B0019665C /* ClassExtensions.swift */,
@@ -275,6 +278,7 @@
 				9B66D3681D073EFC0099C670 /* Assets.xcassets in Resources */,
 				9B927F081DED21E300209D79 /* EyePopover.storyboard in Resources */,
 				9B47723F1E12EF23004884ED /* CalculatorInputView.storyboard in Resources */,
+				9B1D25E31E2E968C008772E8 /* XonJan17DemoData.txt in Resources */,
 				9BCAC2BA1D9C14D20091099C /* Main2.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

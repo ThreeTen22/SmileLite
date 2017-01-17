@@ -31,8 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             usingDemo = true
             client.close()
         }
+        //let filename = "XonJan17DemoData.txt"
         
         
+        xonDemoData
         //let portfolio = getPortfolio(clientSuccess, errmsg: clientErrmsg, client: client)
         //print(portfolio)
         // client.close()
