@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //let filename = "XonJan17DemoData.txt"
         
         
-        xonDemoData
+        //xonDemoData
         //let portfolio = getPortfolio(clientSuccess, errmsg: clientErrmsg, client: client)
         //print(portfolio)
         // client.close()
