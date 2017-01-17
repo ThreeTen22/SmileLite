@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -279,29 +280,44 @@
                                     <rect key="frame" x="0.0" y="0.0" width="210" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Order" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BDj-BQ-nrS">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BDj-BQ-nrS">
                                             <rect key="frame" x="120" y="9" width="31" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="31" id="BzF-S8-nYW"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notify Only" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kX3-Gy-dZk">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notify Only" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kX3-Gy-dZk">
                                             <rect key="frame" x="161" y="9" width="49" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="49" id="lPq-Cc-nAr"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Exchange" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIq-Cn-Xzv">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Exchange" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIq-Cn-Xzv">
                                             <rect key="frame" x="37" y="9" width="71" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="kX3-Gy-dZk" secondAttribute="trailing" id="0iB-TS-6WM"/>
+                                        <constraint firstItem="dIq-Cn-Xzv" firstAttribute="baseline" secondItem="BDj-BQ-nrS" secondAttribute="baseline" id="LpL-Bs-RdS"/>
+                                        <constraint firstItem="dIq-Cn-Xzv" firstAttribute="top" secondItem="BtK-6A-jnC" secondAttribute="top" constant="9" id="Rb4-0O-o75"/>
+                                        <constraint firstItem="dIq-Cn-Xzv" firstAttribute="leading" secondItem="BtK-6A-jnC" secondAttribute="leading" constant="37" id="U0K-tq-P2k"/>
+                                        <constraint firstItem="BDj-BQ-nrS" firstAttribute="baseline" secondItem="kX3-Gy-dZk" secondAttribute="baseline" id="Ykh-ne-z5v"/>
+                                        <constraint firstItem="BDj-BQ-nrS" firstAttribute="firstBaseline" secondItem="kX3-Gy-dZk" secondAttribute="firstBaseline" id="emh-YJ-tBi"/>
+                                        <constraint firstItem="kX3-Gy-dZk" firstAttribute="leading" secondItem="BDj-BQ-nrS" secondAttribute="trailing" constant="10" id="oSz-YR-OHh"/>
+                                        <constraint firstItem="BDj-BQ-nrS" firstAttribute="leading" secondItem="dIq-Cn-Xzv" secondAttribute="trailing" constant="12" id="p7o-Ga-q2X"/>
+                                        <constraint firstItem="dIq-Cn-Xzv" firstAttribute="firstBaseline" secondItem="BDj-BQ-nrS" secondAttribute="firstBaseline" id="tET-R0-D1P"/>
+                                        <constraint firstAttribute="bottom" secondItem="dIq-Cn-Xzv" secondAttribute="bottom" id="wdB-RF-4Yt"/>
+                                    </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="Market" id="wpi-Xa-lUS" customClass="ExchangesTableCell" customModule="Electronic_Eye_Manager" customModuleProvider="target">
@@ -378,23 +394,22 @@
                             <view tag="1337" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vf0-tb-gAq">
                                 <rect key="frame" x="211" y="0.0" width="589" height="306"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4cH-L9-Eej" userLabel="Basic Parameters">
-                                        <rect key="frame" x="18" y="25" width="552" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4cH-L9-Eej" userLabel="Basic Parameters">
+                                        <rect key="frame" x="18" y="25" width="552" height="44.5"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="O94-0d-1NA" userLabel="Max Quantity">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="O94-0d-1NA" userLabel="Max Quantity">
                                                 <rect key="frame" x="0.0" y="0.0" width="184" height="44.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Max Quantity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iv3-yu-BgL">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Quantity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iv3-yu-BgL">
                                                         <rect key="frame" x="0.0" y="0.0" width="184" height="14.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="z2u-x2-DnM">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="z2u-x2-DnM">
                                                         <rect key="frame" x="0.0" y="14.5" width="184" height="30"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oJD-4l-sIb" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oJD-4l-sIb" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&lt;&lt;">
                                                                     <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -406,7 +421,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jMG-Ul-aZ6" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jMG-Ul-aZ6" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="26" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&lt;">
                                                                     <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -418,7 +433,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="puo-6t-z6Z" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="puo-6t-z6Z" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="52" y="0.0" width="80" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="80" id="5cU-Oq-Ja9"/>
@@ -429,7 +444,7 @@
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="paramName" value="maxQuantity"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6bV-5S-ZOU" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6bV-5S-ZOU" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="128" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&gt;">
                                                                     <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -441,7 +456,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIl-6S-PXq" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIl-6S-PXq" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="154" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&gt;&gt;">
                                                                     <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -457,19 +472,19 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GNN-nQ-EJj" userLabel="Max Delta">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="GNN-nQ-EJj" userLabel="Max Delta">
                                                 <rect key="frame" x="184" y="0.0" width="184" height="44.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Max Delta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQl-VE-wHs">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Delta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQl-VE-wHs">
                                                         <rect key="frame" x="0.0" y="0.0" width="184" height="14.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="bDp-Lv-we5">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="bDp-Lv-we5">
                                                         <rect key="frame" x="0.0" y="14.5" width="184" height="30"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7U-SR-OZt" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7U-SR-OZt" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&lt;&lt;">
                                                                     <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -481,7 +496,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6X-Yk-RAG" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6X-Yk-RAG" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="26" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&lt;">
                                                                     <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -493,7 +508,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="F3W-2r-Fib" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="F3W-2r-Fib" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="52" y="0.0" width="80" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="80" id="uqC-aX-604"/>
@@ -501,7 +516,7 @@
                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                                             </textField>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="34h-Zu-00Y" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="34h-Zu-00Y" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="128" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&gt;">
                                                                     <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -513,7 +528,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3u9-6B-eGU" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3u9-6B-eGU" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="154" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&gt;&gt;">
                                                                     <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -529,19 +544,19 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5Wr-z2-Aof" userLabel="Min Edge">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5Wr-z2-Aof" userLabel="Min Edge">
                                                 <rect key="frame" x="368" y="0.0" width="184" height="44.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Min Edge" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cUT-TO-yca">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Min Edge" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cUT-TO-yca">
                                                         <rect key="frame" x="0.0" y="0.0" width="184" height="14.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="xdY-wo-xWW">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="xdY-wo-xWW">
                                                         <rect key="frame" x="0.0" y="14.5" width="184" height="30"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r8F-MO-wTV" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r8F-MO-wTV" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&lt;&lt;">
                                                                     <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -553,7 +568,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6R-Gj-uVB" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6R-Gj-uVB" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="26" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&lt;">
                                                                     <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -565,7 +580,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="gRm-kz-ZZ9" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="gRm-kz-ZZ9" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="52" y="0.0" width="80" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="80" id="Ije-cM-jNf"/>
@@ -576,7 +591,7 @@
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="paramName" value="minEdge"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5mB-M9-DdC" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5mB-M9-DdC" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="128" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&gt;">
                                                                     <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -588,7 +603,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdf-Na-69s" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdf-Na-69s" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="154" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&gt;&gt;">
                                                                     <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -606,23 +621,22 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Wm-fF-cBf" userLabel="Month Parameters">
-                                        <rect key="frame" x="18" y="100" width="552" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Wm-fF-cBf" userLabel="Month Parameters">
+                                        <rect key="frame" x="18" y="100.5" width="552" height="44.5"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MyX-Sg-4Ni" userLabel="High Delta">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MyX-Sg-4Ni" userLabel="High Delta">
                                                 <rect key="frame" x="0.0" y="0.0" width="184" height="44.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="High Delta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xF6-ex-m6f">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="High Delta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xF6-ex-m6f">
                                                         <rect key="frame" x="0.0" y="0.0" width="184" height="14.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="gtP-UD-LtJ">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="gtP-UD-LtJ">
                                                         <rect key="frame" x="0.0" y="14.5" width="184" height="30"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ezm-OD-AGI" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ezm-OD-AGI" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&lt;&lt;">
                                                                     <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -634,7 +648,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBj-5t-Dcm" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBj-5t-Dcm" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="26" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&lt;">
                                                                     <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -646,7 +660,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="3cs-Gp-ZEN" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="3cs-Gp-ZEN" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="52" y="0.0" width="80" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="80" id="hA6-3C-no9"/>
@@ -657,7 +671,7 @@
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="paramName" value="highDelta"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEx-JH-Gj2" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEx-JH-Gj2" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="128" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&gt;">
                                                                     <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -669,7 +683,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YXz-vH-Ee5" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YXz-vH-Ee5" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="154" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&gt;&gt;">
                                                                     <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -685,19 +699,19 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1Z5-Ua-sv8" userLabel="Low Delta">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1Z5-Ua-sv8" userLabel="Low Delta">
                                                 <rect key="frame" x="184" y="0.0" width="184" height="44.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Low Delta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8k-kP-1Ld">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Low Delta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8k-kP-1Ld">
                                                         <rect key="frame" x="0.0" y="0.0" width="184" height="14.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="hkA-a3-Ei2">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="hkA-a3-Ei2">
                                                         <rect key="frame" x="0.0" y="14.5" width="184" height="30"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nsb-Wd-bkr" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nsb-Wd-bkr" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&lt;&lt;">
                                                                     <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -709,7 +723,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ee-1b-r2a" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ee-1b-r2a" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="26" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&lt;">
                                                                     <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -721,7 +735,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Fbu-LT-zns" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Fbu-LT-zns" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="52" y="0.0" width="80" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="80" id="TrI-og-UzC"/>
@@ -732,7 +746,7 @@
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="paramName" value="lowDelta"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTa-SV-Ea3" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTa-SV-Ea3" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="128" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&gt;">
                                                                     <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -744,7 +758,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAb-hS-q9V" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAb-hS-q9V" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="154" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&gt;&gt;">
                                                                     <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -760,19 +774,19 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0V8-p4-bKk" userLabel="Total Delta">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0V8-p4-bKk" userLabel="Total Delta">
                                                 <rect key="frame" x="368" y="0.0" width="184" height="44.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Total Delta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fvm-3Z-Bry">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Delta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fvm-3Z-Bry">
                                                         <rect key="frame" x="0.0" y="0.0" width="184" height="14.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="Ei6-LS-ZNX">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="Ei6-LS-ZNX">
                                                         <rect key="frame" x="0.0" y="14.5" width="184" height="30"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3G-i8-I3j" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3G-i8-I3j" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&lt;&lt;">
                                                                     <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -784,7 +798,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jAd-In-azG" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jAd-In-azG" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="26" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&lt;">
                                                                     <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -796,7 +810,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="7Ok-4H-6uH" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="7Ok-4H-6uH" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="52" y="0.0" width="80" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="80" id="3Hf-GE-wbz"/>
@@ -807,7 +821,7 @@
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="paramName" value="totalDelta"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </textField>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RsT-4j-GVW" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RsT-4j-GVW" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="128" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&gt;">
                                                                     <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -819,7 +833,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wp0-Ml-mfR" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wp0-Ml-mfR" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                                 <rect key="frame" x="154" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&gt;&gt;">
                                                                     <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -837,9 +851,12 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="9AA-8U-2wu">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O58-fh-zvx" userLabel="separator">
+                                        <rect key="frame" x="18" y="152" width="552" height="1"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="9AA-8U-2wu">
                                         <rect key="frame" x="19" y="218" width="358" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <segments>
                                             <segment title="Theo"/>
                                             <segment title="TheoBid"/>
@@ -851,20 +868,19 @@
                                             <action selector="eyeTypeSelected:" destination="lAW-Ly-qrL" eventType="valueChanged" id="m7e-O9-3dr"/>
                                         </connections>
                                     </segmentedControl>
-                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oJn-qb-iGl" userLabel="Price">
-                                        <rect key="frame" x="386" y="201" width="184" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oJn-qb-iGl" userLabel="Price">
+                                        <rect key="frame" x="386" y="201.5" width="184" height="44.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3rc-Fr-y7u">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3rc-Fr-y7u">
                                                 <rect key="frame" x="0.0" y="0.0" width="184" height="14.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="Sr0-52-rkl">
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="Sr0-52-rkl">
                                                 <rect key="frame" x="0.0" y="14.5" width="184" height="30"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RBd-sV-vVF" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RBd-sV-vVF" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                         <state key="normal" title="&lt;&lt;">
                                                             <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -876,7 +892,7 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XmF-sL-chU" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XmF-sL-chU" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                         <rect key="frame" x="26" y="0.0" width="30" height="30"/>
                                                         <state key="normal" title="&lt;">
                                                             <color key="titleColor" red="0.94117647059999998" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -888,7 +904,7 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="6VQ-TW-iZ9" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="6VQ-TW-iZ9" customClass="EditEyeParameter" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                         <rect key="frame" x="52" y="0.0" width="80" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="80" id="WEL-UA-Pkb"/>
@@ -899,7 +915,7 @@
                                                             <userDefinedRuntimeAttribute type="string" keyPath="paramName" value="price"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
-                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="65W-d2-qDA" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="65W-d2-qDA" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                         <rect key="frame" x="128" y="0.0" width="30" height="30"/>
                                                         <state key="normal" title="&gt;">
                                                             <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -911,7 +927,7 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j2U-WS-YDD" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j2U-WS-YDD" customClass="QuickChangeButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
                                                         <rect key="frame" x="154" y="0.0" width="30" height="30"/>
                                                         <state key="normal" title="&gt;&gt;">
                                                             <color key="titleColor" red="0.039215686270000001" green="0.7843137255" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -927,9 +943,11 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="P5z-3E-whx">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="P5z-3E-whx">
                                         <rect key="frame" x="19" y="162" width="358" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="358" id="qqN-XU-anP"/>
+                                        </constraints>
                                         <segments>
                                             <segment title="LMT"/>
                                             <segment title="MOC"/>
@@ -942,8 +960,58 @@
                                             <action selector="orderTypeSelected:" destination="lAW-Ly-qrL" eventType="valueChanged" id="3ua-62-zCo"/>
                                         </connections>
                                     </segmentedControl>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TwY-G7-s3t" userLabel="separator">
+                                        <rect key="frame" x="19" y="256" width="552" height="1"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbS-rU-h08" customClass="RadioButton" customModule="Electronic_Eye_Manager" customModuleProvider="target">
+                                        <rect key="frame" x="19" y="265" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="CIT-Bk-c23"/>
+                                            <constraint firstAttribute="height" constant="25" id="hOz-3s-5bs"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <state key="normal" title="O"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="buttonTag" value="AutoHedge"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="radioPressed:" destination="lAW-Ly-qrL" eventType="touchUpInside" id="9W7-Uy-Wb3"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Auto Hedge" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWv-ag-z2Y">
+                                        <rect key="frame" x="52" y="267" width="70" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="P5z-3E-whx" secondAttribute="bottom" constant="116" id="5Lg-WL-Amn"/>
+                                    <constraint firstItem="O58-fh-zvx" firstAttribute="leading" secondItem="5Wm-fF-cBf" secondAttribute="leading" id="8qi-DN-Gn0"/>
+                                    <constraint firstItem="P5z-3E-whx" firstAttribute="trailing" secondItem="9AA-8U-2wu" secondAttribute="trailing" id="Eyk-Eb-2s6"/>
+                                    <constraint firstItem="TwY-G7-s3t" firstAttribute="centerX" secondItem="Vf0-tb-gAq" secondAttribute="centerX" id="FU8-iu-lbm"/>
+                                    <constraint firstItem="TwY-G7-s3t" firstAttribute="top" secondItem="Vf0-tb-gAq" secondAttribute="top" constant="256" id="HIf-qH-da0"/>
+                                    <constraint firstItem="sbS-rU-h08" firstAttribute="top" secondItem="TwY-G7-s3t" secondAttribute="bottom" constant="8" symbolic="YES" id="If7-vp-eC7"/>
+                                    <constraint firstItem="sbS-rU-h08" firstAttribute="leading" secondItem="TwY-G7-s3t" secondAttribute="leading" id="LAd-ap-hGw"/>
+                                    <constraint firstItem="P5z-3E-whx" firstAttribute="top" secondItem="O58-fh-zvx" secondAttribute="bottom" constant="9" id="NUJ-OK-zaD"/>
+                                    <constraint firstItem="5Wm-fF-cBf" firstAttribute="top" secondItem="4cH-L9-Eej" secondAttribute="bottom" constant="31" id="OA2-Ys-Mva"/>
+                                    <constraint firstAttribute="bottom" secondItem="sbS-rU-h08" secondAttribute="bottom" constant="16" id="QEX-g3-Kkj"/>
+                                    <constraint firstItem="O58-fh-zvx" firstAttribute="trailing" secondItem="oJn-qb-iGl" secondAttribute="trailing" id="QKm-ug-b5k"/>
+                                    <constraint firstItem="O58-fh-zvx" firstAttribute="trailing" secondItem="5Wm-fF-cBf" secondAttribute="trailing" id="TQn-m8-ORI"/>
+                                    <constraint firstItem="O58-fh-zvx" firstAttribute="centerY" secondItem="Vf0-tb-gAq" secondAttribute="centerY" id="X7A-Zu-E2Q"/>
+                                    <constraint firstItem="TwY-G7-s3t" firstAttribute="top" secondItem="oJn-qb-iGl" secondAttribute="bottom" constant="10" id="atz-X8-Dy3"/>
+                                    <constraint firstItem="sbS-rU-h08" firstAttribute="leading" secondItem="Vf0-tb-gAq" secondAttribute="leading" constant="19" id="b67-aY-zir"/>
+                                    <constraint firstItem="O58-fh-zvx" firstAttribute="centerX" secondItem="Vf0-tb-gAq" secondAttribute="centerX" id="dOx-U4-fp1"/>
+                                    <constraint firstItem="O58-fh-zvx" firstAttribute="leading" secondItem="4cH-L9-Eej" secondAttribute="leading" id="drZ-Vl-52p"/>
+                                    <constraint firstItem="O58-fh-zvx" firstAttribute="top" secondItem="5Wm-fF-cBf" secondAttribute="bottom" constant="7" id="i5f-kh-g58"/>
+                                    <constraint firstItem="sbS-rU-h08" firstAttribute="top" secondItem="TwY-G7-s3t" secondAttribute="bottom" constant="8" id="imQ-Gg-aDd"/>
+                                    <constraint firstItem="9AA-8U-2wu" firstAttribute="top" secondItem="P5z-3E-whx" secondAttribute="bottom" constant="28" id="jSL-vC-Wrp"/>
+                                    <constraint firstItem="sbS-rU-h08" firstAttribute="leading" secondItem="P5z-3E-whx" secondAttribute="leading" id="jgH-6R-RVT"/>
+                                    <constraint firstItem="sbS-rU-h08" firstAttribute="leading" secondItem="9AA-8U-2wu" secondAttribute="leading" id="x0A-Jm-pbb"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -961,6 +1029,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="autoHedge" destination="sbS-rU-h08" id="Oaw-UO-pgd"/>
                         <outlet property="exchangeTable" destination="uX3-Jm-fLM" id="dKu-Xd-DMf"/>
                         <outlet property="eyeTypeControl" destination="9AA-8U-2wu" id="xjK-eK-ejl"/>
                         <outlet property="highDelta" destination="3cs-Gp-ZEN" id="QD4-c6-7oS"/>

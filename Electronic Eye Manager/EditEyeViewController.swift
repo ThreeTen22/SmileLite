@@ -26,6 +26,8 @@ class EditEyeViewController: UIViewController {
     @IBOutlet weak var totalDelta: EditEyeParameter!
     @IBOutlet weak var price: EditEyeParameter!
     
+    @IBOutlet weak var autoHedge: RadioButton!
+    
     weak var delegateController:EyePopoverViewController?
     weak var currentListing:Listing?
     weak var currentEye:Eye?
@@ -71,8 +73,8 @@ class EditEyeViewController: UIViewController {
         
         // exchangeTable.eyeExchanges = currentEye?.exchangeData ?? Exchanges()
         
-        delegateController = nil
         exchangeTable.reloadData()
+        Layout.setRadioButtonLayout(autoHedge, isOn: delegateController!.eyeParams.autoHedge.asBool()!)
         super.viewWillAppear(animated)
     }
     

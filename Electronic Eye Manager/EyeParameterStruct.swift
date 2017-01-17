@@ -30,7 +30,7 @@ struct EyeParams:Equatable {
     var delta = "250.0"
     var eyeType = "Theo"
     var orderType = "LMT"
-    var autoHedge = "OFF"
+    var autoHedge = "Off"
     var price = ""
     
     var minDelta = ""

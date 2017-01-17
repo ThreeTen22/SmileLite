@@ -19,6 +19,7 @@ extension Array {
         }
     }
 }
+
 extension String {
     func asInt() -> Int? {
         return Int(self)
@@ -33,6 +34,7 @@ extension String {
     }
     
     func asBool() -> Bool? {
+        print("asBool \(self)")
         switch self {
         case "On","true","1":
             return true

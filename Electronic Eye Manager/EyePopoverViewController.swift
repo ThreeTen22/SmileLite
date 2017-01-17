@@ -69,8 +69,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
     
     func setButtonLayout(senderOp:UIButton) {
         if let sender = senderOp as? RadioButton {
-            print("setButtonLayout \(sender.buttonTag)")
-            if sender.buttonTag == RadioButton.ToggleString {
+            if sender.buttonTag == RadioButton.toggleString {
                 if exchangeData[isActiveExchange: sender.tag] == true {
                     exchangeData[isActiveExchange: sender.tag] = false
                 } else {
@@ -80,8 +79,7 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
                 Layout.setRadioButtonLayout(sender, isOn: exchangeData[isActiveExchange: sender.tag])
                 return
             }
-            if sender.buttonTag == RadioButton.NotifyOnlyString {
-                print("entered NotifyONly  \(exchangeData[notifyOnly: sender.tag])")
+            if sender.buttonTag == RadioButton.notifyOnlyString {
                 if exchangeData[notifyOnly: sender.tag] == true {
                     exchangeData[notifyOnly: sender.tag] = false
                 } else {
@@ -89,6 +87,16 @@ class EyePopoverViewController: UIViewController, UITextFieldDelegate, UITableVi
                 }
                 print("after  \(exchangeData[notifyOnly: sender.tag])")
                 Layout.setRadioButtonLayout(sender, isOn: exchangeData[notifyOnly: sender.tag])
+                return
+            }
+            
+            if sender.buttonTag == RadioButton.autoHedgeString {
+                if eyeParams.autoHedge == true.toParamString() {
+                    eyeParams.autoHedge = false.toParamString()
+                } else {
+                    eyeParams.autoHedge = true.toParamString()
+                }
+                Layout.setRadioButtonLayout(sender, isOn: eyeParams.autoHedge.asBool()!)
             }
         }
     }

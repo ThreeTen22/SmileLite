@@ -80,8 +80,9 @@ class ExchangeOrderType: UIButton {
 class RadioButton:UIButton {
     // var exchange:ExInfo!
     
-    static let NotifyOnlyString = "NotifyOnly"
-    static let ToggleString = "Toggle"
+    static let notifyOnlyString = "NotifyOnly"
+    static let toggleString = "Toggle"
+    static let autoHedgeString = "AutoHedge"
     
     @IBInspectable var buttonTag:String = ""
     
